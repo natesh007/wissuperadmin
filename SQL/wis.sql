@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2022 at 12:23 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Jun 17, 2022 at 01:05 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `wis`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admins`
+--
+
+CREATE TABLE `admins` (
+  `AID` int(11) NOT NULL,
+  `Name` varchar(100) NOT NULL,
+  `Email` varchar(255) NOT NULL,
+  `Password` varchar(100) NOT NULL,
+  `Role` int(11) NOT NULL,
+  `Status` tinyint(4) NOT NULL DEFAULT 1,
+  `CreatedBy` int(11) NOT NULL,
+  `CreatedDate` datetime NOT NULL,
+  `UpdatedBy` int(11) NOT NULL,
+  `UpdatedDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`AID`, `Name`, `Email`, `Password`, `Role`, `Status`, `CreatedBy`, `CreatedDate`, `UpdatedBy`, `UpdatedDate`) VALUES
+(1, 'Admin', 'admin@wis.com', 'e10adc3949ba59abbe56e057f20f883e', 1, 1, 1, '2021-04-08 09:30:42', 1, '2021-08-24 06:36:05');
 
 -- --------------------------------------------------------
 
@@ -142,10 +168,22 @@ CREATE TABLE `organization_type` (
 
 CREATE TABLE `roles` (
   `RoleID` int(11) NOT NULL,
-  `RoleName` varchar(200) NOT NULL,
-  `RoleCode` varchar(100) NOT NULL,
-  `Status` tinyint(4) NOT NULL
+  `RoleName` varchar(50) NOT NULL,
+  `Priority` int(11) DEFAULT NULL,
+  `Status` tinyint(4) NOT NULL DEFAULT 1,
+  `CreatedBy` int(11) NOT NULL,
+  `CreatedDate` datetime NOT NULL,
+  `UpdatedBy` tinyint(4) NOT NULL,
+  `UpdatedDate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`RoleID`, `RoleName`, `Priority`, `Status`, `CreatedBy`, `CreatedDate`, `UpdatedBy`, `UpdatedDate`) VALUES
+(2, 'Super Admin', 1, 1, 0, '2021-07-01 20:54:40', 0, '2022-06-17 05:46:53'),
+(5, 'admin1', 2, 1, 1, '2022-06-17 05:55:58', 1, '2022-06-17 05:56:18');
 
 -- --------------------------------------------------------
 
@@ -163,6 +201,12 @@ CREATE TABLE `shifts` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`AID`);
 
 --
 -- Indexes for table `attendence`
@@ -211,6 +255,12 @@ ALTER TABLE `roles`
 --
 
 --
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `AID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `attendence`
 --
 ALTER TABLE `attendence`
@@ -250,7 +300,7 @@ ALTER TABLE `organization_type`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `RoleID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `RoleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
