@@ -1,0 +1,163 @@
+CRITICAL - 2022-05-11 03:02:13 --> Call to a member function query() on null
+#0 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(147): Modules\Admin\Models\TranslationsModel->get_translations_count('English')
+#1 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->dashboard()
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-05-11 03:04:34 --> Unknown column 'lm.Message' in 'where clause'
+CRITICAL - 2022-05-11 03:04:34 --> Unknown column 'lm.Message' in 'where clause'
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT count(l....', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT count(l....')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT count(l....')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(141): CodeIgniter\Database\BaseConnection->query('SELECT count(l....')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(379): Modules\Admin\Models\UsersModel->get_logs(1, 10, 'supoer', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-11 03:05:13 --> Unknown column 'lm.Message' in 'where clause'
+CRITICAL - 2022-05-11 03:05:13 --> Unknown column 'lm.Message' in 'where clause'
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT count(l....', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT count(l....')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT count(l....')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(141): CodeIgniter\Database\BaseConnection->query('SELECT count(l....')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(379): Modules\Admin\Models\UsersModel->get_logs(1, 10, 'supoer', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-11 03:05:20 --> Unknown column 'lm.Message' in 'where clause'
+CRITICAL - 2022-05-11 03:05:20 --> Unknown column 'lm.Message' in 'where clause'
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT count(l....', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT count(l....')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT count(l....')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(141): CodeIgniter\Database\BaseConnection->query('SELECT count(l....')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(379): Modules\Admin\Models\UsersModel->get_logs(1, 10, 'super', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-11 03:12:18 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}", l.Keyword2), {Keyword3}", l.Keyword3) AS Message FROM logs as l, users as...' at line 1
+CRITICAL - 2022-05-11 03:12:18 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '}", l.Keyword2), {Keyword3}", l.Keyword3) AS Message FROM logs as l, users as...' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT l.*, u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT l.*, u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT l.*, u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(133): CodeIgniter\Database\BaseConnection->query('SELECT l.*, u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(379): Modules\Admin\Models\UsersModel->get_logs(1, 10, '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-05-11 03:14:16 --> Call to a member function table() on null
+#0 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(312): Modules\Admin\Models\TranslationsModel->get_mail_template('1')
+#1 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->mail_template('1')
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-05-11 03:14:18 --> Call to a member function query() on null
+#0 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(384): Modules\Admin\Models\TranslationsModel->get_deleted_translations(1, 10, '', '')
+#1 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-05-11 03:14:22 --> Call to a member function table() on null
+#0 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(338): Modules\Admin\Models\TranslationsModel->get_smpt_details()
+#1 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->smtp_settings()
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-05-11 03:16:39 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-11 08:06:49 --> Column 'LoggedBy' cannot be null
+CRITICAL - 2022-05-11 08:06:49 --> Column 'LoggedBy' cannot be null
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `lo...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `lo...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `lo...')
+#3 C:\xampp\htdocs\oclm\system\Database\BaseBuilder.php(1771): CodeIgniter\Database\BaseConnection->query('INSERT INTO `lo...', Array, false)
+#4 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(122): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(42): Modules\Admin\Models\UsersModel->insert_log(Array)
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->index()
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#8 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2022-05-11 08:17:17 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE lm.MID = l.MID ORDER BY l.LogID ASC Limit 0,10' at line 1
+CRITICAL - 2022-05-11 08:17:17 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE lm.MID = l.MID ORDER BY l.LogID ASC Limit 0,10' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT l.*, u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT l.*, u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT l.*, u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(135): CodeIgniter\Database\BaseConnection->query('SELECT l.*, u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(379): Modules\Admin\Models\UsersModel->get_logs(1, 10, '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-11 08:17:37 --> Unknown column 'l.LoggedBy' in 'on clause'
+CRITICAL - 2022-05-11 08:17:37 --> Unknown column 'l.LoggedBy' in 'on clause'
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT l.*, u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT l.*, u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT l.*, u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(135): CodeIgniter\Database\BaseConnection->query('SELECT l.*, u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(379): Modules\Admin\Models\UsersModel->get_logs(1, 10, '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-11 08:18:39 --> Unknown column 'l.LoggedBy' in 'on clause'
+CRITICAL - 2022-05-11 08:18:39 --> Unknown column 'l.LoggedBy' in 'on clause'
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT l.*, u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT l.*, u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT l.*, u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(135): CodeIgniter\Database\BaseConnection->query('SELECT l.*, u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(379): Modules\Admin\Models\UsersModel->get_logs(1, 10, '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-11 08:19:06 --> Unknown column 'l.LoggedBy' in 'on clause'
+CRITICAL - 2022-05-11 08:19:06 --> Unknown column 'l.LoggedBy' in 'on clause'
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT l.*, u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT l.*, u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT l.*, u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(135): CodeIgniter\Database\BaseConnection->query('SELECT l.*, u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(379): Modules\Admin\Models\UsersModel->get_logs(1, 10, '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-11 08:21:19 --> Unknown column 'Chinese' in 'where clause'
+CRITICAL - 2022-05-11 08:21:19 --> Unknown column 'Chinese' in 'where clause'
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT DisplayL...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT DisplayL...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT DisplayL...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(165): CodeIgniter\Database\BaseConnection->query('SELECT DisplayL...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(92): Modules\Admin\Models\UsersModel->get_keyword_for_log_message('languages', 'DisplayLanguage', 'Language', 'Chinese')
+#5 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(131): Modules\Admin\Models\TranslationsModel->send_to_approval('Chinese', '1')
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->send_to_approval('Chinese', '1')
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#8 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2022-05-11 08:23:43 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-11 08:23:55 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-11 23:23:12 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+CRITICAL - 2022-05-11 23:32:19 --> Maximum execution time of 120 seconds exceeded
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+ERROR - 2022-05-11 23:39:30 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-11 23:41:19 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-11 23:45:38 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-11 23:50:04 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-11 23:54:36 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-11 23:57:16 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()

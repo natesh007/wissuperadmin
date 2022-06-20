@@ -1,0 +1,191 @@
+ERROR - 2022-05-19 00:00:19 --> FUNCTION olm.CONCATE does not exist
+CRITICAL - 2022-05-19 00:00:19 --> FUNCTION olm.CONCATE does not exist
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT @a:=@a+1...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT @a:=@a+1...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT @a:=@a+1...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(165): CodeIgniter\Database\BaseConnection->query('SELECT @a:=@a+1...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(392): Modules\Admin\Models\UsersModel->get_export_logs()
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->export_logs()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-19 00:02:32 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-19 00:05:04 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AS Message, "{Keyword3}", l.Keyword3), CONCAT(u.Name, " ", "(", r.Role, ")") ...' at line 1
+CRITICAL - 2022-05-19 00:05:04 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AS Message, "{Keyword3}", l.Keyword3), CONCAT(u.Name, " ", "(", r.Role, ")") ...' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT replace(...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT replace(...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT replace(...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(135): CodeIgniter\Database\BaseConnection->query('SELECT replace(...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(377): Modules\Admin\Models\UsersModel->get_logs(1, 20, '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-19 00:05:56 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AS Message, "{Keyword3}", l.Keyword3), CONCAT(u.Name, " ", "(", r.Role, ")") ...' at line 1
+CRITICAL - 2022-05-19 00:05:56 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AS Message, "{Keyword3}", l.Keyword3), CONCAT(u.Name, " ", "(", r.Role, ")") ...' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT replace(...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT replace(...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT replace(...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(135): CodeIgniter\Database\BaseConnection->query('SELECT replace(...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(377): Modules\Admin\Models\UsersModel->get_logs(1, 20, '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-05-19 00:06:57 --> Undefined index: Message
+#0 C:\xampp\htdocs\oclm\olm\Admin\Views\logs.php(102): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 102, Array)
+#1 C:\xampp\htdocs\oclm\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\oclm\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\oclm\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\Admin\\V...', Array, true)
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(384): view('Modules\\Admin\\V...', Array)
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-19 00:07:16 --> Unknown column 'Action' in 'where clause'
+CRITICAL - 2022-05-19 00:07:16 --> Unknown column 'Action' in 'where clause'
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT replace(...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT replace(...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT replace(...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(135): CodeIgniter\Database\BaseConnection->query('SELECT replace(...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(377): Modules\Admin\Models\UsersModel->get_logs(1, 20, 'Chinese languag...', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-05-19 00:13:23 --> Undefined index: Export
+#0 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(377): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 377, Array)
+#1 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-05-19 00:15:42 --> syntax error, unexpected 'if' (T_IF)
+#0 C:\xampp\htdocs\oclm\system\Autoloader\Autoloader.php(241): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs...')
+#1 C:\xampp\htdocs\oclm\system\Autoloader\Autoloader.php(219): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Modules\\Admin\\M...')
+#2 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Modules\\Admin\\M...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(13): spl_autoload_call('Modules\\Admin\\M...')
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(809): Modules\Admin\Controllers\Admin->__construct()
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->createController()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-05-19 00:15:57 --> syntax error, unexpected 'if' (T_IF)
+#0 C:\xampp\htdocs\oclm\system\Autoloader\Autoloader.php(241): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs...')
+#1 C:\xampp\htdocs\oclm\system\Autoloader\Autoloader.php(219): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Modules\\Admin\\M...')
+#2 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Modules\\Admin\\M...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(13): spl_autoload_call('Modules\\Admin\\M...')
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(809): Modules\Admin\Controllers\Admin->__construct()
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->createController()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-05-19 00:16:03 --> syntax error, unexpected 'if' (T_IF)
+#0 C:\xampp\htdocs\oclm\system\Autoloader\Autoloader.php(241): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs...')
+#1 C:\xampp\htdocs\oclm\system\Autoloader\Autoloader.php(219): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Modules\\Admin\\M...')
+#2 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Modules\\Admin\\M...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(13): spl_autoload_call('Modules\\Admin\\M...')
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(809): Modules\Admin\Controllers\Admin->__construct()
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->createController()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-05-19 00:16:16 --> syntax error, unexpected 'return' (T_RETURN)
+#0 C:\xampp\htdocs\oclm\system\Autoloader\Autoloader.php(241): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs...')
+#1 C:\xampp\htdocs\oclm\system\Autoloader\Autoloader.php(219): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Modules\\Admin\\M...')
+#2 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Modules\\Admin\\M...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(13): spl_autoload_call('Modules\\Admin\\M...')
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(809): Modules\Admin\Controllers\Admin->__construct()
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->createController()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-05-19 00:17:13 --> Undefined variable: query
+#0 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(165): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 165, Array)
+#1 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(382): Modules\Admin\Models\UsersModel->get_export_logs('Natesh logged i...', '')
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-19 00:17:55 --> Undefined variable: query
+#0 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(165): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 165, Array)
+#1 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(396): Modules\Admin\Models\UsersModel->get_export_logs('Natesh logged i...', '')
+#2 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(378): Modules\Admin\Controllers\Admin->export_logs('Natesh logged i...', '')
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-05-19 00:18:10 --> Undefined variable: query
+#0 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(165): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 165, Array)
+#1 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(395): Modules\Admin\Models\UsersModel->get_export_logs('Natesh logged i...', '')
+#2 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(378): Modules\Admin\Controllers\Admin->export_logs('Natesh logged i...', '')
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-05-19 00:18:23 --> Undefined variable: query
+#0 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(165): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 165, Array)
+#1 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(395): Modules\Admin\Models\UsersModel->get_export_logs('Natesh logged i...', '')
+#2 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(378): Modules\Admin\Controllers\Admin->export_logs('Natesh logged i...', '')
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-05-19 00:18:43 --> Undefined variable: query
+#0 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(165): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 165, Array)
+#1 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(395): Modules\Admin\Models\UsersModel->get_export_logs('Natesh logged i...', '')
+#2 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(378): Modules\Admin\Controllers\Admin->export_logs('Natesh logged i...', '')
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-05-19 00:18:54 --> Undefined variable: query
+#0 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(165): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 165, Array)
+#1 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(395): Modules\Admin\Models\UsersModel->get_export_logs('Natesh logged i...', '')
+#2 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(378): Modules\Admin\Controllers\Admin->export_logs('Natesh logged i...', '')
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-05-19 00:32:20 --> Undefined variable: start_from
+#0 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(136): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 136, Array)
+#1 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(377): Modules\Admin\Models\UsersModel->get_logs('', '', 'Natesh Logged', '')
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-19 00:33:10 --> Too few arguments to function Modules\Admin\Models\UsersModel::get_logs(), 2 passed in C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php on line 377 and exactly 4 expected
+#0 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(377): Modules\Admin\Models\UsersModel->get_logs('Natesh Logged', '')
+#1 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-05-19 00:33:50 --> Too few arguments to function Modules\Admin\Models\UsersModel::get_logs(), 2 passed in C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php on line 377 and exactly 4 expected
+#0 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(377): Modules\Admin\Models\UsersModel->get_logs('Natesh logged', '')
+#1 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-05-19 00:34:47 --> Too few arguments to function Modules\Admin\Models\UsersModel::get_logs(), 2 passed in C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php on line 377 and exactly 4 expected
+#0 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(377): Modules\Admin\Models\UsersModel->get_logs('Natesh logged', '')
+#1 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logs()
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-05-19 06:57:25 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-19 06:59:53 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()

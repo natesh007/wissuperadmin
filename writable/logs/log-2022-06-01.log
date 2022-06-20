@@ -1,0 +1,68 @@
+CRITICAL - 2022-06-01 05:07:47 --> Undefined index: RID
+#0 C:\xampp\htdocs\oclm\olm\Admin\Views\role_edit_form.php(21): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\xampp\\htdocs...', 21, Array)
+#1 C:\xampp\htdocs\oclm\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\oclm\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\oclm\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\Admin\\V...', Array, true)
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Roles.php(81): view('Modules\\Admin\\V...', Array)
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Roles->edit_role('1')
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Roles))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-01 05:08:05 --> syntax error, unexpected '?>'
+#0 C:\xampp\htdocs\oclm\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\oclm\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\Admin\\V...', Array, true)
+#2 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Roles.php(81): view('Modules\\Admin\\V...', Array)
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Roles->edit_role('1')
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Roles))
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-06-01 05:08:06 --> syntax error, unexpected '?>'
+#0 C:\xampp\htdocs\oclm\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\oclm\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\Admin\\V...', Array, true)
+#2 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Roles.php(81): view('Modules\\Admin\\V...', Array)
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Roles->edit_role('1')
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Roles))
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+ERROR - 2022-06-01 05:21:13 --> Column 'Keyword1' cannot be null
+CRITICAL - 2022-06-01 05:21:13 --> Column 'Keyword1' cannot be null
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `lo...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `lo...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `lo...')
+#3 C:\xampp\htdocs\oclm\system\Database\BaseBuilder.php(1771): CodeIgniter\Database\BaseConnection->query('INSERT INTO `lo...', Array, false)
+#4 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(122): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Roles.php(78): Modules\Admin\Models\UsersModel->insert_log(Array)
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Roles->edit_role('1')
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Roles))
+#8 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2022-06-01 05:22:34 --> Column 'Keyword1' cannot be null
+CRITICAL - 2022-06-01 05:22:34 --> Column 'Keyword1' cannot be null
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `lo...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `lo...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `lo...')
+#3 C:\xampp\htdocs\oclm\system\Database\BaseBuilder.php(1771): CodeIgniter\Database\BaseConnection->query('INSERT INTO `lo...', Array, false)
+#4 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(122): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Roles.php(78): Modules\Admin\Models\UsersModel->insert_log(Array)
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Roles->edit_role('1')
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Roles))
+#8 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2022-06-01 05:22:37 --> Column 'Keyword1' cannot be null
+CRITICAL - 2022-06-01 05:22:37 --> Column 'Keyword1' cannot be null
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `lo...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `lo...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `lo...')
+#3 C:\xampp\htdocs\oclm\system\Database\BaseBuilder.php(1771): CodeIgniter\Database\BaseConnection->query('INSERT INTO `lo...', Array, false)
+#4 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(122): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Roles.php(78): Modules\Admin\Models\UsersModel->insert_log(Array)
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Roles->edit_role('1')
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Roles))
+#8 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}

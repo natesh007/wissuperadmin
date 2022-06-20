@@ -1,0 +1,199 @@
+CRITICAL - 2022-06-13 06:20:59 --> The framework needs the following extension(s) installed and loaded: intl.
+#0 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(219): CodeIgniter\Exceptions\FrameworkException::forMissingExtension('intl')
+#1 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(177): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+#2 C:\xampp\htdocs\wisadmin\system\bootstrap.php(146): CodeIgniter\CodeIgniter->initialize()
+#3 C:\xampp\htdocs\wisadmin\index.php(28): require('C:\\xampp\\htdocs...')
+#4 {main}
+CRITICAL - 2022-06-13 06:30:37 --> The framework needs the following extension(s) installed and loaded: intl.
+#0 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(219): CodeIgniter\Exceptions\FrameworkException::forMissingExtension('intl')
+#1 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(177): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+#2 C:\xampp\htdocs\wisadmin\system\bootstrap.php(146): CodeIgniter\CodeIgniter->initialize()
+#3 C:\xampp\htdocs\wisadmin\index.php(28): require('C:\\xampp\\htdocs...')
+#4 {main}
+CRITICAL - 2022-06-13 00:54:05 --> Invalid file: Modules\WIS\Views\engineering.php
+#0 C:\xampp\htdocs\wisadmin\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Modules\\WIS\\Vie...')
+#1 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#2 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Engineering.php(9): view('Modules\\WIS\\Vie...')
+#3 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Engineering->engineering()
+#4 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Engineering))
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-06-13 02:07:08 --> Undefined property: CodeIgniter\View\View::$load
+#0 C:\xampp\htdocs\wisadmin\wis\WIS\Views\hospital_selection.php(28): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 28, Array)
+#1 C:\xampp\htdocs\wisadmin\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\wisadmin\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#4 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Home.php(18): view('Modules\\WIS\\Vie...')
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Home->hospitalSelection()
+#6 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Home))
+#7 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-13 02:32:43 --> Undefined property: CodeIgniter\View\View::$load
+#0 C:\xampp\htdocs\wisadmin\wis\WIS\Views\checklist\checklist_sub_details.php(20): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 20, Array)
+#1 C:\xampp\htdocs\wisadmin\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\wisadmin\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#4 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Home.php(21): view('Modules\\WIS\\Vie...')
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Home->checklistSubDetails()
+#6 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Home))
+#7 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-13 02:56:31 --> Undefined property: CodeIgniter\View\View::$load
+#0 C:\xampp\htdocs\wisadmin\wis\WIS\Views\engineering\engineering.php(187): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 187, Array)
+#1 C:\xampp\htdocs\wisadmin\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\wisadmin\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#4 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Home.php(30): view('Modules\\WIS\\Vie...')
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Home->engineering()
+#6 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Home))
+#7 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-13 02:59:39 --> Undefined property: CodeIgniter\View\View::$load
+#0 C:\xampp\htdocs\wisadmin\wis\WIS\Views\engineering\engineering.php(187): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 187, Array)
+#1 C:\xampp\htdocs\wisadmin\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\wisadmin\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#4 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Home.php(30): view('Modules\\WIS\\Vie...')
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Home->engineering()
+#6 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Home))
+#7 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-13 03:00:16 --> Undefined property: CodeIgniter\View\View::$load
+#0 C:\xampp\htdocs\wisadmin\wis\WIS\Views\engineering\engineering.php(187): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 187, Array)
+#1 C:\xampp\htdocs\wisadmin\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\wisadmin\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#4 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Home.php(30): view('Modules\\WIS\\Vie...')
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Home->engineering()
+#6 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Home))
+#7 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-13 03:02:20 --> Undefined property: CodeIgniter\View\View::$load
+#0 C:\xampp\htdocs\wisadmin\wis\WIS\Views\engineering\engineering.php(187): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 187, Array)
+#1 C:\xampp\htdocs\wisadmin\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\wisadmin\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#4 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Home.php(30): view('Modules\\WIS\\Vie...')
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Home->engineering()
+#6 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Home))
+#7 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-13 03:14:38 --> Undefined property: CodeIgniter\View\View::$load
+#0 C:\xampp\htdocs\wisadmin\wis\WIS\Views\engineering\engineering_soft_integration.php(20): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 20, Array)
+#1 C:\xampp\htdocs\wisadmin\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\wisadmin\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#4 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Home.php(42): view('Modules\\WIS\\Vie...')
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Home->engineeringSoftIntegration()
+#6 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Home))
+#7 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-13 03:25:09 --> Undefined property: CodeIgniter\View\View::$load
+#0 C:\xampp\htdocs\wisadmin\wis\WIS\Views\resources.php(20): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 20, Array)
+#1 C:\xampp\htdocs\wisadmin\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\wisadmin\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#4 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Home.php(54): view('Modules\\WIS\\Vie...')
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Home->resources()
+#6 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Home))
+#7 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-13 03:41:19 --> Invalid file: Modules\WIS\Views\sanitation_washroom.php
+#0 C:\xampp\htdocs\wisadmin\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Modules\\WIS\\Vie...')
+#1 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#2 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Home.php(69): view('Modules\\WIS\\Vie...')
+#3 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Home->sanitation()
+#4 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Home))
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-06-13 03:42:16 --> Invalid file: Modules\WIS\Views\sanitation_washroom.php
+#0 C:\xampp\htdocs\wisadmin\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Modules\\WIS\\Vie...')
+#1 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#2 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Home.php(69): view('Modules\\WIS\\Vie...')
+#3 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Home->sanitation()
+#4 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Home))
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-06-13 03:56:59 --> Undefined property: CodeIgniter\View\View::$load
+#0 C:\xampp\htdocs\wisadmin\wis\WIS\Views\sanitation\sanitation_washroom_full_details.php(23): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 23, Array)
+#1 C:\xampp\htdocs\wisadmin\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\wisadmin\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#4 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Home.php(66): view('Modules\\WIS\\Vie...')
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Home->sanitationWashroomFullDetails()
+#6 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Home))
+#7 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-13 04:01:32 --> Undefined property: CodeIgniter\View\View::$load
+#0 C:\xampp\htdocs\wisadmin\wis\WIS\Views\attendence\attendence.php(24): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 24, Array)
+#1 C:\xampp\htdocs\wisadmin\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\wisadmin\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#4 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Home.php(75): view('Modules\\WIS\\Vie...')
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Home->attendence()
+#6 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Home))
+#7 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-13 04:17:18 --> Call to undefined function form_dropdown()
+#0 C:\xampp\htdocs\wisadmin\system\View\View.php(210): include()
+#1 C:\xampp\htdocs\wisadmin\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#2 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#3 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Home.php(87): view('Modules\\WIS\\Vie...')
+#4 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Home->ppm()
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Home))
+#6 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-06-13 04:30:07 --> Undefined property: CodeIgniter\View\View::$load
+#0 C:\xampp\htdocs\wisadmin\wis\WIS\Views\complaintFeedback.php(20): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 20, Array)
+#1 C:\xampp\htdocs\wisadmin\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\wisadmin\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#4 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Home.php(99): view('Modules\\WIS\\Vie...')
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Home->complaintFeedback()
+#6 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Home))
+#7 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-13 05:09:30 --> Undefined property: CodeIgniter\View\View::$load
+#0 C:\xampp\htdocs\wisadmin\wis\WIS\Views\bedsOccupancy\bedsOccupancy.php(21): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 21, Array)
+#1 C:\xampp\htdocs\wisadmin\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\wisadmin\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#4 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Home.php(120): view('Modules\\WIS\\Vie...')
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Home->bedsOccupancy()
+#6 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Home))
+#7 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-06-13 05:25:44 --> Cannot redeclare Modules\WIS\Controllers\Home::bedsOccupancyDetails()
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2022-06-13 05:26:49 --> Invalid file: Modules\WIS\Views/bedsOccupancy/manpowerUtilization.php
+#0 C:\xampp\htdocs\wisadmin\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Modules\\WIS\\Vie...')
+#1 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#2 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Home.php(127): view('Modules\\WIS\\Vie...')
+#3 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Home->manpowerUtilization()
+#4 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Home))
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-06-13 05:43:46 --> Cannot redeclare Modules\WIS\Controllers\Home::audits()
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2022-06-13 05:44:02 --> Cannot redeclare Modules\WIS\Controllers\Home::audits()
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}

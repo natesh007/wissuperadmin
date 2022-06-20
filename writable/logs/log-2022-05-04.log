@@ -1,0 +1,388 @@
+CRITICAL - 2022-05-04 03:02:51 --> Trying to get property 'DisplayLanguage' of non-object
+#0 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(32): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get p...', 'C:\\xampp\\htdocs...', 32, Array)
+#1 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->index('English')
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-05-04 03:07:34 --> Maximum execution time of 120 seconds exceeded
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2022-05-04 03:12:35 --> ini_set(): Headers already sent. You cannot change the session module's ini settings at this time
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Head...', 'C:\\xampp\\htdocs...', 71, Array)
+#1 C:\xampp\htdocs\oclm\system\Session\Handlers\FileHandler.php(71): ini_set('session.save_pa...', 'C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\oclm\system\Config\Services.php(570): CodeIgniter\Session\Handlers\FileHandler->__construct(Object(Config\App), '::1')
+#3 C:\xampp\htdocs\oclm\system\Config\BaseService.php(248): CodeIgniter\Config\Services::session(Object(Config\App), false)
+#4 C:\xampp\htdocs\oclm\system\Config\BaseService.php(189): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#5 C:\xampp\htdocs\oclm\system\Config\Services.php(563): CodeIgniter\Config\BaseService::getSharedInstance('session', NULL)
+#6 C:\xampp\htdocs\oclm\system\Config\BaseService.php(248): CodeIgniter\Config\Services::session()
+#7 C:\xampp\htdocs\oclm\system\Common.php(901): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#8 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(19): session('UID')
+#9 C:\xampp\htdocs\oclm\system\CodeIgniter.php(809): Modules\Admin\Controllers\Translations->__construct()
+#10 C:\xampp\htdocs\oclm\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->createController()
+#11 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2022-05-04 03:12:35 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\oclm\app\Config\Events.php:32) in C:\xampp\htdocs\oclm\system\Debug\Exceptions.php:112
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', 'C:\\xampp\\htdocs...', 112, Array)
+#1 C:\xampp\htdocs\oclm\system\Debug\Exceptions.php(112): header('HTTP/1.1 500 In...', true, 500)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2022-05-04 03:14:21 --> ini_set(): Headers already sent. You cannot change the session module's ini settings at this time
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Head...', 'C:\\xampp\\htdocs...', 71, Array)
+#1 C:\xampp\htdocs\oclm\system\Session\Handlers\FileHandler.php(71): ini_set('session.save_pa...', 'C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\oclm\system\Config\Services.php(570): CodeIgniter\Session\Handlers\FileHandler->__construct(Object(Config\App), '::1')
+#3 C:\xampp\htdocs\oclm\system\Config\BaseService.php(248): CodeIgniter\Config\Services::session(Object(Config\App), false)
+#4 C:\xampp\htdocs\oclm\system\Config\BaseService.php(189): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#5 C:\xampp\htdocs\oclm\system\Config\Services.php(563): CodeIgniter\Config\BaseService::getSharedInstance('session', NULL)
+#6 C:\xampp\htdocs\oclm\system\Config\BaseService.php(248): CodeIgniter\Config\Services::session()
+#7 C:\xampp\htdocs\oclm\system\Common.php(901): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#8 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(19): session('UID')
+#9 C:\xampp\htdocs\oclm\system\CodeIgniter.php(809): Modules\Admin\Controllers\Translations->__construct()
+#10 C:\xampp\htdocs\oclm\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->createController()
+#11 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2022-05-04 03:14:21 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\oclm\app\Config\Events.php:32) in C:\xampp\htdocs\oclm\system\Debug\Exceptions.php:112
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', 'C:\\xampp\\htdocs...', 112, Array)
+#1 C:\xampp\htdocs\oclm\system\Debug\Exceptions.php(112): header('HTTP/1.1 500 In...', true, 500)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2022-05-04 03:14:50 --> ini_set(): Headers already sent. You cannot change the session module's ini settings at this time
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Head...', 'C:\\xampp\\htdocs...', 71, Array)
+#1 C:\xampp\htdocs\oclm\system\Session\Handlers\FileHandler.php(71): ini_set('session.save_pa...', 'C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\oclm\system\Config\Services.php(570): CodeIgniter\Session\Handlers\FileHandler->__construct(Object(Config\App), '::1')
+#3 C:\xampp\htdocs\oclm\system\Config\BaseService.php(248): CodeIgniter\Config\Services::session(Object(Config\App), false)
+#4 C:\xampp\htdocs\oclm\system\Config\BaseService.php(189): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#5 C:\xampp\htdocs\oclm\system\Config\Services.php(563): CodeIgniter\Config\BaseService::getSharedInstance('session', NULL)
+#6 C:\xampp\htdocs\oclm\system\Config\BaseService.php(248): CodeIgniter\Config\Services::session()
+#7 C:\xampp\htdocs\oclm\system\Common.php(901): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#8 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(19): session('UID')
+#9 C:\xampp\htdocs\oclm\system\CodeIgniter.php(809): Modules\Admin\Controllers\Translations->__construct()
+#10 C:\xampp\htdocs\oclm\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->createController()
+#11 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2022-05-04 03:14:50 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\oclm\app\Config\Events.php:32) in C:\xampp\htdocs\oclm\system\Debug\Exceptions.php:112
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', 'C:\\xampp\\htdocs...', 112, Array)
+#1 C:\xampp\htdocs\oclm\system\Debug\Exceptions.php(112): header('HTTP/1.1 500 In...', true, 500)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2022-05-04 03:15:08 --> ini_set(): Headers already sent. You cannot change the session module's ini settings at this time
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Head...', 'C:\\xampp\\htdocs...', 71, Array)
+#1 C:\xampp\htdocs\oclm\system\Session\Handlers\FileHandler.php(71): ini_set('session.save_pa...', 'C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\oclm\system\Config\Services.php(570): CodeIgniter\Session\Handlers\FileHandler->__construct(Object(Config\App), '::1')
+#3 C:\xampp\htdocs\oclm\system\Config\BaseService.php(248): CodeIgniter\Config\Services::session(Object(Config\App), false)
+#4 C:\xampp\htdocs\oclm\system\Config\BaseService.php(189): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#5 C:\xampp\htdocs\oclm\system\Config\Services.php(563): CodeIgniter\Config\BaseService::getSharedInstance('session', NULL)
+#6 C:\xampp\htdocs\oclm\system\Config\BaseService.php(248): CodeIgniter\Config\Services::session()
+#7 C:\xampp\htdocs\oclm\system\Common.php(901): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#8 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(19): session('UID')
+#9 C:\xampp\htdocs\oclm\system\CodeIgniter.php(809): Modules\Admin\Controllers\Translations->__construct()
+#10 C:\xampp\htdocs\oclm\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->createController()
+#11 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2022-05-04 03:15:08 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\oclm\app\Config\Events.php:32) in C:\xampp\htdocs\oclm\system\Debug\Exceptions.php:112
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', 'C:\\xampp\\htdocs...', 112, Array)
+#1 C:\xampp\htdocs\oclm\system\Debug\Exceptions.php(112): header('HTTP/1.1 500 In...', true, 500)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2022-05-04 03:15:34 --> ini_set(): Headers already sent. You cannot change the session module's ini settings at this time
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Head...', 'C:\\xampp\\htdocs...', 71, Array)
+#1 C:\xampp\htdocs\oclm\system\Session\Handlers\FileHandler.php(71): ini_set('session.save_pa...', 'C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\oclm\system\Config\Services.php(570): CodeIgniter\Session\Handlers\FileHandler->__construct(Object(Config\App), '::1')
+#3 C:\xampp\htdocs\oclm\system\Config\BaseService.php(248): CodeIgniter\Config\Services::session(Object(Config\App), false)
+#4 C:\xampp\htdocs\oclm\system\Config\BaseService.php(189): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#5 C:\xampp\htdocs\oclm\system\Config\Services.php(563): CodeIgniter\Config\BaseService::getSharedInstance('session', NULL)
+#6 C:\xampp\htdocs\oclm\system\Config\BaseService.php(248): CodeIgniter\Config\Services::session()
+#7 C:\xampp\htdocs\oclm\system\Common.php(901): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#8 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(19): session('UID')
+#9 C:\xampp\htdocs\oclm\system\CodeIgniter.php(809): Modules\Admin\Controllers\Translations->__construct()
+#10 C:\xampp\htdocs\oclm\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->createController()
+#11 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2022-05-04 03:15:34 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\oclm\app\Config\Events.php:32) in C:\xampp\htdocs\oclm\system\Debug\Exceptions.php:112
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', 'C:\\xampp\\htdocs...', 112, Array)
+#1 C:\xampp\htdocs\oclm\system\Debug\Exceptions.php(112): header('HTTP/1.1 500 In...', true, 500)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+ERROR - 2022-05-04 03:28:32 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"' at line 1
+CRITICAL - 2022-05-04 03:28:32 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT dt.*,u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT dt.*,u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT dt.*,u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(123): CodeIgniter\Database\BaseConnection->query('SELECT dt.*,u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations(1, '100', '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-04 03:28:41 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"' at line 1
+CRITICAL - 2022-05-04 03:28:41 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT dt.*,u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT dt.*,u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT dt.*,u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(123): CodeIgniter\Database\BaseConnection->query('SELECT dt.*,u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations(1, '40', '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-04 03:28:55 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"' at line 1
+CRITICAL - 2022-05-04 03:28:55 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT dt.*,u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT dt.*,u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT dt.*,u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(123): CodeIgniter\Database\BaseConnection->query('SELECT dt.*,u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations(1, '30', '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-04 03:29:09 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"' at line 1
+CRITICAL - 2022-05-04 03:29:09 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT dt.*,u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT dt.*,u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT dt.*,u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(123): CodeIgniter\Database\BaseConnection->query('SELECT dt.*,u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations(1, '100', '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-04 03:29:23 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"' at line 1
+CRITICAL - 2022-05-04 03:29:23 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT dt.*,u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT dt.*,u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT dt.*,u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(123): CodeIgniter\Database\BaseConnection->query('SELECT dt.*,u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations(1, '30', '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-04 03:31:59 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"' at line 1
+CRITICAL - 2022-05-04 03:31:59 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT dt.*,u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT dt.*,u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT dt.*,u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(123): CodeIgniter\Database\BaseConnection->query('SELECT dt.*,u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations(1, 10, 'Enter_Personal_...', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-04 03:38:17 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '`dt`.`LangKeyWord` = 'Enter_Personal_ID#\",'' at line 7
+CRITICAL - 2022-05-04 03:38:17 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '`dt`.`LangKeyWord` = 'Enter_Personal_ID#\",'' at line 7
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT `dt`.*, ...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `dt`.*, ...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `dt`.*, ...')
+#3 C:\xampp\htdocs\oclm\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT `dt`.*, ...', Array, false)
+#4 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(122): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations(1, 10, 'Enter_Personal_...', '')
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#8 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2022-05-04 03:40:55 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"' at line 1
+CRITICAL - 2022-05-04 03:40:55 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT dt.*,u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT dt.*,u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT dt.*,u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(123): CodeIgniter\Database\BaseConnection->query('SELECT dt.*,u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations(1, 10, 'Enter_Personal_...', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-05-04 03:43:32 --> Maximum execution time of 120 seconds exceeded
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+ERROR - 2022-05-04 04:03:57 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"system_configuration""' at line 1
+CRITICAL - 2022-05-04 04:03:57 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"system_configuration""' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT dt.*,u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT dt.*,u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT dt.*,u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(123): CodeIgniter\Database\BaseConnection->query('SELECT dt.*,u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations('10', '100', '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-04 04:04:22 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"' at line 1
+CRITICAL - 2022-05-04 04:04:22 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT dt.*,u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT dt.*,u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT dt.*,u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(123): CodeIgniter\Database\BaseConnection->query('SELECT dt.*,u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations('10', '100', '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-04 04:04:24 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"' at line 1
+CRITICAL - 2022-05-04 04:04:24 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT dt.*,u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT dt.*,u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT dt.*,u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(123): CodeIgniter\Database\BaseConnection->query('SELECT dt.*,u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations('10', '100', '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-04 04:04:42 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"system_configuration""' at line 1
+CRITICAL - 2022-05-04 04:04:42 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"system_configuration""' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT dt.*,u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT dt.*,u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT dt.*,u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(123): CodeIgniter\Database\BaseConnection->query('SELECT dt.*,u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations('10', '100', '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-04 04:05:59 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"system_configuration""' at line 1
+CRITICAL - 2022-05-04 04:05:59 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"system_configuration""' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT dt.*,u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT dt.*,u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT dt.*,u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(123): CodeIgniter\Database\BaseConnection->query('SELECT dt.*,u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations('94', 10, '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-04 05:08:53 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"system_configuration""' at line 1
+ERROR - 2022-05-04 05:08:53 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"system_configuration""' at line 1
+CRITICAL - 2022-05-04 05:08:53 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"system_configuration""' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT dt.*,u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT dt.*,u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT dt.*,u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(123): CodeIgniter\Database\BaseConnection->query('SELECT dt.*,u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations('94', 10, '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-05-04 05:08:53 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"system_configuration""' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT dt.*,u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT dt.*,u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT dt.*,u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(123): CodeIgniter\Database\BaseConnection->query('SELECT dt.*,u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations('94', 10, '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-04 05:08:54 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"system_configuration""' at line 1
+CRITICAL - 2022-05-04 05:08:54 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"system_configuration""' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT dt.*,u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT dt.*,u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT dt.*,u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(123): CodeIgniter\Database\BaseConnection->query('SELECT dt.*,u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations('94', 10, '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-04 05:08:55 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"system_configuration""' at line 1
+CRITICAL - 2022-05-04 05:08:55 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"system_configuration""' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT dt.*,u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT dt.*,u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT dt.*,u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(123): CodeIgniter\Database\BaseConnection->query('SELECT dt.*,u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations('94', 10, '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-04 05:08:56 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"system_configuration""' at line 1
+CRITICAL - 2022-05-04 05:08:56 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '"system_configuration""' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT dt.*,u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT dt.*,u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT dt.*,u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(123): CodeIgniter\Database\BaseConnection->query('SELECT dt.*,u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations('94', 10, '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-04 05:47:15 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''system_configuration''' at line 1
+CRITICAL - 2022-05-04 05:47:15 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''system_configuration''' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT dt.*,u.N...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT dt.*,u.N...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT dt.*,u.N...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(124): CodeIgniter\Database\BaseConnection->query('SELECT dt.*,u.N...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(360): Modules\Admin\Models\TranslationsModel->get_deleted_translations('94', 10, '', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-05-04 05:51:46 --> Maximum execution time of 120 seconds exceeded
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+ERROR - 2022-05-04 05:53:11 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''' at line 1
+CRITICAL - 2022-05-04 05:53:11 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''' at line 1
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT LangID F...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT LangID F...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT LangID F...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(260): CodeIgniter\Database\BaseConnection->query('SELECT LangID F...')
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->importFile('English')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-05-04 07:43:20 --> count(): Parameter must be an array or an object that implements Countable
+#0 C:\xampp\htdocs\oclm\olm\Admin\Views\deleted_translations.php(58): CodeIgniter\Debug\Exceptions->errorHandler(2, 'count(): Parame...', 'C:\\xampp\\htdocs...', 58, Array)
+#1 C:\xampp\htdocs\oclm\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\oclm\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\oclm\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\Admin\\V...', Array, true)
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(367): view('Modules\\Admin\\V...', Array)
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-04 08:17:12 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()

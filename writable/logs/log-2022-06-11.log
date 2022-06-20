@@ -1,0 +1,29 @@
+CRITICAL - 2022-06-11 08:03:44 --> Invalid file: Modules\WIS\Views\engineering.php
+#0 C:\xampp\htdocs\wisadmin\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Modules\\WIS\\Vie...')
+#1 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#2 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Home.php(13): view('Modules\\WIS\\Vie...')
+#3 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Home->engineering()
+#4 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Home))
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-06-11 08:13:23 --> Invalid file: Modules\WIS\Views\engineering.php
+#0 C:\xampp\htdocs\wisadmin\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Modules\\WIS\\Vie...')
+#1 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#2 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Engineering.php(9): view('Modules\\WIS\\Vie...')
+#3 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Engineering->engineering()
+#4 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Engineering))
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-06-11 08:23:54 --> Undefined variable: languages
+#0 C:\xampp\htdocs\wisadmin\wis\Admin\Views\common\header.php(259): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 259, Array)
+#1 C:\xampp\htdocs\wisadmin\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\wisadmin\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\Admin\\V...', Array, true)
+#4 C:\xampp\htdocs\wisadmin\wis\Admin\Controllers\Admin.php(9): view('Modules\\Admin\\V...')
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->index()
+#6 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#7 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}

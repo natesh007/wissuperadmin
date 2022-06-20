@@ -1,0 +1,126 @@
+CRITICAL - 2022-05-23 01:44:08 --> syntax error, unexpected ';'
+#0 C:\xampp\htdocs\oclm\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\oclm\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\Admin\\V...', Array, true)
+#2 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(77): view('Modules\\Admin\\V...', Array)
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->index('English')
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-05-23 01:47:21 --> syntax error, unexpected 'else' (T_ELSE), expecting ';' or ','
+#0 C:\xampp\htdocs\oclm\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\oclm\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\Admin\\V...', Array, true)
+#2 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(77): view('Modules\\Admin\\V...', Array)
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->index('Chinese')
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-05-23 01:47:42 --> syntax error, unexpected 'else' (T_ELSE), expecting ';' or ','
+#0 C:\xampp\htdocs\oclm\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\oclm\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\Admin\\V...', Array, true)
+#2 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(77): view('Modules\\Admin\\V...', Array)
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->index('Chinese')
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-05-23 04:47:45 --> Undefined variable: perpage
+#0 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(55): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 55, Array)
+#1 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->index('English')
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-05-23 04:48:11 --> Too few arguments to function Modules\Admin\Models\TranslationsModel::get_translations(), 5 passed in C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php on line 55 and exactly 7 expected
+#0 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(55): Modules\Admin\Models\TranslationsModel->get_translations(1, 10, 'English', 'AND t.Status = ...', NULL)
+#1 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->index('English')
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-05-23 04:49:09 --> Unknown column 't.Rem' in 'on clause'
+CRITICAL - 2022-05-23 04:49:09 --> Unknown column 't.Rem' in 'on clause'
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT t.*, DAT...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT t.*, DAT...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT t.*, DAT...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(24): CodeIgniter\Database\BaseConnection->query('SELECT t.*, DAT...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(76): Modules\Admin\Models\TranslationsModel->get_translations(1, 10, 'English', 'AND t.Status = ...', NULL, 'Rem')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->index('English')
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-05-23 04:50:11 --> Too few arguments to function Modules\Admin\Models\TranslationsModel::get_translations(), 6 passed in C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php on line 76 and exactly 7 expected
+#0 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(76): Modules\Admin\Models\TranslationsModel->get_translations(1, 10, 'English', 'AND t.Status = ...', NULL, 'Rem')
+#1 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->index('English')
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-05-23 04:52:17 --> Undefined variable: pagelinks
+#0 C:\xampp\htdocs\oclm\olm\Admin\Views\translations.php(295): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 295, Array)
+#1 C:\xampp\htdocs\oclm\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\oclm\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\oclm\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\Admin\\V...', Array, true)
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(85): view('Modules\\Admin\\V...', Array)
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->index('English')
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-23 05:21:58 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-23 05:23:52 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-23 05:27:12 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-23 07:29:14 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-23 07:29:29 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-23 07:30:13 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-23 07:30:23 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-23 07:30:31 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-23 07:31:57 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-23 07:33:52 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-23 07:34:29 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-23 08:41:31 --> Unknown column 'u.UID' in 'where clause'
+CRITICAL - 2022-05-23 08:41:31 --> Unknown column 'u.UID' in 'where clause'
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT  @a:=@a+...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT  @a:=@a+...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT  @a:=@a+...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(233): CodeIgniter\Database\BaseConnection->query('SELECT  @a:=@a+...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(85): Modules\Admin\Models\TranslationsModel->export_reminders_and_issues('Finnish', 'AND t.Status = ...', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->index('Finnish')
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-05-23 08:43:47 --> Unknown column 'u.UID' in 'where clause'
+CRITICAL - 2022-05-23 08:43:47 --> Unknown column 'u.UID' in 'where clause'
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT  @a:=@a+...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT  @a:=@a+...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT  @a:=@a+...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(233): CodeIgniter\Database\BaseConnection->query('SELECT  @a:=@a+...')
+#4 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(85): Modules\Admin\Models\TranslationsModel->export_reminders_and_issues('Finnish', 'AND (t.Status =...', '')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->index('Finnish')
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-05-23 23:36:48 --> syntax error, unexpected ';'
+#0 C:\xampp\htdocs\oclm\system\Autoloader\Autoloader.php(241): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs...')
+#1 C:\xampp\htdocs\oclm\system\Autoloader\Autoloader.php(219): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Modules\\Admin\\C...')
+#2 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Modules\\Admin\\C...')
+#3 [internal function]: spl_autoload_call('Modules\\Admin\\C...')
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(797): class_exists('\\Modules\\Admin\\...', true)
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(406): CodeIgniter\CodeIgniter->startController()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-05-23 23:37:09 --> syntax error, unexpected ';'
+#0 C:\xampp\htdocs\oclm\system\Autoloader\Autoloader.php(241): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs...')
+#1 C:\xampp\htdocs\oclm\system\Autoloader\Autoloader.php(219): CodeIgniter\Autoloader\Autoloader->loadInNamespace('Modules\\Admin\\C...')
+#2 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('Modules\\Admin\\C...')
+#3 [internal function]: spl_autoload_call('Modules\\Admin\\C...')
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(797): class_exists('\\Modules\\Admin\\...', true)
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(406): CodeIgniter\CodeIgniter->startController()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}

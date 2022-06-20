@@ -1,0 +1,13 @@
+ERROR - 2022-05-18 07:46:56 --> Column 'Keyword1' cannot be null
+CRITICAL - 2022-05-18 07:46:56 --> Column 'Keyword1' cannot be null
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `lo...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `lo...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `lo...')
+#3 C:\xampp\htdocs\oclm\system\Database\BaseBuilder.php(1771): CodeIgniter\Database\BaseConnection->query('INSERT INTO `lo...', Array, false)
+#4 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(122): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(388): Modules\Admin\Models\UsersModel->insert_log(Array)
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->logout()
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#8 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}

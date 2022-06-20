@@ -1,0 +1,19 @@
+CRITICAL - 2022-06-12 23:34:13 --> Class 'CodeIgniter\Cache\CacheFactory' not found
+#0 C:\xampp\htdocs\wisadmin\system\Config\BaseService.php(248): CodeIgniter\Config\Services::cache(Object(Config\Cache), false)
+#1 C:\xampp\htdocs\wisadmin\system\Config\BaseService.php(189): CodeIgniter\Config\BaseService::__callStatic('cache', Array)
+#2 C:\xampp\htdocs\wisadmin\system\Config\Services.php(101): CodeIgniter\Config\BaseService::getSharedInstance('cache', NULL)
+#3 C:\xampp\htdocs\wisadmin\system\Config\BaseService.php(248): CodeIgniter\Config\Services::cache()
+#4 C:\xampp\htdocs\wisadmin\system\Common.php(67): CodeIgniter\Config\BaseService::__callStatic('cache', Array)
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(604): cache()
+#6 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(313): CodeIgniter\CodeIgniter->displayCache(Object(Config\Cache))
+#7 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-06-12 23:42:31 --> Invalid file: Modules\WIS\Views\engineering.php
+#0 C:\xampp\htdocs\wisadmin\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('Modules\\WIS\\Vie...')
+#1 C:\xampp\htdocs\wisadmin\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\WIS\\Vie...', Array, true)
+#2 C:\xampp\htdocs\wisadmin\wis\WIS\Controllers\Engineering.php(9): view('Modules\\WIS\\Vie...')
+#3 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(832): Modules\WIS\Controllers\Engineering->engineering()
+#4 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\WIS\Controllers\Engineering))
+#5 C:\xampp\htdocs\wisadmin\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\wisadmin\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}

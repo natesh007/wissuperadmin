@@ -1,0 +1,61 @@
+CRITICAL - 2022-05-02 00:09:18 --> Class 'CodeIgniter\Cache\CacheFactory' not found
+#0 C:\xampp\htdocs\oclm\system\Config\BaseService.php(248): CodeIgniter\Config\Services::cache(Object(Config\Cache), false)
+#1 C:\xampp\htdocs\oclm\system\Config\BaseService.php(189): CodeIgniter\Config\BaseService::__callStatic('cache', Array)
+#2 C:\xampp\htdocs\oclm\system\Config\Services.php(101): CodeIgniter\Config\BaseService::getSharedInstance('cache', NULL)
+#3 C:\xampp\htdocs\oclm\system\Config\BaseService.php(248): CodeIgniter\Config\Services::cache()
+#4 C:\xampp\htdocs\oclm\system\Common.php(67): CodeIgniter\Config\BaseService::__callStatic('cache', Array)
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(604): cache()
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(313): CodeIgniter\CodeIgniter->displayCache(Object(Config\Cache))
+#7 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-05-02 03:36:45 --> fopen(writable/uploads/downloads/English_Lang.php): failed to open stream: No such file or directory
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fopen(writable/...', 'C:\\xampp\\htdocs...', 315, Array)
+#1 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(315): fopen('writable/upload...', 'w')
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->exportFile('English')
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+ERROR - 2022-05-02 03:39:47 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-02 04:57:16 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-02 04:58:13 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-02 04:59:22 --> Column 'Status' cannot be null
+CRITICAL - 2022-05-02 04:59:22 --> Column 'Status' cannot be null
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\xampp\htdocs\oclm\system\Database\BaseBuilder.php(1771): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\oclm\system\Model.php(239): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\oclm\system\BaseModel.php(738): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\oclm\system\Model.php(625): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Users.php(81): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Users->add_user()
+#9 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Users))
+#10 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#12 {main}
+ERROR - 2022-05-02 05:00:23 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+CRITICAL - 2022-05-02 05:24:07 --> Trying to get property 'LangKeyWord' of non-object
+#0 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(161): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get p...', 'C:\\xampp\\htdocs...', 161, Array)
+#1 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(380): Modules\Admin\Models\TranslationsModel->delete_deleted_translation('109')
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->delete_all_deleted_translations()
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-02 05:24:11 --> Trying to get property 'LangKeyWord' of non-object
+#0 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(161): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get p...', 'C:\\xampp\\htdocs...', 161, Array)
+#1 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(380): Modules\Admin\Models\TranslationsModel->delete_deleted_translation('121')
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->delete_all_deleted_translations()
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-02 05:24:28 --> Trying to get property 'LangKeyWord' of non-object
+#0 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(161): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get p...', 'C:\\xampp\\htdocs...', 161, Array)
+#1 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(380): Modules\Admin\Models\TranslationsModel->delete_deleted_translation('121')
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->delete_all_deleted_translations()
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}

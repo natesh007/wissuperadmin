@@ -1,0 +1,66 @@
+CRITICAL - 2022-05-17 00:21:50 --> syntax error, unexpected '<'
+#0 C:\xampp\htdocs\oclm\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\oclm\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\Admin\\V...', Array, true)
+#2 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(77): view('Modules\\Admin\\V...', Array)
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->index('Chinese')
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-05-17 00:25:44 --> Undefined variable: ttl_rows
+#0 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(25): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 25, Array)
+#1 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(47): Modules\Admin\Models\TranslationsModel->get_translations(0, 'Chinese', 'AND t.Status = ...', NULL)
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->index('Chinese')
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+ERROR - 2022-05-17 04:11:43 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-17 04:13:20 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-17 04:13:27 --> Table 'olm.lang_' doesn't exist
+CRITICAL - 2022-05-17 04:13:27 --> Table 'olm.lang_' doesn't exist
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('UPDATE `lang_` ...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `lang_` ...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `lang_` ...')
+#3 C:\xampp\htdocs\oclm\system\Database\BaseBuilder.php(1913): CodeIgniter\Database\BaseConnection->query('UPDATE `lang_` ...', Array, false)
+#4 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(37): CodeIgniter\Database\BaseBuilder->update(Array)
+#5 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(150): Modules\Admin\Models\TranslationsModel->update_translation('lang_', '16', Array)
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->insert_reminder_or_issue('16')
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#8 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2022-05-17 04:13:58 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-17 04:14:08 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+ERROR - 2022-05-17 04:14:34 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+CRITICAL - 2022-05-17 04:21:42 --> Division by zero
+#0 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(161): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Division by zer...', 'C:\\xampp\\htdocs...', 161, Array)
+#1 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(388): Modules\Admin\Models\TranslationsModel->get_deleted_translations(1, '0', '', '')
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2022-05-17 04:22:03 --> Division by zero
+#0 C:\xampp\htdocs\oclm\olm\Admin\Models\TranslationsModel.php(161): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Division by zer...', 'C:\\xampp\\htdocs...', 161, Array)
+#1 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(388): Modules\Admin\Models\TranslationsModel->get_deleted_translations(1, '0', '', '')
+#2 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->deleted_translations()
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+ERROR - 2022-05-17 06:34:30 --> Email: sendWithMail throwed mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()
+CRITICAL - 2022-05-17 08:17:49 --> Maximum execution time of 120 seconds exceeded
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+ERROR - 2022-05-17 23:40:12 --> Error on rename of '.\olm\#sql-1158_60' to '.\olm\lang_german' (errno: 13 "Permission denied")
+CRITICAL - 2022-05-17 23:40:12 --> Error on rename of '.\olm\#sql-1158_60' to '.\olm\lang_german' (errno: 13 "Permission denied")
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('ALTER TABLE lan...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('ALTER TABLE lan...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('ALTER TABLE lan...')
+#3 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(302): CodeIgniter\Database\BaseConnection->query('ALTER TABLE lan...')
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Translations->importFile('English')
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Translations))
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}

@@ -1,0 +1,35 @@
+CRITICAL - 2022-05-06 04:06:54 --> syntax error, unexpected 'echo' (T_ECHO), expecting ';' or ','
+#0 C:\xampp\htdocs\oclm\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#1 C:\xampp\htdocs\oclm\system\Common.php(1089): CodeIgniter\View\View->render('Modules\\Admin\\V...', Array, true)
+#2 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(273): view('Modules\\Admin\\V...', Array)
+#3 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->expiry_settings()
+#4 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#5 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+ERROR - 2022-05-06 04:19:30 --> Unknown column 'otp' in 'field list'
+CRITICAL - 2022-05-06 04:19:30 --> Unknown column 'otp' in 'field list'
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('UPDATE `expiry_...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `expiry_...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `expiry_...')
+#3 C:\xampp\htdocs\oclm\system\Database\BaseBuilder.php(1913): CodeIgniter\Database\BaseConnection->query('UPDATE `expiry_...', Array, false)
+#4 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(109): CodeIgniter\Database\BaseBuilder->update(Array)
+#5 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(274): Modules\Admin\Models\UsersModel->update_expiry_settings(Array)
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->expiry_settings('1')
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#8 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2022-05-06 04:20:55 --> Unknown column 'otp' in 'field list'
+CRITICAL - 2022-05-06 04:20:55 --> Unknown column 'otp' in 'field list'
+#0 C:\xampp\htdocs\oclm\system\Database\MySQLi\Connection.php(292): mysqli->query('UPDATE `expiry_...', 0)
+#1 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `expiry_...')
+#2 C:\xampp\htdocs\oclm\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `expiry_...')
+#3 C:\xampp\htdocs\oclm\system\Database\BaseBuilder.php(1913): CodeIgniter\Database\BaseConnection->query('UPDATE `expiry_...', Array, false)
+#4 C:\xampp\htdocs\oclm\olm\Admin\Models\UsersModel.php(109): CodeIgniter\Database\BaseBuilder->update(Array)
+#5 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Admin.php(274): Modules\Admin\Models\UsersModel->update_expiry_settings(Array)
+#6 C:\xampp\htdocs\oclm\system\CodeIgniter.php(832): Modules\Admin\Controllers\Admin->expiry_settings('2')
+#7 C:\xampp\htdocs\oclm\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(Modules\Admin\Controllers\Admin))
+#8 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}

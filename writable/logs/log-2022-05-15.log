@@ -1,0 +1,27 @@
+CRITICAL - 2022-05-15 23:36:29 --> Maximum execution time of 120 seconds exceeded
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2022-05-15 23:38:14 --> ini_set(): Headers already sent. You cannot change the session module's ini settings at this time
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Head...', 'C:\\xampp\\htdocs...', 71, Array)
+#1 C:\xampp\htdocs\oclm\system\Session\Handlers\FileHandler.php(71): ini_set('session.save_pa...', 'C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\oclm\system\Config\Services.php(570): CodeIgniter\Session\Handlers\FileHandler->__construct(Object(Config\App), '::1')
+#3 C:\xampp\htdocs\oclm\system\Config\BaseService.php(248): CodeIgniter\Config\Services::session(Object(Config\App), false)
+#4 C:\xampp\htdocs\oclm\system\Config\BaseService.php(189): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#5 C:\xampp\htdocs\oclm\system\Config\Services.php(563): CodeIgniter\Config\BaseService::getSharedInstance('session', NULL)
+#6 C:\xampp\htdocs\oclm\system\Config\BaseService.php(248): CodeIgniter\Config\Services::session()
+#7 C:\xampp\htdocs\oclm\system\Common.php(901): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#8 C:\xampp\htdocs\oclm\olm\Admin\Controllers\Translations.php(19): session('UID')
+#9 C:\xampp\htdocs\oclm\system\CodeIgniter.php(809): Modules\Admin\Controllers\Translations->__construct()
+#10 C:\xampp\htdocs\oclm\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->createController()
+#11 C:\xampp\htdocs\oclm\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\oclm\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2022-05-15 23:38:14 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\oclm\app\Config\Events.php:32) in C:\xampp\htdocs\oclm\system\Debug\Exceptions.php:112
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', 'C:\\xampp\\htdocs...', 112, Array)
+#1 C:\xampp\htdocs\oclm\system\Debug\Exceptions.php(112): header('HTTP/1.1 500 In...', true, 500)
+#2 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#3 {main}
+  thrown
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
