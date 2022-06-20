@@ -60,12 +60,7 @@ $routes->add('/admin/shifts/add_shift', 'Shift::add_shift', ['namespace' => 'Mod
 $routes->add('/admin/shifts/edit_shift/(:num)', 'Shift::edit_shift/$1', ['namespace' => 'Modules\Admin\Controllers']);
 
 
-// Organization Type Routes
-$routes->add('/admin/shifts', 'Shift::index', ['namespace' => 'Modules\Admin\Controllers']);
-$routes->add('/admin/active_shifts', 'Shift::active_shifts', ['namespace' => 'Modules\Admin\Controllers']);
-$routes->add('/admin/inactive_shifts', 'Shift::inactive_shifts', ['namespace' => 'Modules\Admin\Controllers']);
-$routes->add('/admin/shifts/add_shift', 'Shift::add_shift', ['namespace' => 'Modules\Admin\Controllers']);
-$routes->add('/admin/shifts/edit_shift/(:num)', 'Shift::edit_shift/$1', ['namespace' => 'Modules\Admin\Controllers']);
+
 
 /**
  * --------------------------------------------------------------------
