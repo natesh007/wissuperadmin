@@ -1,0 +1,154 @@
+.info {
+    padding-left: 0px !important;
+}
+
+.info h5 {
+    font-size: 18px;
+}
+
+.brand-text p,
+.main-sidebar h2 {
+    margin-bottom: 0px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.user-panel {
+    margin-top: 0px !important;
+    padding-bottom: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.user-panel span {
+    font-size: 13px;
+}
+
+.button {
+    display: inline-block;
+    background: #525252 !important;
+    border: 1px solid #525252 !important;
+    border-radius: 2px;
+    padding: 4px 7px 4px 7px !important;
+    color: #ffffff !important;
+    font-size: 11px !important;
+    cursor: pointer;
+}
+
+.card {
+    margin-top: 15px
+}
+
+.nav-sidebar a {
+    font-size: 14px !important;
+}
+
+.fa,
+.fas {
+    font-size: 12px !important;
+}
+
+.nav-icon {
+    margin-right: 0px !important;
+}
+
+.main-footer {
+    background: #343a40;
+    color: #FFF;
+}
+
+.card-header div.add_but {
+    text-align: right !important;
+}
+
+.table {
+    font-size: 13px
+}
+
+.table th,
+.table td,
+.table td ul {
+    padding: 0px;
+    text-align: left;
+    margin: 0px
+}
+
+.table th,
+.table td {
+    padding: 5px;
+    white-space: nowrap;
+}
+
+.switch-green {
+    background-color: #53a93f !important;
+    color: #fff;
+    padding: 4px 4px;
+    font-size: 14px;
+    width: auto;
+    text-align: center;
+    min-width: 50px;
+    max-width: 70px;
+    border-radius: 2px;
+}
+
+.add_but button,
+.btn-edit,
+.btn_bck,
+.btn_font {
+    font-size: 13px !important;
+}
+
+.add_but .fa {
+    margin-right: 3px !important;
+}
+
+.card-title {
+    float: none !important;
+    text-align: center;
+    font-weight: bold;
+}
+
+.add-user,
+.update-user {
+    width: 80% !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-group label {
+    font-size: 13px;
+}
+
+.form-control {
+    width: 90%;
+}
+
+.add-user .form-check-input,
+.update-user .form-check-input {
+    margin-left: 4px;
+}
+.units_fld{
+    width:84%;
+    display:inline
+}
+
+/* needed for effect */
+
+.popover-content {
+
+    display: none;
+
+}
+
+
+
+/* optional shadow */
+
+.popover {
+
+    -moz-box-shadow: 0 0 8px #5b7d83;
+
+    -webkit-box-shadow: 0 0 8px #5b7d83;
+
+    box-shadow: 0 0 8px #5b7d83;
+
+} 
