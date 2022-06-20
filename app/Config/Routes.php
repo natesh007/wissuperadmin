@@ -52,6 +52,21 @@ $routes->add('/admin/inactive_roles', 'Roles::inactive_roles', ['namespace' => '
 $routes->add('/admin/roles/add_role', 'Roles::add_role', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/roles/edit_role/(:num)', 'Roles::edit_role/$1', ['namespace' => 'Modules\Admin\Controllers']);
 
+// Shifts Routes
+$routes->add('/admin/shifts', 'Shift::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/active_shifts', 'Shift::active_shifts', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/inactive_shifts', 'Shift::inactive_shifts', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/shifts/add_shift', 'Shift::add_shift', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/shifts/edit_shift/(:num)', 'Shift::edit_shift/$1', ['namespace' => 'Modules\Admin\Controllers']);
+
+
+// Organization Type Routes
+$routes->add('/admin/shifts', 'Shift::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/active_shifts', 'Shift::active_shifts', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/inactive_shifts', 'Shift::inactive_shifts', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/shifts/add_shift', 'Shift::add_shift', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/shifts/edit_shift/(:num)', 'Shift::edit_shift/$1', ['namespace' => 'Modules\Admin\Controllers']);
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
