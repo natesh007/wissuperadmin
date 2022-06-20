@@ -30,11 +30,27 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+
 $routes->add('/', 'Admin::index');
 $routes->add('/admin', 'Admin::index',['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/login', 'Admin::index',['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/logout', 'Admin::logout',['namespace' => 'Modules\Admin\Controllers']);
-$routes->add('/admin/users', 'Admin::users',['namespace' => 'Modules\Admin\Controllers']);
+
+//Admin Common Routes  
+$routes->add('/admin/activate_inactivate', 'Admin::activate_inactivate', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/delete', 'Admin::delete', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/delete_all', 'Admin::delete_all', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/active_inactive_all', 'Admin::active_inactive_all', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/changerowpriority', 'Admin::changerowpriority', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/common_form_validation', 'Admin::common_form_validation', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/common_edit_form_validation', 'Admin::common_edit_form_validation', ['namespace' => 'Modules\Admin\Controllers']);
+
+//Roles Routes
+$routes->add('/admin/roles', 'Roles::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/active_roles', 'Roles::active_roles', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/inactive_roles', 'Roles::inactive_roles', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/roles/add_role', 'Roles::add_role', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/roles/edit_role/(:num)', 'Roles::edit_role/$1', ['namespace' => 'Modules\Admin\Controllers']);
 
 /**
  * --------------------------------------------------------------------

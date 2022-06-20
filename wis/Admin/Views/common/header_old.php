@@ -189,7 +189,9 @@
                     <!-- <div class="image">
                         <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div> -->
-                   
+                    <div class="info">
+                        <a href="#" class="d-block">WIS Admin</a>
+                    </div>
                 </div>
 
                 <!-- SidebarSearch Form -->
@@ -210,32 +212,6 @@
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-               <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fas fa-dice-d20  nav-icon"></i>
-                                <p>
-                                    Master Data
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <?php /*<li class="nav-item">
-                                    <a href="<?= base_url('admin/admins') ?>" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Admins</p>
-                                    </a>
-                                </li>*/?>
-                                
-                                <li class="nav-item">
-                                    <a href="<?= base_url('admin/roles') ?>" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Roles</p>
-                                    </a>
-                                </li>
-                                
-                            </ul>
-                        </li>
-
                         <li class="nav-item">
                           <a href="<?= base_url('/admin'); ?>" class="nav-link" id="UsersTab">
                               <i class="nav-icon fas fa-user"></i>
