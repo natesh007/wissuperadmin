@@ -208,6 +208,14 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
+                        <li class="nav-item">
+                                  <a href="<?= base_url('admin/dashboard') ?>" class="nav-link">
+                                      <i class="nav-icon fas fa-tachometer-alt"></i>
+                                      <p>
+                                          Dashboard
+                                      </p>
+                                  </a>
+                              </li>
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                <li class="nav-item">
@@ -225,7 +233,7 @@
                                         <p>Admins</p>
                                     </a>
                                 </li>*/?>
-                                
+                                 
                                 <li class="nav-item">
                                     <a href="<?= base_url('admin/roles') ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
@@ -246,24 +254,18 @@
                                         <p>Organization Types</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="<?= base_url('admin/organizations') ?>" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Organizations</p>
-                                    </a>
-                                </li>
+                                
                                 
                             </ul>
                         </li>
 
                         <li class="nav-item">
-                          <a href="<?= base_url('/admin'); ?>" class="nav-link" id="UsersTab">
+                          <a href="<?= base_url('admin/organizations'); ?>" class="nav-link" id="UsersTab">
                               <i class="nav-icon fas fa-user"></i>
-                              <p>
-                                Users
-                              </p>
+                              <p>Organizations</p>
                           </a>
                         </li>
+                      
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

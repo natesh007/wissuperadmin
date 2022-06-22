@@ -105,6 +105,7 @@ class Roles extends BaseController
 	}
 	public function add_role()
 	{
+		
 		if ($this->request->getMethod() == 'post') {
 			$data = [
 				'RoleName' => $this->request->getVar('RoleName'),

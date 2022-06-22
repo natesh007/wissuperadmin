@@ -21,7 +21,7 @@ class Admin extends BaseController
 					'Role' =>  $result['Role']
 				);
 				session()->set($loggedin_user);
-				return redirect()->to(base_url('admin/users'));
+				return redirect()->to(base_url('admin/dashboard'));
 			}else{
 				return redirect()->to(base_url('admin'))->with('errmsg', 'Wrong credentials.');
 			}
@@ -129,9 +129,17 @@ class Admin extends BaseController
 			}
 		}
 	}
+	public function dashboard()
+	{
+		session()->set('roles_page', '/active_roles');
+		$data['pager'] = \Config\Services::pager();
+		$uri = service('uri');
+		echo view('Modules\Admin\Views\common\header');
+		echo view('Modules\Admin\Views\dashboard'); 
+	}
 	public function pagenotfound(){
 		if(session()->get('AID') != null) {
-			echo view('Modules\Admin\Views\common\header');
+		return redirect()->to(base_url('admin/dashboard'));
 			echo view('Modules\Admin\Views\pagenotfound');
 		}
 	}

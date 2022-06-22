@@ -33,6 +33,7 @@ $routes->setAutoRoute(true);
 
 $routes->add('/', 'Admin::index');
 $routes->add('/admin', 'Admin::index',['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/dashboard', 'Admin::dashboard', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/login', 'Admin::index',['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/logout', 'Admin::logout',['namespace' => 'Modules\Admin\Controllers']);
 
