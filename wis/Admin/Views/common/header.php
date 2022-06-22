@@ -261,11 +261,17 @@
 
                         <li class="nav-item">
                           <a href="<?= base_url('admin/organizations'); ?>" class="nav-link" id="UsersTab">
-                              <i class="nav-icon fas fa-user"></i>
+                              <i class="nav-icon fa fa-building"></i>
                               <p>Organizations</p>
                           </a>
                         </li>
-                      
+                        <li class="nav-item">
+                          <a href="<?= base_url('admin/branches'); ?>" class="nav-link" id="UsersTab">
+                              <i class="nav-icon fa fa-map-marker"></i>
+                              <p>Branches</p>
+                          </a>
+                        </li>
+                        
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

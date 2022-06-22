@@ -74,6 +74,13 @@ $routes->add('/admin/inactive_organizations', 'Organization::inactive_organizati
 $routes->add('/admin/organizations/add_organization', 'Organization::add_organization', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/organizations/edit_organization/(:num)', 'Organization::edit_organization/$1', ['namespace' => 'Modules\Admin\Controllers']);
 
+// Branches Routes
+$routes->add('/admin/branches', 'Branch::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/active_branches', 'Branch::active_branches', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/inactive_branches', 'Branch::inactive_branches', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/branches/add_branch', 'Branch::add_branch', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/branches/edit_branch/(:num)', 'Branch::edit_branch/$1', ['namespace' => 'Modules\Admin\Controllers']);
+
 
 
 
