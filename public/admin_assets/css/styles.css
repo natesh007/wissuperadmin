@@ -152,3 +152,29 @@
     box-shadow: 0 0 8px #5b7d83;
 
 } 
+
+.page {
+    margin: 2rem 0rem;
+    float: right;
+  }
+  .pagination {
+    margin-left: 500px;
+  }
+  .pagination li a {
+    border: 1px solid #ccc;
+    padding: 10px;
+    color: #007bff;
+  }
+  a:not([href]):hover {
+    color: inherit;
+    text-decoration: none;
+  }
+  .pagination li a {
+    border: 1px solid #ccc;
+    padding: 10px;
+    color: #007bff;
+  }
+  .active a {
+    background-color: #007bff;
+    color: white !important;
+  }

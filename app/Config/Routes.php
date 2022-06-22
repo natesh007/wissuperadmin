@@ -59,6 +59,13 @@ $routes->add('/admin/inactive_shifts', 'Shift::inactive_shifts', ['namespace' =>
 $routes->add('/admin/shifts/add_shift', 'Shift::add_shift', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/shifts/edit_shift/(:num)', 'Shift::edit_shift/$1', ['namespace' => 'Modules\Admin\Controllers']);
 
+// Organization Type Routes
+$routes->add('/admin/organization_types', 'OrganizationType::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/active_organization_types', 'OrganizationType::active_organization_types', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/inactive_organization_types', 'OrganizationType::inactive_organization_types', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/organization_types/add_organization_type', 'OrganizationType::add_organization_type', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/organization_types/edit_organization_type/(:num)', 'OrganizationType::edit_organization_type/$1', ['namespace' => 'Modules\Admin\Controllers']);
+
 
 
 

@@ -239,6 +239,13 @@
                                         <p>Shifts</p>
                                     </a>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a href="<?= base_url('admin/organization_types') ?>" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Organization Types</p>
+                                    </a>
+                                </li>
                                 
                             </ul>
                         </li>
