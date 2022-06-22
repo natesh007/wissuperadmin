@@ -81,7 +81,14 @@ $routes->add('/admin/inactive_branches', 'Branch::inactive_branches', ['namespac
 $routes->add('/admin/branches/add_branch', 'Branch::add_branch', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/branches/edit_branch/(:num)', 'Branch::edit_branch/$1', ['namespace' => 'Modules\Admin\Controllers']);
 
-
+//departments Routes
+$routes->add('/admin/departments', 'Departments::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/active_departments', 'Departments::active_departments', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/inactive_departments', 'Departments::inactive_departments', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/departments/add_department', 'Departments::add_department', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/departments/edit_department/(:num)', 'Departments::edit_department/$1', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/departments/departmentsajax', 'Departments::departmentsajax', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/departments/updatedepartmentsajax', 'Departments::updatedepartmentsajax', ['namespace' => 'Modules\Admin\Controllers']);
 
 
 /**

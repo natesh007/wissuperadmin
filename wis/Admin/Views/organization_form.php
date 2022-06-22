@@ -84,7 +84,7 @@
     <!-- ./wrapper -->
 
     
-    <script src="<?= base_url()?>/public/admin_assets/commonjs.js"></script>
+<script src="<?= base_url()?>/public/admin_assets/commonjs.js"></script>
 <script>
 	$("#add_organization").submit(function(event) {
 		var OrgName = $('#OrgName').val();
