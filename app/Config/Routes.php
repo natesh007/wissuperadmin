@@ -66,6 +66,13 @@ $routes->add('/admin/inactive_organization_types', 'OrganizationType::inactive_o
 $routes->add('/admin/organization_types/add_organization_type', 'OrganizationType::add_organization_type', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/organization_types/edit_organization_type/(:num)', 'OrganizationType::edit_organization_type/$1', ['namespace' => 'Modules\Admin\Controllers']);
 
+// Organization Routes
+$routes->add('/admin/organizations', 'Organization::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/active_organizations', 'Organization::active_organizations', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/inactive_organizations', 'Organization::inactive_organizations', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/organizations/add_organization', 'Organization::add_organization', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/organizations/edit_organization/(:num)', 'Organization::edit_organization/$1', ['namespace' => 'Modules\Admin\Controllers']);
+
 
 
 

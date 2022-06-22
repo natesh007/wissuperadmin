@@ -133,7 +133,8 @@ public function changepriority($i, $v, $tbl, $col1, $col2) {
 }
 
 public function getmasterdata($table) {
-  return $this->db->query('SELECT * FROM '. $table . ' where Status = 1 ORDER BY Priority ASC')->getResultArray();
+  return $this->db->query('SELECT * FROM '. $table . ' where Status = 1 ')->getResultArray();
+  //return $this->db->query('SELECT * FROM '. $table . ' where Status = 1 ORDER BY Priority ASC')->getResultArray();
 }
 
 
