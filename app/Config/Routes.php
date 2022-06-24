@@ -106,6 +106,12 @@ $routes->add('/admin/floors/add_floor', 'Floor::add_floor', ['namespace' => 'Mod
 $routes->add('/admin/floors/edit_floor/(:num)', 'Floor::edit_floor/$1', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/floors/getbuildings', 'Floor::getbuildings', ['namespace' => 'Modules\Admin\Controllers']);
 
+// Employees Routes
+$routes->add('/admin/employees', 'Employee::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/active_employees', 'Employee::active_employees', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/inactive_employees', 'Employee::inactive_employees', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/employees/add_employee', 'Employee::add_employee', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/employees/edit_employee/(:num)', 'Employee::edit_employee/$1', ['namespace' => 'Modules\Admin\Controllers']);
 
 
 /**

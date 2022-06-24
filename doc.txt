@@ -1,0 +1,6 @@
+it admin
+emp
+
+
+Speradmin:
+emp:name,oraganization,dept,emailid,pwd

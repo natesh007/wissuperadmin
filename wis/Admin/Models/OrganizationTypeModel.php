@@ -5,7 +5,7 @@ use Modules\Admin\Models\UtilModel;
 
 class OrganizationTypeModel extends Model {
     protected $table='organization_type';
-    protected $primaryKey='TypeID ';
+    protected $primaryKey='TypeID';
     protected $allowedFields = ['OrganizationType', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
@@ -41,7 +41,7 @@ class OrganizationTypeModel extends Model {
         }
         $query .=' Limit ' . $start_from . ',' . $perpage;
         $organization_type['results'] = $this->db->query($query)->getResultArray();
-        $countquery = 'SELECT count(TypeID ) as ttl_rows FROM organization_type';
+        $countquery = 'SELECT count(TypeID) as ttl_rows FROM organization_type';
         if ($keyword !=''&& $status !='') {
             $countquery .=' where OrganizationType  like "%'. $keyword . '%" AND Status = '.$status;
         }

@@ -41,7 +41,7 @@ class ShiftModel extends Model {
         }
         $query .=' Limit ' . $start_from . ',' . $perpage;
         $shifts['results'] = $this->db->query($query)->getResultArray();
-        $countquery = 'SELECT count(ShID ) as ttl_rows FROM shifts';
+        $countquery = 'SELECT count(ShID) as ttl_rows FROM shifts';
         if ($keyword !=''&& $status !='') {
             $countquery .=' where ShType  like "%'. $keyword . '%" AND Status = '.$status;
         }

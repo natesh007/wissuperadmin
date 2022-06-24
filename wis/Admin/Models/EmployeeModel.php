@@ -3,10 +3,10 @@
 use CodeIgniter\Model;
 use Modules\Admin\Models\UtilModel;
 
-class FloorModel extends Model {
-    protected $table='floor';
-    protected $primaryKey='FID';
-    protected $allowedFields = ['OrgID','BID','FloorName', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+class EmployeeModel extends Model {
+    protected $table='employees';
+    protected $primaryKey='EmpID';
+    protected $allowedFields = ['RoleID','EmpName','DeptID','Gender','EmailID','Password','Address','Contact','JobType','City','DateOfJoining','Doc', 'ProfilePic','Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
@@ -24,30 +24,32 @@ class FloorModel extends Model {
         $data['data']['UpdatedDate']=date('Y-m-d H:i:s');
         return $data;
     }
-    function get_floors($page, $perpage, $keyword, $status) 
+    function get_employees($page, $perpage, $keyword, $status) 
     {
         $start_from = ($page - 1) * $perpage;
-        $query = 'SELECT f.*, a.Name, o.OrgName, b.BuildingName FROM floor f left join admins a on a.AID = f.UpdatedBy left join organization o on o.OrgID  = f.OrgID left join building b on b.BID   = f.BID ' ;
+        $query = 'SELECT e.*, a.Name, d.DeptName FROM employees e left join admins a on a.AID = e.UpdatedBy left join departments d on d.DeptID   = e.DeptID';
         if ($keyword !=''&& $status !='') {
-            $query .=' where f.floorName  like "%'. $keyword . '%" AND f.Status = '.$status;
+
+            $query .=' where e.EmpName like "%'. $keyword . '%" OR e.EmailID like "%'. $keyword . '%" OR e.Contact like "%'. $keyword . '%" AND e.Status = '.$status ;
+
         }
 
         else if ($keyword !=''&& $status=='') {
-            $query .=' where f.floorName  like "%'. $keyword . '%"';
+            $query .=' where e.EmpName like "%'. $keyword . '%" OR e.EmailID like "%'. $keyword . '%" OR e.Contact like "%'. $keyword . '%"' ;
         }
 
         else if ($keyword==''&& $status !='') {
-            $query .=' where f.Status = '.$status;
+            $query .=' where e.Status = '.$status;
         }
         $query .=' Limit ' . $start_from . ',' . $perpage;
         $branch['results'] = $this->db->query($query)->getResultArray();
-        $countquery = 'SELECT count(FID) as ttl_rows FROM floor';
+        $countquery = 'SELECT count(EmpID) as ttl_rows FROM employees';
         if ($keyword !=''&& $status !='') {
-            $countquery .=' where floorName  like "%'. $keyword . '%" AND Status = '.$status;
+            $countquery .=' where EmpName  like "%'. $keyword . '%" AND Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $countquery .=' where floorName like "%'. $keyword . '%"';
+            $countquery .=' where EmpName like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {

@@ -5,7 +5,7 @@ use Modules\Admin\Models\UtilModel;
 
 class BuildingModel extends Model {
     protected $table='building';
-    protected $primaryKey='BID ';
+    protected $primaryKey='BID';
     protected $allowedFields = ['OrgID','BuildingName', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
@@ -41,7 +41,7 @@ class BuildingModel extends Model {
         }
         $query .=' Limit ' . $start_from . ',' . $perpage;
         $branch['results'] = $this->db->query($query)->getResultArray();
-        $countquery = 'SELECT count(BID ) as ttl_rows FROM building';
+        $countquery = 'SELECT count(BID) as ttl_rows FROM building';
         if ($keyword !=''&& $status !='') {
             $countquery .=' where BuildingName  like "%'. $keyword . '%" AND Status = '.$status;
         }

@@ -5,7 +5,7 @@ use Modules\Admin\Models\UtilModel;
 
 class BranchModel extends Model {
     protected $table='branches';
-    protected $primaryKey='BrID ';
+    protected $primaryKey='BrID';
     protected $allowedFields = ['OrgID','BrName','Address','BrLangitude','BrLatitude', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
@@ -41,7 +41,7 @@ class BranchModel extends Model {
         }
         $query .=' Limit ' . $start_from . ',' . $perpage;
         $branch['results'] = $this->db->query($query)->getResultArray();
-        $countquery = 'SELECT count(BrID ) as ttl_rows FROM branches';
+        $countquery = 'SELECT count(BrID) as ttl_rows FROM branches';
         if ($keyword !=''&& $status !='') {
             $countquery .=' where BrName  like "%'. $keyword . '%" AND Status = '.$status;
         }

@@ -146,24 +146,7 @@ class departments extends BaseController
 			if ($this->request->getVar('ParentDept') != '') {
 				$departmentdata['ParentDept'] = $this->request->getVar('ParentDept');
 			}
-			/*if ($this->request->getFile('BannerImage')->getName() != '') {
-				$orginalextension = $this->request->getFile('BannerImage')->getClientExtension();
-				$kb = $this->request->getFile('BannerImage')->getSizeByUnit('kb');
-				$variable = substr($kb, 0, strpos($kb, "."));
-				$kbr = str_replace(",", "", $variable);
-				$num = (int)$kbr;
-				if ($num > 2048) {
-					$msg = 'The Image should be less than 2MB in size.';
-					return redirect()->to(base_url('admin/departments/add_department'))->with('msg', $msg);
-				}else{
-					$randcharforimg = substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(8 / strlen($x)))), 1, 8);
-					$newimgname = $randcharforimg . '-' . time() . '.' . $orginalextension;
-					$this->request->getFile('BannerImage')->move(WRITEPATH . 'uploads/departments/', $newimgname);
-					$departmentdata['BannerImage'] = 'writable/uploads/departments/' . $newimgname;
-				}
-			}else{
-				$departmentdata['BannerImage'] = '' ;
-			}*/
+			
 			$save = $cmodel->insert($departmentdata);
 			if ($save) {
 				$msg = 'Data inserted successfully.';
@@ -190,29 +173,7 @@ class departments extends BaseController
 			if ($this->request->getVar('ParentDept') != '') {
 				$departmentdata['ParentDept'] = $this->request->getVar('ParentDept');
 			}
-			/*if ($this->request->getFile('BannerImage')->getName() != '') {
-				if(isset($data['cat']['BannerImage'])){
-					if(file_exists($data['cat']['BannerImage'])){
-						unlink($data['cat']['BannerImage']);
-					}
-				}
-				$orginalextension = $this->request->getFile('BannerImage')->getClientExtension();
-				$kb = $this->request->getFile('BannerImage')->getSizeByUnit('kb');
-				$variable = substr($kb, 0, strpos($kb, "."));
-				$kbr = str_replace(",", "", $variable);
-				$num = (int)$kbr;
-				if ($num > 2048) {
-					$msg = 'The Image should be less than 2MB in size.';
-					return redirect()->to(base_url('admin/departments/edit_department/'.$DeptID))->with('msg', $msg);
-				}else{
-					$randcharforimg = substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(8 / strlen($x)))), 1, 8);
-					$newimgname = $randcharforimg . '-' . time() . '.' . $orginalextension;
-					$this->request->getFile('BannerImage')->move(WRITEPATH . 'uploads/departments/', $newimgname);
-					$departmentdata['BannerImage'] = 'writable/uploads/departments/' . $newimgname;
-				}
-			} else {
-				$departmentdata['BannerImage'] = $this->request->getVar('HiddenImage');
-			}*/
+			
 			$cmodel->update($DeptID, $departmentdata);
 			$msg = 'Data updated successfully.';
 			return redirect()->to(base_url('admin/departments'))->with('msg', $msg);

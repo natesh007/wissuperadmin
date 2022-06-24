@@ -41,7 +41,7 @@ class OrganizationModel extends Model {
         }
         $query .=' Limit ' . $start_from . ',' . $perpage;
         $organization['results'] = $this->db->query($query)->getResultArray();
-        $countquery = 'SELECT count(OrgID ) as ttl_rows FROM organization';
+        $countquery = 'SELECT count(OrgID) as ttl_rows FROM organization';
         if ($keyword !=''&& $status !='') {
             $countquery .=' where OrgName  like "%'. $keyword . '%" AND Status = '.$status;
         }

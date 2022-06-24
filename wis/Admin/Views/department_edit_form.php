@@ -43,9 +43,9 @@
 										<?php if(!empty($total_cats)){
 											foreach ($total_cats as $departments) { ?>
 											<option value="<?= $departments['DeptID']; ?>" style="font-weight:800;background-color:#e9ebed;font-size:18px" <?php if ($cat['ParentDept'] != '') {
-																																									if ($cat['ParentDept'] == $departments['DeptID']) {
-																																										echo 'selected';
-																																									}
+																																																			if ($cat['ParentDept'] == $departments['DeptID']) {
+																																																				echo 'selected';
+																																																			}
 																																								} ?>><?= $departments['DeptName']; ?></option>
 											<?php if (isset($departments['children'])) {
 												for ($i = 0; $i <= count($departments['children']); $i++) {

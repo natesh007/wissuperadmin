@@ -41,7 +41,7 @@ class RolesModel extends Model {
         }
         $query .=' ORDER BY r.Priority ASC Limit ' . $start_from . ',' . $perpage;
         $roles['results'] = $this->db->query($query)->getResultArray();
-        $countquery = 'SELECT count(RoleID  ) as ttl_rows FROM roles';
+        $countquery = 'SELECT count(RoleID) as ttl_rows FROM roles';
         if ($keyword !=''&& $status !='') {
             $countquery .=' where RoleName  like "%'. $keyword . '%" AND Status = '.$status;
         }
