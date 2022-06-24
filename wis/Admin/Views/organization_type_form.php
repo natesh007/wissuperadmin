@@ -31,8 +31,8 @@
                                 
 							</div>
 							<div class="form-group text-center submit_cancel">
-								<span><button type="submit" id="submit" name="submit" class="btn btn-success">Save</button></span>
-								<span><a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('organization_type_page'); ?>" class="btn btn-primary">Cancel</a> </span>
+								<span><button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Save</button></span>
+								<span><a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('organization_type_page'); ?>" class="btn  btn-sm btn-primary">Cancel</a> </span>
 							</div>
 						</form>
 					</div>

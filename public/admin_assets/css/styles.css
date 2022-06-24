@@ -118,9 +118,7 @@
     font-size: 13px;
 }
 
-.form-control {
-    width: 90%;
-}
+
 
 .add-user .form-check-input,
 .update-user .form-check-input {
@@ -162,7 +160,7 @@
   }
   .pagination li a {
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 5px 10px;
     color: #007bff;
   }
   a:not([href]):hover {
@@ -171,10 +169,14 @@
   }
   .pagination li a {
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 5px 10px;
     color: #007bff;
   }
   .active a {
     background-color: #007bff;
     color: white !important;
   }
+  #example1{background-color: #fff!important;}
+  .head-title{font-size:14px!important}
+  
+  .form-control {padding:3px!important;height: auto;}

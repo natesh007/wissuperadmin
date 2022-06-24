@@ -9,7 +9,7 @@
                             <h1 class="m-0">Branch</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6 text-right add_user">
-							<a href="<?= site_url('admin/branches/add_branch') ?>" class="btn btn-success btn-background">Add New Branch</a>
+							<a href="<?= site_url('admin/branches/add_branch') ?>" class="btn btn-sm btn-success btn-background">Add New Branch</a>
 						</div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -26,16 +26,16 @@
 					</div>
 				<?php endif ?>
 				<div class="row">
-							<div class="col-md-3">
-								<button onclick="delete_all('branches', 'BrID', '', '')" name="delete_all[]" id="delete_all" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></button> Delete &nbsp;
-								<button onclick="active_inactive_all('branches',1,'BrID')" data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-success" name="delete_all[]" id="active_all"><span class="fa fa-check"></span></button> Active &nbsp;
+							<div class="col-md-3 head-title">
+								<button onclick="delete_all('branches', 'BrID', '', '')" name="delete_all[]" id="delete_all" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></button> Delete &nbsp;&nbsp;
+								<button onclick="active_inactive_all('branches',1,'BrID')" data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-success" name="delete_all[]" id="active_all"><span class="fa fa-check"></span></button> Active &nbsp;&nbsp;
 								<button onclick="active_inactive_all('branches',0,'BrID')" data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-warning" name="delete_all[]" id="inactive_all"><span class="fa fa-times"></span></button> Inactive
 							</div>
 							<div class="col-md-9">
 								<div class="row">
 									<div class="col-md-3">
 										<div class="dropdown">
-											<button type="button" class="btn btn-primary dropdown-toggle form-control" data-toggle="dropdown">
+											<button type="button" class="btn btn-sm btn-primary dropdown-toggle form-control" data-toggle="dropdown">
 												<?php
 												if (session('branch_page') == '/branches') {
 													echo "All Branches";
@@ -94,11 +94,11 @@
 												<div class="col-md-6">
 													<input type="text" class="form-control field" name="key_word" placeholder="Enter Key Word" id="key_word" value="<?php print $keyword; ?>">&nbsp;
 												</div>
-												<div class="col-md-3">
-													<span id="searchbtn"><button type="submit" id="submit" name="submit" class="btn btn-success field">search</button></span>
+												<div class="col-md-2">
+												&nbsp;<span id="searchbtn"><button type="submit" id="submit" name="submit" class="btn btn-sm btn-success field">search</button></span>
 												</div>
-												<div class="col-md-3">
-                                                    <span id="searchbtn"><a href="<?= base_url('admin/branches/') ?>" class="btn btn-info field">Clear</a></span>
+												<div class="col-md-2">
+                                                    <span id="searchbtn"><a href="<?= base_url('admin/branches/') ?>" class="btn btn-sm btn-info field">Clear</a></span>
                                                 </div>
 											</div>
 										</form>

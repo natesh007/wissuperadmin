@@ -27,7 +27,7 @@
 									<input type="text" class="form-control" id="OrgName" name="OrgName" placehoder="Enter Organization Name ..." />
 									<span id="name_error"></span>
 								</div>
-                                <div class="col-md-6">
+                                <div class="col-md-6  my-2">
 									<label for="OrgType">Organization Type<strong class="help-block">*</strong></label>
 									<select class="form-control" name="OrgType" required>
 										<option disabled selected value>Select Organization Type</option>
@@ -63,8 +63,8 @@
                                 
 							</div>
 							<div class="form-group text-center submit_cancel">
-								<span><button type="submit" id="submit" name="submit" class="btn btn-success">Save</button></span>
-								<span><a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('organization_page'); ?>" class="btn btn-primary">Cancel</a> </span>
+								<span><button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Save</button></span>
+								<span><a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('organization_page'); ?>" class="btn btn-sm btn-primary">Cancel</a> </span>
 							</div>
 						</form>
 					</div>
@@ -83,7 +83,7 @@
 <?= view('Modules\Admin\Views\common\footer'); ?>
     <!-- ./wrapper -->
 
-    
+    <style>.form-group{margin-bottom: 0px!important;}</style>
 <script src="<?= base_url()?>/public/admin_assets/commonjs.js"></script>
 <script>
 	$("#add_organization").submit(function(event) {
