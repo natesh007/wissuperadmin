@@ -260,13 +260,32 @@
                                 
                             </ul>
                         </li>
-
                         <li class="nav-item">
-                          <a href="<?= base_url('admin/organizations'); ?>" class="nav-link" id="UsersTab">
-                              <i class="nav-icon fa fa-building"></i>
-                              <p>Organizations</p>
-                          </a>
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-dice-d20  nav-icon"></i>
+                                <p>
+                                    Organizations
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                 
+                                <li class="nav-item">
+                                    <a href="<?= base_url('admin/organizations') ?>" class="nav-link">
+                                        <i class="far fa-building nav-icon"></i>
+                                        <p>Organizations</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('admin/buildings') ?>" class="nav-link">
+                                        <i class="far fa-building nav-icon"></i>
+                                        <p>Buildings</p>
+                                    </a>
+                                </li>
+
+                            </ul>
                         </li>
+                       
                         <li class="nav-item">
                           <a href="<?= base_url('admin/branches'); ?>" class="nav-link" id="UsersTab">
                               <i class="nav-icon fa fa-map-marker"></i>

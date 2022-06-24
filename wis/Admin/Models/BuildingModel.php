@@ -3,10 +3,10 @@
 use CodeIgniter\Model;
 use Modules\Admin\Models\UtilModel;
 
-class BranchModel extends Model {
-    protected $table='branches';
-    protected $primaryKey='BrID ';
-    protected $allowedFields = ['OrgID','BrName','Address','BrLangitude','BrLatitude', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+class BuildingModel extends Model {
+    protected $table='building';
+    protected $primaryKey='BID ';
+    protected $allowedFields = ['OrgID','BuildingName', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
@@ -24,16 +24,16 @@ class BranchModel extends Model {
         $data['data']['UpdatedDate']=date('Y-m-d H:i:s');
         return $data;
     }
-    function get_branches($page, $perpage, $keyword, $status) 
+    function get_buildings($page, $perpage, $keyword, $status) 
     {
         $start_from = ($page - 1) * $perpage;
-        $query = 'SELECT b.*, a.Name, o.OrgName FROM branches b left join admins a on a.AID = b.UpdatedBy left join organization o on o.OrgID  = b.OrgID';
+        $query = 'SELECT b.*, a.Name, o.OrgName FROM building b left join admins a on a.AID = b.UpdatedBy left join organization o on o.OrgID  = b.OrgID';
         if ($keyword !=''&& $status !='') {
-            $query .=' where b.BrName  like "%'. $keyword . '%" AND b.Status = '.$status;
+            $query .=' where b.BuildingName  like "%'. $keyword . '%" AND b.Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $query .=' where b.BrName  like "%'. $keyword . '%"';
+            $query .=' where b.BuildingName  like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {
@@ -41,13 +41,13 @@ class BranchModel extends Model {
         }
         $query .=' Limit ' . $start_from . ',' . $perpage;
         $branch['results'] = $this->db->query($query)->getResultArray();
-        $countquery = 'SELECT count(BrID ) as ttl_rows FROM branches';
+        $countquery = 'SELECT count(BID ) as ttl_rows FROM building';
         if ($keyword !=''&& $status !='') {
-            $countquery .=' where BrName  like "%'. $keyword . '%" AND Status = '.$status;
+            $countquery .=' where BuildingName  like "%'. $keyword . '%" AND Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $countquery .=' where BrName like "%'. $keyword . '%"';
+            $countquery .=' where BuildingName like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {

@@ -119,7 +119,7 @@
 								</tr>
 							</thead>
 							<tbody id="CatsTable">
-								<?php if ($departments) {
+								<?php if(!empty($departments)){
 									foreach ($departments as $department) { ?>
 										<tr id="<?= $department['DeptID']; ?>">
 											<td>
@@ -140,12 +140,21 @@
 												
 											</td>
 										</tr>
-								<?php }
-								} ?>
+										<?php
+								
+							} }else{
+								?>
+								<tr><td colspan="4">
+								<?php echo "No Departments Data found!";
+							}
+							?>
 							</tbody>
 						</table>
-						<?php if ($pagelinks) {
+						<?php 
+						if(!empty($departments)){
+							if ($pagelinks) {
 							print '<div class="row page">' . $pagelinks . '</div>';
+							} 
 						} ?>
                 </div><!-- /.container-fluid -->
             </section>

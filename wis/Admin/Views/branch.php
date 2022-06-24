@@ -119,6 +119,7 @@
 							</thead>
 							<tbody id="Table">
 								<?php
+								if(!empty($branch)){
 								foreach ($branch as $cnty) {
 								?>
 									<tr id="<?= $cnty['BrID']; ?>">
@@ -146,13 +147,21 @@
 											&nbsp;<button data-toggle="tooltip" onclick="deletedata('<?= $cnty['BrID'] ?>','branches','BrID', '', '')" title="Delete" class="btn btn-xs btn-danger"><span class="fa fa-trash"></span></button>
 										</td>
 									</tr>
-								<?php
-								}
+									<?php
+								
+							} }else{
 								?>
+								<tr><td colspan="4">
+								<?php echo "No Branches Data found!";
+							}
+							?>
 							</tbody>
 						</table>
-						<?php if ($pagelinks) {
+						<?php 
+						if(!empty($building)){
+							if ($pagelinks) {
 							print '<div class="row page">' . $pagelinks . '</div>';
+							} 
 						} ?>
                 </div><!-- /.container-fluid -->
             </section>

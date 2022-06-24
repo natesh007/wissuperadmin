@@ -3,10 +3,10 @@
 use CodeIgniter\Model;
 use Modules\Admin\Models\UtilModel;
 
-class BranchModel extends Model {
-    protected $table='branches';
-    protected $primaryKey='BrID ';
-    protected $allowedFields = ['OrgID','BrName','Address','BrLangitude','BrLatitude', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+class FloorModel extends Model {
+    protected $table='floor';
+    protected $primaryKey='FID ';
+    protected $allowedFields = ['OrgID','BID','FloorName', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
@@ -24,30 +24,30 @@ class BranchModel extends Model {
         $data['data']['UpdatedDate']=date('Y-m-d H:i:s');
         return $data;
     }
-    function get_branches($page, $perpage, $keyword, $status) 
+    function get_floors($page, $perpage, $keyword, $status) 
     {
         $start_from = ($page - 1) * $perpage;
-        $query = 'SELECT b.*, a.Name, o.OrgName FROM branches b left join admins a on a.AID = b.UpdatedBy left join organization o on o.OrgID  = b.OrgID';
+        $query = 'SELECT f.*, a.Name, o.OrgName, b.BuildingName FROM floor f left join admins a on a.AID = f.UpdatedBy left join organization o on o.OrgID  = f.OrgID left join building b on b.BID   = f.BID ' ;
         if ($keyword !=''&& $status !='') {
-            $query .=' where b.BrName  like "%'. $keyword . '%" AND b.Status = '.$status;
+            $query .=' where f.floorName  like "%'. $keyword . '%" AND f.Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $query .=' where b.BrName  like "%'. $keyword . '%"';
+            $query .=' where f.floorName  like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {
-            $query .=' where b.Status = '.$status;
+            $query .=' where f.Status = '.$status;
         }
         $query .=' Limit ' . $start_from . ',' . $perpage;
         $branch['results'] = $this->db->query($query)->getResultArray();
-        $countquery = 'SELECT count(BrID ) as ttl_rows FROM branches';
+        $countquery = 'SELECT count(FID ) as ttl_rows FROM floor';
         if ($keyword !=''&& $status !='') {
-            $countquery .=' where BrName  like "%'. $keyword . '%" AND Status = '.$status;
+            $countquery .=' where floorName  like "%'. $keyword . '%" AND Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $countquery .=' where BrName like "%'. $keyword . '%"';
+            $countquery .=' where floorName like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {

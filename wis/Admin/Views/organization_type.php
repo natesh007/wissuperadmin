@@ -119,6 +119,7 @@
 							</thead>
 							<tbody id="Table">
 								<?php
+								if(!empty($organization_type)){
 								foreach ($organization_type as $cnty) {
 								?>
 									<tr id="<?= $cnty['TypeID']; ?>">
@@ -140,14 +141,18 @@
 											&nbsp;<button data-toggle="tooltip" onclick="deletedata('<?= $cnty['TypeID'] ?>','organization_type','TypeID', '', '')" title="Delete" class="btn btn-xs btn-danger"><span class="fa fa-trash"></span></button>
 										</td>
 									</tr>
-								<?php
-								}
+									<?php
+								} }else{
 								?>
+								<tr><td colspan="4">
+								<?php echo "No Organization Types Data found!";
+							}
+							?>
 							</tbody>
 						</table>
-						<?php if ($pagelinks) {
+						<?php if(!empty($organization_type)){ if ($pagelinks) {
 							print '<div class="row page">' . $pagelinks . '</div>';
-						} ?>
+						} } ?>
                 </div><!-- /.container-fluid -->
             </section>
             <!-- /.content -->

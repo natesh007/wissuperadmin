@@ -91,6 +91,23 @@ $routes->add('/admin/departments/departmentsajax', 'Departments::departmentsajax
 $routes->add('/admin/departments/updatedepartmentsajax', 'Departments::updatedepartmentsajax', ['namespace' => 'Modules\Admin\Controllers']);
 
 
+// Buildings Routes
+$routes->add('/admin/buildings', 'Building::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/active_buildings', 'Building::active_buildings', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/inactive_buildings', 'Building::inactive_buildings', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/buildings/add_building', 'Building::add_building', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/buildings/edit_building/(:num)', 'Building::edit_building/$1', ['namespace' => 'Modules\Admin\Controllers']);
+
+// floors Routes
+$routes->add('/admin/floors', 'Floor::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/active_floors', 'Floor::active_floors', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/inactive_floors', 'Floor::inactive_floors', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/floors/add_floor', 'Floor::add_floor', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/floors/edit_floor/(:num)', 'Floor::edit_floor/$1', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/floors/getbuildings', 'Floor::getbuildings', ['namespace' => 'Modules\Admin\Controllers']);
+
+
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

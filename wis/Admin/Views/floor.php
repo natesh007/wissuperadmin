@@ -6,10 +6,10 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Organization</h1>
+                            <h1 class="m-0">floor</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6 text-right add_user">
-							<a href="<?= site_url('admin/organizations/add_organization') ?>" class="btn  btn-sm btn-success btn-background">Add New Organization</a>
+							<a href="<?= site_url('admin/floors/add_floor') ?>" class="btn btn-sm btn-success btn-background">Add New Floor</a>
 						</div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -27,9 +27,9 @@
 				<?php endif ?>
 				<div class="row">
 							<div class="col-md-3 head-title">
-								<button onclick="delete_all('organization', 'OrgID', '', '')" name="delete_all[]" id="delete_all" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></button> Delete &nbsp;&nbsp;
-								<button onclick="active_inactive_all('organization',1,'OrgID')" data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-success" name="delete_all[]" id="active_all"><span class="fa fa-check"></span></button> Active &nbsp;&nbsp;
-								<button onclick="active_inactive_all('organization',0,'OrgID')" data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-warning" name="delete_all[]" id="inactive_all"><span class="fa fa-times"></span></button> Inactive
+								<button onclick="delete_all('floor', 'FID', '', '')" name="delete_all[]" id="delete_all" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></button> Delete &nbsp;&nbsp;
+								<button onclick="active_inactive_all('floor',1,'FID')" data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-success" name="delete_all[]" id="active_all"><span class="fa fa-check"></span></button> Active &nbsp;&nbsp;
+								<button onclick="active_inactive_all('floor',0,'FID')" data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-warning" name="delete_all[]" id="inactive_all"><span class="fa fa-times"></span></button> Inactive
 							</div>
 							<div class="col-md-9">
 								<div class="row">
@@ -37,19 +37,19 @@
 										<div class="dropdown">
 											<button type="button" class="btn btn-sm btn-primary dropdown-toggle form-control" data-toggle="dropdown">
 												<?php
-												if (session('organization_page') == '/organizations') {
-													echo "All organizations";
-												} elseif (session('organization_page') == '/active_organizations') {
-													echo "Active organizations";
-												} elseif (session('organization_page') == '/inactive_organizations') {
-													echo "Inactive organizations";
+												if (session('floor_page') == '/floors') {
+													echo "All Floors";
+												} elseif (session('floor_page') == '/active_floors') {
+													echo "Active Floors";
+												} elseif (session('floor_page') == '/inactive_floors') {
+													echo "Inactive Floors";
 												}
 												?>
 											</button>
 											<div class="dropdown-menu">
-												<a class="dropdown-item" href="<?= base_url('admin/organizations') ?>">All Organization</a>
-												<a class="dropdown-item" href="<?= base_url('admin/active_organizations') ?>">Active Organization</a>
-												<a class="dropdown-item" href="<?= base_url('admin/inactive_organizations') ?>">Inactive Organization</a>
+												<a class="dropdown-item" href="<?= base_url('admin/floors') ?>">All Floor</a>
+												<a class="dropdown-item" href="<?= base_url('admin/active_floors') ?>">Active Floor</a>
+												<a class="dropdown-item" href="<?= base_url('admin/inactive_floors') ?>">Inactive Floor</a>
 											</div>
 										</div>
 									</div>
@@ -95,10 +95,10 @@
 													<input type="text" class="form-control field" name="key_word" placeholder="Enter Key Word" id="key_word" value="<?php print $keyword; ?>">&nbsp;
 												</div>
 												<div class="col-md-2">
-													&nbsp;<span id="searchbtn"><button type="submit" id="submit" name="submit" class="btn  btn-sm btn-success field">search</button></span>
+												&nbsp;<span id="searchbtn"><button type="submit" id="submit" name="submit" class="btn btn-sm btn-success field">search</button></span>
 												</div>
-												<div class="col-md-3">
-                                                    <span id="searchbtn"><a href="<?= base_url('admin/organizations/') ?>" class="btn  btn-sm btn-info field">Clear</a></span>
+												<div class="col-md-2">
+                                                    <span id="searchbtn"><a href="<?= base_url('admin/floors/') ?>" class="btn btn-sm btn-info field">Clear</a></span>
                                                 </div>
 											</div>
 										</form>
@@ -111,54 +111,64 @@
 							<thead>
 								<tr>
 									<th width="70px"> All &nbsp;<input type="checkbox" id="select_all" class="select_all"></th>
+									<th>floor Name</th>
+									<th>Building Name</th>
 									<th>Organization</th>
-									<th>Organization Type</th>
-									<th>Address</th>
+									
 									<th width="110">Actions</th>
 								</tr>
 							</thead>
 							<tbody id="Table">
 								<?php
-								if(!empty($organization)){
-								foreach ($organization as $cnty) {
+								if(!empty($floor)){
+								foreach ($floor as $cnty) {
 								?>
-									<tr id="<?= $cnty['OrgID']; ?>">
+									<tr id="<?= $cnty['FID']; ?>">
 										<td>
-											<input type="checkbox" name="" class="delete_checkbox" value="<?= $cnty['OrgID']; ?>">
+											<input type="checkbox" name="" class="delete_checkbox" value="<?= $cnty['FID']; ?>">
+										</td>
+										<td>
+											<?= $cnty['FloorName']; ?>
+										</td>
+										<td>
+											<?= $cnty['BuildingName']; ?>
 										</td>
 										<td>
 											<?= $cnty['OrgName']; ?>
 										</td>
-										<td>
-											<?= $cnty['OrganizationType']; ?>
-										</td>
-										<td>
-											<?= $cnty['Address']; ?>
-										</td>
+										
 										
 										
 										<td>
 											<?php if ($cnty['Status'] == 1) { ?>
-												<button data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-success inactive" onclick="activate_inactivate(<?= $cnty['OrgID']; ?>,'organization','OrgID',0)"><span class="fa fa-check"></span></button>
+												<button data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-success inactive" onclick="activate_inactivate(<?= $cnty['FID']; ?>,'floor','FID',0)"><span class="fa fa-check"></span></button>
 											<?php } else { ?>
-												&nbsp;<button data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-warning " onclick="activate_inactivate(<?= $cnty['OrgID']; ?>,'organization','OrgID',1)"><span class="fa fa-times"></span></button>
+												&nbsp;<button data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-warning " onclick="activate_inactivate(<?= $cnty['FID']; ?>,'floor','FID',1)"><span class="fa fa-times"></span></button>
 											<?php } ?>
-											&nbsp;<a data-toggle="tooltip" href="<?= base_url('admin/organizations/edit_organization/' . $cnty['OrgID']); ?>" title="Edit" class="btn btn-xs btn-primary"><span class="fa fa-pen"></span></a>
-											&nbsp;<button data-toggle="tooltip" onclick="deletedata('<?= $cnty['OrgID'] ?>','organization','OrgID', '', '')" title="Delete" class="btn btn-xs btn-danger"><span class="fa fa-trash"></span></button>
+											&nbsp;<a data-toggle="tooltip" href="<?= base_url('admin/floors/edit_floor/' . $cnty['FID']); ?>" title="Edit" class="btn btn-xs btn-primary"><span class="fa fa-pen"></span></a>
+											&nbsp;<button data-toggle="tooltip" onclick="deletedata('<?= $cnty['FID'] ?>','floor','FID', '', '')" title="Delete" class="btn btn-xs btn-danger"><span class="fa fa-trash"></span></button>
 										</td>
 									</tr>
-									<?php
+									
+								<?php
+								
 								} }else{
+									?>
+									<tr><td colspan="4">
+									<?php echo "No Floors Data found!";
+								}
 								?>
-								<tr><td colspan="4">
-								<?php echo "No Organizations Data found!";
-							}
-							?>
+
+								</td></tr>
 							</tbody>
 						</table>
-						<?php if(!empty($organization)){ if ($pagelinks) {
+						
+						<?php 
+						if(!empty($floor)){
+							if ($pagelinks) {
 							print '<div class="row page">' . $pagelinks . '</div>';
-						} } ?>
+							} 
+						} ?>
                 </div><!-- /.container-fluid -->
             </section>
             <!-- /.content -->
