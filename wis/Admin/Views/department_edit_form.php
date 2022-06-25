@@ -119,15 +119,10 @@
 											
 											</div>
 											<div class="text-center form-group">
-												<span><button type="submit" id="submit" name="submit" class="btn btn-sm btn-success subcanbtn">Update</button></span>
-												<span><a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('departments_page'); ?>" class="btn btn-sm btn-primary subcanbtn">Cancel</a> </span>
+												<span><button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Update</button></span>
+												<span><a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('departments_page'); ?>" class="btn btn-sm btn-primary">Cancel</a> </span>
 											</div>
 										</form>
-									</div>
-									
-									<div class="text-center form-group">
-										<span><button type="submit" id="submit" name="submit" class="btn btn-sm btn-success subcanbtn">Update</button></span>
-										<span><a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('departments_page'); ?>" class="btn btn-sm btn-primary subcanbtn">Cancel</a> </span>
 									</div>
 								</form>
 							</div>

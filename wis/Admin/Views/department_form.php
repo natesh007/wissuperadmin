@@ -52,6 +52,8 @@
                                             </select>
                                             <span id="caterror"></span>
                                         </div>
+                                    </div>
+                                    <div class="row form-group">
                                         <div class="col-md-6">
                                             <label for="BrID">Organization</label>
                                             <select class="form-control" name="OrgID" id="OrgID">
@@ -69,11 +71,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    </div>
-                                    <div class="row form-group">
-                                    
-                                    
-                                    <div class="form-group text-center submit_cancel">
+                                    <div class="form-group text-center">
                                         <span><button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Save</button></span>
                                         <span><a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('departments_page'); ?>" class="btn btn-sm btn-primary">Cancel</a> </span>
                                     </div>
