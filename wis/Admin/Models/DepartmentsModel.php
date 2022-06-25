@@ -11,7 +11,7 @@ class DepartmentsModel extends Model
     protected $primaryKey = 'DeptID';
 
 
-    protected $allowedFields = ['ParentDept', 'BrID', 'DeptName', 'DeptURL',  'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+    protected $allowedFields = ['ParentDept','OrgID', 'BrID', 'DeptName', 'DeptURL',  'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert = ['beforeInsert'];
     protected $beforeUpdate = ['beforeUpdate'];

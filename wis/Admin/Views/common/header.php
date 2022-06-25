@@ -160,6 +160,12 @@
                                         <p>Buildings</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('admin/floors') ?>" class="nav-link" id="FloorsTab">
+                                        <i class="far fa-building nav-icon"></i>
+                                        <p>Floors</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">

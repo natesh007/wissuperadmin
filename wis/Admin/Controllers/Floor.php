@@ -137,11 +137,14 @@ class Floor extends BaseController
 		
 		$FloorModel = new FloorModel();
         $AdminsModel = new AdminsModel();
+		$BuildingModel = new BuildingModel();
         //echo $session->get('AID');exit;
         $data['organizations'] = $AdminsModel->getmasterdata('organization');
-        $data['buildings'] = $AdminsModel->getmasterdata('building');
+        //$data['buildings'] = $AdminsModel->getmasterdata('building');
         
 		$data['floor'] = $FloorModel->where('FID', $id)->first();
+
+		$data['buildings'] = $BuildingModel->where('OrgID', $data['floor']['OrgID'])->findAll();
 		//echo "<pre>";print_r($data['floors']);exit;
 		if ($this->request->getMethod() == 'post') {
 			$data = [

@@ -1,0 +1,1 @@
+ALTER TABLE `departments` ADD `OrgID` INT NOT NULL AFTER `ParentDept`;

@@ -3,6 +3,7 @@
 namespace Modules\Admin\Controllers;
 
 use Modules\Admin\Models\DepartmentsModel;
+use Modules\Admin\Models\BranchModel;
 use Modules\Admin\Models\AdminsModel;
 
 
@@ -133,13 +134,14 @@ class departments extends BaseController
 	{
 		$model = new AdminsModel();
 		$data['departments'] = $model->getmasterdata('departments');
-        $data['branches'] = $model->getmasterdata('branches');
+		$data['organizations'] = $model->getmasterdata('organization');
+        //$data['branches'] = $model->getmasterdata('branches');
 		$data['total_cats'] = $this->buildTree($data['departments'], 'ParentDept', 'DeptID');
 		$cmodel = new DepartmentsModel();
 		if ($this->request->getMethod() == 'post') {
 			$departmentdata = [
 				'DeptName'  => $this->request->getVar('DeptName'),
-				'DeptURL'  => $this->request->getVar('DeptURL'),				
+				'OrgID'  => $this->request->getVar('OrgID'),					
 				'BrID'  => $this->request->getVar('BrID'),
                 'Status' => 1
 			];
@@ -159,15 +161,17 @@ class departments extends BaseController
 	public function edit_department($DeptID  = null)
 	{
 		$model = new AdminsModel();
+		$BranchModel = new BranchModel();
 		$data['departments'] = $model->getmasterdata('departments');
-        $data['branches'] = $model->getmasterdata('branches');
+        $data['organizations'] = $model->getmasterdata('organization');
 		$data['total_cats'] = $this->buildTree($data['departments'], 'ParentDept', 'DeptID');
 		$cmodel = new DepartmentsModel();
 		$data['cat'] = $cmodel->where('DeptID', $DeptID)->first();
+		$data['branches'] = $BranchModel->where('OrgID', $data['cat']['OrgID'])->findAll();
 		if ($this->request->getMethod() == 'post') {
 			$departmentdata = [
 				'DeptName'  => $this->request->getVar('DeptName'),
-				'DeptURL'  => $this->request->getVar('DeptURL'),				
+				'OrgID'  => $this->request->getVar('OrgID'),				
 				'BrID'  => $this->request->getVar('BrID'),
 			];
 			if ($this->request->getVar('ParentDept') != '') {
@@ -181,69 +185,13 @@ class departments extends BaseController
 		echo view('Modules\Admin\Views\common\header');
 		echo view('Modules\Admin\Views\department_edit_form', $data);
 	}
-	public function departmentsajax()
-	{
-		if ($this->request->getMethod() == 'post') {
-			$rules = [
-				'DeptName' =>
-				[
-					'rules'  => 'required|is_unique[departments.DeptName]',
-					'errors' =>
-					[
-						'required' => 'department Name field shouldn\'t be empty.',
-						'is_unique' => 'This department Name is already existing in our data base.So please try with another.',
-					]
-				],
-				'DeptURL' =>
-				[
-					'rules'  => 'required|regex_match[/^[a-zA-Z0-9&-]*$/]|is_unique[departments.DeptURL]',
-					'errors' =>
-					[
-						'required' => 'department Url field shouldn\'t be empty.',
-						'is_unique' => 'This department Url is already existing in our data base.So please try with another.',
-						'regex_match' => 'department Url field shouldn\'t allows any special characters (- and &) and space.',
-					]
-				],
-			];
-			$errorstring = '';
-			if (!$this->validate($rules)) {
-				$errorstring .= 'DeptName~' . $this->validator->showError('DeptName') . ',DeptURL~' . $this->validator->showError('DeptURL');
-				print $errorstring;
-				exit;
-			}
-		}
-	}
-	public function updatedepartmentsajax()
-	{
-		if ($this->request->getMethod() == 'post') {
-			$rules = [
-				'DeptName' =>
-				[
-					'rules'  => 'required|is_unique[departments.DeptName,DeptID,' . $this->request->getVar('DeptID') . ']',
-					'errors' =>
-					[
-						'required' => 'department Name field shouldn\'t be empty.',
-						'is_unique' => 'This department Name is already existing in our data base.So please try with another.',
-					]
-				],
-				'DeptURL' =>
-				[
-					'rules'  => 'required|regex_match[/^[a-zA-Z0-9&-]*$/]|is_unique[departments.DeptURL,DeptID,' . $this->request->getVar('DeptID') . ']',
-					'errors' =>
-					[
-						'required' => 'department Url field shouldn\'t be empty.',
-						'regex_match' => 'department Url field shouldn\'t allows any special characters (- and &) and space.',
-						'is_unique' => 'This department Url is already existing in our data base.So please try with another.',
-					]
-				],
-			];
-			$errorstring = '';
-			if (!$this->validate($rules)) {
-				$errorstring .= 'DeptName~' . $this->validator->showError('DeptName') . ',DeptURL~' . $this->validator->showError('DeptURL');
-				print $errorstring;
-				exit;
-			}
-		}
-	}
+
+	
+	public function getbranches(){
+        $BranchModel = new BranchModel();
+        $orgid=$_POST['OrgID'];
+        $branchesdata = $BranchModel->where('OrgID', $orgid)->findAll();
+		echo json_encode($branchesdata);       
+    }
 	
 }
