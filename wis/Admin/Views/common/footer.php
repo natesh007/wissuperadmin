@@ -1,5 +1,5 @@
-<!-- /.content-wrapper -->
-<footer class="main-footer">
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
     <strong>Copyright © <?= date('Y') ?> <a href="<?= base_url('/admin') ?>">WIS Super Admin</a>,</strong>
     Inc All rights reserved.
   </footer>
