@@ -317,6 +317,7 @@ class WisAPI extends REST
 		}
 	}	
 	
+<<<<<<< HEAD
     function organizationslist()
 	{
 	    if ($this->get_request_method() != "GET") {
@@ -343,12 +344,25 @@ class WisAPI extends REST
 		
 		$query1 = $this->db->executeQueryAndGetArray("SELECT * FROM branches where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'", MYSQLI_ASSOC);
 			//	echo $this->db->getLastSQLStatement();exit;
+=======
+	function organizationslist()
+	{
+		if ($this->get_request_method() != "GET") {
+			$this->errorMSG(406, "Wrong HTTP Method");
+		}
+		$query1 = $this->db->executeQueryAndGetArray("SELECT o.OrgID,o.OrgName,o.OrgType,o.Address,o.Langitude,o.Latitude,o.Status,ot.OrganizationType FROM organization o left join organization_type ot ot.TypeID=o.OrgType", MYSQLI_ASSOC);
+		
+>>>>>>> af77511c108a8ae18b309b536c1aab93d0220498
 		
 		/// dropdown view
 		/*foreach ($query1 as $q) {
 			$items[$q['EmpID']] = $q['EmployeeName'];
 		}*/
+<<<<<<< HEAD
 		$this->successMSG('Branches list', $query1);
+=======
+		$this->successMSG('Organizations list', $query1);
+>>>>>>> af77511c108a8ae18b309b536c1aab93d0220498
 	}
 	function roles()
 	{
