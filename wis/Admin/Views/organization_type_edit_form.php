@@ -20,7 +20,7 @@
 							<div class="row">
 								<form class="form-horizontal" method="post" action="<?= base_url('admin/organization_types/edit_organization_type/'.$organization_type['TypeID']) ?>" style="width:100%" id="edit_organization_type" method="post">
 									<div class="form-group row">
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="OrganizationType">Organization Type<strong class="help-block">*</strong></label>
 											<input type="text" class="form-control" id="OrganizationType" name="OrganizationType" placehoder="Enter Organization Type"  value="<?= $organization_type['OrganizationType'];?>"/>
 											<span id="name_error"></span>
@@ -29,8 +29,8 @@
 										
 									</div>
 									<div class="form-group text-center">
-										<span><button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Update</button></span>
-										<span><a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('organization_type_page'); ?>" class="btn btn-sm btn-primary">Cancel</a> </span>
+										<button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Update</button>
+										<a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('organization_type_page'); ?>" class="btn btn-sm btn-primary">Cancel</a>
 									</div>
 								</form>
 							</div>

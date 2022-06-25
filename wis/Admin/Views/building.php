@@ -93,13 +93,13 @@
 											<form class="form-horizontal" action="" method="post">
 												<div class="row">
 													<div class="col-md-6">
-														<input type="text" class="form-control field" name="key_word" placeholder="Enter Key Word" id="key_word" value="<?php print $keyword; ?>">&nbsp;
+														<input type="text" class="form-control" name="key_word" placeholder="Enter Key Word" id="key_word" value="<?php print $keyword; ?>">
 													</div>
 													<div class="col-md-2">
-													&nbsp;<span id="searchbtn"><button type="submit" id="submit" name="submit" class="btn btn-sm btn-success field">search</button></span>
+													<button type="submit" id="submit" name="submit" class="btn btn-sm btn-success field">search</button>
 													</div>
 													<div class="col-md-2">
-														<span id="searchbtn"><a href="<?= base_url('admin/buildings/') ?>" class="btn btn-sm btn-info field">Clear</a></span>
+														<a href="<?= base_url('admin/buildings/') ?>" class="btn btn-sm btn-info field">Clear</a>
 													</div>
 												</div>
 											</form>

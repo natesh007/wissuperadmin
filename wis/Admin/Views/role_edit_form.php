@@ -32,8 +32,8 @@
 										</div>
 									</div>
 									<div class="form-group text-center update_cancel">
-										<span><button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Update</button></span>
-										<span><a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin/roles" class="btn btn-sm btn-primary">Cancel</a> </span>
+										<button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Update</button>
+										<a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin/roles" class="btn btn-sm btn-primary">Cancel</a>
 									</div>
 								</form>
 							</div>

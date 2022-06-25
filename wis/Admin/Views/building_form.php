@@ -20,12 +20,12 @@
 							<div class="row">
 								<form class="form-horizontal" method="post" action="<?= base_url('admin/buildings/add_building') ?>" style="width:100%" id="add_building" method="post">
 									<div class="form-group row">
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="BuildingName">Building Name<strong class="help-block">*</strong></label>
 											<input type="text" class="form-control" id="BuildingName" name="BuildingName" placehoder="Enter building Name" />
 											<span id="name_error"></span>
 										</div>
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="OrgID">Organization<strong class="help-block">*</strong></label>
 											<select class="form-control" name="OrgID" required>
 												<option disabled selected value>Select Organization</option>
@@ -38,8 +38,8 @@
 									</div>
 									
 									<div class="form-group text-center">
-										<span><button type="submit" id="submit" name="submit" class="btn btn-sm  btn-success">Save</button></span>
-										<span><a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('building_page'); ?>" class="btn btn-sm  btn-primary">Cancel</a> </span>
+										<button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Save</button>
+										<a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('building_page'); ?>" class="btn btn-sm btn-primary">Cancel</a>
 									</div>
 								</form>
 							</div>

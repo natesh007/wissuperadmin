@@ -21,12 +21,12 @@
 								<form class="form-horizontal" method="post" action="<?= base_url('admin/floors/edit_floor/'.$floor['FID']) ?>" style="width:100%" id="edit_floor" method="post">
 									
 									<div class="form-group row">
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="floorType">Floor Name<strong class="help-block">*</strong></label>
 											<input type="text" class="form-control" id="FloorName" name="FloorName" placehoder="Enter Floor Name" value="<?= $floor['FloorName'];?>"/> 
 											<span id="name_error"></span>
 										</div>
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="OrgType">Organization<strong class="help-block">*</strong></label>
 											<select class="form-control" name="OrgID"  id="OrgID" required>
 												
@@ -42,7 +42,7 @@
 											</select>
 										</div>
 
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="OrgType">Building<strong class="help-block">*</strong></label>
 											<select class="form-control" name="BID" id="BID" required>
 												
@@ -61,8 +61,8 @@
 									</div>
 									
 									<div class="form-group text-center">
-										<span><button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Update</button></span>
-										<span><a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('floor_page'); ?>" class="btn btn-sm btn-primary">Cancel</a> </span>
+										<button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Update</button>
+										<a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('floor_page'); ?>" class="btn btn-sm btn-primary">Cancel</a>
 									</div>
 								</form>
 							</div>

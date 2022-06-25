@@ -94,35 +94,10 @@
 												
 											</select>
 										</div>
-										
-														<?php foreach($branches as $branch){
-																echo '<option value="' . $branch['BrID'] . '"';
-																if($branch['BrID'] == $cat['BrID']){
-																	echo ' selected';
-																}
-																echo '>' . $branch['BrName'] . '</option>' ;
-															} ?>
-													</select>
-												</div>
-												
-											</div>
-											<div class="form-group row">
-												<?PHP /*<div class="col-md-6">
-													<label for="bannerimage">Banner Image</label>
-													<small class="text-info text-bold">(Suggested Pixel Resolution:1000 X 400, Size should be below 2MB)</small>
-													<input type="file" name="BannerImage" class="form-control" id="BannerImage" />
-													<input type="hidden" name="HiddenImage" id="HiddenImage" value="<?= $cat['BannerImage']; ?>" />
-													<span id="imgerr" style="color:red"></span>
-													<br />
-													<img src="<?= base_url() . '/' . $cat['BannerImage']; ?>" alt="Banner image" class="img-thumbnail" width="200" height="200" />
-												</div>*/?>
-											
-											</div>
-											<div class="text-center form-group">
-												<span><button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Update</button></span>
-												<span><a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('departments_page'); ?>" class="btn btn-sm btn-primary">Cancel</a> </span>
-											</div>
-										</form>
+									</div>
+									<div class="text-center form-group">
+										<button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Update</button>
+										<a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('departments_page'); ?>" class="btn btn-sm btn-primary">Cancel</a>
 									</div>
 								</form>
 							</div>

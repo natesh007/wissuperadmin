@@ -20,12 +20,12 @@
 							<div class="row">
 								<form class="form-horizontal" method="post" action="<?= base_url('admin/shifts/add_shift') ?>" style="width:100%" id="add_shift" method="post">
 									<div class="form-group row">
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="ShType">Shift Type<strong class="help-block">*</strong></label>
 											<input type="text" class="form-control" id="ShType" name="ShType" placehoder="Enter Shift Type" />
 											<span id="name_error"></span>
 										</div>
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="ShCode">Shift Code</label>
 											<input type="text" class="form-control" id="ShCode" name="ShCode" placehoder="Enter Shift Code" />
 											<span id="code_error"></span>
@@ -33,8 +33,8 @@
 										
 									</div>
 									<div class="form-group text-center">
-										<span><button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Save</button></span>
-										<span><a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('shift_page'); ?>" class="btn btn-sm btn-primary">Cancel</a> </span>
+										<button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Save</button>
+										<a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('shift_page'); ?>" class="btn btn-sm btn-primary">Cancel</a>
 									</div>
 								</form>
 							</div>

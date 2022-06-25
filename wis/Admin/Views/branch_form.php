@@ -20,12 +20,12 @@
 							<div class="row">
 								<form class="form-horizontal" method="post" action="<?= base_url('admin/branches/add_branch') ?>" style="width:100%" id="add_branch" method="post">
 									<div class="form-group row">
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="BrName">Branch Name<strong class="help-block">*</strong></label>
 											<input type="text" class="form-control" id="BrName" name="BrName" placehoder="Enter Branch Name" />
 											<span id="name_error"></span>
 										</div>
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="OrgID">Organization<strong class="help-block">*</strong></label>
 											<select class="form-control" name="OrgID" required>
 												<option disabled selected value>Select Organization</option>
@@ -37,13 +37,13 @@
 										
 									</div>
 									<div class="form-group row">
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="Address">Address </label>
 											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address" /></textarea>
 											
 										</div>
 										
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="Langitude">Langitude </label>
 											<input type="text" class="form-control" id="BrLangitude" name="BrLangitude" placehoder="Enter Langitude" />
 											
@@ -52,7 +52,7 @@
 										
 									</div>
 									<div class="form-group row">
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="Latitude">Latitude</label>
 											<input type="text" class="form-control" id="BrLatitude" name="BrLatitude" placehoder="Enter Latitude" />
 											
@@ -61,8 +61,8 @@
 										
 									</div>
 									<div class="form-group text-center">
-										<span><button type="submit" id="submit" name="submit" class="btn btn-sm  btn-success">Save</button></span>
-										<span><a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('branch_page'); ?>" class="btn btn-sm  btn-primary">Cancel</a> </span>
+										<button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Save</button>
+										<a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('branch_page'); ?>" class="btn btn-sm btn-primary">Cancel</a>
 									</div>
 								</form>
 							</div>

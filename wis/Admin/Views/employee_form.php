@@ -28,12 +28,12 @@
 							
 								<form class="form-horizontal" method="post" action="<?= base_url('admin/employees/add_employee') ?>" style="width:100%" id="add_employee" method="post">
 									<div class="form-group row">
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="EmpName">Employee Name<strong class="help-block">*</strong></label>
 											<input type="text" class="form-control" id="EmpName" value="<?php echo set_value('EmpName'); ?>" name="EmpName" placehoder="Enter employee Name" />
 											<span id="name_error"></span>
 										</div>
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="ParentDept">Department<strong class="help-block">*</strong></label>
 											<select name="ParentDept" id="ParentDept" class="form-control">
 												<option disabled selected value>Select Department</option>
@@ -64,12 +64,12 @@
 										</div>
 									</div>
 									<div class="form-group row">
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="EmpName">Email ID<strong class="help-block">*</strong></label>
 											<input type="text" value="<?php echo set_value('EmailID'); ?>" class="form-control" id="EmailID" name="EmailID" placehoder="Enter EmailID" />
 											<span id="email_error"></span>
 										</div>
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="BrID">Gender</label>
 											<select class="form-control" name="Gender" >
 												<option disabled selected value>Select Gender</option>
@@ -79,22 +79,17 @@
 										</div>
 									</div>
 									<div class="form-group row">
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="Langitude">Contact <strong class="help-block">*</strong></label>
 											<input type="text" class="form-control" id="Contact" name="Contact" placehoder="Enter Contact" value="<?php echo set_value('Contact'); ?>" />
 										</div>
-										
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="Langitude">Date Of Joining </label>
 											<input type="text" class="form-control datepicker" id="DateOfJoining" name="DateOfJoining" placehoder="Enter Date Of Joining" value="<?php echo set_value('DateOfJoining'); ?>" />
 										</div>
-										
-										
-									</div>
-										
 									</div>
 									<div class="form-group row">						
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="BrID">Role<strong class="help-block">*</strong></label>
 											<select class="form-control" name="RoleID" >
 												<option disabled selected value="0">Select Role</option>
@@ -103,29 +98,24 @@
 												} ?>
 											</select>
 										</div>
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="Langitude">Job Type </label>
 											<input type="text" class="form-control" id="JobType" name="JobType" placehoder="Enter JobType" value="<?php echo set_value('JobType'); ?>"/>
 										</div>
-										
 									</div>
 									<div class="form-group row">
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="Langitude">City </label>
 											<input type="text" class="form-control" id="City" name="City" placehoder="Enter City" value="<?php echo set_value('City'); ?>"/>
 										</div>
-										<div class="col-md-6 my-2">
+										<div class="col-md-6">
 											<label for="Address">Address </label>
-											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address" /><?php echo set_value('Address'); ?></textarea>
-											
+											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address" /><?php echo set_value('Address'); ?></textarea>		
 										</div>
-										
-										
 									</div>
-									
 									<div class="form-group text-center">
-										<span><button type="submit" id="submit" name="submit" class="btn btn-sm  btn-success">Save</button></span>
-										<span><a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('employee_page'); ?>" class="btn btn-sm  btn-primary">Cancel</a> </span>
+										<button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Save</button>
+										<a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('employee_page'); ?>" class="btn btn-sm btn-primary">Cancel</a>
 									</div>
 								</form>
 							</div>
