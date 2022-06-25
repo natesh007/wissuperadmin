@@ -29,13 +29,6 @@
 									<span id="caterror"></span>
 								</div>
 								<div class="col-md-6">
-									<label for="DeptURL">Department Url<strong class="help-block">*</strong></label>
-									<input type="text" class="form-control" value="<?= $cat['DeptURL'] ?>" name="DeptURL" id="DeptURL" placeholder="Enter Department Url ..." />
-									<span id="caturlerror"></span>
-								</div>
-							</div>
-							<div class="form-group row">
-								<div class="col-md-6">
 									<label for="Priority">Parent Department</label>
 									<select name="ParentDept" id="ParentDept" class="form-control">
 										<option disabled selected value>Select Department</option>
@@ -72,34 +65,40 @@
 										} } ?>
 									</select>
 								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-md-6">
+									<label for="BrID">Organization</label>
+									<select class="form-control" name="OrgID" id="OrgID">
+										<option disabled selected value hidden>Select Organization</option>
+										<?php foreach($organizations as $organization){
+											echo '<option value="' . $organization['OrgID'] . '"';
+											if($organization['OrgID'] == $cat['OrgID']){
+												echo ' selected';
+											}
+											echo '>' . $organization['OrgName'] . '</option>' ;
+										
+										} ?>
+									</select>
+								</div>
 								<div class="col-md-6">
 									<label for="OrgType">Branch<strong class="help-block">*</strong></label>
-									<select class="form-control" name="BrID">
-										<option disabled selected value>Select Branch</option>
-						
+									<select class="form-control" name="BrID" id="BrID">
+										<option disabled selected value hidden>Select Branch</option>
 										<?php foreach($branches as $branch){
-												echo '<option value="' . $branch['BrID'] . '"';
-												if($branch['BrID'] == $cat['BrID']){
-													echo ' selected';
-												}
-												echo '>' . $branch['BrName'] . '</option>' ;
-											} ?>
+											echo '<option value="' . $branch['BrID'] . '"';
+											if($branch['BrID'] == $cat['BrID']){
+												echo ' selected';
+											}
+											echo '>' . $branch['BrName'] . '</option>' ;
+										
+										} ?>
+										
 									</select>
 								</div>
 								
 							</div>
-							<div class="form-group row">
-								<?PHP /*<div class="col-md-6">
-									<label for="bannerimage">Banner Image</label>
-									<small class="text-info text-bold">(Suggested Pixel Resolution:1000 X 400, Size should be below 2MB)</small>
-									<input type="file" name="BannerImage" class="form-control" id="BannerImage" />
-									<input type="hidden" name="HiddenImage" id="HiddenImage" value="<?= $cat['BannerImage']; ?>" />
-									<span id="imgerr" style="color:red"></span>
-									<br />
-									<img src="<?= base_url() . '/' . $cat['BannerImage']; ?>" alt="Banner image" class="img-thumbnail" width="200" height="200" />
-								</div>*/?>
 							
-							</div>
 							<div class="text-center form-group">
 								<span><button type="submit" id="submit" name="submit" class="btn btn-sm btn-success subcanbtn">Update</button></span>
 								<span><a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('departments_page'); ?>" class="btn btn-sm btn-primary subcanbtn">Cancel</a> </span>
@@ -130,51 +129,63 @@
 		var res = x.split(' ').join('-')
 		document.getElementById("DeptURL").value = res;
 	}
-	$("#edit_cats").submit(function(event) {
-		postUrl = '<?= base_url(); ?>/admin/departments/updatedepartmentsajax';
-		dataToPost = {
-			DeptName: $("#DeptName").val(),
-			DeptID: $("#DeptID").val(),
-			DeptURL: $("#DeptURL").val(),
-		};
-		$.ajax({
-			type: "POST",
-			url: postUrl,
-			data: dataToPost,
-			async: false,
-		}).done(function(data) {
-			if (data.length != 0) {
-				errors = data.split(",");
-				for (i = 0; i < errors.length; i++) {
-					var errrorarray = errors[i].split('~');
-					if (errrorarray[0] == 'DeptName') {
-						if (errrorarray[1] != '') {
-							$('#caterror').html(errrorarray[1]);
-							$('#caterror').show();
-							$('#DeptName').focus();
-						} else {
-							$('#caterror').hide();
-						}
-					}
-					if (errrorarray[0] == 'DeptURL') {
-						if (errrorarray[1] != '') {
-							$('#caturlerror').html(errrorarray[1]);
-							$('#caturlerror').show();
-							$('#DeptURL').focus();
-						} else {
-							$('#caturlerror').hide();
-						}
-					}
-				}
-				event.preventDefault();
-			} else {
-				return true;
+	$('#edit_cats').validate({
+            rules: {
+                DeptName: { required: true },
+				ParentDept: { required: true},
+				OrgID: {required: true},
+				BrID:  {required: true}
+            },
+            messages: {
+                DeptName: "Please enter Department Name",
+				ParentDept: {
+                    required: "Please select Parent Department"
+                },
+				OrgID: "Please select Organization",
+				BrID: {
+                    required: "Please select Branch"
+                }
+
+            },
+            submitHandler: function(form) {
+               
+                return true;
+
+               
+            }
+        });
+
+
+	$('#OrgID').change(function(){
+
+var OrgID = $('#OrgID').val();
+if(OrgID != '')
+{
+	$.ajax({
+		url: "<?= base_url(); ?>/admin/departments/getbranches",
+		method:"POST",
+		data:{OrgID:OrgID},
+		dataType:"JSON",
+		success:function(data)
+		{
+			var html = '<option value="">Select Branch</option>';
+
+			for(var count = 0; count < data.length; count++)
+			{
+
+				html += '<option value="'+data[count].BrID +'">'+data[count].BrName+'</option>';
+
 			}
-		}).fail(function() {
-			alert("Sorry. Server unavailable. ");
-			event.preventDefault();
-		});
+
+			$('#BrID').html(html);
+		}
 	});
+}
+else
+{
+	$('#BrID').val('');
+}
+});
 </script>
 </body>
 
