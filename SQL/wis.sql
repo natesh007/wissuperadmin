@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2022 at 02:29 PM
+-- Generation Time: Jun 25, 2022 at 12:25 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -178,7 +178,8 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`EmpID`, `RoleID`, `EmpName`, `DeptID`, `Gender`, `EmailID`, `Password`, `Address`, `Contact`, `JobType`, `City`, `DateOfJoining`, `Doc`, `ProfilePic`, `Status`, `CreatedBy`, `CreatedDate`, `UpdatedBy`, `UpdatedDate`) VALUES
-(1, 2, 'aparnaaa', 0, '', 'aparna@gmail.com', '$2y$10$gtUFbHpwI6y6vMSf7xre/uq2WQYBaRoMgaK3TvVXXSyHxhaFTuhHG', 'sadsd', '98765432', 'dff', 'hyd', '0000-00-00', '', '', 1, 1, '2022-06-24 06:00:42', 1, '2022-06-24 06:57:28');
+(1, 2, 'aparnaaa', 5, '', 'aparna@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'sadsd', '98765432', 'dff', 'hyd', '2022-06-14', '', '', 1, 1, '2022-06-24 06:00:42', 1, '2022-06-24 13:00:00'),
+(3, 1, 'emp1', 1, 'M', 'emp1@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'wewqe', '123456', 'weqwe', 'hyd', '0000-00-00', '', '', 1, 1, '2022-06-24 12:37:22', 1, '2022-06-24 12:51:23');
 
 -- --------------------------------------------------------
 
@@ -438,7 +439,7 @@ ALTER TABLE `departments`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `EmpID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `EmpID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `fcmtokens`
