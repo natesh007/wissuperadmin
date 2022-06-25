@@ -1,0 +1,7 @@
+{
+    "require": {
+        "phpmailer/phpmailer": "^6.0",
+        "stripe/stripe-php": "^7.2",
+        "firebase/php-jwt": "^5.2"
+    }
+}
