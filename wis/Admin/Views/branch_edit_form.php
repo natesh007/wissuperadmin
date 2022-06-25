@@ -23,7 +23,7 @@
 									<div class="form-group row">
 										<div class="col-md-6 my-2">
 											<label for="branchType">Branch Name<strong class="help-block">*</strong></label>
-											<input type="text" class="form-control" id="BrName" name="BrName" placehoder="Enter Branch Name ..." value="<?= $branch['BrName'];?>"/> 
+											<input type="text" class="form-control" id="BrName" name="BrName" placehoder="Enter Branch Name" value="<?= $branch['BrName'];?>"/> 
 											<span id="name_error"></span>
 										</div>
 										<div class="col-md-6 my-2">
@@ -45,13 +45,13 @@
 									<div class="form-group row">
 										<div class="col-md-6 my-2">
 											<label for="Address">Address </label>
-											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address ..." /><?= $branch['Address'];?></textarea>
+											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address" /><?= $branch['Address'];?></textarea>
 											
 										</div>
 										
 										<div class="col-md-6 my-2">
 											<label for="Langitude">Langitude </label>
-											<input type="text" class="form-control" id="BrLangitude" name="BrLangitude" placehoder="Enter Langitude ..." value="<?= $branch['BrLangitude'];?>"/>
+											<input type="text" class="form-control" id="BrLangitude" name="BrLangitude" placehoder="Enter Langitude" value="<?= $branch['BrLangitude'];?>"/>
 											
 										
 										</div>
@@ -60,7 +60,7 @@
 									<div class="form-group row">
 										<div class="col-md-6 my-2">
 											<label for="Latitude">Latitude</label>
-											<input type="text" class="form-control" id="BrLatitude" name="BrLatitude" placehoder="Enter Latitude ..."  value="<?= $branch['BrLatitude'];?>"/>
+											<input type="text" class="form-control" id="BrLatitude" name="BrLatitude" placehoder="Enter Latitude"  value="<?= $branch['BrLatitude'];?>"/>
 											
 										</div>
 										

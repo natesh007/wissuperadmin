@@ -23,7 +23,7 @@
 								<div class="form-group row">
 										<div class="col-md-6 my-2">
 											<label for="EmpName">Employee Name<strong class="help-block">*</strong></label>
-											<input type="text" class="form-control" id="EmpName" name="EmpName" placehoder="Enter employee Name ..." value="<?= $employee['EmpName'];?>" />
+											<input type="text" class="form-control" id="EmpName" name="EmpName" placehoder="Enter employee Name" value="<?= $employee['EmpName'];?>" />
 											<span id="name_error"></span>
 										</div>
 										<div class="col-md-6 my-2">
@@ -68,7 +68,7 @@
 									<div class="form-group row">
 										<div class="col-md-6 my-2">
 											<label for="EmpName">Email ID<strong class="help-block">*</strong></label>
-											<input type="text" class="form-control" id="EmailID" name="EmailID" placehoder="Enter EmailID ..." value="<?= $employee['EmailID'];?>" />
+											<input type="text" class="form-control" id="EmailID" name="EmailID" placehoder="Enter EmailID" value="<?= $employee['EmailID'];?>" />
 											<span id="email_error"></span>
 										</div>
 										<div class="col-md-6 my-2">
@@ -84,11 +84,11 @@
 									<div class="form-group row">
 										<div class="col-md-6 my-2">
 											<label for="Langitude">Contact<strong class="help-block">*</strong> </label>
-											<input type="text" class="form-control" id="Contact" name="Contact" placehoder="Enter Contact ..." value="<?= $employee['Contact'];?>"/>
+											<input type="text" class="form-control" id="Contact" name="Contact" placehoder="Enter Contact" value="<?= $employee['Contact'];?>"/>
 										</div>
 										<div class="col-md-6 my-2">
 											<label for="Langitude">Date Of Joining </label>
-											<input type="text" class="form-control datepicker" id="DateOfJoining" name="DateOfJoining" placehoder="Enter Date Of Joining ..." value="<?= $employee['DateOfJoining'];?>"  />
+											<input type="text" class="form-control datepicker" id="DateOfJoining" name="DateOfJoining" placehoder="Enter Date Of Joining" value="<?= $employee['DateOfJoining'];?>"  />
 										</div>
 
 										
@@ -111,18 +111,18 @@
 										</div>
 										<div class="col-md-6 my-2">
 											<label for="Langitude">Job Type </label>
-											<input type="text" class="form-control" id="JobType" name="JobType" placehoder="Enter JobType ..." value="<?= $employee['JobType'];?>"/>
+											<input type="text" class="form-control" id="JobType" name="JobType" placehoder="Enter JobType" value="<?= $employee['JobType'];?>"/>
 										</div>
 										
 									</div>
 									<div class="form-group row">
 										<div class="col-md-6 my-2">
 											<label for="Langitude">City </label>
-											<input type="text" class="form-control" id="City" name="City" placehoder="Enter City ..." value="<?= $employee['City'];?>" />
+											<input type="text" class="form-control" id="City" name="City" placehoder="Enter City" value="<?= $employee['City'];?>" />
 										</div>
 										<div class="col-md-6 my-2">
 											<label for="Address">Address </label>
-											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address ..." /><?= $employee['Address'];?></textarea>
+											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address" /><?= $employee['Address'];?></textarea>
 											
 										</div>
 										

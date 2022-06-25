@@ -22,12 +22,12 @@
 									<div class="form-group row">
 										<div class="col-md-6">
 											<label for="RoleName">Role Name<strong class="help-block">*</strong></label>
-											<input type="text" class="form-control" id="RoleName" name="RoleName" placehoder="Enter Role Name ..." />
+											<input type="text" class="form-control" id="RoleName" name="RoleName" placehoder="Enter Role Name" />
 											<span id="name_error"></span>
 										</div>
 										<div class="col-md-6">
 											<label for="Priority">Priority</label>
-											<input type="number" class="form-control" min="1" id="Priority" name="Priority" placehoder="Enter Priority ..." />
+											<input type="number" class="form-control" min="1" id="Priority" name="Priority" placehoder="Enter Priority" />
 										</div>
 									</div>
 									<div class="form-group text-center submit_cancel">

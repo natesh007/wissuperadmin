@@ -22,12 +22,12 @@
 									<div class="form-group row">
 										<div class="col-md-6 my-2">
 											<label for="ShType">Shift Type<strong class="help-block">*</strong></label>
-											<input type="text" class="form-control" id="ShType" name="ShType" placehoder="Enter Shift Type..."  value="<?= $shift['ShType'];?>"/>
+											<input type="text" class="form-control" id="ShType" name="ShType" placehoder="Enter Shift Type"  value="<?= $shift['ShType'];?>"/>
 											<span id="name_error"></span>
 										</div>
 										<div class="col-md-6 my-2">
 											<label for="ShCode">Shift Code</label>
-											<input type="text" class="form-control" id="ShCode" name="ShCode" placehoder="Enter Shift Code ..." value="<?= $shift['ShCode'];?>" />
+											<input type="text" class="form-control" id="ShCode" name="ShCode" placehoder="Enter Shift Code" value="<?= $shift['ShCode'];?>" />
 											<span id="code_error"></span>
 										</div>
 										

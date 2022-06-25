@@ -22,7 +22,7 @@
 									<div class="form-group row">
 										<div class="col-md-6 my-2">
 											<label for="OrganizationType">Organization Type<strong class="help-block">*</strong></label>
-											<input type="text" class="form-control" id="OrganizationType" name="OrganizationType" placehoder="Enter Organization Type ..." />
+											<input type="text" class="form-control" id="OrganizationType" name="OrganizationType" placehoder="Enter Organization Type" />
 											<span id="name_error"></span>
 										</div>
 										

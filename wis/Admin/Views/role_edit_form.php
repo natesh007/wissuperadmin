@@ -23,12 +23,12 @@
 									<div class="form-group row">
 										<div class="col-md-6">
 											<label for="RoleName">Role Name<strong class="help-block">*</strong></label>
-											<input type="text" class="form-control" id="RoleName" name="RoleName" value="<?= $roles['RoleName']; ?>" placeholder="Enter Role Name ...">
+											<input type="text" class="form-control" id="RoleName" name="RoleName" value="<?= $roles['RoleName']; ?>" placeholder="Enter Role Name">
 											<span id="name_error"></span>
 										</div>
 										<div class="col-md-6">
 											<label for="Priority">Priority</label>
-											<input type="number" class="form-control" id="Priority" name="Priority" min="1" placeholder="Enter Priority ..." value="<?= $roles['Priority']; ?>">
+											<input type="number" class="form-control" id="Priority" name="Priority" min="1" placeholder="Enter Priority" value="<?= $roles['Priority']; ?>">
 										</div>
 									</div>
 									<div class="form-group text-center update_cancel">

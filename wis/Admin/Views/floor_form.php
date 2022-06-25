@@ -22,7 +22,7 @@
 									<div class="form-group row">
 										<div class="col-md-6 my-2">
 											<label for="floorName">Floor Name<strong class="help-block">*</strong></label>
-											<input type="text" class="form-control" id="FloorName" name="FloorName" placehoder="Enter floor Name ..." />
+											<input type="text" class="form-control" id="FloorName" name="FloorName" placehoder="Enter floor Name" />
 											<span id="name_error"></span>
 										</div>
 										<div class="col-md-6 my-2">

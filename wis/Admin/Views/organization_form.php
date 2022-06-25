@@ -22,7 +22,7 @@
 									<div class="form-group row">
 										<div class="col-md-6 my-2">
 											<label for="OrganizationType">Organization Name<strong class="help-block">*</strong></label>
-											<input type="text" class="form-control" id="OrgName" name="OrgName" placehoder="Enter Organization Name ..." />
+											<input type="text" class="form-control" id="OrgName" name="OrgName" placehoder="Enter Organization Name" />
 											<span id="name_error"></span>
 										</div>
 										<div class="col-md-6  my-2">
@@ -39,13 +39,13 @@
 									<div class="form-group row">
 										<div class="col-md-6 my-2">
 											<label for="Address">Address </label>
-											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address ..." /></textarea>
+											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address" /></textarea>
 											
 										</div>
 										
 										<div class="col-md-6 my-2">
 											<label for="Langitude">Langitude </label>
-											<input type="text" class="form-control" id="Langitude" name="Langitude" placehoder="Enter Langitude ..." />
+											<input type="text" class="form-control" id="Langitude" name="Langitude" placehoder="Enter Langitude" />
 											
 										
 										</div>
@@ -54,7 +54,7 @@
 									<div class="form-group row">
 										<div class="col-md-6 my-2">
 											<label for="Latitude">Latitude</label>
-											<input type="text" class="form-control" id="Latitude" name="Latitude" placehoder="Enter Latitude ..." />
+											<input type="text" class="form-control" id="Latitude" name="Latitude" placehoder="Enter Latitude" />
 											
 										</div>
 										

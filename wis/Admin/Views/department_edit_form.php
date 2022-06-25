@@ -23,7 +23,7 @@
 									<div class="form-group row">
 										<div class="col-md-6">
 											<label for="DeptName">Department Name<strong class="help-block">*</strong></label>
-											<input type="text" class="form-control" value="<?= $cat['DeptName'] ?>" onkeyup="myFunction()" name="DeptName" id="DeptName" placeholder="Enter Department Name ..." />
+											<input type="text" class="form-control" value="<?= $cat['DeptName'] ?>" onkeyup="myFunction()" name="DeptName" id="DeptName" placeholder="Enter Department Name" />
 											<span id="caterror"></span>
 										</div>
 										<div class="col-md-6">

@@ -23,7 +23,7 @@
 									<div class="form-group row">
 										<div class="col-md-6 my-2">
 											<label for="OrganizationType">Organization Name<strong class="help-block">*</strong></label>
-											<input type="text" class="form-control" id="OrgName" name="OrgName" placehoder="Enter Organization Name ..." value="<?= $organization['OrgName'];?>"/> 
+											<input type="text" class="form-control" id="OrgName" name="OrgName" placehoder="Enter Organization Name" value="<?= $organization['OrgName'];?>"/> 
 											<span id="name_error"></span>
 										</div>
 										<div class="col-md-6">
@@ -45,13 +45,13 @@
 									<div class="form-group row">
 										<div class="col-md-6 my-2">
 											<label for="Address">Address </label>
-											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address ..." /><?= $organization['Address'];?></textarea>
+											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address" /><?= $organization['Address'];?></textarea>
 											
 										</div>
 										
 										<div class="col-md-6 my-2">
 											<label for="Langitude">Langitude </label>
-											<input type="text" class="form-control" id="Langitude" name="Langitude" placehoder="Enter Langitude ..." value="<?= $organization['Langitude'];?>"/>
+											<input type="text" class="form-control" id="Langitude" name="Langitude" placehoder="Enter Langitude" value="<?= $organization['Langitude'];?>"/>
 											
 										
 										</div>
@@ -60,7 +60,7 @@
 									<div class="form-group row">
 										<div class="col-md-6 my-2">
 											<label for="Latitude">Latitude</label>
-											<input type="text" class="form-control" id="Latitude" name="Latitude" placehoder="Enter Latitude ..."  value="<?= $organization['Latitude'];?>"/>
+											<input type="text" class="form-control" id="Latitude" name="Latitude" placehoder="Enter Latitude"  value="<?= $organization['Latitude'];?>"/>
 											
 										</div>
 										
