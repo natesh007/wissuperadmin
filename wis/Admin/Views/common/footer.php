@@ -38,6 +38,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?= base_url() ?>/public/admin_assets/dist/js/demo.js"></script>
 <script src="<?= base_url() ?>/public/admin_assets/plugins/multiselect/bootstrap-multiselect.js"></script>
+<script src="<?= base_url()?>/public/admin_assets/commonjs.js"></script>
 <script>
   // for sidebar menu entirely but not cover treeview
   $('ul.nav-sidebar a').filter(function () {

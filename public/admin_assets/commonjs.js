@@ -1,6 +1,4 @@
-var base_url = window.location.origin;
-var pathArray = window.location.pathname.split("/");
-var baseURL = base_url + "/" + pathArray[1];
+var base_url = $("#BaseURL").val();
 
 //Activate Or Inactive Record
 function activate_inactivate(Id, tbl, col, status) {
@@ -97,23 +95,6 @@ function delete_all(table, col, img, thumb) {
     alert("Select atleast one records");
   }
 }
-
-//Left Nave Activation
-var url = window.location;
-$("ul.nav-sidebar a")
-  .filter(function () {
-    return this.href == url;
-  })
-  .addClass("active");
-$("ul.nav-treeview a")
-  .filter(function () {
-    return this.href == url;
-  })
-  .parentsUntil(".nav-sidebar > .nav-treeview")
-  .addClass("menu-open")
-  .prev("a")
-  .addClass("active");
-
 //No Of Rows Filter
 $("#selectbox").change(function () {
   var urlsplit = window.location.href.split("?");

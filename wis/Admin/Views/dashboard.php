@@ -28,21 +28,7 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        <footer class="main-footer"><strong>Copyright &copy; 2021-2022 <a href="<?= base_url(); ?>" target="_blank">e-City</a>.</strong> All rights reserved.</footer>
-
-
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
-    </div>
-    <!-- ./wrapper -->
-
-    <?= view('Modules\Admin\Views\common\footer'); ?>
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
-    </script>
-</body>
-
+        <input type="hidden" value="DashboardTab" id="CurrentPage" />
+        <?= view('Modules\Admin\Views\common\footer'); ?>
+    </body>
 </html>

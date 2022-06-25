@@ -100,7 +100,7 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <li class="nav-item">
-                                  <a href="<?= base_url('admin/dashboard') ?>" class="nav-link">
+                                  <a href="<?= base_url('admin/dashboard') ?>" class="nav-link" id="DashboardTab">
                                       <i class="nav-icon fas fa-tachometer-alt"></i>
                                       <p>
                                           Dashboard
@@ -117,38 +117,26 @@
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <?php /*<li class="nav-item">
-                                    <a href="<?= base_url('admin/admins') ?>" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Admins</p>
-                                    </a>
-                                </li>*/?>
-                                 
+                            <ul class="nav nav-treeview">                                 
                                 <li class="nav-item">
-                                    <a href="<?= base_url('admin/roles') ?>" class="nav-link">
+                                    <a href="<?= base_url('admin/roles') ?>" class="nav-link" id="RolesTab">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Roles</p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="<?= base_url('admin/shifts') ?>" class="nav-link">
+                                    <a href="<?= base_url('admin/shifts') ?>" class="nav-link" id="ShiftsTab">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Shifts</p>
                                     </a>
                                 </li>
-
                                 <li class="nav-item">
-                                    <a href="<?= base_url('admin/organization_types') ?>" class="nav-link">
+                                    <a href="<?= base_url('admin/organization_types') ?>" class="nav-link" id="OrganizationTypesTab">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Organization Types</p>
                                     </a>
-                                </li>
-
-                                
-                                
-                                
+                                </li> 
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -160,44 +148,38 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                 
                                 <li class="nav-item">
-                                    <a href="<?= base_url('admin/organizations') ?>" class="nav-link">
+                                    <a href="<?= base_url('admin/organizations') ?>" class="nav-link" id="OrganizationsTab">
                                         <i class="far fa-building nav-icon"></i>
                                         <p>Organizations</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?= base_url('admin/buildings') ?>" class="nav-link">
+                                    <a href="<?= base_url('admin/buildings') ?>" class="nav-link" id="BuildingsTab">
                                         <i class="far fa-building nav-icon"></i>
                                         <p>Buildings</p>
                                     </a>
                                 </li>
-
                             </ul>
                         </li>
-                       
                         <li class="nav-item">
-                          <a href="<?= base_url('admin/branches'); ?>" class="nav-link" id="UsersTab">
+                          <a href="<?= base_url('admin/branches'); ?>" class="nav-link" id="BranchesTab">
                               <i class="nav-icon fa fa-map-marker"></i>
                               <p>Branches</p>
                           </a>
                         </li>
-
                         <li class="nav-item">
-                          <a href="<?= base_url('admin/departments'); ?>" class="nav-link" id="UsersTab">
+                          <a href="<?= base_url('admin/departments'); ?>" class="nav-link" id="DepartmentsTab">
                               <i class="nav-icon fa fa-users"></i>
                               <p>Departments</p>
                           </a>
                         </li>
-
                         <li class="nav-item">
-                          <a href="<?= base_url('admin/departments'); ?>" class="nav-link" id="UsersTab">
+                          <a href="<?= base_url('admin/employees'); ?>" class="nav-link" id="EmployeesTab">
                               <i class="nav-icon fa fa-user"></i>
                               <p>Employees</p>
                           </a>
                         </li>
-                        
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
