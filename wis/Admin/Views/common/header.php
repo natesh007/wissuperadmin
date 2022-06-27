@@ -166,6 +166,12 @@
                                         <p>Floors</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('admin/rooms') ?>" class="nav-link" id="RoomsTab">
+                                        <i class="far fa-building nav-icon"></i>
+                                        <p>Rooms</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">

@@ -107,6 +107,16 @@ $routes->add('/admin/floors/add_floor', 'Floor::add_floor', ['namespace' => 'Mod
 $routes->add('/admin/floors/edit_floor/(:num)', 'Floor::edit_floor/$1', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/floors/getbuildings', 'Floor::getbuildings', ['namespace' => 'Modules\Admin\Controllers']);
 
+// rooms Routes
+$routes->add('/admin/rooms', 'Room::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/active_rooms', 'Room::active_rooms', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/inactive_rooms', 'Room::inactive_rooms', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/rooms/add_room', 'Room::add_room', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/rooms/edit_room/(:num)', 'Room::edit_room/$1', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/rooms/getbuildings', 'Room::getbuildings', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/rooms/getfloors', 'Room::getfloors', ['namespace' => 'Modules\Admin\Controllers']);
+
+
 // Employees Routes
 $routes->add('/admin/employees', 'Employee::index', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/active_employees', 'Employee::active_employees', ['namespace' => 'Modules\Admin\Controllers']);
