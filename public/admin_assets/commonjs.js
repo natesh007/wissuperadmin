@@ -1,4 +1,4 @@
-var base_url = $("#BaseURL").val();
+var baseURL = $("#BaseURL").val();
 
 //Activate Or Inactive Record
 function activate_inactivate(Id, tbl, col, status) {

@@ -110,6 +110,7 @@ public function deletedata($id, $tbl, $col, $image, $thumb) {
     }
     $query .= ' FROM '. $tbl . ' where ' . $col . ' = ' . $id;
     $img = $this->db->query($query)->getRowArray(); 
+    //ECHO $query;exit;
     if(isset($img[$image])){
       if(file_exists($img[$image])){
         unlink($img[$image]);
