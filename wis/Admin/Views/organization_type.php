@@ -94,13 +94,13 @@
 											<form class="form-horizontal" action="" method="post">
 												<div class="row">
 													<div class="col-md-6">
-														<input type="text" class="form-control" name="key_word" placeholder="Enter Key Word" id="key_word" value="<?php print $keyword; ?>">
+														<input type="text" class="form-control" name="key_word" placeholder="Enter Key Word" value="<?php print $keyword; ?>">
 													</div>
 													<div class="col-md-2">
-													<button type="submit" id="submit" name="submit" class="btn btn-sm btn-success field">search</button>
+													<button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">search</button>
 													</div>
 													<div class="col-md-2">
-														<a href="<?= base_url('admin/organization_types/') ?>" class="btn btn-sm btn-info field">Clear</a>
+														<a href="<?= base_url('admin/organization_types') ?>" class="btn btn-sm btn-info">Clear</a>
 													</div>
 												</div>
 											</form>
@@ -108,7 +108,8 @@
 									</div>
 								</div>
 							</div>
-							<table id="example1" class="table table-bordered table-striped ">
+							&nbsp;
+							<table class="table table-bordered table-striped">
 								<thead>
 									<tr>
 										<th width="70px"> All &nbsp;<input type="checkbox" id="select_all" class="select_all"></th>
