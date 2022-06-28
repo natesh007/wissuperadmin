@@ -17,8 +17,13 @@
     <!-- summernote -->
     <link rel="stylesheet" href="<?= base_url() ?>/public/admin_assets/plugins/summernote/summernote-bs4.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>/public/admin_assets/css/styles.css">
-    <link rel="stylesheet" href=" <?= base_url() ?>/public/admin_assets/plugins/multiselect/bootstrap-multiselect.css">   
+    <link rel="stylesheet" href=" <?= base_url() ?>/public/admin_assets/plugins/multiselect/bootstrap-multiselect.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">   
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+
+
+
     
 </head>
 

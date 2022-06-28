@@ -3,10 +3,10 @@
 use CodeIgniter\Model;
 use Modules\Admin\Models\UtilModel;
 
-class OrganizationModel extends Model {
-    protected $table='organization';
-    protected $primaryKey='OrgID';
-    protected $allowedFields = ['OrgName','OrgType', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+class CityModel extends Model {
+    protected $table='cities';
+    protected $primaryKey='CityID';
+    protected $allowedFields = ['CityName','Langitude','Latitude', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
@@ -24,30 +24,30 @@ class OrganizationModel extends Model {
         $data['data']['UpdatedDate']=date('Y-m-d H:i:s');
         return $data;
     }
-    function get_organizations($page, $perpage, $keyword, $status) 
+    function get_cities($page, $perpage, $keyword, $status) 
     {
         $start_from = ($page - 1) * $perpage;
-        $query = 'SELECT o.*, a.Name, ot.OrganizationType FROM organization o left join admins a on a.AID = o.UpdatedBy left join organization_type ot on ot.TypeID = o.OrgType';
+        $query = 'SELECT c.*, a.Name FROM cities c left join admins a on a.AID = c.UpdatedBy';
         if ($keyword !=''&& $status !='') {
-            $query .=' where o.OrgName  like "%'. $keyword . '%" AND o.Status = '.$status;
+            $query .=' where c.CityName  like "%'. $keyword . '%" AND c.Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $query .=' where o.OrgName  like "%'. $keyword . '%"';
+            $query .=' where c.CityName  like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {
-            $query .=' where o.Status = '.$status;
+            $query .=' where c.Status = '.$status;
         }
         $query .=' Limit ' . $start_from . ',' . $perpage;
-        $organization['results'] = $this->db->query($query)->getResultArray();
-        $countquery = 'SELECT count(OrgID) as ttl_rows FROM organization';
+        $branch['results'] = $this->db->query($query)->getResultArray();
+        $countquery = 'SELECT count(CityID) as ttl_rows FROM cities';
         if ($keyword !=''&& $status !='') {
-            $countquery .=' where OrgName  like "%'. $keyword . '%" AND Status = '.$status;
+            $countquery .=' where CityName  like "%'. $keyword . '%" AND Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $countquery .=' where OrgName like "%'. $keyword . '%"';
+            $countquery .=' where CityName like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {
@@ -62,7 +62,7 @@ class OrganizationModel extends Model {
         } else {
             $actual_link = $actual_link_array[0] . '?' . 'key_word=' . $keyword . '&';
         }
-        $organization['ttl_rows'] = $row->ttl_rows;
+        $branch['ttl_rows'] = $row->ttl_rows;
         $adjacents = "2";
         $previous_page = $page - 1;
         $next_page = $page + 1;
@@ -70,8 +70,8 @@ class OrganizationModel extends Model {
         $second_last = $totalPages - 1; // total page minus 1
         $utilmodel = new UtilModel;
         $pagelinks = $utilmodel->build_pagelinks($actual_link, $previous_page, $next_page, $totalPages, $adjacents, $page, $second_last);
-        $organization['pagelinks'] = $pagelinks;
-        return $organization;
+        $branch['pagelinks'] = $pagelinks;
+        return $branch;
 
 
      

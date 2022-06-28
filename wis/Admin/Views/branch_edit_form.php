@@ -43,21 +43,36 @@
 										
 									</div>
 									<div class="form-group row">
+									<div class="col-md-6">
+											<label for="OrgType">City<strong class="help-block">*</strong></label>
+											<select class="form-control" name="CityID" required>
+												<option disabled selected value>Select City</option>
+								
+												<?php foreach($cities as $city){
+														echo '<option value="' . $city['CityID'] . '"';
+														if($city['CityID'] == $branch['CityID']){
+															echo ' selected';
+														}
+														echo '>' . $city['CityName'] . '</option>' ;
+													} ?>
+											</select>
+										</div>
 										<div class="col-md-6">
 											<label for="Address">Address </label>
 											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address" /><?= $branch['Address'];?></textarea>
 											
 										</div>
 										
-										<div class="col-md-6">
+										
+										
+									</div>
+									<div class="form-group row">
+									<div class="col-md-6">
 											<label for="Langitude">Langitude </label>
 											<input type="text" class="form-control" id="BrLangitude" name="BrLangitude" placehoder="Enter Langitude" value="<?= $branch['BrLangitude'];?>"/>
 											
 										
 										</div>
-										
-									</div>
-									<div class="form-group row">
 										<div class="col-md-6">
 											<label for="Latitude">Latitude</label>
 											<input type="text" class="form-control" id="BrLatitude" name="BrLatitude" placehoder="Enter Latitude"  value="<?= $branch['BrLatitude'];?>"/>

@@ -38,28 +38,18 @@
 									</div>
 									<div class="form-group row">
 										<div class="col-md-6">
-											<label for="Address">Address </label>
-											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address" /></textarea>
+										<label for="OrgType">Cities<strong class="help-block">*</strong></label>
+										<select class="selectpicker form-control" multiple data-live-search="true" name="cities[]">
+										<option disabled selected value>Select Multiple Cities</option>
+												<?php foreach($cities as $city){
+													echo '<option value="' . $city['CityID'] . '">' . $city['CityName'] . '</option>' ;
+												} ?>
 											
+										</select>
 										</div>
-										
-										<div class="col-md-6">
-											<label for="Langitude">Langitude </label>
-											<input type="text" class="form-control" id="Langitude" name="Langitude" placehoder="Enter Langitude" />
-											
-										
-										</div>
-										
 									</div>
-									<div class="form-group row">
-										<div class="col-md-6">
-											<label for="Latitude">Latitude</label>
-											<input type="text" class="form-control" id="Latitude" name="Latitude" placehoder="Enter Latitude" />
-											
-										</div>
-										
-										
-									</div>
+									
+									
 									<div class="form-group text-center">
 										<button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Save</button>
 										<a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('organization_page'); ?>" class="btn btn-sm btn-primary">Cancel</a>
@@ -76,6 +66,9 @@
 		<!-- /.content-wrapper -->
 		<input type="hidden" value="OrganizationsTab" id="CurrentPage" />
 		<?= view('Modules\Admin\Views\common\footer'); ?>
+		<style>.bootstrap-select{background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da!important;height:auto}</style>
 		<script>
 			$("#add_organization").submit(function(event) {
 				var OrgName = $('#OrgName').val();

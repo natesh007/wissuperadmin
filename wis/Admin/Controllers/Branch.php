@@ -113,10 +113,13 @@ class Branch extends BaseController
         $AdminsModel = new AdminsModel();
         //echo $session->get('AID');exit;
         $data['organizations'] = $AdminsModel->getmasterdata('organization');
+		$data['cities'] = $AdminsModel->getmasterdata('cities');
+		
         //echo "<pre>";print_r($data['branch_types'] );exit;
 		if ($this->request->getMethod() == 'post') {
 			$data = [
-				'OrgID' => $this->request->getVar('OrgID'),  
+				'OrgID' => $this->request->getVar('OrgID'), 
+				'CityID' => $this->request->getVar('CityID'),  
 				'BrName' => $this->request->getVar('BrName'),
                 'Address' => $this->request->getVar('Address'),                
 				'BrLangitude' => $this->request->getVar('BrLangitude'),                
@@ -136,13 +139,15 @@ class Branch extends BaseController
 		
 		$BranchModel = new BranchModel();
         $AdminsModel = new AdminsModel();
+		$data['cities'] = $AdminsModel->getmasterdata('cities');
         //echo $session->get('AID');exit;
         $data['organizations'] = $AdminsModel->getmasterdata('organization');
 		$data['branch'] = $BranchModel->where('BrID  ', $id)->first();
 		//echo "<pre>";print_r($data['branches']);exit;
 		if ($this->request->getMethod() == 'post') {
 			$data = [
-				'OrgID' => $this->request->getVar('OrgID'),  
+				'OrgID' => $this->request->getVar('OrgID'),
+				'CityID' => $this->request->getVar('CityID'),  
 				'BrName' => $this->request->getVar('BrName'),
                 'Address' => $this->request->getVar('Address'),                
 				'BrLangitude' => $this->request->getVar('BrLangitude'),                

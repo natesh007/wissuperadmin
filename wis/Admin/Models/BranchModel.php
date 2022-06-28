@@ -6,7 +6,7 @@ use Modules\Admin\Models\UtilModel;
 class BranchModel extends Model {
     protected $table='branches';
     protected $primaryKey='BrID';
-    protected $allowedFields = ['OrgID','BrName','Address','BrLangitude','BrLatitude', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+    protected $allowedFields = ['OrgID','CityID','BrName','Address','BrLangitude','BrLatitude', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
@@ -27,7 +27,7 @@ class BranchModel extends Model {
     function get_branches($page, $perpage, $keyword, $status) 
     {
         $start_from = ($page - 1) * $perpage;
-        $query = 'SELECT b.*, a.Name, o.OrgName FROM branches b left join admins a on a.AID = b.UpdatedBy left join organization o on o.OrgID  = b.OrgID';
+        $query = 'SELECT b.*, a.Name, o.OrgName, c.CityName FROM branches b left join admins a on a.AID = b.UpdatedBy left join organization o on o.OrgID  = b.OrgID left join cities c on c.CityID  = b.CityID';
         if ($keyword !=''&& $status !='') {
             $query .=' where b.BrName  like "%'. $keyword . '%" AND b.Status = '.$status;
         }

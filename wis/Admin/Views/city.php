@@ -5,10 +5,10 @@
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
-							<h1 class="m-0">Branch</h1>
+							<h1 class="m-0">Cities</h1>
 						</div><!-- /.col -->
 						<div class="col-sm-6 text-right add_user">
-							<a href="<?= site_url('admin/branches/add_branch') ?>" class="btn btn-sm btn-success btn-background">Add New Branch</a>
+							<a href="<?= site_url('admin/cities/add_city') ?>" class="btn btn-sm btn-success btn-background">Add New City</a>
 						</div><!-- /.col -->
 					</div><!-- /.row -->
 				</div><!-- /.container-fluid -->
@@ -28,9 +28,9 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col-md-3 head-title">
-									<button onclick="delete_all('branches', 'BrID', '', '')" name="delete_all[]" id="delete_all" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></button> Delete &nbsp;&nbsp;
-									<button onclick="active_inactive_all('branches',1,'BrID')" data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-success" name="delete_all[]" id="active_all"><span class="fa fa-check"></span></button> Active &nbsp;&nbsp;
-									<button onclick="active_inactive_all('branches',0,'BrID')" data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-warning" name="delete_all[]" id="inactive_all"><span class="fa fa-times"></span></button> Inactive
+									<button onclick="delete_all('cities', 'CityID', '', '')" name="delete_all[]" id="delete_all" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></button> Delete &nbsp;&nbsp;
+									<button onclick="active_inactive_all('cities',1,'CityID')" data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-success" name="delete_all[]" id="active_all"><span class="fa fa-check"></span></button> Active &nbsp;&nbsp;
+									<button onclick="active_inactive_all('cities',0,'CityID')" data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-warning" name="delete_all[]" id="inactive_all"><span class="fa fa-times"></span></button> Inactive
 								</div>
 								<div class="col-md-9">
 									<div class="row">
@@ -38,19 +38,19 @@
 											<div class="dropdown">
 												<button type="button" class="btn btn-sm btn-primary dropdown-toggle form-control" data-toggle="dropdown">
 													<?php
-													if (session('branch_page') == '/branches') {
-														echo "All Branches";
-													} elseif (session('branch_page') == '/active_branches') {
-														echo "Active Branches";
-													} elseif (session('branch_page') == '/inactive_branches') {
-														echo "Inactive Branches";
+													if (session('city_page') == '/cities') {
+														echo "All Cities";
+													} elseif (session('city_page') == '/active_cities') {
+														echo "Active Cities";
+													} elseif (session('city_page') == '/inactive_cities') {
+														echo "Inactive Cities";
 													}
 													?>
 												</button>
 												<div class="dropdown-menu">
-													<a class="dropdown-item" href="<?= base_url('admin/branches') ?>">All Branch</a>
-													<a class="dropdown-item" href="<?= base_url('admin/active_branches') ?>">Active Branch</a>
-													<a class="dropdown-item" href="<?= base_url('admin/inactive_branches') ?>">Inactive Branch</a>
+													<a class="dropdown-item" href="<?= base_url('admin/cities') ?>">All City</a>
+													<a class="dropdown-item" href="<?= base_url('admin/active_cities') ?>">Active City</a>
+													<a class="dropdown-item" href="<?= base_url('admin/inactive_cities') ?>">Inactive City</a>
 												</div>
 											</div>
 										</div>
@@ -99,7 +99,7 @@
 														<button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">search</button>
 													</div>
 													<div class="col-md-2">
-														<a href="<?= base_url('admin/branches') ?>" class="btn btn-sm btn-info">Clear</a>
+														<a href="<?= base_url('admin/cities') ?>" class="btn btn-sm btn-info">Clear</a>
 													</div>
 												</div>
 											</form>
@@ -112,27 +112,20 @@
 								<thead>
 									<tr>
 										<th width="70px"> All &nbsp;<input type="checkbox" id="select_all" class="select_all"></th>
-										<th>Branch Name</th>
-										<th>Organization</th>
-										<th>CityCity</th>
+										<th>City Name</th>
 										<th width="110">Actions</th>
 									</tr>
 								</thead>
 								<tbody id="Table">
 									<?php
-									if(!empty($branch)){
-									foreach ($branch as $cnty) {
+									if(!empty($city)){
+									foreach ($city as $cnty) {
 									?>
-										<tr id="<?= $cnty['BrID']; ?>">
+										<tr id="<?= $cnty['CityID']; ?>">
 											<td>
-												<input type="checkbox" name="" class="delete_checkbox" value="<?= $cnty['BrID']; ?>">
+												<input type="checkbox" name="" class="delete_checkbox" value="<?= $cnty['CityID']; ?>">
 											</td>
-											<td>
-												<?= $cnty['BrName']; ?>
-											</td>
-											<td>
-												<?= $cnty['OrgName']; ?>
-											</td>
+											
 											<td>
 												<?= $cnty['CityName']; ?>
 											</td>
@@ -140,12 +133,12 @@
 											
 											<td>
 												<?php if ($cnty['Status'] == 1) { ?>
-													<button data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-success inactive" onclick="activate_inactivate(<?= $cnty['BrID']; ?>,'branches','BrID',0)"><span class="fa fa-check"></span></button>
+													<button data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-success inactive" onclick="activate_inactivate(<?= $cnty['CityID']; ?>,'cities','CityID',0)"><span class="fa fa-check"></span></button>
 												<?php } else { ?>
-													&nbsp;<button data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-warning " onclick="activate_inactivate(<?= $cnty['BrID']; ?>,'branches','BrID',1)"><span class="fa fa-times"></span></button>
+													&nbsp;<button data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-warning " onclick="activate_inactivate(<?= $cnty['CityID']; ?>,'cities','CityID',1)"><span class="fa fa-times"></span></button>
 												<?php } ?>
-												&nbsp;<a data-toggle="tooltip" href="<?= base_url('admin/branches/edit_branch/' . $cnty['BrID']); ?>" title="Edit" class="btn btn-xs btn-primary"><span class="fa fa-pen"></span></a>
-												&nbsp;<button data-toggle="tooltip" onclick="deletedata('<?= $cnty['BrID'] ?>','branches','BrID', '', '')" title="Delete" class="btn btn-xs btn-danger"><span class="fa fa-trash"></span></button>
+												&nbsp;<a data-toggle="tooltip" href="<?= base_url('admin/cities/edit_city/' . $cnty['CityID']); ?>" title="Edit" class="btn btn-xs btn-primary"><span class="fa fa-pen"></span></a>
+												&nbsp;<button data-toggle="tooltip" onclick="deletedata('<?= $cnty['CityID'] ?>','cities','CityID', '', '')" title="Delete" class="btn btn-xs btn-danger"><span class="fa fa-trash"></span></button>
 											</td>
 										</tr>
 										<?php
@@ -153,7 +146,7 @@
 								} }else{
 									?>
 									<tr><td colspan="4">
-									<?php echo "No Branches Data found!";
+									<?php echo "No cities Data found!";
 								}
 								?>
 								</tbody>
@@ -168,7 +161,7 @@
 			<!-- /.content -->
 		</div>
 		<!-- /.content-wrapper -->
-		<input type="hidden" value="BranchesTab" id="CurrentPage" />
+		<input type="hidden" value="CitiesTab" id="CurrentPage" />
 		<?= view('Modules\Admin\Views\common\footer'); ?>
 	</body>
 </html>

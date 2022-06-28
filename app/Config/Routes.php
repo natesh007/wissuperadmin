@@ -124,6 +124,13 @@ $routes->add('/admin/inactive_employees', 'Employee::inactive_employees', ['name
 $routes->add('/admin/employees/add_employee', 'Employee::add_employee', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/employees/edit_employee/(:num)', 'Employee::edit_employee/$1', ['namespace' => 'Modules\Admin\Controllers']);
 
+// Cities Routes
+$routes->add('/admin/cities', 'City::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/active_cities', 'City::active_cities', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/inactive_cities', 'City::inactive_cities', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/cities/add_city', 'City::add_city', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/cities/edit_city/(:num)', 'City::edit_city/$1', ['namespace' => 'Modules\Admin\Controllers']);
+
 
 /**
  * --------------------------------------------------------------------
