@@ -132,8 +132,8 @@ class WisAPI extends REST
 	private function getJWToken($userIndex, $email, $role, $FBTokenID, $secret)
 	{
 		$token = array(
-			"iss" => "https://sonijewellers.co",
-			"aud" => "https://sonijewellers.co",
+			"iss" => "http://igreen.systems",
+			"aud" => "http://igreen.systems",
 			"iat" => time(),
 			"nbf" => time() + 0,
 			"exp" => time() + 8640000,
@@ -150,8 +150,8 @@ class WisAPI extends REST
 	private function revokeJWToken($userIndex, $email, $role, $FBTokenID, $secret)
 	{
 		$token = array(
-			"iss" => "https://sonijewellers.co",
-			"aud" => "https://sonijewellers.co",
+			"iss" => "http://igreen.systems",
+			"aud" => "http://igreen.systems",
 			"iat" => time(),
 			"nbf" => time() + 0,
 			"exp" => time() + 8640000,
@@ -224,19 +224,17 @@ class WisAPI extends REST
 				if ($this->db->getRowsCount() == 1) {
 					$row = $this->db->getCurrentRow();
 				
-					if (verifyPassword($password, $row->Password)) {
+					if (md5($password, $row->Password)) {
+					    
 						if ($row->Status != "1") {
 							$this->errorMSG(400, "Your account is temporarily suspended. Please contact administrator.");
 						}
 						if ($row->Status != "") {
+						    
 							$FBTokenID = 0;
-							if (isset($firebase_token)) {
-								if ($firebase_token != "") {
-									$this->db->executeQuery("INSERT INTO `fcmtokens`(`EmpID`, `Token`, `CreatedDate`) VALUES('" . mysqli_real_escape_string($this->db->mysql_link, $row->EmpID) . "','" . $firebase_token . "','" . date('Y-m-d H:i:s') . "');");
-									$FBTokenID = $this->db->getLastInsertID();
-								}
-							}
+							
 							$jwt = $this->getJWToken($row->EmpID, $row->EmailID, $row->RoleID, $FBTokenID, $this->appSecret);
+							//echo "<pre>";print_r($jwt);exit;
 							$result = json_decode(json_encode($row), true);
 							$result['accessToken'] = $jwt;
 							$result['fb'] = $FBTokenID;
@@ -317,7 +315,6 @@ class WisAPI extends REST
 		}
 	}	
 	
-<<<<<<< HEAD
     function organizationslist()
 	{
 	    if ($this->get_request_method() != "GET") {
@@ -342,27 +339,67 @@ class WisAPI extends REST
 			$this->errorMSG(400, "Please enter Organization ID");
 		}
 		
-		$query1 = $this->db->executeQueryAndGetArray("SELECT * FROM branches where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'", MYSQLI_ASSOC);
+		$query1 = $this->db->executeQueryAndGetArray("SELECT b.BrID,b.BrName,b.Address,b.BrLangitude,b.BrLatitude,b.Status,b.UpdatedBy,b.UpdatedDate,o.OrgName,o.OrgID FROM branches b left join organization o on o.OrgID=b.OrgID where b.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'", MYSQLI_ASSOC);
 			//	echo $this->db->getLastSQLStatement();exit;
-=======
-	function organizationslist()
+		
+	
+		$this->successMSG('Branches list', $query1);
+	}
+	function departments()
 	{
-		if ($this->get_request_method() != "GET") {
+	    if ($this->get_request_method() != "GET") {
 			$this->errorMSG(406, "Wrong HTTP Method");
 		}
-		$query1 = $this->db->executeQueryAndGetArray("SELECT o.OrgID,o.OrgName,o.OrgType,o.Address,o.Langitude,o.Latitude,o.Status,ot.OrganizationType FROM organization o left join organization_type ot ot.TypeID=o.OrgType", MYSQLI_ASSOC);
+		$OrgID = $this->_request['OrgID'];
+		$BrID = $this->_request['BrID'];
+		if ($OrgID == '') {
+			$this->errorMSG(400, "Please enter Organization ID");
+		}
 		
->>>>>>> af77511c108a8ae18b309b536c1aab93d0220498
+		if ($BrID == '') {
+			$this->errorMSG(400, "Please enter Branch ID");
+		}
+
+		$query = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName FROM departments where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND BrID='" . mysqli_real_escape_string($this->db->mysql_link, $BrID) . "' AND ParentDept = 0 order by DeptID DESC", MYSQLI_ASSOC);
 		
-		/// dropdown view
-		/*foreach ($query1 as $q) {
-			$items[$q['EmpID']] = $q['EmployeeName'];
-		}*/
-<<<<<<< HEAD
-		$this->successMSG('Branches list', $query1);
-=======
-		$this->successMSG('Organizations list', $query1);
->>>>>>> af77511c108a8ae18b309b536c1aab93d0220498
+			//	echo $this->db->getLastSQLStatement();exit;
+			
+			foreach ($query as $rec) {
+				$query1 = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName FROM departments WHERE ParentDept ='" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "'", MYSQLI_ASSOC);
+				//echo $this->db->getLastSQLStatement();echo "<br>";
+				$ri = [];
+				foreach ($query1 as $rec1) {
+					$ri[] = array(
+					"DeptID" =>  $rec1['DeptID'],
+					"DeptName" => $rec1['DeptName']
+					);
+				}
+				$subdept = $ri;
+				$r[] = array(
+					"DeptID" =>  $rec['DeptID'],
+					"DeptName" => $rec['DeptName'],
+					"Subdeparts" => $subdept
+				);
+			}
+			$data['data'] = $r;
+			
+		$this->successMSG('Department list', $data);
+	}
+	function employees()
+	{
+	    if ($this->get_request_method() != "GET") {
+			$this->errorMSG(406, "Wrong HTTP Method");
+		}
+		$DeptID = $this->_request['DeptID'];
+		if ($DeptID == '') {
+			$this->errorMSG(400, "Please enter Department ID");
+		}
+		
+		$query1 = $this->db->executeQueryAndGetArray("SELECT e.EmpID,e.RoleID,e.EmpName,e.Gender,e.EmailID,e.Address,e.Contact,e.JobType,e.City,e.DateOfJoining,e.Status,e.UpdatedBy,e.UpdatedDate,d.DeptName FROM employees e left join departments d on d.DeptID=e.DeptID where e.DeptID='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "'", MYSQLI_ASSOC);
+			//	echo $this->db->getLastSQLStatement();exit;
+		
+	
+		$this->successMSG('Employees list', $query1);
 	}
 	function roles()
 	{
