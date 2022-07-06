@@ -3,7 +3,7 @@ namespace Modules\Admin\Controllers;
 
 use Modules\Admin\Models\EmployeeModel;
 use Modules\Admin\Models\AdminsModel;
-
+use Modules\Admin\Models\DepartmentsModel;
 class Employee extends BaseController
 {
    
@@ -134,7 +134,7 @@ class Employee extends BaseController
 		helper(['url', 'form']);       
 		$EmployeeModel = new EmployeeModel();
         $AdminsModel = new AdminsModel();
-       
+		$data['organizations'] = $AdminsModel->getmasterdata('organization');
         $data['departments'] = $AdminsModel->getmasterdata('departments');
         $data['roles'] = $AdminsModel->getmasterdata('roles');
 		$data['total_cats'] = $this->buildTree($data['departments'], 'ParentDept', 'DeptID');
@@ -145,7 +145,8 @@ class Employee extends BaseController
 				if(!$exist_emp){
 					$data = [
 						'RoleID' => $this->request->getVar('RoleID'),
-						'EmpName' => $this->request->getVar('EmpName'),                
+						'EmpName' => $this->request->getVar('EmpName'),  
+						'OrgID' => $this->request->getVar('OrgID'),              
 						'DeptID' => $this->request->getVar('ParentDept'),                
 						'Gender' => ($this->request->getVar('Gender')==""?'':$this->request->getVar('Gender')),
 						'EmailID' => $this->request->getVar('EmailID'),
@@ -184,17 +185,21 @@ class Employee extends BaseController
 		
 		$EmployeeModel = new EmployeeModel();
         $AdminsModel = new AdminsModel();
-        $data['departments'] = $AdminsModel->getmasterdata('departments');
+		$DepartmentsModel = new DepartmentsModel();
+		$data['organizations'] = $AdminsModel->getmasterdata('organization');
+       
         $data['roles'] = $AdminsModel->getmasterdata('roles');
-		$data['total_cats'] = $this->buildTree($data['departments'], 'ParentDept', 'DeptID');
+		
 		$data['employee'] = $EmployeeModel->where('EmpID  ', $id)->first();
-        
+		$data['departments'] = $DepartmentsModel->where('OrgID',$data['employee']['OrgID'])->findAll();
+        $data['total_cats'] = $this->buildTree($data['departments'], 'ParentDept', 'DeptID');
 		//echo "<pre>";print_r($data['employees']);exit;
 		if ($this->request->getMethod() == 'post') {
 			$data = [
 				'RoleID' => $this->request->getVar('RoleID'),
                 'EmpName' => $this->request->getVar('EmpName'),                
-				'DeptID' => $this->request->getVar('ParentDept'),                
+				'DeptID' => $this->request->getVar('ParentDept'),  
+				'OrgID' => $this->request->getVar('OrgID'),              
 				'Gender' => $this->request->getVar('Gender'),
 				'EmailID' => $this->request->getVar('EmailID'),
                 'Password' => md5('123456'),

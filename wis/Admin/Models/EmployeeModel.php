@@ -6,7 +6,7 @@ use Modules\Admin\Models\UtilModel;
 class EmployeeModel extends Model {
     protected $table='employees';
     protected $primaryKey='EmpID';
-    protected $allowedFields = ['RoleID','EmpName','DeptID','Gender','EmailID','Password','Address','Contact','JobType','City','DateOfJoining','Doc', 'ProfilePic','Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+    protected $allowedFields = ['RoleID','EmpName','DeptID','OrgID','Gender','EmailID','Password','Address','Contact','JobType','City','DateOfJoining','Doc', 'ProfilePic','Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
@@ -27,7 +27,7 @@ class EmployeeModel extends Model {
     function get_employees($page, $perpage, $keyword, $status) 
     {
         $start_from = ($page - 1) * $perpage;
-        $query = 'SELECT e.*, a.Name, d.DeptName FROM employees e left join admins a on a.AID = e.UpdatedBy left join departments d on d.DeptID   = e.DeptID';
+        $query = 'SELECT e.*, a.Name, d.DeptName,o.OrgName FROM employees e left join admins a on a.AID = e.UpdatedBy left join departments d on d.DeptID   = e.DeptID left join organization o on o.OrgID   = e.OrgID';
         if ($keyword !=''&& $status !='') {
 
             $query .=' where e.EmpName like "%'. $keyword . '%" OR e.EmailID like "%'. $keyword . '%" OR e.Contact like "%'. $keyword . '%" AND e.Status = '.$status ;

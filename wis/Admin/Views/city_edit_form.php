@@ -60,7 +60,7 @@
 			<!-- /.content -->
 		</div>
 		<!-- /.content-wrapper -->
-		<input type="hidden" value="citiesTab" id="CurrentPage" />
+		<input type="hidden" value="CitiesTab" id="CurrentPage" />
 		<?= view('Modules\Admin\Views\common\footer'); ?>
 		<script>
 			$("#edit_city").submit(function(event) {

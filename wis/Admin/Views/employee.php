@@ -115,8 +115,9 @@
 										<th width="70px"> All &nbsp;<input type="checkbox" id="select_all" class="select_all"></th>
 										<th>Employee Name</th>
 										<th>EmailID</th>
+										<th>Organization</th>
 										<th>Department</th>
-										<th>Contact</th>
+										<th>Mobile</th>
 										<th width="110">Actions</th>
 									</tr>
 								</thead>
@@ -134,6 +135,9 @@
 											</td>
 											<td>
 												<?= $cnty['EmailID']; ?>
+											</td>
+											<td>
+												<?= $cnty['OrgName']; ?>
 											</td>
 											<td>
 												<?= $cnty['DeptName']; ?>

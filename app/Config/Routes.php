@@ -90,6 +90,8 @@ $routes->add('/admin/departments/edit_department/(:num)', 'Departments::edit_dep
 $routes->add('/admin/departments/departmentsajax', 'Departments::departmentsajax', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/departments/updatedepartmentsajax', 'Departments::updatedepartmentsajax', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/departments/getbranches', 'Departments::getbranches', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/departments/getdepartments', 'Departments::getdepartments', ['namespace' => 'Modules\Admin\Controllers']);
+
 
 
 // Buildings Routes

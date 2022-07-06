@@ -39,8 +39,8 @@
 <script src="<?= base_url() ?>/public/admin_assets/dist/js/demo.js"></script>
 <script src="<?= base_url() ?>/public/admin_assets/plugins/multiselect/bootstrap-multiselect.js"></script>
 <script src="<?= base_url()?>/public/admin_assets/commonjs.js"></script>
+<script src="<?= base_url()?>/public/admin_assets/plugins/bootstrap-select.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <script>
   // for sidebar menu entirely but not cover treeview
   $('ul.nav-sidebar a').filter(function () {

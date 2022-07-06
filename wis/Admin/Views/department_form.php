@@ -20,12 +20,24 @@
                             <div class="row">
                                 <form method="post" action="" style="width:100%" enctype="multipart/form-data" id="add_cats">
                                     <div class="row form-group">
+                                    <div class="col-md-6">
+                                            <label for="BrID">Organization</label>
+                                            <select class="form-control OrgID" name="OrgID" id="OrgID">
+                                                <option disabled selected value>Select Organization</option>
+                                                <?php foreach($organizations as $organization){
+                                                    echo '<option value="' . $organization['OrgID'] . '">' . $organization['OrgName'] . '</option>' ;
+                                                } ?>
+                                            </select>
+                                        </div>
                                         <div class="col-md-6">
                                             <label for="DeptName">Department Name<strong class="help-block">*</strong></label>
                                             <input type="text" class="form-control" name="DeptName" onkeyup="myFunction()" id="DeptName" placeholder="Enter Department Name" />
                                             <span id="caterror"></span>
                                         </div>
-                                        <div class="col-md-6">
+                                       
+                                    </div>
+                                    <div class="row form-group">
+                                    <div class="col-md-6">
                                             <label for="ParentDept">Parent Department</label>
                                             <select name="ParentDept" id="ParentDept" class="form-control">
                                                 <option disabled selected value>Select Department</option>
@@ -51,17 +63,6 @@
                                                 } ?>
                                             </select>
                                             <span id="caterror"></span>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-md-6">
-                                            <label for="BrID">Organization</label>
-                                            <select class="form-control" name="OrgID" id="OrgID">
-                                                <option disabled selected value>Select Organization</option>
-                                                <?php foreach($organizations as $organization){
-                                                    echo '<option value="' . $organization['OrgID'] . '">' . $organization['OrgName'] . '</option>' ;
-                                                } ?>
-                                            </select>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="BrID">Branch</label>
@@ -118,21 +119,49 @@
                         url: "<?= base_url(); ?>/admin/departments/getbranches",
                         method:"POST",
                         data:{OrgID:OrgID},
-                        dataType:"JSON",
+                        dataType:'html',
                         success:function(data)
                         {
-                            var html = '<option value="">Select Branch</option>';
+                            /*var html = '<option value="">Select Branch</option>';
                             for(var count = 0; count < data.length; count++)
                             {
                                 html += '<option value="'+data[count].BrID +'">'+data[count].BrName+'</option>';
-                            }
-                            $('#BrID').html(html);
+                            }*/
+                            $('#BrID').html(data)
+                            //$('#BrID').html(html);
                         }
                     });
                 }
                 else
                 {
                     $('#BrID').val('');
+                }
+            });
+
+            $('.OrgID').change(function(){
+                var OrgID = $('#OrgID').val();
+                if(OrgID != '')
+                {
+                    $.ajax({
+                        url: "<?= base_url(); ?>/admin/departments/getdepartments",
+                        method:"POST",
+                        data:{OrgID:OrgID},
+                        dataType:'html',
+                        success:function(data)
+                        {
+                            /*var html = '<option value="">Select Branch</option>';
+                            for(var count = 0; count < data.length; count++)
+                            {
+                                html += '<option value="'+data[count].BrID +'">'+data[count].BrName+'</option>';
+                            }*/
+                            $('#ParentDept').html(data)
+                            //$('#BrID').html(html);
+                        }
+                    });
+                }
+                else
+                {
+                    $('#ParentDept').val('');
                 }
             });
         </script>

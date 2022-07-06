@@ -34,6 +34,19 @@
 											<span id="name_error"></span>
 										</div>
 										<div class="col-md-6">
+                                            <label for="BrID">Organization</label>
+                                            <select class="form-control OrgID" name="OrgID" id="OrgID">
+                                                <option disabled selected value>Select Organization</option>
+                                                <?php foreach($organizations as $organization){
+                                                    echo '<option value="' . $organization['OrgID'] . '">' . $organization['OrgName'] . '</option>' ;
+                                                } ?>
+                                            </select>
+                                        </div>
+                                       
+										
+									</div>
+									<div class="form-group row">
+									<div class="col-md-6">
 											<label for="ParentDept">Department<strong class="help-block">*</strong></label>
 											<select name="ParentDept" id="ParentDept" class="form-control">
 												<option disabled selected value>Select Department</option>
@@ -62,14 +75,15 @@
 											</select>
 											<span id="caterror"></span>
 										</div>
-									</div>
-									<div class="form-group row">
 										<div class="col-md-6">
 											<label for="EmpName">Email ID<strong class="help-block">*</strong></label>
 											<input type="text" value="<?php echo set_value('EmailID'); ?>" class="form-control" id="EmailID" name="EmailID" placehoder="Enter EmailID" />
 											<span id="email_error"></span>
 										</div>
-										<div class="col-md-6">
+										
+									</div>
+									<div class="form-group row">
+									<div class="col-md-6">
 											<label for="BrID">Gender</label>
 											<select class="form-control" name="Gender" >
 												<option disabled selected value>Select Gender</option>
@@ -77,18 +91,16 @@
 												<option value="F">Female</option>
 											</select>
 										</div>
-									</div>
-									<div class="form-group row">
 										<div class="col-md-6">
-											<label for="Langitude">Contact <strong class="help-block">*</strong></label>
-											<input type="text" class="form-control" id="Contact" name="Contact" placehoder="Enter Contact" value="<?php echo set_value('Contact'); ?>" />
+											<label for="Langitude">Mobile <strong class="help-block">*</strong></label>
+											<input type="text" class="form-control" id="Contact" name="Contact" placehoder="Enter Mobile Number" value="<?php echo set_value('Contact'); ?>" />
 										</div>
-										<div class="col-md-6">
+										
+									</div>
+									<div class="form-group row">					<div class="col-md-6">
 											<label for="Langitude">Date Of Joining </label>
 											<input type="text" class="form-control datepicker" id="DateOfJoining" name="DateOfJoining" placehoder="Enter Date Of Joining" value="<?php echo set_value('DateOfJoining'); ?>" />
 										</div>
-									</div>
-									<div class="form-group row">						
 										<div class="col-md-6">
 											<label for="BrID">Role<strong class="help-block">*</strong></label>
 											<select class="form-control" name="RoleID" >
@@ -98,16 +110,20 @@
 												} ?>
 											</select>
 										</div>
-										<div class="col-md-6">
+										
+									</div>
+									<div class="form-group row">
+									<div class="col-md-6">
 											<label for="Langitude">Job Type </label>
 											<input type="text" class="form-control" id="JobType" name="JobType" placehoder="Enter JobType" value="<?php echo set_value('JobType'); ?>"/>
 										</div>
-									</div>
-									<div class="form-group row">
 										<div class="col-md-6">
 											<label for="Langitude">City </label>
 											<input type="text" class="form-control" id="City" name="City" placehoder="Enter City" value="<?php echo set_value('City'); ?>"/>
 										</div>
+										
+									</div>
+									<div class="form-group row">
 										<div class="col-md-6">
 											<label for="Address">Address </label>
 											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address" /><?php echo set_value('Address'); ?></textarea>		
@@ -161,6 +177,32 @@
 					return true;
 				}
 			});
+			$('.OrgID').change(function(){
+                var OrgID = $('#OrgID').val();
+                if(OrgID != '')
+                {
+                    $.ajax({
+                        url: "<?= base_url(); ?>/admin/departments/getdepartments",
+                        method:"POST",
+                        data:{OrgID:OrgID},
+                        dataType:'html',
+                        success:function(data)
+                        {
+                            /*var html = '<option value="">Select Branch</option>';
+                            for(var count = 0; count < data.length; count++)
+                            {
+                                html += '<option value="'+data[count].BrID +'">'+data[count].BrName+'</option>';
+                            }*/
+                            $('#ParentDept').html(data)
+                            //$('#BrID').html(html);
+                        }
+                    });
+                }
+                else
+                {
+                    $('#ParentDept').val('');
+                }
+            });
 		</script>
 	</body>
 </html>

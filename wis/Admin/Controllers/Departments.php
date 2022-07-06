@@ -162,12 +162,14 @@ class departments extends BaseController
 	{
 		$model = new AdminsModel();
 		$BranchModel = new BranchModel();
-		$data['departments'] = $model->getmasterdata('departments');
+		//$data['departments'] = $model->getmasterdata('departments');
         $data['organizations'] = $model->getmasterdata('organization');
-		$data['total_cats'] = $this->buildTree($data['departments'], 'ParentDept', 'DeptID');
+		
 		$cmodel = new DepartmentsModel();
 		$data['cat'] = $cmodel->where('DeptID', $DeptID)->first();
 		$data['branches'] = $BranchModel->where('OrgID', $data['cat']['OrgID'])->findAll();
+		$data['departments'] = $cmodel->where('OrgID',$data['cat']['OrgID'])->findAll();
+		$data['total_cats'] = $this->buildTree($data['departments'], 'ParentDept', 'DeptID');
 		if ($this->request->getMethod() == 'post') {
 			$departmentdata = [
 				'DeptName'  => $this->request->getVar('DeptName'),
@@ -190,8 +192,20 @@ class departments extends BaseController
 	public function getbranches(){
         $BranchModel = new BranchModel();
         $orgid=$_POST['OrgID'];
-        $branchesdata = $BranchModel->where('OrgID', $orgid)->findAll();
-		echo json_encode($branchesdata);       
+        $data['branches'] = $BranchModel->where('OrgID', $orgid)->findAll();
+		//echo "<pre>";print_r($data['branches']);exit;
+		echo view('Modules\Admin\Views\branch_dropdown_ajax',$data);
+		//echo json_encode($branchesdata);       
+    }
+
+	public function getdepartments(){
+        $DepartmentsModel = new DepartmentsModel();
+        $orgid=$_POST['OrgID'];
+        $data['departments'] = $DepartmentsModel->where('OrgID', $orgid)->findAll();
+		$data['total_cats'] = $this->buildTree($data['departments'], 'ParentDept', 'DeptID');
+		//echo "<pre>";print_r($data['departments']);exit;
+		echo view('Modules\Admin\Views\departments_dropdown_ajax',$data);
+		//echo json_encode($branchesdata);       
     }
 	
 }

@@ -26,6 +26,25 @@
 											<span id="name_error"></span>
 										</div>
 										<div class="col-md-6">
+											<label for="BrID">Organization</label>
+											<select class="OrgID form-control" name="OrgID" id="OrgID">
+												<option disabled selected value hidden>Select Organization</option>
+												<?php foreach($organizations as $organization){
+													echo '<option value="' . $organization['OrgID'] . '"';
+													if($organization['OrgID'] == $employee['OrgID']){
+														echo ' selected';
+													}
+													echo '>' . $organization['OrgName'] . '</option>' ;
+												
+												} ?>
+											</select>
+										</div>
+										
+									</div>
+									
+									</div>
+									<div class="form-group row">
+									<div class="col-md-6">
 											<label for="Priority">Parent Department</label>
 											<select name="ParentDept" id="ParentDept" class="form-control">
 												<option disabled selected value>Select Department</option>
@@ -62,14 +81,15 @@
 												} } ?>
 											</select>
 										</div>
-									</div>
-									<div class="form-group row">
 										<div class="col-md-6">
 											<label for="EmpName">Email ID<strong class="help-block">*</strong></label>
 											<input type="text" class="form-control" id="EmailID" name="EmailID" placehoder="Enter EmailID" value="<?= $employee['EmailID'];?>" />
 											<span id="email_error"></span>
 										</div>
-										<div class="col-md-6">
+										
+									</div>
+									<div class="form-group row">
+									<div class="col-md-6">
 											<label for="EmpID">Gender</label>
 											<select class="form-control" name="Gender" >
 												<option disabled selected value>Select Gender</option>
@@ -78,18 +98,16 @@
 												<option value="F" <?php echo ($employee['Gender']=='F'?'selected':'');?>>Female</option>
 											</select>
 										</div>
-									</div>
-									<div class="form-group row">
 										<div class="col-md-6">
-											<label for="Langitude">Contact<strong class="help-block">*</strong> </label>
-											<input type="text" class="form-control" id="Contact" name="Contact" placehoder="Enter Contact" value="<?= $employee['Contact'];?>"/>
+											<label for="Langitude">Mobile<strong class="help-block">*</strong> </label>
+											<input type="text" class="form-control" id="Contact" name="Contact" placehoder="Enter Mobile Number" value="<?= $employee['Contact'];?>"/>
 										</div>
-										<div class="col-md-6">
+										
+									</div>
+									<div class="form-group row">					<div class="col-md-6">
 											<label for="Langitude">Date Of Joining </label>
 											<input type="text" class="form-control datepicker" id="DateOfJoining" name="DateOfJoining" placehoder="Enter Date Of Joining" value="<?= $employee['DateOfJoining'];?>"  />
 										</div>
-									</div>
-									<div class="form-group row">						
 										<div class="col-md-6">
 											<label for="EmpID">Role<strong class="help-block">*</strong> </label>
 											<select class="form-control" name="RoleID" >
@@ -103,17 +121,21 @@
 												} ?>
 											</select>
 										</div>
-										<div class="col-md-6">
+										
+									</div>
+									<div class="form-group row">
+									<div class="col-md-6">
 											<label for="Langitude">Job Type </label>
 											<input type="text" class="form-control" id="JobType" name="JobType" placehoder="Enter JobType" value="<?= $employee['JobType'];?>"/>
 										</div>
-									</div>
-									<div class="form-group row">
 										<div class="col-md-6">
 											<label for="Langitude">City </label>
 											<input type="text" class="form-control" id="City" name="City" placehoder="Enter City" value="<?= $employee['City'];?>" />
 										</div>
-										<div class="col-md-6">
+										
+									</div>
+									<div class="form-group row">
+									<div class="col-md-6">
 											<label for="Address">Address </label>
 											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address" /><?= $employee['Address'];?></textarea>
 										</div>
@@ -165,6 +187,32 @@
 					return true;	
 				}
 			});
+			$('.OrgID').change(function(){
+                var OrgID = $('#OrgID').val();
+                if(OrgID != '')
+                {
+                    $.ajax({
+                        url: "<?= base_url(); ?>/admin/departments/getdepartments",
+                        method:"POST",
+                        data:{OrgID:OrgID},
+                        dataType:'html',
+                        success:function(data)
+                        {
+                            /*var html = '<option value="">Select Branch</option>';
+                            for(var count = 0; count < data.length; count++)
+                            {
+                                html += '<option value="'+data[count].BrID +'">'+data[count].BrName+'</option>';
+                            }*/
+                            $('#ParentDept').html(data)
+                            //$('#BrID').html(html);
+                        }
+                    });
+                }
+                else
+                {
+                    $('#ParentDept').val('');
+                }
+            });
 		</script>
 	</body>
 </html>

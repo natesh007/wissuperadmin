@@ -21,12 +21,29 @@
 								<form class="form-horizontal" method="post" action="" style="width:100%" enctype="multipart/form-data" id="edit_cats">
 									<input type="hidden" class="form-control" id="DeptID" name="DeptID" value="<?= $cat['DeptID']; ?>">
 									<div class="form-group row">
+									<div class="col-md-6">
+											<label for="BrID">Organization</label>
+											<select class="OrgID form-control" name="OrgID" id="OrgID">
+												<option disabled selected value hidden>Select Organization</option>
+												<?php foreach($organizations as $organization){
+													echo '<option value="' . $organization['OrgID'] . '"';
+													if($organization['OrgID'] == $cat['OrgID']){
+														echo ' selected';
+													}
+													echo '>' . $organization['OrgName'] . '</option>' ;
+												
+												} ?>
+											</select>
+										</div>
 										<div class="col-md-6">
 											<label for="DeptName">Department Name<strong class="help-block">*</strong></label>
 											<input type="text" class="form-control" value="<?= $cat['DeptName'] ?>" onkeyup="myFunction()" name="DeptName" id="DeptName" placeholder="Enter Department Name" />
 											<span id="caterror"></span>
 										</div>
-										<div class="col-md-6">
+										
+									</div>
+									<div class="form-group row">
+									<div class="col-md-6">
 											<label for="Priority">Parent Department</label>
 											<select name="ParentDept" id="ParentDept" class="form-control">
 												<option disabled selected value>Select Department</option>
@@ -61,22 +78,6 @@
 														}
 													}
 												} } ?>
-											</select>
-										</div>
-									</div>
-									<div class="form-group row">
-										<div class="col-md-6">
-											<label for="BrID">Organization</label>
-											<select class="form-control" name="OrgID" id="OrgID">
-												<option disabled selected value hidden>Select Organization</option>
-												<?php foreach($organizations as $organization){
-													echo '<option value="' . $organization['OrgID'] . '"';
-													if($organization['OrgID'] == $cat['OrgID']){
-														echo ' selected';
-													}
-													echo '>' . $organization['OrgName'] . '</option>' ;
-												
-												} ?>
 											</select>
 										</div>
 										<div class="col-md-6">
@@ -159,6 +160,32 @@
 					$('#BrID').val('');
 				}
 			});
+			$('.OrgID').change(function(){
+                var OrgID = $('#OrgID').val();
+                if(OrgID != '')
+                {
+                    $.ajax({
+                        url: "<?= base_url(); ?>/admin/departments/getdepartments",
+                        method:"POST",
+                        data:{OrgID:OrgID},
+                        dataType:'html',
+                        success:function(data)
+                        {
+                            /*var html = '<option value="">Select Branch</option>';
+                            for(var count = 0; count < data.length; count++)
+                            {
+                                html += '<option value="'+data[count].BrID +'">'+data[count].BrName+'</option>';
+                            }*/
+                            $('#ParentDept').html(data)
+                            //$('#BrID').html(html);
+                        }
+                    });
+                }
+                else
+                {
+                    $('#ParentDept').val('');
+                }
+            });
 		</script>
 	</body>
 </html>

@@ -116,6 +116,8 @@
 										<th width="70px">All &nbsp;<input type="checkbox" id="select_all" class="select_all"></th>
 										<th>Department Name</th>
 										<th>Parent Department</th>
+										<th>Organization</th>
+										<th>Branch</th>
 										<th>Updated Date</th>
 										<th width="140">Actions</th>
 									</tr>
@@ -129,6 +131,8 @@
 												</td>
 												<td><?= $department['DeptName']; ?></td>
 												<td><?= $department['ParentDeptName']; ?></td>
+												<td><?= $department['OrgName']; ?></td>
+												<td><?= $department['BrName']; ?></td>
 												
 												<td><?= $department['UpdatedDate']; ?></td>
 												<td>
