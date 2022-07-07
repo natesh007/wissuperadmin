@@ -144,6 +144,12 @@
                                         <p>Cities</p>
                                     </a>
                                 </li> 
+                                <li class="nav-item">
+                                    <a href="<?= base_url('admin/jobtitles') ?>" class="nav-link" id="JobtitlesTab">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Job Title</p>
+                                    </a>
+                                </li> 
                             </ul>
                         </li>
                         <li class="nav-item">

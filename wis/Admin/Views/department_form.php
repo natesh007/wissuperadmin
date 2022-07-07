@@ -119,16 +119,16 @@
                         url: "<?= base_url(); ?>/admin/departments/getbranches",
                         method:"POST",
                         data:{OrgID:OrgID},
-                        dataType:'html',
+                        dataType:'json',
                         success:function(data)
                         {
-                            /*var html = '<option value="">Select Branch</option>';
+                            var html = '<option value="">Select Branch</option>';
                             for(var count = 0; count < data.length; count++)
                             {
                                 html += '<option value="'+data[count].BrID +'">'+data[count].BrName+'</option>';
-                            }*/
-                            $('#BrID').html(data)
-                            //$('#BrID').html(html);
+                            }
+                            //$('#BrID').html(data)
+                            $('#BrID').html(html);
                         }
                     });
                 }
@@ -154,7 +154,7 @@
                             {
                                 html += '<option value="'+data[count].BrID +'">'+data[count].BrName+'</option>';
                             }*/
-                            $('#ParentDept').html(data)
+                            $('#ParentDept').html(data);
                             //$('#BrID').html(html);
                         }
                     });

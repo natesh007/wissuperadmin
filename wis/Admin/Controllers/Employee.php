@@ -3,7 +3,11 @@ namespace Modules\Admin\Controllers;
 
 use Modules\Admin\Models\EmployeeModel;
 use Modules\Admin\Models\AdminsModel;
+use Modules\Admin\Models\BranchModel;
 use Modules\Admin\Models\DepartmentsModel;
+use Modules\Admin\Models\EmployeeBranchesModel;
+use Modules\Admin\Models\JobtitleModel;
+
 class Employee extends BaseController
 {
    
@@ -134,27 +138,33 @@ class Employee extends BaseController
 		helper(['url', 'form']);       
 		$EmployeeModel = new EmployeeModel();
         $AdminsModel = new AdminsModel();
+		$EmployeeBranchesModel = new EmployeeBranchesModel();
+		
 		$data['organizations'] = $AdminsModel->getmasterdata('organization');
         $data['departments'] = $AdminsModel->getmasterdata('departments');
+		$data['jobtitles'] = $AdminsModel->getmasterdata('jobtitle');
+		$data['branches'] = $AdminsModel->getmasterdata('branches');
         $data['roles'] = $AdminsModel->getmasterdata('roles');
 		$data['total_cats'] = $this->buildTree($data['departments'], 'ParentDept', 'DeptID');
 		$data['error']="";
 		if ($this->request->getMethod() == 'post') {
+			//echo "<pre>";print_r($this->request->getVar());exit;
 			if($this->request->getVar('EmailID')!=""){
 				$exist_emp = $EmployeeModel->where('EmailID', $this->request->getVar('EmailID'))->first();
 				if(!$exist_emp){
 					$data = [
-						'RoleID' => $this->request->getVar('RoleID'),
-						'EmpName' => $this->request->getVar('EmpName'),  
-						'OrgID' => $this->request->getVar('OrgID'),              
-						'DeptID' => $this->request->getVar('ParentDept'),                
+						'RoleID' => '',
+						'EmpName' => $this->request->getVar('EmpName'),
+						'DeptID' => $this->request->getVar('ParentDept'),
+						'OrgID' => $this->request->getVar('OrgID'),
+						'JobTID' => $this->request->getVar('JobTID'),             
 						'Gender' => ($this->request->getVar('Gender')==""?'':$this->request->getVar('Gender')),
 						'EmailID' => $this->request->getVar('EmailID'),
-						'password' => md5('123456'),
+						'Password' => md5('123456'),
 						'Address' => $this->request->getVar('Address'),
 						'Contact' => $this->request->getVar('Contact'),
 						'JobType' => $this->request->getVar('JobType'),
-						'City' => $this->request->getVar('City'),
+						'City' => '',
 						'DateOfJoining' => $this->request->getVar('DateOfJoining'),
 						'Doc' => '',
 						'ProfilePic' =>'',
@@ -163,7 +173,19 @@ class Employee extends BaseController
 					if ($this->request->getVar('ParentDept') != '') {
 						$departmentdata['ParentDept'] = $this->request->getVar('ParentDept');
 					}
+					//echo "<pre>";print_r($data);exit;
 					$save = $EmployeeModel->insert($data);
+					$empid = $EmployeeModel->getInsertID();
+					$BrID=$this->request->getVar('BrID');
+					if(!empty($BrID)){
+						for($i=0;$i<count($BrID);$i++){
+							$data1 = [
+								"EmpID" => $empid,
+								"BrID" => $BrID[$i]
+							];
+							$EmployeeBranchesModel->insert($data1);
+						}
+					}
 					
 					$msg = 'Data Saved Successfully';
 					return redirect()->to(base_url('admin/employees'))->with('msg', $msg);
@@ -186,27 +208,43 @@ class Employee extends BaseController
 		$EmployeeModel = new EmployeeModel();
         $AdminsModel = new AdminsModel();
 		$DepartmentsModel = new DepartmentsModel();
+		$BranchModel = new BranchModel();
+		$EmployeeBranchesModel = new EmployeeBranchesModel();
+		$JobtitleModel = new JobtitleModel();
+		
 		$data['organizations'] = $AdminsModel->getmasterdata('organization');
        
-        $data['roles'] = $AdminsModel->getmasterdata('roles');
-		
-		$data['employee'] = $EmployeeModel->where('EmpID  ', $id)->first();
+        
+		$data['roles'] = $AdminsModel->getmasterdata('roles');
+		$data['employee'] = $EmployeeModel->where('EmpID', $id)->first();
 		$data['departments'] = $DepartmentsModel->where('OrgID',$data['employee']['OrgID'])->findAll();
         $data['total_cats'] = $this->buildTree($data['departments'], 'ParentDept', 'DeptID');
-		//echo "<pre>";print_r($data['employees']);exit;
+		$data['branches'] = $BranchModel->where('OrgID',$data['employee']['OrgID'])->findAll();
+		$data['jobtitles'] = $JobtitleModel->where('OrgID',$data['employee']['OrgID'])->findAll();
+		$branches = $EmployeeBranchesModel->where('EmpID', $id)->findAll();
+		$selbranches=[];
+		foreach($branches as $b){
+			$selbranches[]=$b['BrID'];
+		}
+		$data['selbranches'] = $selbranches;
+		//echo "<pre>";print_r($data['selbranches']);exit;
 		if ($this->request->getMethod() == 'post') {
+			//echo "<pre>";print_r($this->request->getVar());
+			$BrID=$this->request->getVar('BrID');
+			//echo "<pre>";print_r($BrID);exit;
 			$data = [
-				'RoleID' => $this->request->getVar('RoleID'),
+				'RoleID' => '',
                 'EmpName' => $this->request->getVar('EmpName'),                
 				'DeptID' => $this->request->getVar('ParentDept'),  
-				'OrgID' => $this->request->getVar('OrgID'),              
+				'OrgID' => $this->request->getVar('OrgID'), 
+				'JobTID' => $this->request->getVar('JobTID'),         
 				'Gender' => $this->request->getVar('Gender'),
 				'EmailID' => $this->request->getVar('EmailID'),
                 'Password' => md5('123456'),
 				'Address' => $this->request->getVar('Address'),
 				'Contact' => $this->request->getVar('Contact'),
 				'JobType' => $this->request->getVar('JobType'),
-				'City' => $this->request->getVar('City'),
+				'City' => '',
 				'DateOfJoining' => $this->request->getVar('DateOfJoining'),
                 'Doc' => '',
                 'ProfilePic' =>'',
@@ -217,6 +255,18 @@ class Employee extends BaseController
 			}
 			//print_r($data);exit;
 			$EmployeeModel->update($id, $data);
+			//$EmployeeBranchesModel->where('EmpID', $id)->delete();
+			$BrID=$this->request->getVar('BrID');
+			if(!empty($BrID)){
+				for($i=0;$i<count($BrID);$i++){				
+						$data1 = [
+							'EmpID' => $id,  
+							'BrID' => $BrID[$i]						
+						];			
+						$save1 = $EmployeeBranchesModel->insert($data1);
+				
+				}
+			}
 			$msg = 'Data Updated Successfully';
 			return redirect()->to(base_url('admin/employees'))->with('msg', $msg);
 		}

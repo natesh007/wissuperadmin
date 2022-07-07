@@ -91,6 +91,7 @@ $routes->add('/admin/departments/departmentsajax', 'Departments::departmentsajax
 $routes->add('/admin/departments/updatedepartmentsajax', 'Departments::updatedepartmentsajax', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/departments/getbranches', 'Departments::getbranches', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/departments/getdepartments', 'Departments::getdepartments', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/departments/getBrdepartments', 'Departments::getBrdepartments', ['namespace' => 'Modules\Admin\Controllers']);
 
 
 
@@ -132,6 +133,14 @@ $routes->add('/admin/active_cities', 'City::active_cities', ['namespace' => 'Mod
 $routes->add('/admin/inactive_cities', 'City::inactive_cities', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/cities/add_city', 'City::add_city', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/cities/edit_city/(:num)', 'City::edit_city/$1', ['namespace' => 'Modules\Admin\Controllers']);
+
+// Jobtitle Routes
+$routes->add('/admin/jobtitles', 'Jobtitle::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/active_jobtitles', 'Jobtitle::active_jobtitles', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/inactive_jobtitles', 'Jobtitle::inactive_jobtitles', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/jobtitles/add_jobtitle', 'Jobtitle::add_jobtitle', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/jobtitles/edit_jobtitle/(:num)', 'Jobtitle::edit_jobtitle/$1', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/jobtitles/getjobtitle', 'Jobtitle::getjobtitle', ['namespace' => 'Modules\Admin\Controllers']);
 
 
 /**

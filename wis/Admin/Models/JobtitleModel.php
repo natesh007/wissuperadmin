@@ -3,10 +3,10 @@
 use CodeIgniter\Model;
 use Modules\Admin\Models\UtilModel;
 
-class EmployeeModel extends Model {
-    protected $table='employees';
-    protected $primaryKey='EmpID';
-    protected $allowedFields = ['RoleID','EmpName','DeptID','OrgID','JobTID','Gender','EmailID','Password','Address','Contact','JobType','City','DateOfJoining','Doc', 'ProfilePic','Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+class JobtitleModel extends Model {
+    protected $table='jobtitle';
+    protected $primaryKey='JobTID';
+    protected $allowedFields = ['OrgID','JobTitle', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
@@ -24,32 +24,30 @@ class EmployeeModel extends Model {
         $data['data']['UpdatedDate']=date('Y-m-d H:i:s');
         return $data;
     }
-    function get_employees($page, $perpage, $keyword, $status) 
+    function get_jobtitles($page, $perpage, $keyword, $status) 
     {
         $start_from = ($page - 1) * $perpage;
-        $query = 'SELECT e.*, a.Name, d.DeptName,o.OrgName FROM employees e left join admins a on a.AID = e.UpdatedBy left join departments d on d.DeptID   = e.DeptID left join organization o on o.OrgID   = e.OrgID';
+        $query = 'SELECT j.*, a.Name, o.OrgName FROM jobtitle j left join admins a on a.AID = j.UpdatedBy left join organization o on o.OrgID  = j.OrgID';
         if ($keyword !=''&& $status !='') {
-
-            $query .=' where e.EmpName like "%'. $keyword . '%" OR e.EmailID like "%'. $keyword . '%" OR e.Contact like "%'. $keyword . '%" AND e.Status = '.$status ;
-
+            $query .=' where j.JobTitle  like "%'. $keyword . '%" AND j.Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $query .=' where e.EmpName like "%'. $keyword . '%" OR e.EmailID like "%'. $keyword . '%" OR e.Contact like "%'. $keyword . '%"' ;
+            $query .=' where j.JobTitle  like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {
-            $query .=' where e.Status = '.$status;
+            $query .=' where j.Status = '.$status;
         }
         $query .=' Limit ' . $start_from . ',' . $perpage;
         $branch['results'] = $this->db->query($query)->getResultArray();
-        $countquery = 'SELECT count(EmpID) as ttl_rows FROM employees';
+        $countquery = 'SELECT count(JobTID) as ttl_rows FROM jobtitle';
         if ($keyword !=''&& $status !='') {
-            $countquery .=' where EmpName  like "%'. $keyword . '%" AND Status = '.$status;
+            $countquery .=' where JobTitle  like "%'. $keyword . '%" AND Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $countquery .=' where EmpName like "%'. $keyword . '%"';
+            $countquery .=' where JobTitle like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {

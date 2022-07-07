@@ -26,9 +26,9 @@
 											<span id="name_error"></span>
 										</div>
 										<div class="col-md-6">
-											<label for="BrID">Organization</label>
+											<label for="OrgID">Organization</label>
 											<select class="OrgID form-control" name="OrgID" id="OrgID">
-												<option disabled selected value hidden>Select Organization</option>
+												<option disabled selected value >Select Organization</option>
 												<?php foreach($organizations as $organization){
 													echo '<option value="' . $organization['OrgID'] . '"';
 													if($organization['OrgID'] == $employee['OrgID']){
@@ -44,7 +44,24 @@
 									
 									</div>
 									<div class="form-group row">
-									<div class="col-md-6">
+										<div class="col-md-6">
+											<label for="BrID">Branch<strong class="help-block">*</strong></label>
+											<select class="selectpicker form-control" multiple name="BrID[]" id="BrID">
+												<option selected value>Select Multiple Branches</option>
+
+												
+													<?php foreach($branches as $branch){
+														echo '<option value="' . $branch['BrID'] . '"';
+														if(in_array($branch['BrID'], $selbranches)){
+															echo ' selected';
+														}
+														echo '>' . $branch['BrName'] . '</option>' ;
+													} ?>
+													
+													
+											</select>
+										</div>
+										<div class="col-md-6">
 											<label for="Priority">Parent Department</label>
 											<select name="ParentDept" id="ParentDept" class="form-control">
 												<option disabled selected value>Select Department</option>
@@ -81,15 +98,39 @@
 												} } ?>
 											</select>
 										</div>
+										
+										
+									</div>
+									<div class="form-group row">
+                                    <div class="col-md-6">
+												<label for="BrID">Job Title<strong class="help-block">*</strong></label>
+												<select class="form-control" name="JobTID" id="JobTID">
+													<option disabled selected value>Select Job Title</option>
+													<?php foreach($jobtitles as $jobtitle){
+														echo '<option value="' . $jobtitle['JobTID'] . '"';
+														if($jobtitle['JobTID'] == $employee['JobTID']){
+															echo ' selected';
+														}
+														echo '>' . $jobtitle['JobTitle'] . '</option>' ;
+														
+													} ?>
+												</select>
+										</div>
 										<div class="col-md-6">
 											<label for="EmpName">Email ID<strong class="help-block">*</strong></label>
 											<input type="text" class="form-control" id="EmailID" name="EmailID" placehoder="Enter EmailID" value="<?= $employee['EmailID'];?>" />
 											<span id="email_error"></span>
 										</div>
+									
+										
 										
 									</div>
 									<div class="form-group row">
 									<div class="col-md-6">
+											<label for="Langitude">Mobile<strong class="help-block">*</strong> </label>
+											<input type="text" class="form-control" id="Contact" name="Contact" placehoder="Enter Mobile Number" value="<?= $employee['Contact'];?>"/>
+										</div>
+										<div class="col-md-6">
 											<label for="EmpID">Gender</label>
 											<select class="form-control" name="Gender" >
 												<option disabled selected value>Select Gender</option>
@@ -98,17 +139,8 @@
 												<option value="F" <?php echo ($employee['Gender']=='F'?'selected':'');?>>Female</option>
 											</select>
 										</div>
-										<div class="col-md-6">
-											<label for="Langitude">Mobile<strong class="help-block">*</strong> </label>
-											<input type="text" class="form-control" id="Contact" name="Contact" placehoder="Enter Mobile Number" value="<?= $employee['Contact'];?>"/>
-										</div>
 										
-									</div>
-									<div class="form-group row">					<div class="col-md-6">
-											<label for="Langitude">Date Of Joining </label>
-											<input type="text" class="form-control datepicker" id="DateOfJoining" name="DateOfJoining" placehoder="Enter Date Of Joining" value="<?= $employee['DateOfJoining'];?>"  />
-										</div>
-										<div class="col-md-6">
+										<?php /*<div class="col-md-6">
 											<label for="EmpID">Role<strong class="help-block">*</strong> </label>
 											<select class="form-control" name="RoleID" >
 												<option disabled selected value>Select Role</option>
@@ -120,22 +152,27 @@
 													echo '>' . $role['RoleName'] . '</option>' ;
 												} ?>
 											</select>
-										</div>
+										</div>*/?>
 										
 									</div>
 									<div class="form-group row">
+									<div class="col-md-6">
+											<label for="Langitude">Date Of Joining </label>
+											<input type="text" class="form-control datepicker" id="DateOfJoining" name="DateOfJoining" placehoder="Enter Date Of Joining" value="<?= $employee['DateOfJoining'];?>"  />
+										</div>
 									<div class="col-md-6">
 											<label for="Langitude">Job Type </label>
 											<input type="text" class="form-control" id="JobType" name="JobType" placehoder="Enter JobType" value="<?= $employee['JobType'];?>"/>
 										</div>
-										<div class="col-md-6">
+										
+										<?php /*<div class="col-md-6">
 											<label for="Langitude">City </label>
 											<input type="text" class="form-control" id="City" name="City" placehoder="Enter City" value="<?= $employee['City'];?>" />
-										</div>
+										</div>*/?>
 										
 									</div>
 									<div class="form-group row">
-									<div class="col-md-6">
+										<div class="col-md-6">
 											<label for="Address">Address </label>
 											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address" /><?= $employee['Address'];?></textarea>
 										</div>
@@ -157,6 +194,10 @@
 		<input type="hidden" value="EmployeesTab" id="CurrentPage" />
 		<?= view('Modules\Admin\Views\common\footer'); ?>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+		<style>
+		.bootstrap-select{background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da!important;height:auto}</style>
 		<script>
 			$('.datepicker').datepicker({
 				format: 'yyyy-mm-dd'
@@ -165,46 +206,101 @@
 			$('#edit_employee').validate({
 				rules: {
 					EmpName: { required: true },
+					OrgID: { required: true },
+					JobTID: { required: true },
+					BrID: { required: true },
 					EmailID: { required: true,
 								email: true},
 					ParentDept: {required: true},
 					Contact:  {required: true,
-						number: true,},		
+						number: true}		
+
 				},
 				messages: {
 					EmpName: "Please enter Employee Name",
 					EmailID: {
 						required: "Please enter Email ID",
-						email: "Please enter valid Email ID"
+						EmailID: "Please enter valid Email ID"
 					},
-					EmpName: "Please select Department",
+					ParentDept: "Please select Department",
 					Contact: {
 						required: "Please enter mobile number",
 						number: "Please enter valid mobile number"
 					},
+					OrgID: "Please enter Organization",
+					BrID: "Please enter Brach",
+					JobTID: "Please enter Job Title",
 				},
 				submitHandler: function(form) {
 					return true;	
 				}
 			});
-			$('.OrgID').change(function(){
+			$('.OrgID').change(function(){				
                 var OrgID = $('#OrgID').val();
                 if(OrgID != '')
                 {
                     $.ajax({
-                        url: "<?= base_url(); ?>/admin/departments/getdepartments",
+                        url: "<?= base_url(); ?>/admin/departments/getbranches",
                         method:"POST",
                         data:{OrgID:OrgID},
-                        dataType:'html',
+                        dataType:'JSON',
                         success:function(data)
                         {
-                            /*var html = '<option value="">Select Branch</option>';
+                            var html = '';
                             for(var count = 0; count < data.length; count++)
                             {
                                 html += '<option value="'+data[count].BrID +'">'+data[count].BrName+'</option>';
-                            }*/
-                            $('#ParentDept').html(data)
-                            //$('#BrID').html(html);
+                            }
+                            $('#BrID').html(html);
+							$('#BrID').selectpicker("refresh");
+                        }
+                    });
+                }
+                else
+                {
+                    $('#BrID').val('');
+                }
+            });
+			$('#OrgID').change(function(){
+                var OrgID = $('#OrgID').val();
+                if(OrgID != '')
+                {
+                    $.ajax({
+                        url: "<?= base_url(); ?>/admin/jobtitles/getjobtitle",
+                        method:"POST",
+                        data:{OrgID:OrgID},
+                        dataType:'json',
+                        success:function(data)
+                        {
+                            var html = '<option value="">Select Job Title</option>';
+                            for(var count = 0; count < data.length; count++)
+                            {
+                                html += '<option value="'+data[count].JobTID +'">'+data[count].JobTitle+'</option>';
+                            }
+                            //$('#ParentDept').html(data)
+                            $('#JobTID').html(html);
+                        }
+                    });
+                }
+                else
+                {
+                    $('#JobTID').val('');
+                }
+            });
+
+			$('#BrID').change(function(){
+                var BrID = $('#BrID').val();
+				alert(BrID);
+                if(BrID != '')
+                {
+                    $.ajax({
+                        url: "<?= base_url(); ?>/admin/departments/getBrdepartments",
+                        method:"POST",
+                        data:{BrID:BrID},
+                        dataType:'html',
+                        success:function(data)
+                        {
+							$('#ParentDept').html(data);
                         }
                     });
                 }
