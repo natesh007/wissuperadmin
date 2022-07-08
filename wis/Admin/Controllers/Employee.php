@@ -148,7 +148,6 @@ class Employee extends BaseController
 		$data['total_cats'] = $this->buildTree($data['departments'], 'ParentDept', 'DeptID');
 		$data['error']="";
 		if ($this->request->getMethod() == 'post') {
-			//echo "<pre>";print_r($this->request->getVar());exit;
 			if($this->request->getVar('EmailID')!=""){
 				$exist_emp = $EmployeeModel->where('EmailID', $this->request->getVar('EmailID'))->first();
 				if(!$exist_emp){
@@ -173,7 +172,6 @@ class Employee extends BaseController
 					if ($this->request->getVar('ParentDept') != '') {
 						$departmentdata['ParentDept'] = $this->request->getVar('ParentDept');
 					}
-					//echo "<pre>";print_r($data);exit;
 					$save = $EmployeeModel->insert($data);
 					$empid = $EmployeeModel->getInsertID();
 					$BrID=$this->request->getVar('BrID');
@@ -186,18 +184,13 @@ class Employee extends BaseController
 							$EmployeeBranchesModel->insert($data1);
 						}
 					}
-					
 					$msg = 'Data Saved Successfully';
 					return redirect()->to(base_url('admin/employees'))->with('msg', $msg);
 				}else{
 					$data['error'] = 'Email ID alreay Exist!';
-					//return redirect()->to(base_url('admin/add_employee'))->with('msg', $error);
-					
 				}
 			}
-			
 		}
-		//echo "<pre>";print_r($data);exit;
 		echo view('Modules\Admin\Views\common\header');
 		echo view('Modules\Admin\Views\employee_form',$data);
 	}
@@ -211,10 +204,7 @@ class Employee extends BaseController
 		$BranchModel = new BranchModel();
 		$EmployeeBranchesModel = new EmployeeBranchesModel();
 		$JobtitleModel = new JobtitleModel();
-		
 		$data['organizations'] = $AdminsModel->getmasterdata('organization');
-       
-        
 		$data['roles'] = $AdminsModel->getmasterdata('roles');
 		$data['employee'] = $EmployeeModel->where('EmpID', $id)->first();
 		$data['departments'] = $DepartmentsModel->where('OrgID',$data['employee']['OrgID'])->findAll();
@@ -227,11 +217,7 @@ class Employee extends BaseController
 			$selbranches[]=$b['BrID'];
 		}
 		$data['selbranches'] = $selbranches;
-		//echo "<pre>";print_r($data['selbranches']);exit;
 		if ($this->request->getMethod() == 'post') {
-			//echo "<pre>";print_r($this->request->getVar());
-			$BrID=$this->request->getVar('BrID');
-			//echo "<pre>";print_r($BrID);exit;
 			$data = [
 				'RoleID' => '',
                 'EmpName' => $this->request->getVar('EmpName'),                
@@ -253,18 +239,16 @@ class Employee extends BaseController
             if ($this->request->getVar('ParentDept') != '') {
 				$departmentdata['ParentDept'] = $this->request->getVar('ParentDept');
 			}
-			//print_r($data);exit;
 			$EmployeeModel->update($id, $data);
-			//$EmployeeBranchesModel->where('EmpID', $id)->delete();
+			$EmployeeBranchesModel->where('EmpID', $id)->delete();
 			$BrID=$this->request->getVar('BrID');
 			if(!empty($BrID)){
 				for($i=0;$i<count($BrID);$i++){				
-						$data1 = [
-							'EmpID' => $id,  
-							'BrID' => $BrID[$i]						
-						];			
-						$save1 = $EmployeeBranchesModel->insert($data1);
-				
+					$data1 = [
+						'EmpID' => $id,  
+						'BrID' => $BrID[$i]						
+					];			
+					$save1 = $EmployeeBranchesModel->insert($data1);
 				}
 			}
 			$msg = 'Data Updated Successfully';

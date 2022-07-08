@@ -41,15 +41,11 @@
 										</div>
 										
 									</div>
-									
-									</div>
 									<div class="form-group row">
 										<div class="col-md-6">
 											<label for="BrID">Branch<strong class="help-block">*</strong></label>
-											<select class="selectpicker form-control" multiple name="BrID[]" id="BrID">
-												<option selected value>Select Multiple Branches</option>
-
-												
+											<select class="selectpicker form-control" name="BrID[]" id="BrID" multiple data-live-search="true" multiple data-live-search="true">
+												<!-- <option selected value>Select Multiple Branches</option> -->
 													<?php foreach($branches as $branch){
 														echo '<option value="' . $branch['BrID'] . '"';
 														if(in_array($branch['BrID'], $selbranches)){
@@ -57,8 +53,6 @@
 														}
 														echo '>' . $branch['BrName'] . '</option>' ;
 													} ?>
-													
-													
 											</select>
 										</div>
 										<div class="col-md-6">
@@ -98,35 +92,30 @@
 												} } ?>
 											</select>
 										</div>
-										
-										
 									</div>
 									<div class="form-group row">
-                                    <div class="col-md-6">
-												<label for="BrID">Job Title<strong class="help-block">*</strong></label>
-												<select class="form-control" name="JobTID" id="JobTID">
-													<option disabled selected value>Select Job Title</option>
-													<?php foreach($jobtitles as $jobtitle){
-														echo '<option value="' . $jobtitle['JobTID'] . '"';
-														if($jobtitle['JobTID'] == $employee['JobTID']){
-															echo ' selected';
-														}
-														echo '>' . $jobtitle['JobTitle'] . '</option>' ;
-														
-													} ?>
-												</select>
+                                    	<div class="col-md-6">
+											<label for="JobTID">Job Title<strong class="help-block">*</strong></label>
+											<select class="form-control" name="JobTID" id="JobTID">
+												<option disabled selected value>Select Job Title</option>
+												<?php foreach($jobtitles as $jobtitle){
+													echo '<option value="' . $jobtitle['JobTID'] . '"';
+													if($jobtitle['JobTID'] == $employee['JobTID']){
+														echo ' selected';
+													}
+													echo '>' . $jobtitle['JobTitle'] . '</option>' ;
+													
+												} ?>
+											</select>
 										</div>
 										<div class="col-md-6">
 											<label for="EmpName">Email ID<strong class="help-block">*</strong></label>
 											<input type="text" class="form-control" id="EmailID" name="EmailID" placehoder="Enter EmailID" value="<?= $employee['EmailID'];?>" />
 											<span id="email_error"></span>
 										</div>
-									
-										
-										
 									</div>
 									<div class="form-group row">
-									<div class="col-md-6">
+										<div class="col-md-6">
 											<label for="Langitude">Mobile<strong class="help-block">*</strong> </label>
 											<input type="text" class="form-control" id="Contact" name="Contact" placehoder="Enter Mobile Number" value="<?= $employee['Contact'];?>"/>
 										</div>
@@ -139,37 +128,16 @@
 												<option value="F" <?php echo ($employee['Gender']=='F'?'selected':'');?>>Female</option>
 											</select>
 										</div>
-										
-										<?php /*<div class="col-md-6">
-											<label for="EmpID">Role<strong class="help-block">*</strong> </label>
-											<select class="form-control" name="RoleID" >
-												<option disabled selected value>Select Role</option>
-												<?php foreach($roles as $role){
-													echo '<option value="' . $role['RoleID'] . '"';
-													if($role['RoleID'] == $employee['RoleID']){
-														echo ' selected';
-													}
-													echo '>' . $role['RoleName'] . '</option>' ;
-												} ?>
-											</select>
-										</div>*/?>
-										
 									</div>
 									<div class="form-group row">
-									<div class="col-md-6">
+										<div class="col-md-6">
 											<label for="Langitude">Date Of Joining </label>
 											<input type="text" class="form-control datepicker" id="DateOfJoining" name="DateOfJoining" placehoder="Enter Date Of Joining" value="<?= $employee['DateOfJoining'];?>"  />
 										</div>
-									<div class="col-md-6">
+										<div class="col-md-6">
 											<label for="Langitude">Job Type </label>
 											<input type="text" class="form-control" id="JobType" name="JobType" placehoder="Enter JobType" value="<?= $employee['JobType'];?>"/>
 										</div>
-										
-										<?php /*<div class="col-md-6">
-											<label for="Langitude">City </label>
-											<input type="text" class="form-control" id="City" name="City" placehoder="Enter City" value="<?= $employee['City'];?>" />
-										</div>*/?>
-										
 									</div>
 									<div class="form-group row">
 										<div class="col-md-6">
@@ -204,6 +172,7 @@
 			});
 
 			$('#edit_employee').validate({
+				ignore: [],
 				rules: {
 					EmpName: { required: true },
 					OrgID: { required: true },
@@ -290,7 +259,6 @@
 
 			$('#BrID').change(function(){
                 var BrID = $('#BrID').val();
-				alert(BrID);
                 if(BrID != '')
                 {
                     $.ajax({
