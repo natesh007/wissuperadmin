@@ -49,7 +49,7 @@
 										<div class="col-md-6">
 												<label for="BrID">Branch<strong class="help-block">*</strong></label>
 												<select class="selectpicker form-control" multiple data-live-search="true" name="BrID[]" id="BrID">
-													<option disabled selected value hidden>Select Multiple Branches</option>
+													<!-- <option disabled selected value hidden>Select Multiple Branches</option> -->
 													<?php /*foreach($branches as $branch){
 														echo '<option value="' . $branch['BrID'] . '">' . $branch['BrName'] . '</option>' ;
 													}*/ ?>
