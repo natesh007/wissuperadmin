@@ -44,7 +44,7 @@
 									<div class="form-group row">
 										<div class="col-md-6">
 											<label for="BrID">Branch<strong class="help-block">*</strong></label>
-											<select class="selectpicker form-control" name="BrID[]" id="BrID" multiple data-live-search="true" multiple data-live-search="true">
+											<select class="selectpicker form-control" name="BrID[]" id="BrID" multiple data-live-search="true">
 													<!-- <option disabled selected value hidden>Select Multiple Branches</option> -->
 													<?php foreach($branches as $branch){
 														echo '<option value="' . $branch['BrID'] . '"';
