@@ -218,7 +218,7 @@ class WisAPI extends REST
 		// Input validations
 		if (!empty($email) and !empty($password)) {
 			if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-				$sql = "SELECT e.DeptID,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.Gender,e.Address,e.JobType,e.Contact,e.City,e.Password,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate FROM employees as e LEFT JOIN roles as r
+				$sql = "SELECT e.OrgID,e.JobTID,e.DeptID,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.Gender,e.Address,e.JobType,e.Contact,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate FROM employees as e LEFT JOIN roles as r
 				ON r.RoleID = e.RoleID WHERE e.EmailID = '" . mysqli_real_escape_string($this->db->mysql_link, $email) . "' AND e.Status=1";
 				$this->db->executeQuery($sql);
 				
@@ -318,10 +318,10 @@ class WisAPI extends REST
 	
     function organizationslist()
 	{
-	    if ($this->get_request_method() != "GET") {
+	    if ($this->get_request_method() != "POST") {
 			$this->errorMSG(406, "Wrong HTTP Method");
 		}
-		$query1 = $this->db->executeQueryAndGetArray("SELECT o.OrgID,o.OrgName,o.OrgType,o.Address,o.Langitude,o.Latitude,o.Status,ot.OrganizationType FROM organization o left join organization_type ot on ot.TypeID=o.OrgType", MYSQLI_ASSOC);
+		$query1 = $this->db->executeQueryAndGetArray("SELECT o.OrgID,o.OrgName FROM organization o left join organization_type ot on ot.TypeID=o.OrgType", MYSQLI_ASSOC);
 			//	echo $this->db->getLastSQLStatement();exit;
 		
 		/// dropdown view
@@ -332,7 +332,7 @@ class WisAPI extends REST
 	}
 	function branches()
 	{
-	    if ($this->get_request_method() != "GET") {
+	    if ($this->get_request_method() != "POST") {
 			$this->errorMSG(406, "Wrong HTTP Method");
 		}
 		$OrgID = $this->_request['OrgID'];
@@ -349,7 +349,7 @@ class WisAPI extends REST
 
 	function jobtitles()
 	{
-	    if ($this->get_request_method() != "GET") {
+	    if ($this->get_request_method() != "POST") {
 			$this->errorMSG(406, "Wrong HTTP Method");
 		}
 		$OrgID = $this->_request['OrgID'];
@@ -365,7 +365,7 @@ class WisAPI extends REST
 	}
 	function departments()
 	{
-	    if ($this->get_request_method() != "GET") {
+	    if ($this->get_request_method() != "POST") {
 			$this->errorMSG(406, "Wrong HTTP Method");
 		}
 		$OrgID = $this->_request['OrgID'];
@@ -408,7 +408,7 @@ class WisAPI extends REST
 	}
 	function employees()
 	{
-	    if ($this->get_request_method() != "GET") {
+	    if ($this->get_request_method() != "POST") {
 			$this->errorMSG(406, "Wrong HTTP Method");
 		}
 		$DeptID = $this->_request['DeptID'];
@@ -514,6 +514,46 @@ class WisAPI extends REST
 				$this->errorMSG(400, $e->getMessage());
 			}
 		}
+	}
+
+	function getemployee()
+	{
+	    if ($this->get_request_method() != "POST") {
+			$this->errorMSG(406, "Wrong HTTP Method");
+		}
+		$EmpID = $this->_request['EmpID'];
+		if ($EmpID == '') {
+			$this->errorMSG(400, "Please enter Employee ID");
+		}
+		$query1 = $this->db->executeQueryAndGetArray("SELECT e.OrgID,e.JobTID,e.DeptID,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.Gender,e.Address,e.JobType,e.Contact,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate FROM employees e where e.EmpID='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "'", MYSQLI_ASSOC);
+		
+		$query2 = $this->db->executeQueryAndGetArray("SELECT * FROM employeebranches where EmpID='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "'", MYSQLI_ASSOC);
+		
+		foreach($query2 as $q){
+			$brs[]=$q['BrID'];
+		}
+		$Brid=implode(",",$brs);
+		$items = array();
+		foreach($query1 as $qu){
+			$items[] = array(
+				"OrgID" => $qu['OrgID'],
+				"JobTID" => $qu['JobTID'],
+				"DeptID" => $qu['DeptID'],
+				"EmpID" => $qu['EmpID'],
+				"EmpName" => $qu['EmpName'],
+				"EmailID" => $qu['EmailID'],
+				"Mobile" => $qu['Contact'],
+				"Gender" => $qu['Gender'],
+				"Address" => $qu['Address'],
+				"JobType" => $qu['JobType'],
+				"CreatedDate" => $qu['CreatedDate'],
+				"Status" => $qu['Status'],
+				"UpdatedDate" => $qu['UpdatedDate'],
+				"BrID" => $Brid
+			);
+		}
+		
+		$this->successMSG('Employee Data', $items);
 	}
 	
 	/*function updateemployee(){
