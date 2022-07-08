@@ -18,7 +18,7 @@ class WisAPI extends REST
 {
 	private $db;
 	private $appSecret = "dfhfhfi&9)jnd%sndn&565ggghGGdedj*nsn&jsdnjdnj";
-	private $jwtPassThroughRoutes = array("logout","test","addemployee","updateemployee");
+	private $jwtPassThroughRoutes = array("logout","test","addemployee");
 	private $logIndex = 0;
 	private $EmpID = 0;
 	private $EmailID = '';
@@ -346,6 +346,23 @@ class WisAPI extends REST
 	
 		$this->successMSG('Branches list', $query1);
 	}
+
+	function jobtitles()
+	{
+	    if ($this->get_request_method() != "GET") {
+			$this->errorMSG(406, "Wrong HTTP Method");
+		}
+		$OrgID = $this->_request['OrgID'];
+		if ($OrgID == '') {
+			$this->errorMSG(400, "Please enter Organization ID");
+		}
+		
+		$query1 = $this->db->executeQueryAndGetArray("SELECT OrgID,JobTID,JobTitle FROM jobtitle where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'", MYSQLI_ASSOC);
+				//echo $this->db->getLastSQLStatement();exit;
+		
+	
+		$this->successMSG('Job Titles list', $query1);
+	}
 	function departments()
 	{
 	    if ($this->get_request_method() != "GET") {
@@ -353,6 +370,8 @@ class WisAPI extends REST
 		}
 		$OrgID = $this->_request['OrgID'];
 		$BrID = $this->_request['BrID'];
+		$branches = explode(',',$BrID);
+		
 		if ($OrgID == '') {
 			$this->errorMSG(400, "Please enter Organization ID");
 		}
@@ -361,10 +380,11 @@ class WisAPI extends REST
 			$this->errorMSG(400, "Please enter Branch ID");
 		}
 
-		$query = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName FROM departments where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND BrID='" . mysqli_real_escape_string($this->db->mysql_link, $BrID) . "' AND ParentDept = 0 order by DeptID DESC", MYSQLI_ASSOC);
-		
-			//	echo $this->db->getLastSQLStatement();exit;
+		$query = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName FROM departments where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND BrID IN (".$BrID.") order by DeptID DESC", MYSQLI_ASSOC);
 			
+				//echo $this->db->getLastSQLStatement();exit;
+			/*$query = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName FROM departments where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND BrID IN (".$BrID.") AND ParentDept = 0 order by DeptID DESC", MYSQLI_ASSOC);
+
 			foreach ($query as $rec) {
 				$query1 = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName FROM departments WHERE ParentDept ='" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "'", MYSQLI_ASSOC);
 				//echo $this->db->getLastSQLStatement();echo "<br>";
@@ -381,8 +401,8 @@ class WisAPI extends REST
 					"DeptName" => $rec['DeptName'],
 					"Subdeparts" => $subdept
 				);
-			}
-			$data['data'] = $r;
+			}*/
+			$data['data'] = $query;
 			
 		$this->successMSG('Department list', $data);
 	}
@@ -419,19 +439,21 @@ class WisAPI extends REST
 
        // echo $this->EmpID;exit;
 		$EmpName = $this->_request['EmpName'];
+		$OrgID = $this->_request['OrgID'];
+		$BrID = $this->_request['BrID'];
 		$DeptID = $this->_request['DeptID'];
+		$JobTID = $this->_request['JobTID'];
 		$Email = $this->_request['Email'];
 		$Gender = $this->_request['Gender'];
 		$Mobile = $this->_request['Mobile'];
 		$DateOfJoining = $this->_request['DateOfJoining'];
 		$JobType = $this->_request['JobType'];
-		$City = $this->_request['City'];
 		$Address = $this->_request['Address'];
-
+		$branches = explode(",",$BrID);
 		if ($EmpName == '') {
 			$this->errorMSG(400, "Please enter Employee Name.");
 		}
-		if ($Email == '') {
+		if ($Email == '') {	
 			$this->errorMSG(400, "Please enter Email.");
 		} else {
 			if (filter_var($Email, FILTER_VALIDATE_EMAIL)) {
@@ -442,51 +464,51 @@ class WisAPI extends REST
 		if ($DeptID == '') {
 			$this->errorMSG(400, "Please enter Department.");
 		}
+		if ($BrID == '') {
+			$this->errorMSG(400, "Please enter Branches.");
+		}
+		if ($JobTID == '') {
+			$this->errorMSG(400, "Please enter Job Title.");
+		}
 		if ($Mobile == '') {
 			$this->errorMSG(400, "Please enter Mobile.");
 		}
 
 		$Mobile = '+91' . $Mobile;
 
-		if ($DateOfJoining == '') {
-			$this->errorMSG(400, "Please enter DateOfJoining.");
-		}
-
-		if ($JobType == '') {
-			$this->errorMSG(400, "Please enter JobType.");
-		}
-
-		if ($City == '') {
-			$this->errorMSG(400, "Please enter City.");
-		}
-
-		if ($Address == '') {
-			$this->errorMSG(400, "Please enter Address.");
-		}
 
 		if ($this->db->hasRecords("SELECT * FROM `employees` WHERE EmailID='" . mysqli_real_escape_string($this->db->mysql_link, $Email) . "' AND Status=1;")) {
 			$this->errorMSG(400, "Not Available. Email Already Registered");
 		} else {
 			try {
 
-				$OrgID = $this->db->getFirstRowFirstColumn("SELECT `OrgID` FROM `departments` WHERE `DeptID`='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "';");
-				//echo $this->db->getLastSQLStatement();exit;
+				//$OrgID = $this->db->getFirstRowFirstColumn("SELECT `OrgID` FROM `departments` WHERE `DeptID`='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "';");
+				
 
-				$this->db->executeQuery("INSERT INTO `employees`(`RoleID`,`EmpName`,`DeptID`, `OrgID`,  `Gender`, `EmailID`, `Password`, `Address`, `Contact`, `JobType`,`City`,`DateOfJoining`,`Status`,`CreatedBy`,`CreatedDate`,`UpdatedBy`,`UpdatedDate`) VALUES('2','" . mysqli_real_escape_string($this->db->mysql_link, $EmpName) . "',
+				$this->db->executeQuery("INSERT INTO `employees`(`RoleID`,`EmpName`,`DeptID`, `OrgID`,`JobTID`,`Gender`, `EmailID`, `Password`, `Address`, `Contact`, `JobType`,`DateOfJoining`,`Status`,`CreatedBy`,`CreatedDate`,`UpdatedBy`,`UpdatedDate`) VALUES('0','" . mysqli_real_escape_string($this->db->mysql_link, $EmpName) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "',
+				'" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "'
+				,
 				'" . mysqli_real_escape_string($this->db->mysql_link, $Gender) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $Email) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, md5("123456")) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $Address) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $Mobile) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $JobType) . "',
-				'" . mysqli_real_escape_string($this->db->mysql_link, $City) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $DateOfJoining) . "',
 				'1',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $this->EmpID) . "','" . date('Y-m-d H:i:s') . "','" . mysqli_real_escape_string($this->db->mysql_link, $this->EmpID) . "','" . date('Y-m-d H:i:s') . "')");
+				//echo $this->db->getLastSQLStatement();exit;
+				$empid = $this->db->getLastInsertID();
+				if(!empty($branches)){
+					for($i=0;$i<count($branches);$i++){
+						
+						$this->db->executeQuery("INSERT INTO `employeebranches`(`EmpID`,`BrID`,`CreatedDate`) VALUES('" . mysqli_real_escape_string($this->db->mysql_link, $empid) . "','" . mysqli_real_escape_string($this->db->mysql_link, $branches[$i]) . "','" . date('Y-m-d H:i:s') . "')");
+					}
+				}
 				$this->successMSG('Employee Added Succesfully..!', '');
-				//$userIndex = $this->db->getLastInsertID();
+				
 			} catch (Exception $e) {
 				$this->db->rollbackTransaction();
 				$this->errorMSG(400, $e->getMessage());
@@ -494,12 +516,12 @@ class WisAPI extends REST
 		}
 	}
 	
-	function updateemployee(){
+	/*function updateemployee(){
 		if ($this->get_request_method() != "POST") {
 			$this->errorMSG(406, "Wrong Method");
 		}
-
-       // echo $this->EmpID;exit;
+	
+	   // echo $this->EmpID;exit;
 	   //	$EmpID
 		$EmpName = $this->_request['EmpName'];
 		$DeptID = $this->_request['DeptID'];
@@ -510,7 +532,7 @@ class WisAPI extends REST
 		$JobType = $this->_request['JobType'];
 		$City = $this->_request['City'];
 		$Address = $this->_request['Address'];
-
+	
 		if ($EmpName == '') {
 			$this->errorMSG(400, "Please enter Employee Name.");
 		}
@@ -528,33 +550,33 @@ class WisAPI extends REST
 		if ($Mobile == '') {
 			$this->errorMSG(400, "Please enter Mobile.");
 		}
-
+	
 		$Mobile = '+91' . $Mobile;
-
+	
 		if ($DateOfJoining == '') {
 			$this->errorMSG(400, "Please enter DateOfJoining.");
 		}
-
+	
 		if ($JobType == '') {
 			$this->errorMSG(400, "Please enter JobType.");
 		}
-
+	
 		if ($City == '') {
 			$this->errorMSG(400, "Please enter City.");
 		}
-
+	
 		if ($Address == '') {
 			$this->errorMSG(400, "Please enter Address.");
 		}
-
+	
 		if ($this->db->hasRecords("SELECT * FROM `employees` WHERE EmailID='" . mysqli_real_escape_string($this->db->mysql_link, $Email) . "' AND Status=1;")) {
 			$this->errorMSG(400, "Not Available. Email Already Registered");
 		} else {
 			try {
-
+	
 				$OrgID = $this->db->getFirstRowFirstColumn("SELECT `OrgID` FROM `departments` WHERE `DeptID`='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "';");
 				//echo $this->db->getLastSQLStatement();exit;
-
+	
 				$this->db->executeQuery("INSERT INTO `employees`(`RoleID`,`EmpName`,`DeptID`, `OrgID`,  `Gender`, `EmailID`, `Password`, `Address`, `Contact`, `JobType`,`City`,`DateOfJoining`,`Status`,`CreatedBy`,`CreatedDate`,`UpdatedBy`,`UpdatedDate`) VALUES('2','" . mysqli_real_escape_string($this->db->mysql_link, $EmpName) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "',
@@ -575,8 +597,8 @@ class WisAPI extends REST
 				$this->errorMSG(400, $e->getMessage());
 			}
 		}
-	}
-
+	}*/
+	
 	
 	
 	/*
