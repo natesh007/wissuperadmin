@@ -14,6 +14,12 @@
 			<!-- Main content -->
 			<section class="content">
 				<div class="container-fluid">
+					<?php if (session('error')) : ?>
+						<div class="alert alert-danger alert-dismissible">
+							<?= session('error') ?>
+							<button type="button" class="close" data-dismiss="alert"><span>×</span></button>
+						</div>
+					<?php endif ?>
 					<!-- Main row -->
 					<div class="card">
 						<div class="card-body">
@@ -44,7 +50,7 @@
 									<div class="form-group row">
 										<div class="col-md-6">
 											<label for="BrID">Branch<strong class="help-block">*</strong></label>
-											<select class="selectpicker form-control" name="BrID[]" id="BrID" multiple data-live-search="true">
+											<select class="selectpicker form-control" name="BrID[]" id="BrID" multiple data-live-search="true" required>
 													<!-- <option disabled selected value hidden>Select Multiple Branches</option> -->
 													<?php foreach($branches as $branch){
 														echo '<option value="' . $branch['BrID'] . '"';
@@ -165,7 +171,9 @@
 		<style>
 		.bootstrap-select{background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid #ced4da!important;height:auto}</style>
+    border: 1px solid #ced4da!important;height:auto}
+	#BrID-error{position: absolute;
+    top: 40px;}</style>
 		<script>
 			$('.datepicker').datepicker({
 				format: 'yyyy-mm-dd'

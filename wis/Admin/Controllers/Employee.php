@@ -149,7 +149,7 @@ class Employee extends BaseController
 		$data['error']="";
 		if ($this->request->getMethod() == 'post') {
 			if($this->request->getVar('EmailID')!=""){
-				$exist_emp = $EmployeeModel->where('EmailID', $this->request->getVar('EmailID'))->first();
+				$exist_emp = $EmployeeModel->where('EmailID',$this->request->getVar('EmailID'))->first();
 				if(!$exist_emp){
 					$data = [
 						'RoleID' => '',
@@ -218,41 +218,89 @@ class Employee extends BaseController
 		}
 		$data['selbranches'] = $selbranches;
 		if ($this->request->getMethod() == 'post') {
-			$data = [
-				'RoleID' => '',
-                'EmpName' => $this->request->getVar('EmpName'),                
-				'DeptID' => $this->request->getVar('ParentDept'),  
-				'OrgID' => $this->request->getVar('OrgID'), 
-				'JobTID' => $this->request->getVar('JobTID'),         
-				'Gender' => $this->request->getVar('Gender'),
-				'EmailID' => $this->request->getVar('EmailID'),
-                'Password' => md5('123456'),
-				'Address' => $this->request->getVar('Address'),
-				'Contact' => $this->request->getVar('Contact'),
-				'JobType' => $this->request->getVar('JobType'),
-				'City' => '',
-				'DateOfJoining' => $this->request->getVar('DateOfJoining'),
-                'Doc' => '',
-                'ProfilePic' =>'',
-			];
-			
-            if ($this->request->getVar('ParentDept') != '') {
-				$departmentdata['ParentDept'] = $this->request->getVar('ParentDept');
-			}
-			$EmployeeModel->update($id, $data);
-			$EmployeeBranchesModel->where('EmpID', $id)->delete();
-			$BrID=$this->request->getVar('BrID');
-			if(!empty($BrID)){
-				for($i=0;$i<count($BrID);$i++){				
-					$data1 = [
-						'EmpID' => $id,  
-						'BrID' => $BrID[$i]						
-					];			
-					$save1 = $EmployeeBranchesModel->insert($data1);
+			if($data['employee']['EmailID']!=$this->request->getVar('EmailID')){
+				$exist_emp = $EmployeeModel->where('EmailID',$this->request->getVar('EmailID'))->first();
+				if($exist_emp){
+					$msg = 'Email ID Already Exist, Please Enter Another Email ID!';
+					return redirect()->to(base_url('admin/employees/edit_employee/'.$id))->with('error', $msg);
+				}else{
+					$data = [
+						'RoleID' => '',
+						'EmpName' => $this->request->getVar('EmpName'),                
+						'DeptID' => $this->request->getVar('ParentDept'),  
+						'OrgID' => $this->request->getVar('OrgID'), 
+						'JobTID' => $this->request->getVar('JobTID'),         
+						'Gender' => $this->request->getVar('Gender'),
+						'EmailID' => $this->request->getVar('EmailID'),
+						'Password' => md5('123456'),
+						'Address' => $this->request->getVar('Address'),
+						'Contact' => $this->request->getVar('Contact'),
+						'JobType' => $this->request->getVar('JobType'),
+						'City' => '',
+						'DateOfJoining' => $this->request->getVar('DateOfJoining'),
+						'Doc' => '',
+						'ProfilePic' =>'',
+					];
+					
+					if ($this->request->getVar('ParentDept') != '') {
+						$departmentdata['ParentDept'] = $this->request->getVar('ParentDept');
+					}
+					$EmployeeModel->update($id, $data);
+					$EmployeeBranchesModel->where('EmpID', $id)->delete();
+					$BrID=$this->request->getVar('BrID');
+					if(!empty($BrID)){
+						for($i=0;$i<count($BrID);$i++){				
+							$data1 = [
+								'EmpID' => $id,  
+								'BrID' => $BrID[$i]						
+							];			
+							$save1 = $EmployeeBranchesModel->insert($data1);
+						}
+					}
+					$msg = 'Data Updated Successfully';
+					return redirect()->to(base_url('admin/employees'))->with('msg', $msg);
 				}
+			}else{
+			
+				
+
+				
+				$data = [
+					'RoleID' => '',
+					'EmpName' => $this->request->getVar('EmpName'),                
+					'DeptID' => $this->request->getVar('ParentDept'),  
+					'OrgID' => $this->request->getVar('OrgID'), 
+					'JobTID' => $this->request->getVar('JobTID'),         
+					'Gender' => $this->request->getVar('Gender'),
+					'EmailID' => $this->request->getVar('EmailID'),
+					'Password' => md5('123456'),
+					'Address' => $this->request->getVar('Address'),
+					'Contact' => $this->request->getVar('Contact'),
+					'JobType' => $this->request->getVar('JobType'),
+					'City' => '',
+					'DateOfJoining' => $this->request->getVar('DateOfJoining'),
+					'Doc' => '',
+					'ProfilePic' =>'',
+				];
+				
+				if ($this->request->getVar('ParentDept') != '') {
+					$departmentdata['ParentDept'] = $this->request->getVar('ParentDept');
+				}
+				$EmployeeModel->update($id, $data);
+				$EmployeeBranchesModel->where('EmpID', $id)->delete();
+				$BrID=$this->request->getVar('BrID');
+				if(!empty($BrID)){
+					for($i=0;$i<count($BrID);$i++){				
+						$data1 = [
+							'EmpID' => $id,  
+							'BrID' => $BrID[$i]						
+						];			
+						$save1 = $EmployeeBranchesModel->insert($data1);
+					}
+				}
+				$msg = 'Data Updated Successfully';
+				return redirect()->to(base_url('admin/employees'))->with('msg', $msg);
 			}
-			$msg = 'Data Updated Successfully';
-			return redirect()->to(base_url('admin/employees'))->with('msg', $msg);
 		}
 		echo view('Modules\Admin\Views\common\header');
 		echo view('Modules\Admin\Views\employee_edit_form', $data);

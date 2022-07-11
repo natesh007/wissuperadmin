@@ -48,8 +48,8 @@
 									<div class="form-group row">
 										<div class="col-md-6">
 												<label for="BrID">Branch<strong class="help-block">*</strong></label>
-												<select class="selectpicker form-control" multiple data-live-search="true" name="BrID[]" id="BrID">
-													<!-- <option disabled selected value hidden>Select Multiple Branches</option> -->
+												<select class="selectpicker form-control" multiple data-live-search="true" name="BrID[]" id="BrID" required>
+													<option selected value>Select Multiple Branches</option>
 													<?php /*foreach($branches as $branch){
 														echo '<option value="' . $branch['BrID'] . '">' . $branch['BrName'] . '</option>' ;
 													}*/ ?>
@@ -177,7 +177,9 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 		<style>.bootstrap-select{background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid #ced4da!important;height:auto}</style>
+    border: 1px solid #ced4da!important;height:auto}
+	#BrID-error{position: absolute;
+    top: 40px;}</style>
 		<script>
 			$('.datepicker').datepicker({
 				format: 'yyyy-mm-dd'
@@ -289,6 +291,8 @@
                     $('#ParentDept').val('');
                 }
             });
+
+	
 		</script>
 	</body>
 </html>
