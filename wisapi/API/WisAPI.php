@@ -440,7 +440,7 @@ class WisAPI extends REST
 				$r[] = array(
 					"DeptID" =>  $q['DeptID'],
 					"DeptName" => $q['DeptName'],
-					"Employees" => $res
+					"Employees" => $res2
 				);
 
 		}
