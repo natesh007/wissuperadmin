@@ -185,7 +185,7 @@
 					EmpName: { required: true },
 					OrgID: { required: true },
 					JobTID: { required: true },
-					BrID: { required: true },
+					"BrID[]": { required: true },
 					EmailID: { required: true,
 								email: true},
 					ParentDept: {required: true},
@@ -205,7 +205,7 @@
 						number: "Please enter valid mobile number"
 					},
 					OrgID: "Please enter Organization",
-					BrID: "Please enter Brach",
+					"BrID[]": "Please enter Brach",
 					JobTID: "Please enter Job Title",
 				},
 				submitHandler: function(form) {
