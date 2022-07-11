@@ -435,7 +435,7 @@ class WisAPI extends REST
 				$query2 = $this->db->executeQueryAndGetArray("SELECT e.OrgID,e.JobTID,e.DeptID,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.Password,e.Gender,e.Address,e.JobType,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate from employees e left join departments d on d.DeptID = e.DeptID where d.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $q['DeptID']) . "' AND e.JobTID = '" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "' AND e.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "'", MYSQLI_ASSOC);
 			}
 
-			$res = $query2;
+			$res2 = $query2;
 			
 				$r[] = array(
 					"DeptID" =>  $q['DeptID'],
