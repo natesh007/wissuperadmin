@@ -409,6 +409,7 @@ class WisAPI extends REST
 		$OrgID = $this->OrgID;		
 	    $DeptName = $this->_request['DeptName'];
 		$BrID = $this->_request['BrID'];
+		$SortType = $this->_request['SortType'];//branch,department
 		//$query = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName FROM departments where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND BrID IN (".$BrID.") order by DeptID DESC", MYSQLI_ASSOC);
 
         $sql = "SELECT d.BrID,d.DeptID,d.DeptName,d.ParentDept,b.BrName,d.Status,dd.DeptName as ParentName FROM departments d left join departments dd on dd.DeptID = d.ParentDept left join branches b on b.BrId = d.BrId  where d.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'";
@@ -419,6 +420,14 @@ class WisAPI extends REST
 		}
 		if($BrID != ''){
 			$sql.="AND d.BrID = '" . mysqli_real_escape_string($this->db->mysql_link, $BrID) . "' ";
+		}
+		if($SortType != ''){
+			if($SortType == 'branch'){
+				$sql.=" order by b.BrName ASC";
+			}
+			if($SortType == 'department'){
+				$sql.=" order by d.DeptName ASC";
+			}
 		}
 
 		//echo $sql;exit;
@@ -469,35 +478,39 @@ class WisAPI extends REST
 				$sql.="SELECT * FROM ('.$sql.') AS N WHERE N.JobTID = '" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "'";
 			}*/
 			if($JobTID != ''){
-				$sql = "SELECT * FROM((SELECT e.EmpID,e.EmpName,e.DeptID,e.JobTID,e.Gender,e.EmailID,e.Address,e.Contact,e.JobType,e.DateOfJoining,e.PreviousExp,e.Status,e.CreatedDate,e.UpdatedDate,d.DeptName,j.JobTitle from employees e left join departments d on d.DeptID = e.DeptID left join jobtitle j on j.JobTID = e.JobTID where e.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "') UNION (SELECT e.EmpID,e.EmpName,e.DeptID,e.JobTID,e.Gender,e.EmailID,e.Address,e.Contact,e.JobType,e.DateOfJoining,e.PreviousExp,e.Status,e.CreatedDate,e.UpdatedDate,d.DeptName,j.JobTitle FROM employees e left join departments d on d.DeptID = e.DeptID left join jobtitle j on j.JobTID = e.JobTID WHERE e.DeptID IN(SELECT d.DeptID FROM departments d WHERE d.ParentDept = '" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "'))) AS N WHERE N.JobTID = '" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "'";
+				$sql = "SELECT * FROM((SELECT e.EmpID,e.EmpName,e.DeptID,e.JobTID,e.Gender,e.EmailID,e.Address,e.Contact,e.JobType,e.DateOfJoining,ex.Experience as exp,ex.Exp_Desc as PreviousExperience,e.Status,e.CreatedDate,e.UpdatedDate,d.DeptName,j.JobTitle from employees e left join departments d on d.DeptID = e.DeptID left join jobtitle j on j.JobTID = e.JobTID left join experience ex on ex.ExeID = e.PreviousExp where e.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "') UNION (SELECT e.EmpID,e.EmpName,e.DeptID,e.JobTID,e.Gender,e.EmailID,e.Address,e.Contact,e.JobType,e.DateOfJoining,ex.Experience as exp,ex.Exp_Desc as PreviousExperience,e.Status,e.CreatedDate,e.UpdatedDate,d.DeptName,j.JobTitle from employees e left join departments d on d.DeptID = e.DeptID left join jobtitle j on j.JobTID = e.JobTID left join experience ex on ex.ExeID = e.PreviousExp WHERE e.DeptID IN(SELECT d.DeptID FROM departments d WHERE d.ParentDept = '" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "'))) AS N WHERE N.JobTID = '" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "'";
 				/*if($Exp != ''){
 					$sql.=" AND N.DateOfJoining BETWEEN  CURDATE() - INTERVAL 2 YEAR AND CURDATE()";
 				}
 				echo $sql;exit;*/
 				$query1 = $this->db->executeQueryAndGetArray($sql, MYSQLI_ASSOC);
 			}else{
-				$query1 = $this->db->executeQueryAndGetArray("(SELECT e.EmpID,e.EmpName,e.DeptID,e.JobTID,e.Gender,e.EmailID,e.Address,e.Contact,e.JobType,e.DateOfJoining,e.PreviousExp,e.Status,e.CreatedDate,e.UpdatedDate,d.DeptName,j.JobTitle from employees e left join departments d on d.DeptID = e.DeptID left join jobtitle j on j.JobTID = e.JobTID where e.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "') UNION (SELECT e.EmpID,e.EmpName,e.DeptID,e.JobTID,e.Gender,e.EmailID,e.Address,e.Contact,e.JobType,e.DateOfJoining,e.PreviousExp,e.Status,e.CreatedDate,e.UpdatedDate,d.DeptName,j.JobTitle FROM employees e left join departments d on d.DeptID = e.DeptID left join jobtitle j on j.JobTID = e.JobTID WHERE e.DeptID IN(SELECT d.DeptID FROM departments d WHERE d.ParentDept = '" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "'))", MYSQLI_ASSOC);
+				$query1 = $this->db->executeQueryAndGetArray("(SELECT e.EmpID,e.EmpName,e.DeptID,e.JobTID,e.Gender,e.EmailID,e.Address,e.Contact,e.JobType,e.DateOfJoining,ex.Experience as exp,ex.Exp_Desc as PreviousExperience,e.Status,e.CreatedDate,e.UpdatedDate,d.DeptName,j.JobTitle from employees e left join departments d on d.DeptID = e.DeptID left join jobtitle j on j.JobTID = e.JobTID left join experience ex on ex.ExeID = e.PreviousExp where e.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "') UNION (SELECT e.EmpID,e.EmpName,e.DeptID,e.JobTID,e.Gender,e.EmailID,e.Address,e.Contact,e.JobType,e.DateOfJoining,ex.Experience as exp,ex.Exp_Desc as PreviousExperience,e.Status,e.CreatedDate,e.UpdatedDate,d.DeptName,j.JobTitle from employees e left join departments d on d.DeptID = e.DeptID left join jobtitle j on j.JobTID = e.JobTID left join experience ex on ex.ExeID = e.PreviousExp WHERE e.DeptID IN(SELECT d.DeptID FROM departments d WHERE d.ParentDept = '" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "'))", MYSQLI_ASSOC);
 			}
 			//$query1 = $this->db->executeQueryAndGetArray($sql, MYSQLI_ASSOC);
 			//echo $this->db->getLastSQLStatement();exit;
-			/*$rec1=[];
+			
+
+			$ri=[];
 			foreach($query1 as $rec1){
-				//$rec1[]=$rec1;
 				if($rec1['DateOfJoining']!="0000-00-00"){
 					$origin = new DateTime($rec1['DateOfJoining']);
 					$target = new DateTime(date('Y-m-d'));
 					$interval = $origin->diff($target);
 					if($interval->format('%y')!=0){
 						$rec1['Experience']=$interval->format('%y Year');
+						$rec1['CurrentExperience']=$interval->format('%y');
 					}else if($interval->format('%m')!=0){
 						$rec1['Experience']=$interval->format('%m Month');
+						$rec1['CurrentExperience']=$interval->format('%m');
 					}else{
-						$rec1['Experience']=$interval->format('%d Days');
+						$rec1['Experience']=0;
 					}
 				}else{
 					$rec1['Experience'] = "0";
 				}
-			}*/
+				$ri[] = $rec1;
+			}
 
 			
 			
@@ -505,7 +518,7 @@ class WisAPI extends REST
 				$data[]=array(
 					"DeptID" => $rec['DeptID'],
 					"DeptName" => $rec['DeptName'],
-					"Employees" => $query1
+					"Employees" => $ri
 				);
 			}
 			
@@ -916,10 +929,10 @@ class WisAPI extends REST
 	
 	function experiencelist()
 	{
-		$query1 = $this->db->executeQueryAndGetArray("SELECT ExeID,Experience FROM experience", MYSQLI_ASSOC);
+		$query1 = $this->db->executeQueryAndGetArray("SELECT Exp_Desc,ExeID,Experience FROM experience", MYSQLI_ASSOC);
 		//"1"=>"Order Created","2"=>"In-Progress","3"=>"Ready","4"=>"Delivered"
 		foreach ($query1 as $q) {
-			$items[$q['ExeID']] = $q['Experience'];
+			$items[$q['ExeID']] = $q['Exp_Desc'];
 		}
 		$this->successMSG('Experience list', $items);
 	}
