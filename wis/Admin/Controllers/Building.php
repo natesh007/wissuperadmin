@@ -2,6 +2,8 @@
 namespace Modules\Admin\Controllers;
 
 use Modules\Admin\Models\BuildingModel;
+use Modules\Admin\Models\FloorModel;
+use Modules\Admin\Models\RoomModel;
 use Modules\Admin\Models\AdminsModel;
 
 class Building extends BaseController
@@ -110,17 +112,50 @@ class Building extends BaseController
     public function add_building()
 	{
 		$BuildingModel = new BuildingModel();
+		$FloorModel = new FloorModel();
+		$RoomModel = new RoomModel();
         $AdminsModel = new AdminsModel();
         //echo $session->get('AID');exit;
         $data['organizations'] = $AdminsModel->getmasterdata('organization');
         //echo "<pre>";print_r($data['building_types'] );exit;
 		if ($this->request->getMethod() == 'post') {
-			$data = [
+			//echo "<pre>";print_r($this->request->getVar());
+			
+			$buildingdata = [
 				'OrgID' => $this->request->getVar('OrgID'),  
 				'BuildingName' => $this->request->getVar('BuildingName'),
+				'BrID' => $this->request->getVar('BrID'),
                 'Status' => 1
 			];
-			$save = $BuildingModel->insert($data);
+			$buildingsave = $BuildingModel->insert($buildingdata);
+			$buildingid = $BuildingModel->getInsertID();
+
+			$floors = $this->request->getVar('FloorName');
+			for($i=1;$i<=count($floors);$i++){
+				$floordata = [
+					'OrgID' => $this->request->getVar('OrgID'),	
+					'BrID' => $this->request->getVar('BrID'),
+					'BID' => $buildingid,
+					'FloorName' => $this->request->getVar('FloorName')[$i],
+					'Status' => 1
+				];
+				$floorsave = $FloorModel->insert($floordata);
+				$floorid = $FloorModel->getInsertID();
+				$rooms = $this->request->getVar('RoomName');
+				for($j=0;$j<count($rooms[$i]);$j++){
+					$roomdata = [
+						'OrgID' => $this->request->getVar('OrgID'),	
+						'BrID' => $this->request->getVar('BrID'),
+						'BID' => $buildingid,
+						'FID' => $floorid,
+						'RoomName' => $this->request->getVar('RoomName')[$i][$j],
+						'Status' => 1
+					];
+					$roomsave = $RoomModel->insert($roomdata);
+					//$floorid = $FloorModel->getInsertID();
+					
+				}				
+			}
 			$msg = 'Data Saved Successfully';
 			return redirect()->to(base_url('admin/buildings'))->with('msg', $msg);
 		}

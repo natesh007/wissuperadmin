@@ -499,10 +499,8 @@ class WisAPI extends REST
 					$interval = $origin->diff($target);
 					if($interval->format('%y')!=0){
 						$rec1['Experience']=$interval->format('%y Year');
-						$rec1['CurrentExperience']=$interval->format('%y');
 					}else if($interval->format('%m')!=0){
 						$rec1['Experience']=$interval->format('%m Month');
-						$rec1['CurrentExperience']=$interval->format('%m');
 					}else{
 						$rec1['Experience']=0;
 					}

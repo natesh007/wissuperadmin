@@ -50,12 +50,12 @@
 									<div class="MainFloor">
 										<div class="form-group row">
 											<div class="col-md-4">
-												<input type="text" name="FloorName[]" class="form-control" placeholder="Enter Floor Name" autocomplete="off">
+												<input type="text" name="FloorName[1]" class="form-control" placeholder="Enter Floor Name" autocomplete="off">
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-3 mb-2 MainRoom1 d-flex">
-												<input type="text" name="RoomName[]" class="form-control RoomName" placeholder="Enter Room Name" autocomplete="off"/>
+												<input type="text" name="RoomName[1][]" class="form-control RoomName" placeholder="Enter Room Name" autocomplete="off"/>
 											</div>
 											<div class="col-md-1 my-auto">
 												<button type="button" class="btn btn-sm btn-success" onclick="AddMoreRooms(1)"><span class="fa fa-plus"></span> Add Room</button>
@@ -84,7 +84,7 @@
 		<input type="hidden" value="BuildingsTab" id="CurrentPage" />
 		<?= view('Modules\Admin\Views\common\footer'); ?>
 		<script>
-			$("#add_building").submit(function(event) {
+			/*$("#add_building").submit(function(event) {
 				var BuildingName = $('#BuildingName').val();
 				if(BuildingName == '')
 				{
@@ -95,7 +95,7 @@
 				else{
 					$('#name_error').html();
 				}
-			});
+			});*/
 
 			$('#OrgID').change(function(){
                 var OrgID = $('#OrgID').val();
@@ -126,11 +126,11 @@
 
 			// Add More Rooms
 			function AddMoreRooms(num){
-				$('<div class="col-md-3 mb-2 MainRoom'+num+' d-flex RoomeBlk"><input type="text" name="RoomName[]" class="form-control RoomName" placeholder="Enter Room Name" autocomplete="off" style="width: 90%;"/><button type="button" class="btn btn-sm btn-danger RemoveRoom"><span class="fa fa-minus"></span></button></div>').insertAfter($('.MainRoom'+num+'').last());
+				$('<div class="col-md-3 mb-2 MainRoom'+num+' d-flex RoomeBlk"><input type="text" name="RoomName['+num+'][]" class="form-control RoomName" placeholder="Enter Room Name" autocomplete="off" style="width: 90%;"/><button type="button" class="btn btn-sm btn-danger RemoveRoom"><span class="fa fa-minus"></span></button></div>').insertAfter($('.MainRoom'+num+'').last());
 			}
 			// Add More Floors
 			function AddMoreFloors(num){
-				$('<div class="MainFloor"><div class="form-group row"><div class="col-md-4"><input type="text" name="FloorName[]" class="form-control" placeholder="Enter Floor Name" autocomplete="off"></div></div><div class="row"><div class="col-md-3 mb-2 MainRoom'+num+'"><input type="text" name="RoomName[]" class="form-control" placeholder="Enter Room Name" autocomplete="off"/></div><div class="col-md-1 my-auto"><button type="button" class="btn btn-sm btn-success" onclick="AddMoreRooms('+num+')"><span class="fa fa-plus"></span> Add Room</button></div></div><div class="col-md-12 text-right"><button type="button" class="btn btn-sm btn-danger RemoveFloor"><span class="fa fa-minus"></span> Remove Floor</button></div><hr></div>').insertAfter($('.MainFloor').last());
+				$('<div class="MainFloor"><div class="form-group row"><div class="col-md-4"><input type="text" name="FloorName['+num+']" class="form-control" placeholder="Enter Floor Name" autocomplete="off"></div></div><div class="row"><div class="col-md-3 mb-2 MainRoom'+num+'"><input type="text" name="RoomName['+num+'][]" class="form-control" placeholder="Enter Room Name" autocomplete="off"/></div><div class="col-md-1 my-auto"><button type="button" class="btn btn-sm btn-success" onclick="AddMoreRooms('+num+')"><span class="fa fa-plus"></span> Add Room</button></div></div><div class="col-md-12 text-right"><button type="button" class="btn btn-sm btn-danger RemoveFloor"><span class="fa fa-minus"></span> Remove Floor</button></div><hr></div>').insertAfter($('.MainFloor').last());
 				$("#AddMoreFloorsBtn").attr("onclick", "AddMoreFloors("+(num+1)+")");
 			}
 			// remove row
@@ -139,6 +139,28 @@
 			});
 			$(document).on('click', '.RemoveFloor', function () {	
 				$(this).closest('div.MainFloor').remove();
+			});
+
+
+			$('#add_building').validate({
+				ignore: [],
+				rules: {
+					OrgID: { required: true },
+					BrID: { required: true },
+					BuildingName: { required: true },
+					"FloorName[1]": { required: true },
+					"RoomName[1][]": { required: true},
+				},
+				messages: {
+					OrgID: "Please select Organization",
+					BrID: "Please select Branch",
+					BuildingName:"Please enter Building Name",
+					"FloorName[1]": "Please enter Floor Name",
+					"RoomName[1][]": "Please enter Room Name",
+				},
+				submitHandler: function(form) {
+					return true;
+				}
 			});
 		</script>
 	</body>

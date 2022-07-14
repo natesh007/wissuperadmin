@@ -6,7 +6,7 @@ use Modules\Admin\Models\UtilModel;
 class BuildingModel extends Model {
     protected $table='building';
     protected $primaryKey='BID';
-    protected $allowedFields = ['OrgID','BuildingName', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+    protected $allowedFields = ['OrgID','BuildingName','BrID','Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
