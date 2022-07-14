@@ -16,7 +16,7 @@ class WisAPI extends REST
 {
 	private $db;
 	private $appSecret = "dfhfhfi&9)jnd%sndn&565ggghGGdedj*nsn&jsdnjdnj";
-	private $jwtPassThroughRoutes = array("logout","test","editemployee","addemployee","employees");
+	private $jwtPassThroughRoutes = array("logout","test","editemployee","addemployee","employees","alldepartments","branches","adddepartment","editdepartment","departments","jobtitles");
 	private $logIndex = 0;
 	private $EmpID = 0;
 	private $EmailID = '';
@@ -216,8 +216,9 @@ class WisAPI extends REST
 		// Input validations
 		if (!empty($email) and !empty($password)) {
 			if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-				$sql = "SELECT e.OrgID,e.JobTID,e.DeptID,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.Password,e.Gender,e.Address,e.JobType,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate FROM employees as e LEFT JOIN roles as r
-				ON r.RoleID = e.RoleID WHERE e.EmailID = '" . mysqli_real_escape_string($this->db->mysql_link, $email) . "' AND e.Status=1";
+				$sql = "SELECT e.OrgID,e.JobTID,e.DeptID,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.Password,e.Gender,e.Address,e.JobType,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate,e.DateOfJoining,e.PreviousExp,o.OrgName FROM employees as e LEFT JOIN roles as r
+				ON r.RoleID = e.RoleID LEFT JOIN organization as o
+				ON o.OrgID = e.OrgID WHERE e.EmailID = '" . mysqli_real_escape_string($this->db->mysql_link, $email) . "' AND e.Status=1";
 				$this->db->executeQuery($sql);
 				
 				//echo $this->db->getLastSQLStatement();exit;
@@ -335,10 +336,8 @@ class WisAPI extends REST
 	    if ($this->get_request_method() != "POST") {
 			$this->errorMSG(406, "Wrong HTTP Method");
 		}
-		$OrgID = $this->_request['OrgID'];
-		if ($OrgID == '') {
-			$this->errorMSG(400, "Please enter Organization ID");
-		}
+		$OrgID = $this->OrgID;
+		
 		
 		$query1 = $this->db->executeQueryAndGetArray("SELECT b.BrID,b.BrName,b.Address,b.BrLangitude,b.BrLatitude,b.Status,b.UpdatedBy,b.UpdatedDate,o.OrgName,o.OrgID FROM branches b left join organization o on o.OrgID=b.OrgID where b.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'", MYSQLI_ASSOC);
 			//	echo $this->db->getLastSQLStatement();exit;
@@ -352,10 +351,8 @@ class WisAPI extends REST
 	    if ($this->get_request_method() != "POST") {
 			$this->errorMSG(406, "Wrong HTTP Method");
 		}
-		$OrgID = $this->_request['OrgID'];
-		if ($OrgID == '') {
-			$this->errorMSG(400, "Please enter Organization ID");
-		}
+		$OrgID = $this->OrgID;
+		
 		
 		$query1 = $this->db->executeQueryAndGetArray("SELECT OrgID,JobTID,JobTitle FROM jobtitle where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'", MYSQLI_ASSOC);
 				//echo $this->db->getLastSQLStatement();exit;
@@ -368,22 +365,20 @@ class WisAPI extends REST
 	    if ($this->get_request_method() != "POST") {
 			$this->errorMSG(406, "Wrong HTTP Method");
 		}
-		$OrgID = $this->_request['OrgID'];
+		//$OrgID = $this->_request['OrgID'];
+		$OrgID = $this->OrgID;
 		$BrID = $this->_request['BrID'];
 		$branches = explode(',',$BrID);
 		
-		if ($OrgID == '') {
-			$this->errorMSG(400, "Please enter Organization ID");
-		}
 		
 		if ($BrID == '') {
 			$this->errorMSG(400, "Please enter Branch ID");
 		}
 
-		$query = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName FROM departments where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND BrID IN (".$BrID.") order by DeptID DESC", MYSQLI_ASSOC);
+		$query = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName FROM departments where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND BrID IN (".$BrID.")  AND ParentDept = '0' order by DeptID DESC", MYSQLI_ASSOC);
 			
 				//echo $this->db->getLastSQLStatement();exit;
-			/*$query = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName FROM departments where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND BrID IN (".$BrID.") AND ParentDept = 0 order by DeptID DESC", MYSQLI_ASSOC);
+			//$query = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName FROM departments where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND BrID IN (".$BrID.") AND ParentDept = 0 order by DeptID DESC", MYSQLI_ASSOC);
 
 			foreach ($query as $rec) {
 				$query1 = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName FROM departments WHERE ParentDept ='" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "'", MYSQLI_ASSOC);
@@ -401,12 +396,203 @@ class WisAPI extends REST
 					"DeptName" => $rec['DeptName'],
 					"Subdeparts" => $subdept
 				);
-			}*/
-			$data['data'] = $query;
+			}
+		//	$data['data'] = $query;
 			
-		$this->successMSG('Department list', $data);
+		$this->successMSG('Department list', $r);
 	}
-	function employees()
+	function alldepartments()
+	{
+	    if ($this->get_request_method() != "POST") {
+			$this->errorMSG(406, "Wrong HTTP Method");
+		}
+		$OrgID = $this->OrgID;		
+	    $DeptName = $this->_request['DeptName'];
+		$BrID = $this->_request['BrID'];
+		//$query = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName FROM departments where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND BrID IN (".$BrID.") order by DeptID DESC", MYSQLI_ASSOC);
+
+        $sql = "SELECT d.BrID,d.DeptID,d.DeptName,d.ParentDept,b.BrName,d.Status,dd.DeptName as ParentName FROM departments d left join departments dd on dd.DeptID = d.ParentDept left join branches b on b.BrId = d.BrId  where d.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'";
+        
+		//$sql = "SELECT d.BrID,d.DeptID,d.DeptName,d.ParentDept,dd.DeptName as ParentName,b.BrName,d.Status FROM departments d left join departments dd on dd.ParentDept = d.DeptID left join branches b on b.BrId = d.BrId  where d.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'";
+		if($DeptName != ''){
+			$sql.="AND d.DeptName like '%". $DeptName . "%'";
+		}
+		if($BrID != ''){
+			$sql.="AND d.BrID = '" . mysqli_real_escape_string($this->db->mysql_link, $BrID) . "' ";
+		}
+
+		//echo $sql;exit;
+		$query = $this->db->executeQueryAndGetArray($sql, MYSQLI_ASSOC);
+		
+			//echo $this->db->getLastSQLStatement();exit;
+			/*foreach ($query as $rec) {
+				$query1 = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName FROM departments WHERE ParentDept ='" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "'", MYSQLI_ASSOC);
+				//echo $this->db->getLastSQLStatement();echo "<br>";
+				$ri = [];
+				foreach ($query1 as $rec1) {
+					$ri[] = array(
+					"DeptID" =>  $rec1['DeptID'],
+					"DeptName" => $rec1['DeptName']
+					);
+				}
+				$subdept = $ri;
+				$r[] = array(
+					"DeptID" =>  $rec['DeptID'],
+					"DeptName" => $rec['DeptName'],
+					"Subdeparts" => $subdept
+				);
+			}
+			$data['data'] = $r;*/
+			
+		$this->successMSG('Department list', $query);
+	}
+
+	function employees(){
+		if ($this->get_request_method() != "POST") {
+			$this->errorMSG(406, "Wrong HTTP Method");
+		}
+		$OrgID = $this->OrgID;
+		$DeptID = $this->_request['DeptID'];
+		$JobTID = $this->_request['JobTID'];
+		//$Exp = $this->_request['Exp'];
+
+		if($DeptID != ''){
+			$query = $this->db->executeQueryAndGetArray("SELECT OrgID,DeptID,DeptName from departments where OrgID = '" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND ParentDept = 0 AND DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "'", MYSQLI_ASSOC);
+		}else{
+			$query = $this->db->executeQueryAndGetArray("SELECT OrgID,DeptID,DeptName from departments where OrgID = '" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND ParentDept = 0", MYSQLI_ASSOC);
+		}
+		
+
+		foreach($query as $rec){
+			/*$sql = "(SELECT e.EmpID,e.EmpName,e.DeptID,e.JobTID,e.Gender,e.EmailID,e.Address,e.Contact,e.JobType,e.DateOfJoining,e.PreviousExp,e.Status,e.CreatedDate,e.UpdatedDate,d.DeptName,j.JobTitle from employees e left join departments d on d.DeptID = e.DeptID left join jobtitle j on j.JobTID = e.JobTID where e.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "') UNION (SELECT e.EmpID,e.EmpName,e.DeptID,e.JobTID,e.Gender,e.EmailID,e.Address,e.Contact,e.JobType,e.DateOfJoining,e.PreviousExp,e.Status,e.CreatedDate,e.UpdatedDate,d.DeptName,j.JobTitle FROM employees e left join departments d on d.DeptID = e.DeptID left join jobtitle j on j.JobTID = e.JobTID WHERE e.DeptID IN(SELECT d.DeptID FROM departments d WHERE d.ParentDept = '" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "'))";
+			if($JobTID != ''){
+				$sql.="SELECT * FROM ('.$sql.') AS N WHERE N.JobTID = '" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "'";
+			}*/
+			if($JobTID != ''){
+				$sql = "SELECT * FROM((SELECT e.EmpID,e.EmpName,e.DeptID,e.JobTID,e.Gender,e.EmailID,e.Address,e.Contact,e.JobType,e.DateOfJoining,e.PreviousExp,e.Status,e.CreatedDate,e.UpdatedDate,d.DeptName,j.JobTitle from employees e left join departments d on d.DeptID = e.DeptID left join jobtitle j on j.JobTID = e.JobTID where e.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "') UNION (SELECT e.EmpID,e.EmpName,e.DeptID,e.JobTID,e.Gender,e.EmailID,e.Address,e.Contact,e.JobType,e.DateOfJoining,e.PreviousExp,e.Status,e.CreatedDate,e.UpdatedDate,d.DeptName,j.JobTitle FROM employees e left join departments d on d.DeptID = e.DeptID left join jobtitle j on j.JobTID = e.JobTID WHERE e.DeptID IN(SELECT d.DeptID FROM departments d WHERE d.ParentDept = '" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "'))) AS N WHERE N.JobTID = '" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "'";
+				/*if($Exp != ''){
+					$sql.=" AND N.DateOfJoining BETWEEN  CURDATE() - INTERVAL 2 YEAR AND CURDATE()";
+				}
+				echo $sql;exit;*/
+				$query1 = $this->db->executeQueryAndGetArray($sql, MYSQLI_ASSOC);
+			}else{
+				$query1 = $this->db->executeQueryAndGetArray("(SELECT e.EmpID,e.EmpName,e.DeptID,e.JobTID,e.Gender,e.EmailID,e.Address,e.Contact,e.JobType,e.DateOfJoining,e.PreviousExp,e.Status,e.CreatedDate,e.UpdatedDate,d.DeptName,j.JobTitle from employees e left join departments d on d.DeptID = e.DeptID left join jobtitle j on j.JobTID = e.JobTID where e.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "') UNION (SELECT e.EmpID,e.EmpName,e.DeptID,e.JobTID,e.Gender,e.EmailID,e.Address,e.Contact,e.JobType,e.DateOfJoining,e.PreviousExp,e.Status,e.CreatedDate,e.UpdatedDate,d.DeptName,j.JobTitle FROM employees e left join departments d on d.DeptID = e.DeptID left join jobtitle j on j.JobTID = e.JobTID WHERE e.DeptID IN(SELECT d.DeptID FROM departments d WHERE d.ParentDept = '" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "'))", MYSQLI_ASSOC);
+			}
+			//$query1 = $this->db->executeQueryAndGetArray($sql, MYSQLI_ASSOC);
+			//echo $this->db->getLastSQLStatement();exit;
+			/*$rec1=[];
+			foreach($query1 as $rec1){
+				//$rec1[]=$rec1;
+				if($rec1['DateOfJoining']!="0000-00-00"){
+					$origin = new DateTime($rec1['DateOfJoining']);
+					$target = new DateTime(date('Y-m-d'));
+					$interval = $origin->diff($target);
+					if($interval->format('%y')!=0){
+						$rec1['Experience']=$interval->format('%y Year');
+					}else if($interval->format('%m')!=0){
+						$rec1['Experience']=$interval->format('%m Month');
+					}else{
+						$rec1['Experience']=$interval->format('%d Days');
+					}
+				}else{
+					$rec1['Experience'] = "0";
+				}
+			}*/
+
+			
+			
+			if(!empty($query1)){
+				$data[]=array(
+					"DeptID" => $rec['DeptID'],
+					"DeptName" => $rec['DeptName'],
+					"Employees" => $query1
+				);
+			}
+			
+		}
+
+		//exit;
+		$this->successMSG('Employees list', $data);
+		
+	}
+
+	
+	function employees_old()
+	{
+	    if ($this->get_request_method() != "POST") {
+			$this->errorMSG(406, "Wrong HTTP Method");
+		}
+		$OrgID = $this->OrgID;
+		$DeptID = $this->_request['DeptID'];
+		$JobTID = $this->_request['JobTID'];
+		//$PreExp = $this->_request['PreExp'];
+		
+		$query1 = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName,OrgID from departments where OrgID = '" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'", MYSQLI_ASSOC);
+		//echo $this->db->getLastSQLStatement();exit;
+		foreach ($query1 as $q) {
+			
+			$sql="SELECT e.OrgID,e.JobTID,e.DeptID,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.Password,e.Gender,e.DateOfJoining,e.Address,e.JobType,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate,e.DateOfJoining,e.PreviousExp from employees e left join departments d on d.DeptID = e.DeptID where d.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $q['DeptID']) . "' ";
+			if($JobID != '' && $DeptID == ''){
+				$sql.=" AND e.JobTID = '" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "'";
+			}
+			if($JobID == '' && $DeptID != ''){
+				$sql.=" AND e.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "'";
+			}
+			if($JobID != '' && $DeptID != ''){
+				$sql.=" AND e.JobTID = '" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "' AND e.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "'";
+			}	
+			/*if($PreExp != ""){
+				$currentdate = date('Y-m-d');
+				$month6 = date("Y-m-d", strtotime("-6 months"));
+				$year1 = date('Y-m-d', strtotime('-1 year'));
+				$year2plus = date('Y-m-d', strtotime('-10 year'));
+				if($PreExp == 2){
+					$sql.=" AND DateOfJoining BETWEEN '".$month6."' AND '".$currentdate."'";
+				}
+				if($PreExp == 3){
+					$sql.=" AND DateOfJoining BETWEEN '".$year1."' AND '".$currentdate."'";
+				}
+				if($PreExp == 4){
+					$sql.=" AND DateOfJoining BETWEEN '".$year2plus."' AND '".$currentdate."'";
+				}
+			}	*/
+			//echo $sql;echo "<br/>";
+			$query2 = $this->db->executeQueryAndGetArray($sql, MYSQLI_ASSOC);
+
+			/*foreach($query2 as $res2){
+				if($res2['DateOfJoining']!="0000-00-00"){
+					$origin = new DateTime($res2['DateOfJoining']);
+					$target = new DateTime(date('Y-m-d'));
+					$interval = $origin->diff($target);
+					if($interval->format('%y')!=0){
+						$res2['Experience']=$interval->format('%y Year');
+					}else if($interval->format('%m')!=0){
+						$res2['Experience']=$interval->format('%m Month');
+					}else{
+						$res2['Experience']=$interval->format('%d Days');
+					}
+				}else{
+					$res2['Experience'] = "0";
+				}
+				
+				
+			}*/
+			//echo "<pre>";print_r($res2);
+			//$res2 = $query2;
+		
+				$r[] = array(
+					"DeptID" =>  $q['DeptID'],
+					"DeptName" => $q['DeptName'],
+					"Employees" => $query2
+				);
+
+		}
+		
+		$this->successMSG('Employees list', $r);
+
+	}
+
+	/*function employees()
 	{
 	    if ($this->get_request_method() != "POST") {
 			$this->errorMSG(406, "Wrong HTTP Method");
@@ -416,47 +602,40 @@ class WisAPI extends REST
 		$JobTID = $this->_request['JobTID'];
 
 		
-		$query1 = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName,OrgID from departments where OrgID = '" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'", MYSQLI_ASSOC);
-		//echo $this->db->getLastSQLStatement();exit;
-		foreach ($query1 as $q) {
-			if($JobID == '' && $DeptID == ''){
-			$query2 = $this->db->executeQueryAndGetArray("SELECT e.OrgID,e.JobTID,e.DeptID,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.Password,e.Gender,e.Address,e.JobType,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate,e.DateOfJoining from employees e left join departments d on d.DeptID = e.DeptID where d.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $q['DeptID']) . "'", MYSQLI_ASSOC);
-			}
-			if($JobID != '' && $DeptID == ''){
-				$query2 = $this->db->executeQueryAndGetArray("SELECT e.OrgID,e.JobTID,e.DeptID,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.Password,e.Gender,e.Address,e.JobType,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate,e.DateOfJoining from employees e left join departments d on d.DeptID = e.DeptID where d.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $q['DeptID']) . "' AND e.JobTID = '" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "'", MYSQLI_ASSOC);
-			}
-			if($JobID == '' && $DeptID != ''){
-				$query2 = $this->db->executeQueryAndGetArray("SELECT e.OrgID,e.JobTID,e.DeptID,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.Password,e.Gender,e.Address,e.JobType,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate,e.DateOfJoining from employees e left join departments d on d.DeptID = e.DeptID where d.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $q['DeptID']) . "' AND e.JobTID = '" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "'", MYSQLI_ASSOC);
-			}
-
-			if($JobID != '' && $DeptID != ''){
-				$query2 = $this->db->executeQueryAndGetArray("SELECT e.OrgID,e.JobTID,e.DeptID,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.Password,e.Gender,e.Address,e.JobType,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate,e.DateOfJoining from employees e left join departments d on d.DeptID = e.DeptID where d.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $q['DeptID']) . "' AND e.JobTID = '" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "' AND e.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "'", MYSQLI_ASSOC);
-			}
-
-			/*foreach($query2 as $res2){
-				if($res2['DateOfJoining']!="0000-00-00"){
-					$date1 = new DateTime($res2['DateOfJoining']);
-					$date2 = date('Y-m-d');
-					$diff = $date1->diff($date2);
-					$res2['Experience'] = $diff->y . " years, " . $diff->m." months, ".$diff->d." days ";
-				}else{
-					$res2['Experience'] = "0 years";
-				}
-				
-				
-			}*/
-			$res2 = $query2;
+		$query1 = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName,OrgID from departments where OrgID = '" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND ParentDept = 0 group by DeptID", MYSQLI_ASSOC);
+		$query3 = array();
+		$query33 = array();
+		foreach ($query1 as $q1) {
+			$query2 = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName,OrgID,ParentDept from departments where ParentDept = '" . mysqli_real_escape_string($this->db->mysql_link, $q1['DeptID']) . "'", MYSQLI_ASSOC);
 			
-				$r[] = array(
-					"DeptID" =>  $q['DeptID'],
-					"DeptName" => $q['DeptName'],
-					"Employees" => $res2
-				);
+			//echo $this->db->getLastSQLStatement();echo "<br/>";
+			foreach($query2 as $q2){
+				//$query3 = $this->db->executeQueryAndGetArray("SELECT e.OrgID,e.JobTID,e.DeptID,d.DeptName,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.Password,e.Gender,e.Address,e.JobType,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate,e.DateOfJoining from employees e left join departments d on d.DeptID = e.DeptID where e.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $q1['DeptID']) . "'", MYSQLI_ASSOC);
 
+				$query33[] = $this->db->executeQueryAndGetArray("SELECT e.OrgID,e.JobTID,e.DeptID,d.DeptName,d.ParentDept,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.Password,e.Gender,e.Address,e.JobType,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate,e.DateOfJoining from employees e left join departments d on d.DeptID = e.DeptID where e.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $q2['DeptID']) . "'", MYSQLI_ASSOC);
+				//$emps[]=array_merge($query3,$query33);
+				//echo $this->db->getLastSQLStatement();echo "<br/>";
+				
+				
+			}
+			$total[] = array(
+				"DeptID" =>  $q1['DeptID'],
+				"DeptName" => $q1['DeptName'],
+				"Employees" => $query33
+			);
+			
+			
+			
+				
+				
+				
 		}
-		$this->successMSG('Employees list', $r);
 
-	}
+		
+		
+		$this->successMSG('Employees list', $total);
+
+	}*/
 	function roles()
 	{
 		$query1 = $this->db->executeQueryAndGetArray("SELECT RoleID,RoleName FROM roles", MYSQLI_ASSOC);
@@ -475,7 +654,7 @@ class WisAPI extends REST
        // echo $this->EmpID;exit;
 	   	$UserIndex = $this->_request['UserIndex'];
 		$EmpName = $this->_request['EmpName'];
-		$OrgID = $this->_request['OrgID'];
+		$OrgID = $this->OrgID;
 		$BrID = $this->_request['BrID'];
 		$DeptID = $this->_request['DeptID'];
 		$JobTID = $this->_request['JobTID'];
@@ -485,6 +664,7 @@ class WisAPI extends REST
 		$DateOfJoining = $this->_request['DateOfJoining'];
 		$JobType = $this->_request['JobType'];
 		$Address = $this->_request['Address'];
+		$PreviousExp = $this->_request['PreviousExp'];
 		$branches = explode(",",$BrID);
 		if ($EmpName == '') {
 			$this->errorMSG(400, "Please enter Employee Name.");
@@ -510,7 +690,7 @@ class WisAPI extends REST
 			$this->errorMSG(400, "Please enter Mobile.");
 		}
 
-		$Mobile = '+91' . $Mobile;
+	//	$Mobile = '+91' . $Mobile;
 
 
 		if ($this->db->hasRecords("SELECT * FROM `employees` WHERE EmailID='" . mysqli_real_escape_string($this->db->mysql_link, $Email) . "' AND Status=1;")) {
@@ -521,7 +701,7 @@ class WisAPI extends REST
 				//$OrgID = $this->db->getFirstRowFirstColumn("SELECT `OrgID` FROM `departments` WHERE `DeptID`='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "';");
 				
 
-				$this->db->executeQuery("INSERT INTO `employees`(`RoleID`,`EmpName`,`DeptID`, `OrgID`,`JobTID`,`Gender`, `EmailID`, `Password`, `Address`, `Contact`, `JobType`,`DateOfJoining`,`Status`,`CreatedBy`,`CreatedDate`,`UpdatedBy`,`UpdatedDate`) VALUES('0','" . mysqli_real_escape_string($this->db->mysql_link, $EmpName) . "',
+				$this->db->executeQuery("INSERT INTO `employees`(`RoleID`,`EmpName`,`DeptID`, `OrgID`,`JobTID`,`Gender`, `EmailID`, `Password`, `Address`, `Contact`, `JobType`,`DateOfJoining`,`PreviousExp`,`Status`,`CreatedBy`,`CreatedDate`,`UpdatedBy`,`UpdatedDate`) VALUES('0','" . mysqli_real_escape_string($this->db->mysql_link, $EmpName) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "'
@@ -533,6 +713,7 @@ class WisAPI extends REST
 				'" . mysqli_real_escape_string($this->db->mysql_link, $Mobile) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $JobType) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $DateOfJoining) . "',
+				'" . mysqli_real_escape_string($this->db->mysql_link, $PreviousExp) . "',
 				'1',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $this->EmpID) . "','" . date('Y-m-d H:i:s') . "','" . mysqli_real_escape_string($this->db->mysql_link, $this->EmpID) . "','" . date('Y-m-d H:i:s') . "')");
 				//echo $this->db->getLastSQLStatement();exit;
@@ -561,7 +742,7 @@ class WisAPI extends REST
 		if ($EmpID == '') {
 			$this->errorMSG(400, "Please enter Employee ID");
 		}
-		$query1 = $this->db->executeQueryAndGetArray("SELECT e.OrgID,e.JobTID,e.DeptID,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.Gender,e.Address,e.JobType,e.Contact,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate FROM employees e where e.EmpID='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "'", MYSQLI_ASSOC);
+		$query1 = $this->db->executeQueryAndGetArray("SELECT e.OrgID,e.JobTID,e.DeptID,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.Gender,e.Address,e.JobType,e.Contact,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate,e.PreviousExp,e.DateOfJoining FROM employees e where e.EmpID='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "'", MYSQLI_ASSOC);
 		
 		$query2 = $this->db->executeQueryAndGetArray("SELECT * FROM employeebranches where EmpID='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "'", MYSQLI_ASSOC);
 		
@@ -584,6 +765,8 @@ class WisAPI extends REST
 				"JobType" => $qu['JobType'],
 				"CreatedDate" => $qu['CreatedDate'],
 				"Status" => $qu['Status'],
+				"PreviousExp" => $qu['PreviousExp'],
+				"DateOfJoining" => $qu['DateOfJoining'],
 				"UpdatedDate" => $qu['UpdatedDate'],
 				"BrID" => $Brid
 			);
@@ -591,7 +774,26 @@ class WisAPI extends REST
 		
 		$this->successMSG('Employee Data', $items);
 	}
-	
+
+    function getdepartment()
+	{
+	    if ($this->get_request_method() != "POST") {
+			$this->errorMSG(406, "Wrong HTTP Method");
+		}
+		$DeptID = $this->_request['DeptID'];
+		if ($DeptID == '') {
+			$this->errorMSG(400, "Please enter Deparment ID");
+		}
+		if (!$this->db->hasRecords("SELECT * FROM `departments` WHERE DeptID='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "'")) {
+			//echo $this->db->getLastSQLStatement();exit;
+			$this->errorMSG(400, "Not Available. Department Not Registered");
+		} else {
+		    $query1 = $this->db->executeQueryAndGetArray("SELECT b.BrName,d.DeptID,d.ParentDept,d.BrID,d.DeptName,d.Status,d.CreatedDate,d.UpdatedDate FROM departments d left join branches b on b.BrID = d.BrID where d.DeptID='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "'", MYSQLI_ASSOC);
+	    	//echo $this->db->getLastSQLStatement();exit;
+	    
+	    	$this->successMSG('Department Data', $query1);
+		}
+	}	
 	
 
 	function editemployee(){
@@ -601,7 +803,7 @@ class WisAPI extends REST
 
 		$EmpID = $this->_request['EmpID'];
 		$EmpName = $this->_request['EmpName'];
-		$OrgID = $this->_request['OrgID'];
+		$OrgID = $this->OrgID;
 		$BrID = $this->_request['BrID'];
 		$DeptID = $this->_request['DeptID'];
 		$JobTID = $this->_request['JobTID'];
@@ -609,6 +811,7 @@ class WisAPI extends REST
 		$Gender = $this->_request['Gender'];
 		$Mobile = $this->_request['Mobile'];
 		$DateOfJoining = $this->_request['DateOfJoining'];
+		$PreviousExp = $this->_request['PreviousExp'];
 		$JobType = $this->_request['JobType'];
 		$Address = $this->_request['Address'];
 		$branches = explode(",",$BrID);
@@ -638,15 +841,23 @@ class WisAPI extends REST
 		if ($Mobile == '') {
 			$this->errorMSG(400, "Please enter Mobile.");
 		}
-	
-		$Mobile = '+91' . $Mobile;
+		
+		$DBEmailID = $this->db->getFirstRowFirstColumn("SELECT `EmailID` FROM `employees` WHERE `EmpID`= '" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "';");
+	    if($DBEmailID != $Email){
+	        	if ($this->db->hasRecords("SELECT * FROM `employees` WHERE EmailID='" . mysqli_real_escape_string($this->db->mysql_link, $Email) . "'")) {
+    			//echo $this->db->getLastSQLStatement();exit;
+    			$this->errorMSG(400, "Email Already exist!");
+    		    }
+	    }
+	    
+		//$Mobile = '+91' . $Mobile;
 		if (!$this->db->hasRecords("SELECT * FROM `employees` WHERE EmpID='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "'")) {
 			//echo $this->db->getLastSQLStatement();exit;
 			$this->errorMSG(400, "Not Available. Employee Not Registered");
 		} else {
 			try {
 	
-				$sql = "UPDATE `employees` SET `EmpName`='" . mysqli_real_escape_string($this->db->mysql_link, $EmpName) . "',`DeptID`='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "',`OrgID`='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "',`JobTID`='" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "',`Gender`='" . mysqli_real_escape_string($this->db->mysql_link, $Gender) . "',`EmailID`='" . mysqli_real_escape_string($this->db->mysql_link, $Email) . "',`Address`='" . mysqli_real_escape_string($this->db->mysql_link, $Address) . "',`Contact`='" . mysqli_real_escape_string($this->db->mysql_link, $Mobile) . "',`JobType`='" . mysqli_real_escape_string($this->db->mysql_link, $JobType) . "',`DateOfJoining`='" . mysqli_real_escape_string($this->db->mysql_link, $DateOfJoining) . "',`UpdatedBy`='" .mysqli_real_escape_string($this->db->mysql_link, $this->EmpID) . "',`UpdatedDate`='" . date('Y-m-d H:i:s') . "' WHERE `EmpID`='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "';";
+				$sql = "UPDATE `employees` SET `EmpName`='" . mysqli_real_escape_string($this->db->mysql_link, $EmpName) . "',`DeptID`='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "',`OrgID`='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "',`JobTID`='" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "',`Gender`='" . mysqli_real_escape_string($this->db->mysql_link, $Gender) . "',`EmailID`='" . mysqli_real_escape_string($this->db->mysql_link, $Email) . "',`Address`='" . mysqli_real_escape_string($this->db->mysql_link, $Address) . "',`Contact`='" . mysqli_real_escape_string($this->db->mysql_link, $Mobile) . "',`JobType`='" . mysqli_real_escape_string($this->db->mysql_link, $JobType) . "',`DateOfJoining`='" . mysqli_real_escape_string($this->db->mysql_link, $DateOfJoining) . "',`PreviousExp`='" . mysqli_real_escape_string($this->db->mysql_link, $PreviousExp) . "',`UpdatedBy`='" .mysqli_real_escape_string($this->db->mysql_link, $this->EmpID) . "',`UpdatedDate`='" . date('Y-m-d H:i:s') . "' WHERE `EmpID`='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "';";
 				if ($this->db->executeQuery($sql)) {
 					$sql = $this->db->executeQuery("DELETE FROM `employeebranches` WHERE EmpID='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "';");
 					if(!empty($branches)){
@@ -676,6 +887,129 @@ class WisAPI extends REST
 			$this->db->executeQuery("DELETE FROM `employeebranches` WHERE EmpID='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "'");
 			$this->successMSG('Employee Deleted Successfully..!', '');
 		} 
+	}
+	
+	function activeinactive(){
+	    if ($this->get_request_method() != "POST") {
+			$this->errorMSG(406, "Wrong Method");
+		}
+		
+		$MasterTable = $this->_request['MasterTable'];
+		$ID = $this->_request['ID'];
+		$Status = $this->_request['Status'];
+		if($MasterTable == "getemployee"){
+		    $table = "employees";
+		    $KeyID = "EmpID";
+		}
+		if($MasterTable == "getdepartment"){
+		    $table = "departments";
+		    $KeyID = "DeptID";
+		}
+		
+			$sql = "UPDATE `".$table."` SET `Status`='" . mysqli_real_escape_string($this->db->mysql_link, $Status) . "' WHERE `".$KeyID."` = '" . mysqli_real_escape_string($this->db->mysql_link, $ID) . "';";
+				if ($this->db->executeQuery($sql)) {
+				    	$this->successMSG('Status Updated Successfully..!', '');
+				}
+		
+	}
+	
+	
+	function experiencelist()
+	{
+		$query1 = $this->db->executeQueryAndGetArray("SELECT ExeID,Experience FROM experience", MYSQLI_ASSOC);
+		//"1"=>"Order Created","2"=>"In-Progress","3"=>"Ready","4"=>"Delivered"
+		foreach ($query1 as $q) {
+			$items[$q['ExeID']] = $q['Experience'];
+		}
+		$this->successMSG('Experience list', $items);
+	}
+
+	function adddepartment(){
+		if ($this->get_request_method() != "POST") {
+			$this->errorMSG(406, "Wrong Method");
+		}
+
+		$OrgID = $this->OrgID;
+		$BrID = $this->_request['BrID'];
+		$DeptName = $this->_request['DeptName'];
+		$ParentDeptID = $this->_request['ParentDeptID'];
+		
+		if ($DeptName == '') {
+			$this->errorMSG(400, "Please enter Deptment Name.");
+		}
+		if ($BrID == '') {
+			$this->errorMSG(400, "Please enter Branches.");
+		}
+		/*if ($ParentDeptID == '') {
+			$this->errorMSG(400, "Please enter Parent Department.");
+		}	*/
+		
+		$ParentDeptID = $ParentDeptID;
+		if($ParentDeptID == ''){
+		    $ParentDeptID = 0;
+		}
+		
+		try {			
+
+			$this->db->executeQuery("INSERT INTO `departments`(`ParentDept`,`OrgID`, `BrID`,`DeptName`,`Status`,`CreatedBy`,`CreatedDate`,`UpdatedBy`,`UpdatedDate`) VALUES('" . mysqli_real_escape_string($this->db->mysql_link, $ParentDeptID) . "',
+			'" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "',
+			'" . mysqli_real_escape_string($this->db->mysql_link, $BrID) . "',
+			'" . mysqli_real_escape_string($this->db->mysql_link, $DeptName) . "'
+			,'1','" . mysqli_real_escape_string($this->db->mysql_link, $this->EmpID) . "','" . date('Y-m-d H:i:s') . "','" . mysqli_real_escape_string($this->db->mysql_link, $this->EmpID) . "','" . date('Y-m-d H:i:s') . "')");
+			
+			
+			$this->successMSG('Department Added Succesfully..!', '');
+			
+		} catch (Exception $e) {
+			$this->db->rollbackTransaction();
+			$this->errorMSG(400, $e->getMessage());
+		}
+		
+	}
+
+	function editdepartment(){
+		if ($this->get_request_method() != "POST") {
+			$this->errorMSG(406, "Wrong Method");
+		}
+
+		$OrgID = $this->OrgID;
+		$DeptID = $this->_request['DeptID'];
+		$BrID = $this->_request['BrID'];
+		$DeptName = $this->_request['DeptName'];
+		$ParentDeptID = $this->_request['ParentDeptID'];
+		
+		if ($DeptID == '') {
+			$this->errorMSG(400, "Please enter Deptment ID.");
+		}
+		if ($DeptName == '') {
+			$this->errorMSG(400, "Please enter Deptment Name.");
+		}
+		if ($BrID == '') {
+			$this->errorMSG(400, "Please enter Branches.");
+		}
+		$ParentDeptID = $ParentDeptID;
+		if($ParentDeptID == ''){
+		    $ParentDeptID = 0;
+		}	
+
+		if (!$this->db->hasRecords("SELECT * FROM `departments` WHERE DeptID='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "'")) {
+			//echo $this->db->getLastSQLStatement();exit;
+			$this->errorMSG(400, "Department Not Registered!");
+		}
+		
+		try {			
+
+			$sql = "UPDATE `departments` SET `ParentDept`='" . mysqli_real_escape_string($this->db->mysql_link, $ParentDeptID) . "',`OrgID`='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "',`BrID`='" . mysqli_real_escape_string($this->db->mysql_link, $BrID) . "',`DeptName`='" . mysqli_real_escape_string($this->db->mysql_link, $DeptName) . "',`UpdatedBy`='" .mysqli_real_escape_string($this->db->mysql_link, $this->EmpID) . "',`UpdatedDate`='" . date('Y-m-d H:i:s') . "' WHERE `DeptID`='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "';";
+			//echo $sql;exit;
+				if ($this->db->executeQuery($sql)) {
+					$this->successMSG('Department Updated Succesfully..!', '');
+				}
+			
+		} catch (Exception $e) {
+			$this->db->rollbackTransaction();
+			$this->errorMSG(400, $e->getMessage());
+		}
+		
 	}
 
 	/*
