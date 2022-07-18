@@ -114,9 +114,9 @@
 									<tr>
 										<th width="70px"> All &nbsp;<input type="checkbox" id="select_all" class="select_all"></th>
 										<th>Category Name</th>
-										<th
-										<th>Organizations</th>
 										
+										<th>Category Icon</th>
+										<th>Organizations</th>
 										<th width="110">Actions</th>
 									</tr>
 								</thead>
@@ -133,10 +133,12 @@
 												<?= $cnty['CategoryName']; ?>
 											</td>
 											<td>
-												<?= '<img src="'.base_url($cnty['CategoryIcon']).'">' ; ?>
+												<?= '<img src="'.base_url($cnty['CategoryIcon']).'" width="100px"> ' ; ?>
+											</td>
+											<td>
+												<?= $orgs[$cnty['ComCatID']]?>
 											</td>
 											
-											<td></td>
 											
 											
 											<td>

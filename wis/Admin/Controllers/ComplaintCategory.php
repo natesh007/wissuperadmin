@@ -4,6 +4,7 @@ namespace Modules\Admin\Controllers;
 use Modules\Admin\Models\ComplaintCategoryModel;
 use Modules\Admin\Models\ComplaintCategoryOrganizationModel;
 use Modules\Admin\Models\AdminsModel;
+use Modules\Admin\Models\OrganizationModel;
 
 class ComplaintCategory extends BaseController
 {
@@ -13,7 +14,8 @@ class ComplaintCategory extends BaseController
 		session()->set('complaintcategory_page', '/complaintcategories');
 		$data['pager'] = \Config\Services::pager();
 		$model = new ComplaintCategoryModel();
-		
+		$ComplaintCategoryOrganizationModel = new ComplaintCategoryOrganizationModel();
+		$OrganizationModel = new OrganizationModel();
 		$uri = service('uri');
 
 
@@ -42,7 +44,17 @@ class ComplaintCategory extends BaseController
 		$data['keyword'] = $keyword;
 
 		$data['complaintcategory'] = $complaintcategory['results'];
-		
+		$orgs = [];
+		foreach($data['complaintcategory'] as $rec){
+			$orgnames = $model->getorgnames($rec['ComCatID']);
+			$o = [];
+			foreach($orgnames as $org){
+				$o[$rec['ComCatID']][] = $org['OrgName'];echo " ";
+			}
+			
+			$orgs[$rec['ComCatID']] = implode(", ",$o[$rec['ComCatID']]);
+		}
+		$data['orgs'] = $orgs;
 		$data['pagelinks'] = $complaintcategory['pagelinks'];
 		echo view('Modules\Admin\Views\common\header');
 		echo view('Modules\Admin\Views\complaintcategory', $data);
@@ -73,6 +85,17 @@ class ComplaintCategory extends BaseController
 		$complaintcategory = $model->get_complaintcategories($page, $perPage, $keyword, '1');
 		$data['keyword'] = $keyword;
 		$data['complaintcategory'] = $complaintcategory['results'];
+		$orgs = [];
+		foreach($data['complaintcategory'] as $rec){
+			$orgnames = $model->getorgnames($rec['ComCatID']);
+			$o = [];
+			foreach($orgnames as $org){
+				$o[$rec['ComCatID']][] = $org['OrgName'];echo " ";
+			}
+			
+			$orgs[$rec['ComCatID']] = implode(", ",$o[$rec['ComCatID']]);
+		}
+		$data['orgs'] = $orgs;
 		$data['pagelinks'] = $complaintcategory['pagelinks'];
 		echo view('Modules\Admin\Views\common\header');
 		echo view('Modules\Admin\Views\complaintcategory', $data);
@@ -101,6 +124,17 @@ class ComplaintCategory extends BaseController
 			$perPage = 10;
 		}
 		$complaintcategory = $model->get_complaintcategories($page, $perPage, $keyword, '0');
+		$orgs = [];
+		foreach($data['complaintcategory'] as $rec){
+			$orgnames = $model->getorgnames($rec['ComCatID']);
+			$o = [];
+			foreach($orgnames as $org){
+				$o[$rec['ComCatID']][] = $org['OrgName'];echo " ";
+			}
+			
+			$orgs[$rec['ComCatID']] = implode(", ",$o[$rec['ComCatID']]);
+		}
+		$data['orgs'] = $orgs;
 		
 		$data['keyword'] = $keyword;
 		$data['complaintcategory'] = $complaintcategory['results'];

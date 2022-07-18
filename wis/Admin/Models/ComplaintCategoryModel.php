@@ -76,5 +76,13 @@ class ComplaintCategoryModel extends Model {
 
      
     }
+
+    function getorgnames($id){
+        $query = "SELECT o.OrgName FROM complaintcategoryorganizations c left join organization o on o.OrgID = c.OrgID where c.ComCatID = $id";
+        $results = $this->db->query($query)->getResultArray();
+        //echo "<pre>";print_r($results);
+        //echo $this->db->getLastQuery();exit;
+        return $results;
+    }
     
 }
