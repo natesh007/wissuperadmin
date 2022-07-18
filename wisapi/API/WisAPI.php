@@ -7,7 +7,7 @@ require "../utilities/vendor/autoload.php";
 //test
 use \Firebase\JWT\JWT;
 
-define('SiteURL', 'https://igreen.systems/wissuperadmin/WisAPI/');
+define('SiteURL', 'https://igreen.systems/wissuperadmin/');
 
 require_once("../utilities/Rest.inc.php");
 require_once("../utilities/class.MySQL.php");
@@ -553,11 +553,20 @@ class WisAPI extends REST
 		$OrgID = $this->OrgID;
 		
 		
-		$query1 = $this->db->executeQueryAndGetArray("SELECT cco.ComCatID,cc.CategoryName,cco.OrgID FROM complaintcategoryorganizations cco left join complaintcategory cc on cc.ComCatID = cco.ComCatID where cco.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'", MYSQLI_ASSOC);
+		$query1 = $this->db->executeQueryAndGetArray("SELECT cco.ComCatID,cc.CategoryName,cco.OrgID,cc.CategoryIcon FROM complaintcategoryorganizations cco left join complaintcategory cc on cc.ComCatID = cco.ComCatID where cco.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'", MYSQLI_ASSOC);
+		foreach($query1 as $rec){
+			$r[] = array(
+				"ComCatID" => $rec['ComCatID'],
+				"CategoryName" => $rec['CategoryName'],
+				"OrgID" => $rec['OrgID'],
+				"CategoryIcon" => SiteURL.$rec['CategoryIcon']
+
+			);
+		}
 				//echo $this->db->getLastSQLStatement();exit;
 		
 	
-		$this->successMSG('Complaint Category list', $query1);
+		$this->successMSG('Complaint Category list', $r);
 	}
 
 	function roles()
