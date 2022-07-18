@@ -48,6 +48,8 @@ class Admin extends BaseController
 		exit;
 	}
 
+	
+
 	public  function active_inactive_all()
 	{
 		if ($this->request->getVar('checkbox_value')) {

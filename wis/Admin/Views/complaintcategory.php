@@ -1,14 +1,15 @@
-		<!-- Content Wrapper. Contains page content -->
+
+        <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Building</h1>
+                            <h1 class="m-0">Complaint Category</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6 text-right add_user">
-							<a href="<?= site_url('admin/buildings/add_building') ?>" class="btn btn-sm btn-success btn-background">Add New Building</a>
+							<a href="<?= site_url('admin/complaintcategories/add_complaintcategory') ?>" class="btn  btn-sm btn-success btn-background">Add New ComplaintCategory</a>
 						</div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -28,9 +29,9 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col-md-3 head-title">
-									<button onclick="delete_all('building', 'BID', '', '')" name="delete_all[]" id="delete_all" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></button> Delete &nbsp;&nbsp;
-									<button onclick="active_inactive_all('building',1,'BID')" data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-success" name="delete_all[]" id="active_all"><span class="fa fa-check"></span></button> Active &nbsp;&nbsp;
-									<button onclick="active_inactive_all('building',0,'BID')" data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-warning" name="delete_all[]" id="inactive_all"><span class="fa fa-times"></span></button> Inactive
+									<button onclick="delete_all('complaintcategory', 'ComCatID', 'CategoryIcon', '')" name="delete_all[]" id="delete_all" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></button> Delete &nbsp;&nbsp;
+									<button onclick="active_inactive_all('complaintcategory',1,'ComCatID')" data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-success" name="delete_all[]" id="active_all"><span class="fa fa-check"></span></button> Active &nbsp;&nbsp;
+									<button onclick="active_inactive_all('complaintcategory',0,'ComCatID')" data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-warning" name="delete_all[]" id="inactive_all"><span class="fa fa-times"></span></button> Inactive
 								</div>
 								<div class="col-md-9">
 									<div class="row">
@@ -38,19 +39,19 @@
 											<div class="dropdown">
 												<button type="button" class="btn btn-sm btn-primary dropdown-toggle form-control" data-toggle="dropdown">
 													<?php
-													if (session('building_page') == '/buildings') {
-														echo "All Buildings";
-													} elseif (session('building_page') == '/active_buildings') {
-														echo "Active Buildings";
-													} elseif (session('building_page') == '/inactive_buildings') {
-														echo "Inactive Buildings";
+													if (session('complaintcategory_page') == '/complaintcategories') {
+														echo "All Complaint Categories";
+													} elseif (session('complaintcategory_page') == '/active_complaintcategories') {
+														echo "Active Complaint Categories";
+													} elseif (session('complaintcategory_page') == '/inactive_complaintcategories') {
+														echo "Inactive Complaint Categories";
 													}
 													?>
 												</button>
 												<div class="dropdown-menu">
-													<a class="dropdown-item" href="<?= base_url('admin/buildings') ?>">All Building</a>
-													<a class="dropdown-item" href="<?= base_url('admin/active_buildings') ?>">Active Building</a>
-													<a class="dropdown-item" href="<?= base_url('admin/inactive_buildings') ?>">Inactive Building</a>
+													<a class="dropdown-item" href="<?= base_url('admin/complaintcategories') ?>">All Complaint Category</a>
+													<a class="dropdown-item" href="<?= base_url('admin/active_complaintcategories') ?>">Active Complaint Category</a>
+													<a class="dropdown-item" href="<?= base_url('admin/inactive_complaintcategories') ?>">Inactive Complaint Category</a>
 												</div>
 											</div>
 										</div>
@@ -96,10 +97,10 @@
 														<input type="text" class="form-control" name="key_word" placeholder="Enter Key Word" value="<?php print $keyword; ?>">
 													</div>
 													<div class="col-md-2">
-													<button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">search</button>
+														<button type="submit" id="submit" name="submit" class="btn  btn-sm btn-success">search</button>
 													</div>
-													<div class="col-md-2">
-														<a href="<?= base_url('admin/buildings') ?>" class="btn btn-sm btn-info">Clear</a>
+													<div class="col-md-3">
+														<a href="<?= base_url('admin/complaintcategories') ?>" class="btn  btn-sm btn-info">Clear</a>
 													</div>
 												</div>
 											</form>
@@ -112,54 +113,51 @@
 								<thead>
 									<tr>
 										<th width="70px"> All &nbsp;<input type="checkbox" id="select_all" class="select_all"></th>
-										<th>Building Name</th>
-										<th>Organization</th>
+										<th>Category Name</th>
+										<th
+										<th>Organizations</th>
 										
 										<th width="110">Actions</th>
 									</tr>
 								</thead>
 								<tbody id="Table">
 									<?php
-									if(!empty($building)){
-									foreach ($building as $cnty) {
+									if(!empty($complaintcategory)){
+									foreach ($complaintcategory as $cnty) {
 									?>
-										<tr id="<?= $cnty['BID']; ?>">
+										<tr id="<?= $cnty['ComCatID']; ?>">
 											<td>
-												<input type="checkbox" name="" class="delete_checkbox" value="<?= $cnty['BID']; ?>">
+												<input type="checkbox" name="" class="delete_checkbox" value="<?= $cnty['ComCatID']; ?>">
 											</td>
 											<td>
-												<?= $cnty['BuildingName']; ?>
+												<?= $cnty['CategoryName']; ?>
 											</td>
 											<td>
-												<?= $cnty['OrgName']; ?>
+												<?= '<img src="'.base_url($cnty['CategoryIcon']).'">' ; ?>
 											</td>
 											
+											<td></td>
 											
 											
 											<td>
 												<?php if ($cnty['Status'] == 1) { ?>
-													<button data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-success inactive" onclick="activate_inactivate(<?= $cnty['BID']; ?>,'building','BID',0)"><span class="fa fa-check"></span></button>
+													<button data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-success inactive" onclick="activate_inactivate(<?= $cnty['ComCatID']; ?>,'complaintcategory','ComCatID',0)"><span class="fa fa-check"></span></button>
 												<?php } else { ?>
-													&nbsp;<button data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-warning " onclick="activate_inactivate(<?= $cnty['BID']; ?>,'building','BID',1)"><span class="fa fa-times"></span></button>
+													&nbsp;<button data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-warning " onclick="activate_inactivate(<?= $cnty['ComCatID']; ?>,'complaintcategory','ComCatID',1)"><span class="fa fa-times"></span></button>
 												<?php } ?>
-												&nbsp;<a data-toggle="tooltip" href="<?= base_url('admin/buildings/edit_building/' . $cnty['BID']); ?>" title="Edit" class="btn btn-xs btn-primary"><span class="fa fa-pen"></span></a>
-												&nbsp;<button data-toggle="tooltip" onclick="deletebuildingdata('<?= $cnty['BID'] ?>','building','BID', '', '')" title="Delete" class="btn btn-xs btn-danger"><span class="fa fa-trash"></span></button>
+												&nbsp;<a data-toggle="tooltip" href="<?= base_url('admin/complaintcategories/edit_complaintcategory/' . $cnty['ComCatID']); ?>" title="Edit" class="btn btn-xs btn-primary"><span class="fa fa-pen"></span></a>
+												&nbsp;<button data-toggle="tooltip" onclick="deletecomplaintcategorydata('<?= $cnty['ComCatID'] ?>','complaintcategory','ComCatID', 'CategoryIcon', '')" title="Delete" class="btn btn-xs btn-danger"><span class="fa fa-trash"></span></button>
 											</td>
 										</tr>
-										
-									<?php
-									
+										<?php
 									} }else{
-										?>
-										<tr><td colspan="4">
-										<?php echo "No Buidings Data found!";
-									}
 									?>
-
-									</td></tr>
+									<tr><td colspan="4">
+									<?php echo "No complaintcategories Data found!";
+								}
+								?>
 								</tbody>
 							</table>
-							
 							<?php if ($pagelinks) {
 								print '<div class="row page">' . $pagelinks . '</div>';
 							} ?>
@@ -170,7 +168,7 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-		<input type="hidden" value="BuildingsTab" id="CurrentPage" />
+		<input type="hidden" value="ComplaintCategoriesTab" id="CurrentPage" />
 		<?= view('Modules\Admin\Views\common\footer'); ?>
 	</body>
 </html>

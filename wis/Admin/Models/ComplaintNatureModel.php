@@ -3,10 +3,10 @@
 use CodeIgniter\Model;
 use Modules\Admin\Models\UtilModel;
 
-class RoomModel extends Model {
-    protected $table='room';
-    protected $primaryKey='RID';
-    protected $allowedFields = ['OrgID','BID','FID','RoomName', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+class ComplaintNatureModel extends Model {
+    protected $table='complaintnature';
+    protected $primaryKey='ComNatID';
+    protected $allowedFields = ['ComplaintNature','ComCatID', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
@@ -24,30 +24,30 @@ class RoomModel extends Model {
         $data['data']['UpdatedDate']=date('Y-m-d H:i:s');
         return $data;
     }
-    function get_rooms($page, $perpage, $keyword, $status) 
+    function get_complaintnatures($page, $perpage, $keyword, $status) 
     {
         $start_from = ($page - 1) * $perpage;
-        $query = 'SELECT r.*, a.Name, o.OrgName, b.BuildingName,f.FloorName FROM room r left join admins a on a.AID = r.UpdatedBy left join organization o on o.OrgID  = r.OrgID left join building b on b.BID   = r.BID left join floor f on f.FID   = r.FID ' ;
+        $query = 'SELECT cn.*, a.Name, cc.CategoryName FROM complaintnature cn left join admins a on a.AID = cn.UpdatedBy left join complaintcategory cc on cc.ComCatID  = cn.ComCatID';
         if ($keyword !=''&& $status !='') {
-            $query .=' where r.roomName  like "%'. $keyword . '%" AND r.Status = '.$status;
+            $query .=' where cn.ComplaintNature  like "%'. $keyword . '%" AND cn.Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $query .=' where r.roomName  like "%'. $keyword . '%"';
+            $query .=' where cn.ComplaintNature  like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {
-            $query .=' where r.Status = '.$status;
+            $query .=' where cn.Status = '.$status;
         }
         $query .=' Limit ' . $start_from . ',' . $perpage;
         $branch['results'] = $this->db->query($query)->getResultArray();
-        $countquery = 'SELECT count(RID) as ttl_rows FROM room';
+        $countquery = 'SELECT count(ComNatID) as ttl_rows FROM complaintnature';
         if ($keyword !=''&& $status !='') {
-            $countquery .=' where RoomName  like "%'. $keyword . '%" AND Status = '.$status;
+            $countquery .=' where complaintnature  like "%'. $keyword . '%" AND Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $countquery .=' where RoomName like "%'. $keyword . '%"';
+            $countquery .=' where complaintnature like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {

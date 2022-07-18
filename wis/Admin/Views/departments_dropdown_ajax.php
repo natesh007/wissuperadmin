@@ -1,6 +1,6 @@
 
     <option disabled selected value>Select Department</option>
-    
+    <option value="0">None</option>
     <?php if (!empty($total_cats)) {
         foreach ($total_cats as $departments) { ?>
             <option value="<?= $departments['DeptID']; ?>" style="font-weight:800;background-color:#e9ebed;font-size:18px"><?= $departments['DeptName']; ?></option>

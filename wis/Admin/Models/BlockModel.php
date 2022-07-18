@@ -3,10 +3,10 @@
 use CodeIgniter\Model;
 use Modules\Admin\Models\UtilModel;
 
-class RoomModel extends Model {
-    protected $table='room';
-    protected $primaryKey='RID';
-    protected $allowedFields = ['OrgID','BID','FID','RoomName', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+class blockModel extends Model {
+    protected $table='block';
+    protected $primaryKey='BKID';
+    protected $allowedFields = ['OrgID','BID','BlockName', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
@@ -24,30 +24,30 @@ class RoomModel extends Model {
         $data['data']['UpdatedDate']=date('Y-m-d H:i:s');
         return $data;
     }
-    function get_rooms($page, $perpage, $keyword, $status) 
+    function get_blocks($page, $perpage, $keyword, $status) 
     {
         $start_from = ($page - 1) * $perpage;
-        $query = 'SELECT r.*, a.Name, o.OrgName, b.BuildingName,f.FloorName FROM room r left join admins a on a.AID = r.UpdatedBy left join organization o on o.OrgID  = r.OrgID left join building b on b.BID   = r.BID left join floor f on f.FID   = r.FID ' ;
+        $query = 'SELECT bl.*, a.Name, o.OrgName, b.BuildingName FROM block bl left join admins a on a.AID = bl.UpdatedBy left join organization o on o.OrgID  = bl.OrgID left join building b on b.BID   = bl.BID' ;
         if ($keyword !=''&& $status !='') {
-            $query .=' where r.roomName  like "%'. $keyword . '%" AND r.Status = '.$status;
+            $query .=' where bl.BlockName  like "%'. $keyword . '%" AND bl.Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $query .=' where r.roomName  like "%'. $keyword . '%"';
+            $query .=' where bl.BlockName  like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {
-            $query .=' where r.Status = '.$status;
+            $query .=' where bl.Status = '.$status;
         }
         $query .=' Limit ' . $start_from . ',' . $perpage;
         $branch['results'] = $this->db->query($query)->getResultArray();
-        $countquery = 'SELECT count(RID) as ttl_rows FROM room';
+        $countquery = 'SELECT count(BKID) as ttl_rows FROM block';
         if ($keyword !=''&& $status !='') {
-            $countquery .=' where RoomName  like "%'. $keyword . '%" AND Status = '.$status;
+            $countquery .=' where BlockName  like "%'. $keyword . '%" AND Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $countquery .=' where RoomName like "%'. $keyword . '%"';
+            $countquery .=' where BlockName like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {

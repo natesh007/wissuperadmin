@@ -3,10 +3,10 @@
 use CodeIgniter\Model;
 use Modules\Admin\Models\UtilModel;
 
-class RoomModel extends Model {
-    protected $table='room';
-    protected $primaryKey='RID';
-    protected $allowedFields = ['OrgID','BID','FID','RoomName', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+class ComplaintCategoryModel extends Model {
+    protected $table='complaintcategory';
+    protected $primaryKey='ComCatID';
+    protected $allowedFields = ['CategoryName','CategoryIcon', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
@@ -24,30 +24,30 @@ class RoomModel extends Model {
         $data['data']['UpdatedDate']=date('Y-m-d H:i:s');
         return $data;
     }
-    function get_rooms($page, $perpage, $keyword, $status) 
+    function get_complaintcategories($page, $perpage, $keyword, $status) 
     {
         $start_from = ($page - 1) * $perpage;
-        $query = 'SELECT r.*, a.Name, o.OrgName, b.BuildingName,f.FloorName FROM room r left join admins a on a.AID = r.UpdatedBy left join organization o on o.OrgID  = r.OrgID left join building b on b.BID   = r.BID left join floor f on f.FID   = r.FID ' ;
+        $query = "SELECT c.*, a.Name FROM complaintcategory c left join admins a on a.AID = c.UpdatedBy";
         if ($keyword !=''&& $status !='') {
-            $query .=' where r.roomName  like "%'. $keyword . '%" AND r.Status = '.$status;
+            $query .=' where c.CategoryName  like "%'. $keyword . '%" AND c.Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $query .=' where r.roomName  like "%'. $keyword . '%"';
+            $query .=' where c.CategoryName  like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {
-            $query .=' where r.Status = '.$status;
+            $query .=' where c.Status = '.$status;
         }
         $query .=' Limit ' . $start_from . ',' . $perpage;
-        $branch['results'] = $this->db->query($query)->getResultArray();
-        $countquery = 'SELECT count(RID) as ttl_rows FROM room';
+        $complaintcategory['results'] = $this->db->query($query)->getResultArray();
+        $countquery = 'SELECT count(ComCatID) as ttl_rows FROM complaintcategory';
         if ($keyword !=''&& $status !='') {
-            $countquery .=' where RoomName  like "%'. $keyword . '%" AND Status = '.$status;
+            $countquery .=' where CategoryName  like "%'. $keyword . '%" AND Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $countquery .=' where RoomName like "%'. $keyword . '%"';
+            $countquery .=' where CategoryName like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {
@@ -62,7 +62,7 @@ class RoomModel extends Model {
         } else {
             $actual_link = $actual_link_array[0] . '?' . 'key_word=' . $keyword . '&';
         }
-        $branch['ttl_rows'] = $row->ttl_rows;
+        $complaintcategory['ttl_rows'] = $row->ttl_rows;
         $adjacents = "2";
         $previous_page = $page - 1;
         $next_page = $page + 1;
@@ -70,8 +70,8 @@ class RoomModel extends Model {
         $second_last = $totalPages - 1; // total page minus 1
         $utilmodel = new UtilModel;
         $pagelinks = $utilmodel->build_pagelinks($actual_link, $previous_page, $next_page, $totalPages, $adjacents, $page, $second_last);
-        $branch['pagelinks'] = $pagelinks;
-        return $branch;
+        $complaintcategory['pagelinks'] = $pagelinks;
+        return $complaintcategory;
 
 
      

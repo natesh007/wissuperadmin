@@ -23,6 +23,29 @@ function deletedata(Id, tbl, col, img, thumb) {
     location.reload();
   });
 }
+function deletebuildingdata(Id, tbl, col, img, thumb) {
+  $.ajax({
+    type: "POST",
+    url: baseURL + "/admin/buildings/deletebuilding",
+    data: { table: tbl, Id: Id, column: col, Image: img, Thumb: thumb},
+    async: false,
+  }).done(function (data) {
+    location.reload();
+  });
+}
+
+function deletecomplaintcategorydata(Id, tbl, col, img, thumb) {
+  $.ajax({
+    type: "POST",
+    url: baseURL + "/admin/complaintcategories/deletecomplaintcategory",
+    data: { table: tbl, Id: Id, column: col, Image: img, Thumb: thumb},
+    async: false,
+  }).done(function (data) {
+    location.reload();
+  });
+}
+
+
 
 //Select All Records
 $("#select_all").on("click", function () {

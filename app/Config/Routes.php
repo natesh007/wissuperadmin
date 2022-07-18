@@ -101,6 +101,16 @@ $routes->add('/admin/active_buildings', 'Building::active_buildings', ['namespac
 $routes->add('/admin/inactive_buildings', 'Building::inactive_buildings', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/buildings/add_building', 'Building::add_building', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/buildings/edit_building/(:num)', 'Building::edit_building/$1', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/buildings/deletebuilding', 'Building::deletebuilding', ['namespace' => 'Modules\Admin\Controllers']);
+
+// Blocks Routes
+$routes->add('/admin/blocks', 'Block::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/active_blocks', 'Block::active_blocks', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/inactive_blocks', 'Block::inactive_blocks', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/blocks/add_block', 'Block::add_block', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/blocks/edit_block/(:num)', 'Block::edit_block/$1', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/blocks/getbuildings', 'Block::getbuildings', ['namespace' => 'Modules\Admin\Controllers']);
+
 
 // floors Routes
 $routes->add('/admin/floors', 'Floor::index', ['namespace' => 'Modules\Admin\Controllers']);
@@ -142,6 +152,21 @@ $routes->add('/admin/jobtitles/add_jobtitle', 'Jobtitle::add_jobtitle', ['namesp
 $routes->add('/admin/jobtitles/edit_jobtitle/(:num)', 'Jobtitle::edit_jobtitle/$1', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/jobtitles/getjobtitle', 'Jobtitle::getjobtitle', ['namespace' => 'Modules\Admin\Controllers']);
 
+// Complaint Categories Routes
+$routes->add('/admin/complaintcategories', 'ComplaintCategory::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/active_complaintcategories', 'ComplaintCategory::active_complaintcategories', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/inactive_complaintcategories', 'ComplaintCategory::inactive_complaintcategories', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/complaintcategories/add_complaintcategory', 'ComplaintCategory::add_complaintcategory', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/complaintcategories/edit_complaintcategory/(:num)', 'ComplaintCategory::edit_complaintcategory/$1', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/complaintcategories/deletecomplaintcategory', 'ComplaintCategory::deletecomplaintcategory', ['namespace' => 'Modules\Admin\Controllers']);
+
+
+// Complaint Natures Routes
+$routes->add('/admin/complaintnatures', 'ComplaintNature::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/active_complaintnatures', 'ComplaintNature::active_complaintnatures', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/inactive_complaintnatures', 'ComplaintNature::inactive_complaintnatures', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/complaintnatures/add_complaintnature', 'ComplaintNature::add_complaintnature', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/complaintnatures/edit_complaintnature/(:num)', 'ComplaintNature::edit_complaintnature/$1', ['namespace' => 'Modules\Admin\Controllers']);
 
 /**
  * --------------------------------------------------------------------

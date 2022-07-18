@@ -1,6 +1,9 @@
-it admin
-emp
+Complaint Management:
 
+blocks module
+complaint categories module
+category, organization multi select, caegory icon
+common complaint
 
-Speradmin:
-emp:name,oraganization,dept,emailid,pwd
+complain form:
+

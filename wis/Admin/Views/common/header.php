@@ -144,11 +144,24 @@
                                         <p>Cities</p>
                                     </a>
                                 </li> 
+                                
                                 <li class="nav-item">
                                     <a href="<?= base_url('admin/jobtitles') ?>" class="nav-link" id="JobtitlesTab">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Job Title</p>
                                     </a>
+                                </li> 
+                                <li class="nav-item">
+                                    <a href="<?= base_url('admin/complaintcategories') ?>" class="nav-link" id="ComplaintCategoriesTab">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Complaint Category</p>
+                                    </a>
+                                </li> 
+                                <li class="nav-item">
+                                    <a href="<?= base_url('admin/complaintnatures') ?>" class="nav-link" id="ComplaintNaturesTab">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Complaint Nature</p>
+                                     </a>
                                 </li> 
                             </ul>
                         </li>
@@ -174,6 +187,12 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="<?= base_url('admin/blocks') ?>" class="nav-link" id="BlocksTab">
+                                        <i class="far fa-building nav-icon"></i>
+                                        <p>Blocks</p>
+                                    </a>
+                                </li>
+                                <?php /*<li class="nav-item">
                                     <a href="<?= base_url('admin/floors') ?>" class="nav-link" id="FloorsTab">
                                         <i class="far fa-building nav-icon"></i>
                                         <p>Floors</p>
@@ -184,7 +203,7 @@
                                         <i class="far fa-building nav-icon"></i>
                                         <p>Rooms</p>
                                     </a>
-                                </li>
+                                </li>*/?>
                             </ul>
                         </li>
                         <li class="nav-item">
