@@ -6,7 +6,7 @@ use Modules\Admin\Models\UtilModel;
 class BuildingModel extends Model {
     protected $table='building';
     protected $primaryKey='BID';
-    protected $allowedFields = ['OrgID','BuildingName','BrID','Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+    protected $allowedFields = ['OrgID','BrID','BuildingName','Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
@@ -71,10 +71,6 @@ class BuildingModel extends Model {
         $utilmodel = new UtilModel;
         $pagelinks = $utilmodel->build_pagelinks($actual_link, $previous_page, $next_page, $totalPages, $adjacents, $page, $second_last);
         $branch['pagelinks'] = $pagelinks;
-        return $branch;
-
-
-     
+        return $branch;     
     }
-    
 }

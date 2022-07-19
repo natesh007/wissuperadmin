@@ -6,6 +6,7 @@ use Modules\Admin\Models\FloorModel;
 use Modules\Admin\Models\RoomModel;
 use Modules\Admin\Models\BranchModel;
 use Modules\Admin\Models\AdminsModel;
+use Modules\Admin\Models\BlockModel;
 
 class Building extends BaseController
 {
@@ -116,44 +117,55 @@ class Building extends BaseController
 		$FloorModel = new FloorModel();
 		$RoomModel = new RoomModel();
         $AdminsModel = new AdminsModel();
-        //echo $session->get('AID');exit;
+        $BlockModel = new BlockModel();
         $data['organizations'] = $AdminsModel->getmasterdata('organization');
-        //echo "<pre>";print_r($data['building_types'] );exit;
 		if ($this->request->getMethod() == 'post') {
-			echo "<pre>";print_r($this->request->getVar());
-			exit;
 			$buildingdata = [
 				'OrgID' => $this->request->getVar('OrgID'),  
-				'BuildingName' => $this->request->getVar('BuildingName'),
 				'BrID' => $this->request->getVar('BrID'),
+				'BuildingName' => $this->request->getVar('BuildingName'),
                 'Status' => 1
 			];
-			$buildingsave = $BuildingModel->insert($buildingdata);
-			$buildingid = $BuildingModel->getInsertID();
-
-			$floors = $this->request->getVar('FloorName');
-			for($i=1;$i<=count($floors);$i++){
-				$floordata = [
-					'OrgID' => $this->request->getVar('OrgID'),	
-					'BID' => $buildingid,
-					'FloorName' => $this->request->getVar('FloorName')[$i],
-					'Status' => 1
-				];
-				$floorsave = $FloorModel->insert($floordata);
-				$floorid = $FloorModel->getInsertID();
-				$rooms = $this->request->getVar('RoomName');
-				for($j=0;$j<count($rooms[$i]);$j++){
-					$roomdata = [
-						'OrgID' => $this->request->getVar('OrgID'),	
-						'BID' => $buildingid,
-						'FID' => $floorid,
-						'RoomName' => $this->request->getVar('RoomName')[$i][$j],
-						'Status' => 1
-					];
-					$roomsave = $RoomModel->insert($roomdata);
-					//$floorid = $FloorModel->getInsertID();
-					
-				}				
+			$buildingid = $BuildingModel->insert($buildingdata);
+			if($buildingid){
+				for($i = 1; $i <= count($this->request->getVar('BlockName')); $i++){
+					if($this->request->getVar('BlockName')[$i]){
+						$blockdata = [
+							'OrgID' => $this->request->getVar('OrgID'),  
+							'BID' => $buildingid,
+							'BlockName' => $this->request->getVar('BlockName')[$i],
+							'Status' => 1
+						];
+						$blockid = $BlockModel->insert($blockdata);
+						if($blockid){
+							for($j = 1; $j <= count($this->request->getVar('FloorName')[$i]); $j++){
+								if($this->request->getVar('FloorName')[$i][$j]){
+									$floordata = [
+										'OrgID' => $this->request->getVar('OrgID'),  
+										'BKID' => $blockid,
+										'FloorName' => $this->request->getVar('FloorName')[$i][$j],
+										'Status' => 1
+									];
+									$floorid = $FloorModel->insert($floordata);
+									if($floorid){
+										for($k = 1; $k <= count($this->request->getVar('RoomName')[$i][$j]); $k++){
+											if($this->request->getVar('RoomName')[$i][$j][$k]){
+												$roomdata = [
+													'OrgID' => $this->request->getVar('OrgID'),  
+													'BKID' => $blockid,
+													'FID' => $floorid,
+													'RoomName' => $this->request->getVar('RoomName')[$i][$j][$k],
+													'Status' => 1
+												];
+												$roomid = $RoomModel->insert($roomdata);	
+											}								
+										}
+									}				
+								}	
+							}	
+						}
+					}		
+				}
 			}
 			$msg = 'Data Saved Successfully';
 			return redirect()->to(base_url('admin/buildings'))->with('msg', $msg);
@@ -170,8 +182,7 @@ class Building extends BaseController
 		$RoomModel = new RoomModel();
 		$BranchModel = new BranchModel();
         $AdminsModel = new AdminsModel();
-        //echo $session->get('AID');exit;
-		$data['building'] = $BuildingModel->where('BID', $id)->first();
+        $data['building'] = $BuildingModel->where('BID', $id)->first();
         $data['organizations'] = $AdminsModel->getmasterdata('organization');
 		$data['branches'] = $BranchModel->where('OrgID', $data['building']['OrgID'])->findAll();
 		$rooms=[];

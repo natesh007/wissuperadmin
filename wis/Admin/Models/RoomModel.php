@@ -6,7 +6,7 @@ use Modules\Admin\Models\UtilModel;
 class RoomModel extends Model {
     protected $table='room';
     protected $primaryKey='RID';
-    protected $allowedFields = ['OrgID','BID','FID','RoomName', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+    protected $allowedFields = ['OrgID','BKID','FID','RoomName', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
