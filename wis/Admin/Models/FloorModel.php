@@ -6,7 +6,7 @@ use Modules\Admin\Models\UtilModel;
 class FloorModel extends Model {
     protected $table='floor';
     protected $primaryKey='FID';
-    protected $allowedFields = ['OrgID','BKID','FloorName', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+    protected $allowedFields = ['OrgID','BID','BKID','FloorName', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];

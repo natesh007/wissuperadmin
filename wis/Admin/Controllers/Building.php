@@ -142,6 +142,7 @@ class Building extends BaseController
 								if($this->request->getVar('FloorName')[$i][$j]){
 									$floordata = [
 										'OrgID' => $this->request->getVar('OrgID'),  
+										'BID' => $buildingid,
 										'BKID' => $blockid,
 										'FloorName' => $this->request->getVar('FloorName')[$i][$j],
 										'Status' => 1
@@ -152,6 +153,7 @@ class Building extends BaseController
 											if($this->request->getVar('RoomName')[$i][$j][$k]){
 												$roomdata = [
 													'OrgID' => $this->request->getVar('OrgID'),  
+													'BID' => $buildingid,
 													'BKID' => $blockid,
 													'FID' => $floorid,
 													'RoomName' => $this->request->getVar('RoomName')[$i][$j][$k],
@@ -176,60 +178,64 @@ class Building extends BaseController
 
 	public function edit_building($id = null)
 	{
-		
 		$BuildingModel = new BuildingModel();
 		$FloorModel = new FloorModel();
 		$RoomModel = new RoomModel();
 		$BranchModel = new BranchModel();
         $AdminsModel = new AdminsModel();
-        $data['building'] = $BuildingModel->where('BID', $id)->first();
-        $data['organizations'] = $AdminsModel->getmasterdata('organization');
+        $BlockModel = new BlockModel();
+        $data['building'] = $BuildingModel->get_building_data($id);
+		$data['organizations'] = $AdminsModel->getmasterdata('organization');
 		$data['branches'] = $BranchModel->where('OrgID', $data['building']['OrgID'])->findAll();
-		$rooms=[];
-		$data['floors'] = $FloorModel->where('BID',$id)->findAll();
-		foreach($data['floors'] as $fl){
-			$rooms[$fl['FID']] = $RoomModel->where('FID',$fl['FID'])->findAll();
-		}
-		$data['rooms'] = $rooms;
-		
 		if ($this->request->getMethod() == 'post') {
-			
-		//echo "<pre>";print_r($this->request->getVar());exit;				
-			$data = [
+			$buildingdata = [
 				'OrgID' => $this->request->getVar('OrgID'),  
-				'BrID' => $this->request->getVar('BrID'),  
-				'BuildingName' => $this->request->getVar('BuildingName')
-			];
-			//print_r($data);exit;
-			$BuildingModel->update($id, $data);
-			
-			$floors = $this->request->getVar('FloorName');
-			if($floors){
-				$FloorModel->where('BID', $id)->delete();//delete all floors
-				$RoomModel->where('BID', $id)->delete();//delete all rooms
-				for($i=0;$i<count($floors);$i++){
-					$floordata = [
-						'OrgID' => $this->request->getVar('OrgID'),	
+				'BrID' => $this->request->getVar('BrID'),
+				'BuildingName' => $this->request->getVar('BuildingName'),
+            ];
+			$BuildingModel->update($id, $buildingdata);
+			$BlockModel->where('BID', $id)->delete();
+			$FloorModel->where('BID', $id)->delete();
+			$RoomModel->where('BID', $id)->delete();
+			for($i = 1; $i <= count($this->request->getVar('BlockName')); $i++){
+				if($this->request->getVar('BlockName')[$i]){
+					$blockdata = [
+						'OrgID' => $this->request->getVar('OrgID'),  
 						'BID' => $id,
-						'FloorName' => $this->request->getVar('FloorName')[$i],
+						'BlockName' => $this->request->getVar('BlockName')[$i],
 						'Status' => 1
 					];
-					$floorsave = $FloorModel->insert($floordata);
-					$floorid = $FloorModel->getInsertID();
-					$rooms = $this->request->getVar('RoomName');
-					for($j=0;$j<count($rooms[$i]);$j++){
-						$roomdata = [
-							'OrgID' => $this->request->getVar('OrgID'),	
-							'BID' => $id,
-							'FID' => $floorid,
-							'RoomName' => $this->request->getVar('RoomName')[$i][$j],
-							'Status' => 1
-						];
-						$roomsave = $RoomModel->insert($roomdata);
-						//$floorid = $FloorModel->getInsertID();
-						
-					}				
-				}
+					$blockid = $BlockModel->insert($blockdata);
+					if($blockid){
+						for($j = 1; $j <= count($this->request->getVar('FloorName')[$i]); $j++){
+							if($this->request->getVar('FloorName')[$i][$j]){
+								$floordata = [
+									'OrgID' => $this->request->getVar('OrgID'),  
+									'BID' => $id,
+									'BKID' => $blockid,
+									'FloorName' => $this->request->getVar('FloorName')[$i][$j],
+									'Status' => 1
+								];
+								$floorid = $FloorModel->insert($floordata);
+								if($floorid){
+									for($k = 1; $k <= count($this->request->getVar('RoomName')[$i][$j]); $k++){
+										if($this->request->getVar('RoomName')[$i][$j][$k]){
+											$roomdata = [
+												'OrgID' => $this->request->getVar('OrgID'),  
+												'BID' => $id,
+												'BKID' => $blockid,
+												'FID' => $floorid,
+												'RoomName' => $this->request->getVar('RoomName')[$i][$j][$k],
+												'Status' => 1
+											];
+											$roomid = $RoomModel->insert($roomdata);	
+										}								
+									}
+								}				
+							}	
+						}	
+					}
+				}		
 			}
 			$msg = 'Data Updated Successfully';
 			return redirect()->to(base_url('admin/buildings'))->with('msg', $msg);
@@ -241,12 +247,14 @@ class Building extends BaseController
 	public function deletebuilding()
 	{
 		$BuildingModel = new BuildingModel();
+		$BlockModel = new BlockModel();
 		$FloorModel = new FloorModel();
 		$RoomModel = new RoomModel();
 		$id = $this->request->getVar('Id');
-		$BuildingModel->where('BID', $id)->delete();//delete all floors
-		$FloorModel->where('BID', $id)->delete();//delete all floors
-		$RoomModel->where('BID', $id)->delete();//delete all rooms 
+		$BuildingModel->where('BID', $id)->delete();
+		$BlockModel->where('BID', $id)->delete();
+		$FloorModel->where('BID', $id)->delete();
+		$RoomModel->where('BID', $id)->delete();
 		echo 1;
 		exit;
 	}
