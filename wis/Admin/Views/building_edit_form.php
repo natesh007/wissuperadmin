@@ -95,17 +95,45 @@
 																		<button type="button" class="btn btn-sm btn-success" onclick="AddMoreRooms(<?= $i ?>, <?= $j ?>)"><span class="fa fa-plus"></span> Add Room</button>
 																	</div>
 																</div>
+															<?php }else{ ?>
+																<label for="RoomName">Room Name<strong class="help-block">*</strong></label>
+																<div class="row">
+																	<div class="col-md-3 mb-2 MainRoom_<?= $i ?>_1">
+																		<input type="text" name="RoomName[<?= $i ?>][1][1]" class="form-control" placeholder="Enter Room Name" autocomplete="off"/>
+																	</div>
+																	<div class="col-md-2 my-auto">
+																		<button type="button" class="btn btn-sm btn-success" onclick="AddMoreRooms(<?= $i ?>, 1)"><span class="fa fa-plus"></span> Add Room</button>
+																	</div>
+																</div>
 															<?php } if($j > 1){ ?>
 																<div class="col-md-12 text-right"><button type="button" class="btn btn-sm btn-danger RemoveFloorBtn"><span class="fa fa-minus"></span> Remove Floor</button></div>
 															<?php } ?>
 															<hr>
 														</div>
-													<?php $j++; } 
-												} ?>
-												<div class="col-md-12 text-right">
-													<button type="button" class="btn btn-sm btn-success" id="AddMoreFloorsBtn<?= $i ?>" onclick="AddMoreFloors(<?= $i ?>, <?= $j ?>)"><span class="fa fa-plus"></span> Add Floor</button>
-													&nbsp;
-												</div>
+													<?php $j++; } ?>
+													<div class="col-md-12 text-right">
+														<button type="button" class="btn btn-sm btn-success" id="AddMoreFloorsBtn<?= $i ?>" onclick="AddMoreFloors(<?= $i ?>, <?= $j ?>)"><span class="fa fa-plus"></span> Add Floor</button>
+													</div>
+												<?php }else{ ?>
+													<div class="MainFloor<?= $i ?>">
+														<div class="form-group row">
+															<div class="col-md-4">
+																<label for="FloorName">Floor Name<strong class="help-block">*</strong></label>
+																<input type="text" name="FloorName[<?= $i ?>][1]" class="form-control" placeholder="Enter Floor Name" autocomplete="off">
+															</div>
+														</div>
+														<label for="RoomName">Room Name<strong class="help-block">*</strong></label>
+														<div class="row">
+															<div class="col-md-3 mb-2 MainRoom_<?= $i ?>_1">
+																<input type="text" name="RoomName[<?= $i ?>][1][1]" class="form-control" placeholder="Enter Room Name" autocomplete="off"/>
+															</div>
+															<div class="col-md-2 my-auto">
+																<button type="button" class="btn btn-sm btn-success" onclick="AddMoreRooms(<?= $i ?>, 1)"><span class="fa fa-plus"></span> Add Room</button>
+															</div>
+														</div>
+														<hr>
+													</div>
+												<?php } ?>
 											</div>
 										</div>
 										<?php if($i > 1){ ?>
@@ -180,7 +208,7 @@
 				$(this).closest('div.TotalBlock').remove();
 			});
 
-			$('#add_building').validate({
+			$('#edit_building').validate({
 				ignore: [],
 				rules: {
 					OrgID: { required: true },

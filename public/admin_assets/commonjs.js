@@ -23,11 +23,11 @@ function deletedata(Id, tbl, col, img, thumb) {
     location.reload();
   });
 }
-function deletebuildingdata(Id, tbl, col, img, thumb) {
+function deletebuildingdata(Id) {
   $.ajax({
     type: "POST",
     url: baseURL + "/admin/buildings/deletebuilding",
-    data: { table: tbl, Id: Id, column: col, Image: img, Thumb: thumb},
+    data: { Id: Id},
     async: false,
   }).done(function (data) {
     location.reload();

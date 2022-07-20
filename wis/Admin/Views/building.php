@@ -114,7 +114,6 @@
 										<th width="70px"> All &nbsp;<input type="checkbox" id="select_all" class="select_all"></th>
 										<th>Building Name</th>
 										<th>Organization</th>
-										
 										<th width="110">Actions</th>
 									</tr>
 								</thead>
@@ -133,9 +132,6 @@
 											<td>
 												<?= $cnty['OrgName']; ?>
 											</td>
-											
-											
-											
 											<td>
 												<?php if ($cnty['Status'] == 1) { ?>
 													<button data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-success inactive" onclick="activate_inactivate(<?= $cnty['BID']; ?>,'building','BID',0)"><span class="fa fa-check"></span></button>
@@ -143,7 +139,7 @@
 													&nbsp;<button data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-warning " onclick="activate_inactivate(<?= $cnty['BID']; ?>,'building','BID',1)"><span class="fa fa-times"></span></button>
 												<?php } ?>
 												&nbsp;<a data-toggle="tooltip" href="<?= base_url('admin/buildings/edit_building/' . $cnty['BID']); ?>" title="Edit" class="btn btn-xs btn-primary"><span class="fa fa-pen"></span></a>
-												&nbsp;<button data-toggle="tooltip" onclick="deletebuildingdata('<?= $cnty['BID'] ?>','building','BID', '', '')" title="Delete" class="btn btn-xs btn-danger"><span class="fa fa-trash"></span></button>
+												&nbsp;<button data-toggle="tooltip" onclick="deletebuildingdata('<?= $cnty['BID'] ?>')" title="Delete" class="btn btn-xs btn-danger"><span class="fa fa-trash"></span></button>
 											</td>
 										</tr>
 										
