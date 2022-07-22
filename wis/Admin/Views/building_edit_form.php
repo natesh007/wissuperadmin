@@ -64,7 +64,7 @@
 										<div class="form-group row">
 											<div class="col-md-4">
 												<label for="BlockName">Block Name<strong class="help-block">*</strong></label>
-												<input type="text" name="BlockName[<?= $i ?>]" class="form-control" placeholder="Enter Block Name" autocomplete="off" value="<?= $block['BlockName']; ?>">
+												<input type="text" name="BlockName[<?= ($i == 1) ? $i : ''; ?>]" class="form-control" placeholder="Enter Block Name" autocomplete="off" value="<?= $block['BlockName']; ?>">
 											</div>
 										</div>
 										<div class="card">
@@ -76,7 +76,7 @@
 															<div class="form-group row">
 																<div class="col-md-4">
 																	<label for="FloorName">Floor Name<strong class="help-block">*</strong></label>
-																	<input type="text" name="FloorName[<?= $i ?>][<?= $j ?>]" class="form-control" placeholder="Enter Floor Name" autocomplete="off" value="<?= $floor['FloorName']; ?>">
+																	<input type="text" name="FloorName[<?= $i ?>][<?= ($j == 1) ? $j : ''; ?>]" class="form-control" placeholder="Enter Floor Name" autocomplete="off" value="<?= $floor['FloorName']; ?>">
 																</div>
 															</div>
 															<?php if(!empty(@$floor['rooms'])){ ?>
@@ -85,9 +85,9 @@
 																 	<?php $k = 1; 
 																	foreach($floor['rooms'] as $room){ ?>
 																		<div class="col-md-3 mb-2 MainRoom_<?= $i ?>_<?= $j ?> <?php if($k > 1) echo 'RoomBlk'; ?>">
-																			<input type="text" name="RoomName[<?= $i ?>][<?= $j ?>][<?= $k ?>]" class="form-control" placeholder="Enter Room Name" autocomplete="off" value="<?= $room['RoomName']; ?>"/>
+																			<input type="text" name="RoomName[<?= $i ?>][<?= $j ?>][<?= ($k == 1) ? $k : ''; ?>]" class="form-control" placeholder="Enter Room Name" autocomplete="off" value="<?= $room['RoomName']; ?>"/>
 																			<?php if($k > 1){ ?>
-																				<button type="button" class="btn btn-sm btn-danger RemoveRoomBtn" style="float: right; margin-top: -38px; height: calc(2.25rem + 2px);"><span class="fa fa-minus"></span></button>
+																				<button type="button" class="btn btn-sm btn-danger" style="float: right; margin-top: -38px; height: calc(2.25rem + 2px);" onclick="removerelatedrecords(<?= $room['RID']; ?>, 'room')"><span class="fa fa-minus"></span></button>
 																			<?php } ?>
 																		</div>
 																	<?php $k++; } ?>
@@ -98,15 +98,15 @@
 															<?php }else{ ?>
 																<label for="RoomName">Room Name<strong class="help-block">*</strong></label>
 																<div class="row">
-																	<div class="col-md-3 mb-2 MainRoom_<?= $i ?>_1">
-																		<input type="text" name="RoomName[<?= $i ?>][1][1]" class="form-control" placeholder="Enter Room Name" autocomplete="off"/>
+																	<div class="col-md-3 mb-2 MainRoom_<?= $i ?>_<?= $j ?>">
+																		<input type="text" name="RoomName[<?= $i ?>][<?= $j ?>][1]" class="form-control" placeholder="Enter Room Name" autocomplete="off"/>
 																	</div>
 																	<div class="col-md-2 my-auto">
-																		<button type="button" class="btn btn-sm btn-success" onclick="AddMoreRooms(<?= $i ?>, 1)"><span class="fa fa-plus"></span> Add Room</button>
+																		<button type="button" class="btn btn-sm btn-success" onclick="AddMoreRooms(<?= $i ?>, <?= $j ?>)"><span class="fa fa-plus"></span> Add Room</button>
 																	</div>
 																</div>
 															<?php } if($j > 1){ ?>
-																<div class="col-md-12 text-right"><button type="button" class="btn btn-sm btn-danger RemoveFloorBtn"><span class="fa fa-minus"></span> Remove Floor</button></div>
+																<div class="col-md-12 text-right"><button type="button" class="btn btn-sm btn-danger" onclick="removerelatedrecords(<?= $floor['FID']; ?>, 'floor')"><span class="fa fa-minus"></span> Remove Floor</button></div>
 															<?php } ?>
 															<hr>
 														</div>
@@ -133,11 +133,14 @@
 														</div>
 														<hr>
 													</div>
+													<div class="col-md-12 text-right">
+														<button type="button" class="btn btn-sm btn-success" id="AddMoreFloorsBtn<?= $i ?>" onclick="AddMoreFloors(<?= $i ?>, <?= $j ?>)"><span class="fa fa-plus"></span> Add Floor</button>
+													</div>
 												<?php } ?>
 											</div>
 										</div>
 										<?php if($i > 1){ ?>
-											<div class="col-md-12 text-right"><button type="button" class="btn btn-sm btn-danger RemoveBlockBtn"><span class="fa fa-minus"></span> Remove Block</button></div>
+											<div class="col-md-12 text-right"><button type="button" class="btn btn-sm btn-danger" onclick="removerelatedrecords(<?= $block['BKID']; ?>, 'block')"><span class="fa fa-minus"></span> Remove Block</button></div>
 										<?php } ?>
 										<hr>
 									</div>
@@ -230,6 +233,12 @@
 					return true;
 				}
 			});
+			function removerelatedrecords(ID, Table){
+				$.post("<?= base_url() ?>/admin/buildings/removerelatedrecords", {ID: ID, Table: Table}, function(data, status){
+					if(data == 1)
+						window.location.href = window.location.href;
+				});
+			}
 		</script>
 	</body>
 </html>
