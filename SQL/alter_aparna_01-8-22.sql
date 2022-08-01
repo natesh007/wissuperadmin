@@ -1,0 +1,1 @@
+ALTER TABLE `complaints` ADD `Name` VARCHAR(255) NOT NULL AFTER `DeptID`, ADD `Mobile` VARCHAR(15) NOT NULL AFTER `Name`;
