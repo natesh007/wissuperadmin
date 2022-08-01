@@ -102,6 +102,7 @@ $routes->add('/admin/inactive_buildings', 'Building::inactive_buildings', ['name
 $routes->add('/admin/buildings/add_building', 'Building::add_building', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/buildings/edit_building/(:num)', 'Building::edit_building/$1', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/buildings/deletebuilding', 'Building::deletebuilding', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/buildings/removerelatedrecords', 'Building::removerelatedrecords', ['namespace' => 'Modules\Admin\Controllers']);
 
 // Blocks Routes
 $routes->add('/admin/blocks', 'Block::index', ['namespace' => 'Modules\Admin\Controllers']);
