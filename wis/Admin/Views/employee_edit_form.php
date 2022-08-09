@@ -146,6 +146,19 @@
 										</div>
 									</div>
 									<div class="form-group row">
+									<div class="col-md-6">
+											<label for="BrID">Shift</label>
+											<select class="form-control" name="Shift" >
+												<option disabled selected value="0">Select Shift</option>
+												<?php foreach($shifts as $shift){
+													echo '<option value="' . $shift['ShID'] . '"';
+													if($shift['ShID'] == $employee['Shift']){
+														echo ' selected';
+													}
+													echo '>' . $shift['ShiftName'] . '</option>' ;
+												} ?>
+											</select>
+										</div>
 										<div class="col-md-6">
 											<label for="Address">Address </label>
 											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address" /><?= $employee['Address'];?></textarea>

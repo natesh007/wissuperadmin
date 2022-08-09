@@ -112,9 +112,9 @@ class Shift extends BaseController
 		$ShiftModel = new ShiftModel();
 		if ($this->request->getMethod() == 'post') {
 			$data = [
-				'ShCode' => $this->request->getVar('ShCode'),
-                'ShType' => $this->request->getVar('ShType'),
-                'ShCode' => $this->request->getVar('ShCode'),
+				'ShiftDesc' => $this->request->getVar('ShiftDesc'),
+                'ShiftName' => $this->request->getVar('ShiftName'),
+                'ShiftDesc' => $this->request->getVar('ShiftDesc'),
 				'Status' => 1
 			];
 			$save = $ShiftModel->insert($data);
@@ -133,9 +133,9 @@ class Shift extends BaseController
 		//echo "<pre>";print_r($data['shifts']);exit;
 		if ($this->request->getMethod() == 'post') {
 			$data = [
-				'ShCode' => $this->request->getVar('ShCode'),
-                'ShType' => $this->request->getVar('ShType'),
-                'ShCode' => $this->request->getVar('ShCode')				
+				'ShiftDesc' => $this->request->getVar('ShiftDesc'),
+                'ShiftName' => $this->request->getVar('ShiftName'),
+                'ShiftDesc' => $this->request->getVar('ShiftDesc')				
 			];
 			//print_r($data);exit;
 			$ShiftModel->update($id, $data);

@@ -6,7 +6,7 @@ use Modules\Admin\Models\UtilModel;
 class ShiftModel extends Model {
     protected $table='shifts';
     protected $primaryKey='ShID';
-    protected $allowedFields = ['ShType', 'ShCode', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+    protected $allowedFields = ['ShiftName', 'ShiftDesc', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
@@ -29,11 +29,11 @@ class ShiftModel extends Model {
         $start_from = ($page - 1) * $perpage;
         $query = 'SELECT s.*, a.Name FROM shifts s left join admins a on a.AID = s.UpdatedBy';
         if ($keyword !=''&& $status !='') {
-            $query .=' where s.ShType  like "%'. $keyword . '%" AND s.Status = '.$status;
+            $query .=' where s.ShiftName  like "%'. $keyword . '%" AND s.Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $query .=' where s.ShType  like "%'. $keyword . '%"';
+            $query .=' where s.ShiftName  like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {
@@ -43,11 +43,11 @@ class ShiftModel extends Model {
         $shifts['results'] = $this->db->query($query)->getResultArray();
         $countquery = 'SELECT count(ShID) as ttl_rows FROM shifts';
         if ($keyword !=''&& $status !='') {
-            $countquery .=' where ShType  like "%'. $keyword . '%" AND Status = '.$status;
+            $countquery .=' where ShiftName  like "%'. $keyword . '%" AND Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $countquery .=' where ShType like "%'. $keyword . '%"';
+            $countquery .=' where ShiftName like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {

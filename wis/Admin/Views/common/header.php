@@ -186,13 +186,13 @@
                                         <p>Buildings</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <?php /*<li class="nav-item">
                                     <a href="<?= base_url('admin/blocks') ?>" class="nav-link" id="BlocksTab">
                                         <i class="far fa-building nav-icon"></i>
                                         <p>Blocks</p>
                                     </a>
                                 </li>
-                                <?php /*<li class="nav-item">
+                                <li class="nav-item">
                                     <a href="<?= base_url('admin/floors') ?>" class="nav-link" id="FloorsTab">
                                         <i class="far fa-building nav-icon"></i>
                                         <p>Floors</p>

@@ -21,13 +21,13 @@
 								<form class="form-horizontal" method="post" action="<?= base_url('admin/shifts/edit_shift/'.$shift['ShID']) ?>" style="width:100%" id="edit_shift" method="post">
 									<div class="form-group row">
 										<div class="col-md-6">
-											<label for="ShType">Shift Type<strong class="help-block">*</strong></label>
-											<input type="text" class="form-control" id="ShType" name="ShType" placehoder="Enter Shift Type"  value="<?= $shift['ShType'];?>"/>
+											<label for="ShiftName">Shift Name<strong class="help-block">*</strong></label>
+											<input type="text" class="form-control" id="ShiftName" name="ShiftName" placehoder="Enter Shift Name"  value="<?= $shift['ShiftName'];?>"/>
 											<span id="name_error"></span>
 										</div>
 										<div class="col-md-6">
-											<label for="ShCode">Shift Code</label>
-											<input type="text" class="form-control" id="ShCode" name="ShCode" placehoder="Enter Shift Code" value="<?= $shift['ShCode'];?>" />
+											<label for="ShiftDesc">Shift Desc</label>
+											<input type="text" class="form-control" id="ShiftDesc" name="ShiftDesc" placehoder="Enter Shift Desc" value="<?= $shift['ShiftDesc'];?>" />
 											<span id="code_error"></span>
 										</div>
 										
@@ -50,9 +50,9 @@
 		<?= view('Modules\Admin\Views\common\footer'); ?>
 		<script>
 			$("#edit_shift").submit(function(event) {
-				var ShType = $('#ShType').val();
-				var ShCode = $('#ShCode').val();
-				if(ShType == '')
+				var ShiftName = $('#ShiftName').val();
+				var ShiftDesc = $('#ShiftDesc').val();
+				if(ShiftName == '')
 				{
 					event.preventDefault();
 					$('#name_error').css('color','red');

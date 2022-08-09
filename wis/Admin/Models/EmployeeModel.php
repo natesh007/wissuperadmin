@@ -6,7 +6,7 @@ use Modules\Admin\Models\UtilModel;
 class EmployeeModel extends Model {
     protected $table='employees';
     protected $primaryKey='EmpID';
-    protected $allowedFields = ['RoleID','EmpName','DeptID','OrgID','JobTID','Gender','EmailID','Password','Address','Contact','JobType','City','DateOfJoining','Doc', 'ProfilePic','Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+    protected $allowedFields = ['RoleID','EmpName','DeptID','OrgID','JobTID','Gender','EmailID','Password','Address','Contact','JobType','City','DateOfJoining','Doc', 'ProfilePic','Status','Shift','CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];

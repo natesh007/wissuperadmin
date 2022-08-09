@@ -145,6 +145,7 @@ class Employee extends BaseController
 		$data['jobtitles'] = $AdminsModel->getmasterdata('jobtitle');
 		$data['branches'] = $AdminsModel->getmasterdata('branches');
         $data['roles'] = $AdminsModel->getmasterdata('roles');
+		$data['shifts'] = $AdminsModel->getmasterdata('shifts');
 		$data['total_cats'] = $this->buildTree($data['departments'], 'ParentDept', 'DeptID');
 		$data['error']="";
 		if ($this->request->getMethod() == 'post') {
@@ -167,7 +168,8 @@ class Employee extends BaseController
 						'DateOfJoining' => $this->request->getVar('DateOfJoining'),
 						'Doc' => '',
 						'ProfilePic' =>'',
-						'Status' => 1
+						'Status' => 1,
+						'Shift' => $this->request->getVar('Shift')
 					];
 					if ($this->request->getVar('ParentDept') != '') {
 						$departmentdata['ParentDept'] = $this->request->getVar('ParentDept');
@@ -206,6 +208,7 @@ class Employee extends BaseController
 		$JobtitleModel = new JobtitleModel();
 		$data['organizations'] = $AdminsModel->getmasterdata('organization');
 		$data['roles'] = $AdminsModel->getmasterdata('roles');
+		$data['shifts'] = $AdminsModel->getmasterdata('shifts');
 		$data['employee'] = $EmployeeModel->where('EmpID', $id)->first();
 		$data['departments'] = $DepartmentsModel->where('OrgID',$data['employee']['OrgID'])->findAll();
         $data['total_cats'] = $this->buildTree($data['departments'], 'ParentDept', 'DeptID');
@@ -240,6 +243,7 @@ class Employee extends BaseController
 						'DateOfJoining' => $this->request->getVar('DateOfJoining'),
 						'Doc' => '',
 						'ProfilePic' =>'',
+						'Shift' => $this->request->getVar('Shift')
 					];
 					
 					if ($this->request->getVar('ParentDept') != '') {
@@ -281,6 +285,7 @@ class Employee extends BaseController
 					'DateOfJoining' => $this->request->getVar('DateOfJoining'),
 					'Doc' => '',
 					'ProfilePic' =>'',
+					'Shift' => $this->request->getVar('Shift')
 				];
 				
 				if ($this->request->getVar('ParentDept') != '') {

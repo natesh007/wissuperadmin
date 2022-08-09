@@ -113,8 +113,8 @@
 								<thead>
 									<tr>
 										<th width="70px"> All &nbsp;<input type="checkbox" id="select_all" class="select_all"></th>
-										<th>Shifts Type</th>
-										<th>Shift Code</th>
+										<th>Shifts Name</th>
+										<th>Shift Description</th>
 										<th width="110">Actions</th>
 									</tr>
 								</thead>
@@ -128,10 +128,10 @@
 												<input type="checkbox" name="" class="delete_checkbox" value="<?= $cnty['ShID']; ?>">
 											</td>
 											<td>
-												<?= $cnty['ShType']; ?>
+												<?= $cnty['ShiftName']; ?>
 											</td>
 											<td>
-												<?= $cnty['ShCode']; ?>
+												<?= $cnty['ShiftDesc']; ?>
 											</td>
 											
 											<td>

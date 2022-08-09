@@ -1,0 +1,1 @@
+ALTER TABLE `complaints` ADD `AssignedNote` TEXT NOT NULL AFTER `Mobile`;
