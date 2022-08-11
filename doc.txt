@@ -1,9 +1,11 @@
-Complaint Management:
+wisadmin:
+add active/inactive search
+download as pdf, download execel -- all downloads
+branch admin
 
-blocks module
-complaint categories module
-category, organization multi select, caegory icon
-common complaint
 
-complain form:
+Wissuperadmin:
+organization logo upload
 
+
+data import my excel -- departments,building, blocks,floor and room
