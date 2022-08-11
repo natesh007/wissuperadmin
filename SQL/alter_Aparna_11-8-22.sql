@@ -1,0 +1,1 @@
+ALTER TABLE `organization` ADD `Logo` TEXT NOT NULL AFTER `OrgType`;

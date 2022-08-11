@@ -217,7 +217,7 @@ class WisAPI extends REST
 		// Input validations
 		if (!empty($email) and !empty($password)) {
 			if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-				$sql = "SELECT e.OrgID,e.JobTID,e.DeptID,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.Password,e.Gender,e.Address,e.JobType,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate,e.DateOfJoining,e.PreviousExp,e.ProfilePic,o.OrgName,d.DeptName FROM employees as e LEFT JOIN roles as r
+				$sql = "SELECT e.OrgID,e.JobTID,e.DeptID,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.Password,e.Gender,e.Address,e.JobType,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate,e.DateOfJoining,e.PreviousExp,e.ProfilePic,o.OrgName,o.Logo,d.DeptName FROM employees as e LEFT JOIN roles as r
 				ON r.RoleID = e.RoleID LEFT JOIN organization as o
 				ON o.OrgID = e.OrgID LEFT JOIN departments as d
 				ON d.DeptID = e.DeptID WHERE e.EmailID = '" . mysqli_real_escape_string($this->db->mysql_link, $email) . "' AND e.Status=1";
@@ -226,6 +226,32 @@ class WisAPI extends REST
 				
 				if ($this->db->getRowsCount() == 1) {
 					$row = $this->db->getCurrentRow();
+					$qu = $row;
+						$items = array(
+							"OrgID" => $qu->OrgID,
+							"JobTID" => $qu->JobTID,
+							"RoleID" => $qu->RoleID,
+							"DeptID" => $qu->DeptID,
+							"EmpID" => $qu->EmpID,
+							"Password" => $qu->Password,
+							"EmpName" => $qu->EmpName,
+							"EmailID" => $qu->EmailID,
+							"Mobile" => $qu->Contact,
+							"Gender" => $qu->Gender,
+							"Address" => $qu->Address,
+							"JobType" => $qu->JobType,
+							"CreatedDate" => $qu->CreatedDate,
+							"Status" => $qu->Status,
+							"Shift" => $qu->Shift,
+							"PreviousExp" => $qu->PreviousExp,
+							"ProfilePic" => SiteURL.$qu->ProfilePic,
+							"Logi" => SiteURL1.$qu->Logo,
+							"DateOfJoining" => $qu->DateOfJoining,
+							"UpdatedDate" => $qu->UpdatedDate,
+							"OrgName" => $qu->OrgName,
+							"DeptName" => $qu->DeptName
+						);
+					
 					
 				    if (md5($password)==$row->Password) {
 					    
@@ -237,7 +263,7 @@ class WisAPI extends REST
 							$FBTokenID = 0;
 							
 							$jwt = $this->getJWToken($row->EmpID, $row->EmailID, $row->OrgID, $FBTokenID, $this->appSecret);
-							$result = json_decode(json_encode($row), true);
+							$result = json_decode(json_encode($items), true);
 							$result['accessToken'] = $jwt;
 							$result['fb'] = $FBTokenID;
 							$result  = filterUserData($result);
@@ -446,7 +472,7 @@ class WisAPI extends REST
 
 		$query = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName,ParentDept FROM departments where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND BrID IN (".$BrID.")  AND ParentDept = '0' order by DeptID DESC", MYSQLI_ASSOC);
 			
-				//echo $this->db->getLastSQLStatement();exit;
+			//echo $this->db->getLastSQLStatement();exit;
 			//$query = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName FROM departments where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND BrID IN (".$BrID.") AND ParentDept = 0 order by DeptID DESC", MYSQLI_ASSOC);
 
 			foreach ($query as $rec) {
@@ -481,6 +507,7 @@ class WisAPI extends REST
 	    $DeptName = $this->_request['DeptName'];
 		$BrID = $this->_request['BrID'];
 		$SortType = $this->_request['SortType'];//branch,department
+
 		//$query = $this->db->executeQueryAndGetArray("SELECT DeptID,DeptName FROM departments where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND BrID IN (".$BrID.") order by DeptID DESC", MYSQLI_ASSOC);
 
         $sql = "SELECT d.BrID,d.DeptID,d.DeptName,d.ParentDept,b.BrName,d.Status,dd.DeptName as ParentName FROM departments d left join departments dd on dd.DeptID = d.ParentDept left join branches b on b.BrId = d.BrId  where d.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'";
@@ -536,6 +563,7 @@ class WisAPI extends REST
 		$JobTID = $this->_request['JobTID'];
 		$JoiningDate = $this->_request['JoiningDate'];
 		$BrID = $this->_request['BrID'];
+		$Status = $this->_request['Status'];
 
 		$sql1 = "SELECT OrgID,DeptID,DeptName from departments where OrgID = '" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND ParentDept = 0";
 
@@ -545,6 +573,7 @@ class WisAPI extends REST
 		if($BrID != ''){
 			$sql1.=" AND BrID = '" . mysqli_real_escape_string($this->db->mysql_link, $BrID) . "'";
 		}
+	
 		
 		$query = $this->db->executeQueryAndGetArray($sql1, MYSQLI_ASSOC);
 
@@ -575,9 +604,19 @@ class WisAPI extends REST
 					$sql.= "";
 				}
 			}
+
+			if($Status != "" && $JoiningDate!='' && $JobTID != ''){
+				$sql.=" AND N.Status = '" . mysqli_real_escape_string($this->db->mysql_link, $Status) . "'";					
+			}else if($Status != "" && $JoiningDate!='' && $JobTID == ''){
+				$sql.=" AND N.Status = '" . mysqli_real_escape_string($this->db->mysql_link, $Status) . "'";					
+			}else if($Status != "" && $JoiningDate=='' && $JobTID != ''){
+				$sql.=" AND N.Status = '" . mysqli_real_escape_string($this->db->mysql_link, $Status) . "'";					
+			}else if($Status != "" && $JoiningDate=='' && $JobTID == ''){
+				$sql.=" where N.Status = '" . mysqli_real_escape_string($this->db->mysql_link, $Status) . "'";					
+			}
 			
 			
-			//echo $sql;exit;
+			//echo $sql;
 			$query1 = $this->db->executeQueryAndGetArray($sql, MYSQLI_ASSOC);
 			//$query1 = $this->db->executeQueryAndGetArray($sql, MYSQLI_ASSOC);
 			//echo $this->db->getLastSQLStatement();exit;
@@ -777,11 +816,11 @@ class WisAPI extends REST
 			$this->errorMSG(400, "Please enter Gender.");
 		}
 
-		if($ProfilePic == ""){
+		if($ProfilePic == "" || $ProfilePic == NULL){
 			if($Gender == "M"){
-				$ProfilePic = "writable/uploades/ProfilePics/man.png";
+				$ProfilePic = "writable/uploads/ProfilePics/man.png";
 			}else if($Gender == "F"){
-				$ProfilePic = "writable/uploades/ProfilePics/woman.png";
+				$ProfilePic = "writable/uploads/ProfilePics/woman.png";
 			}
 		} 
 
@@ -848,7 +887,7 @@ class WisAPI extends REST
 				"Status" => $qu['Status'],
 				"Shift" => $qu['Shift'],
 				"PreviousExp" => $qu['PreviousExp'],
-				"ProfilePic" => $qu['ProfilePic'],
+				"ProfilePic" => SiteURL.$qu['ProfilePic'],
 				"DateOfJoining" => $qu['DateOfJoining'],
 				"UpdatedDate" => $qu['UpdatedDate'],
 				"BrID" => $Brid
@@ -932,12 +971,12 @@ class WisAPI extends REST
 
 		$ExistPic = $this->db->getFirstRowFirstColumn("SELECT `ProfilePic` FROM `employees` WHERE `EmpID`= '" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "';");
 
-		if($ProfilePic == ""){
+		if($ProfilePic == "" || $ProfilePic == NULL){
 			if($ExistPic == ""){
 				if($Gender == "M"){
-					$ProfilePic = "writable/uploades/ProfilePics/man.png";
+					$ProfilePic = "writable/uploads/ProfilePics/man.png";
 				}else if($Gender == "F"){
-					$ProfilePic = "writable/uploades/ProfilePics/woman.png";
+					$ProfilePic = "writable/uploads/ProfilePics/woman.png";
 				}
 			}else{
 				$ProfilePic = $ExistPic;

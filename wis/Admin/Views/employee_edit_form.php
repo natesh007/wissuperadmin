@@ -24,7 +24,7 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="row">
-								<form class="form-horizontal" method="post" action="<?= base_url('admin/employees/edit_employee/'.$employee['EmpID']) ?>" style="width:100%" id="edit_employee" method="post">	
+								<form class="form-horizontal" method="post" action="<?= base_url('admin/employees/edit_employee/'.$employee['EmpID']) ?>" style="width:100%" id="edit_employee" method="post" enctype="multipart/form-data" >
 									<div class="form-group row">
 										<div class="col-md-6">
 											<label for="EmpName">Employee Name<strong class="help-block">*</strong></label>
@@ -149,7 +149,7 @@
 									<div class="col-md-6">
 											<label for="BrID">Shift</label>
 											<select class="form-control" name="Shift" >
-												<option disabled selected value="0">Select Shift</option>
+												<option value="0">Select Shift</option>
 												<?php foreach($shifts as $shift){
 													echo '<option value="' . $shift['ShID'] . '"';
 													if($shift['ShID'] == $employee['Shift']){
@@ -164,6 +164,18 @@
 											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address" /><?= $employee['Address'];?></textarea>
 										</div>
 									</div>
+									<?php /*<div class="form-group row">
+										<div class="col-md-6">
+											<label for="ProfilePic"> Upload Profile Pic</label>
+											<input type="file" class="form-control" id="ProfilePic" name="ProfilePic" placehoder="Upload Profile Pic" />
+											<span id="name_error"></span>
+
+											<?php if($employee['ProfilePic']){ ?>
+												<input type="hidden" name="OldProfilePic" id="OldProfilePic" value="<?= $employee['ProfilePic']; ?>" />
+												<img src="<?= base_url($employee['ProfilePic']); ?>" alt="image" class="FormImg"/>
+											<?php } ?>
+										</div>
+									</div>*/?>
 									<div class="form-group text-center">
 										<button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Update</button>
 										<a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('employee_page'); ?>" class="btn btn-sm btn-primary">Cancel</a>

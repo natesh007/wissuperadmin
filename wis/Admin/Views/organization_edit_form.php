@@ -18,7 +18,7 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="row">
-								<form class="form-horizontal" method="post" action="<?= base_url('admin/organizations/edit_organization/'.$organization['OrgID']) ?>" style="width:100%" id="edit_organization" method="post">
+								<form class="form-horizontal" method="post" action="<?= base_url('admin/organizations/edit_organization/'.$organization['OrgID']) ?>" style="width:100%" id="edit_organization" method="post" enctype="multipart/form-data" >
 									
 									<div class="form-group row">
 										<div class="col-md-6">
@@ -57,6 +57,19 @@
 											
 										</select>
 										</div>
+
+										<div class="col-md-6">
+											<label for="Logo"> Upload Logo<strong class="help-block">*</strong></label>
+											<input type="file" class="form-control" id="Logo" name="Logo" placehoder="Upload Logo" />
+											<span id="name_error"></span>
+
+											<?php if($organization['Logo']){ ?>
+												<input type="hidden" name="OldLogo" id="OldLogo" value="<?= $organization['Logo']; ?>" />
+												<img src="<?= base_url($organization['Logo']); ?>" alt="image" class="FormImg" width="100"/>
+											<?php } ?>
+										</div>
+										
+
 									</div>
 									
 									<div class="form-group text-center">

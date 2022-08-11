@@ -18,7 +18,7 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="row">
-								<form class="form-horizontal" method="post" action="<?= base_url('admin/organizations/add_organization') ?>" style="width:100%" id="add_organization" method="post">
+								<form class="form-horizontal" method="post" action="<?= base_url('admin/organizations/add_organization') ?>" style="width:100%" id="add_organization" method="post" enctype="multipart/form-data" >
 									<div class="form-group row">
 										<div class="col-md-6">
 											<label for="OrganizationType">Organization Name<strong class="help-block">*</strong></label>
@@ -46,6 +46,12 @@
 												} ?>
 											
 										</select>
+										</div>
+
+										<div class="col-md-6">
+											<label for="Logo"> Logo<strong class="help-block">*</strong></label>
+											<input type="file" class="form-control" id="Logo" name="Logo" placehoder="Upload Logo" required/>
+											<span id="name_error"></span>
 										</div>
 									</div>
 									

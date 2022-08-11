@@ -149,6 +149,22 @@ class Employee extends BaseController
 		$data['total_cats'] = $this->buildTree($data['departments'], 'ParentDept', 'DeptID');
 		$data['error']="";
 		if ($this->request->getMethod() == 'post') {
+
+			/*$img = '';
+			if ($this->request->getFile('ProfilePic') != '') {
+				$orginalextension = $this->request->getFile('ProfilePic')->getClientExtension();
+				$randcharforimg = substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(8 / strlen($x)))), 1, 8);
+				$newimgname = $randcharforimg . '-' . time() . '.' . $orginalextension;
+				$this->request->getFile('ProfilePic')->move(SAURL . WRITEPATH . 'uploads/ProfilePics/', $newimgname);
+				$img = 'writable/uploads/ProfilePics/' . $newimgname;
+			}*/
+
+			if($this->request->getVar('Gender')=='M'){
+				$img = "writable/uploads/ProfilePics/man.png";
+			}else if($this->request->getVar('Gender')=='M'){
+				$img = "writable/uploads/ProfilePics/woman.png";
+			}
+
 			if($this->request->getVar('EmailID')!=""){
 				$exist_emp = $EmployeeModel->where('EmailID',$this->request->getVar('EmailID'))->first();
 				if(!$exist_emp){
@@ -167,7 +183,7 @@ class Employee extends BaseController
 						'City' => '',
 						'DateOfJoining' => $this->request->getVar('DateOfJoining'),
 						'Doc' => '',
-						'ProfilePic' =>'',
+						'ProfilePic' => $img,
 						'Status' => 1,
 						'Shift' => $this->request->getVar('Shift')
 					];
@@ -221,6 +237,29 @@ class Employee extends BaseController
 		}
 		$data['selbranches'] = $selbranches;
 		if ($this->request->getMethod() == 'post') {
+
+			/*$img = '';
+            if ($this->request->getFile('ProfilePic') != '') {
+				if(isset($data['employee']['ProfilePic'])){
+					if(file_exists($data['employee']['ProfilePic'])){
+						unlink($data['employee']['ProfilePic']);
+					}
+				}
+                $orginalextension = $this->request->getFile('ProfilePic')->getClientExtension();
+                $randcharforimg = substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(8 / strlen($x)))), 1, 8);
+                $newimgname = $randcharforimg . '-' . time() . '.' . $orginalextension;
+                $this->request->getFile('ProfilePic')->move(SAURL . 'uploads/ProfilePics/', $newimgname);
+                $img = 'writable/uploads/ProfilePics/' . $newimgname;
+            }else{
+                $img = $this->request->getVar('OldProfilePic') ;
+            }*/
+			if($this->request->getVar('Gender')=='M'){
+				$img = "writable/uploads/ProfilePics/man.png";
+			}else if($this->request->getVar('Gender')=='M'){
+				$img = "writable/uploads/ProfilePics/woman.png";
+			}
+			
+
 			if($data['employee']['EmailID']!=$this->request->getVar('EmailID')){
 				$exist_emp = $EmployeeModel->where('EmailID',$this->request->getVar('EmailID'))->first();
 				if($exist_emp){
@@ -242,7 +281,7 @@ class Employee extends BaseController
 						'City' => '',
 						'DateOfJoining' => $this->request->getVar('DateOfJoining'),
 						'Doc' => '',
-						'ProfilePic' =>'',
+						'ProfilePic' => $img,
 						'Shift' => $this->request->getVar('Shift')
 					];
 					
@@ -284,7 +323,7 @@ class Employee extends BaseController
 					'City' => '',
 					'DateOfJoining' => $this->request->getVar('DateOfJoining'),
 					'Doc' => '',
-					'ProfilePic' =>'',
+					'ProfilePic' => $img,
 					'Shift' => $this->request->getVar('Shift')
 				];
 				

@@ -6,7 +6,7 @@ use Modules\Admin\Models\UtilModel;
 class OrganizationModel extends Model {
     protected $table='organization';
     protected $primaryKey='OrgID';
-    protected $allowedFields = ['OrgName','OrgType', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+    protected $allowedFields = ['OrgName','OrgType','Logo', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];

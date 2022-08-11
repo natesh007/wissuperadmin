@@ -118,11 +118,21 @@ class Organization extends BaseController
 		$data['cities'] = $AdminsModel->getmasterdata('cities');
         //echo "<pre>";print_r($data['organization_types'] );exit;
 		if ($this->request->getMethod() == 'post') {
+
+				$img = '';
+				if ($this->request->getFile('Logo') != '') {
+					$orginalextension = $this->request->getFile('Logo')->getClientExtension();
+					$randcharforimg = substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(8 / strlen($x)))), 1, 8);
+					$newimgname = $randcharforimg . '-' . time() . '.' . $orginalextension;
+					$this->request->getFile('Logo')->move(WRITEPATH . 'uploads/organization/', $newimgname);
+					$img = 'writable/uploads/organization/' . $newimgname;
+				}
 			$cities=$this->request->getVar('cities');
 			if($cities){
 				$data = [
 					'OrgName' => $this->request->getVar('OrgName'),  
 					'OrgType' => $this->request->getVar('OrgType'),
+					'Logo' => $img,
 					'Status' => 1
 				];
 			
@@ -165,12 +175,32 @@ class Organization extends BaseController
 		}
 		$data['selcities'] = $selcities;
 		if ($this->request->getMethod() == 'post') {
+
+			$img = '';
+            if ($this->request->getFile('Logo') != '') {
+				if(isset($data['organization']['Logo'])){
+					if(file_exists($data['organization']['Logo'])){
+						unlink($data['organization']['Logo']);
+					}
+				}
+                $orginalextension = $this->request->getFile('Logo')->getClientExtension();
+                $randcharforimg = substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(8 / strlen($x)))), 1, 8);
+                $newimgname = $randcharforimg . '-' . time() . '.' . $orginalextension;
+                $this->request->getFile('Logo')->move(WRITEPATH . 'uploads/organization/', $newimgname);
+                $img = 'writable/uploads/organization/' . $newimgname;
+            }else{
+                $img = $this->request->getVar('OldLogo') ;
+            }
+
+
+
 			$cities=$this->request->getVar('cities');
 			//echo "<pre>";print_r($cities);exit;
 			if($cities){
 			$data = [
 				'OrgName' => $this->request->getVar('OrgName'),  
-				'OrgType' => $this->request->getVar('OrgType')		
+				'OrgType' => $this->request->getVar('OrgType'),
+				'Logo' => $img	
 			];
 			//print_r($data);exit;
 			$OrganizationModel->update($id, $data);

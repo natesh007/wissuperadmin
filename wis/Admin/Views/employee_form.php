@@ -26,7 +26,7 @@
 							<?php endif ?>
 
 							
-								<form class="form-horizontal" method="post" action="<?= base_url('admin/employees/add_employee') ?>" style="width:100%" id="add_employee" method="post">
+								<form class="form-horizontal" method="post" action="<?= base_url('admin/employees/add_employee') ?>" style="width:100%" id="add_employee" method="post"  enctype="multipart/form-data" >
 									<div class="form-group row">
 										<div class="col-md-6">
 											<label for="EmpName">Employee Name<strong class="help-block">*</strong></label>
@@ -147,7 +147,7 @@
 										<div class="col-md-6">
 											<label for="BrID">Shift</label>
 											<select class="form-control" name="Shift" >
-												<option disabled selected value="0">Select Shift</option>
+												<option value="0">Select Shift</option>
 												<?php foreach($shifts as $shift){
 													echo '<option value="' . $shift['ShID'] . '">' . $shift['ShiftName'] . '</option>' ;
 												} ?>
@@ -158,6 +158,14 @@
 											<textarea class="form-control" id="Address" name="Address" placehoder="Enter Address"><?php echo set_value('Address'); ?></textarea>		
 										</div>
 									</div>
+
+									<?php /*<div class="form-group row">
+										<div class="col-md-6">
+											<label for="BrID">Upload Profile Pic</label>
+											<input type="file" class="form-control" id="ProfilePic" name="ProfilePic" placehoder="Upload Profile Pic" />
+											
+										</div>
+									</div>*/?>
 									
 									<div class="form-group text-center">
 										<button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Save</button>
