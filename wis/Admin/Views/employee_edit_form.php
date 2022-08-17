@@ -215,7 +215,10 @@
 								email: true},
 					ParentDept: {required: true},
 					Contact:  {required: true,
-						number: true}		
+						number: true,
+						minlength: 10,
+						maxlength: 10
+					}			
 
 				},
 				messages: {

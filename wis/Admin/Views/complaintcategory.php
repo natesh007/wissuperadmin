@@ -133,7 +133,7 @@
 												<?= $cnty['CategoryName']; ?>
 											</td>
 											<td>
-												<?= '<img src="'.base_url($cnty['CategoryIcon']).'" width="100px"> ' ; ?>
+												<?= '<img src="'.base_url($cnty['CategoryIcon']).'" width="50px"> ' ; ?>
 											</td>
 											<td>
 												<?= $orgs[$cnty['ComCatID']]?>

@@ -33,7 +33,7 @@
 
 											<?php if($complaintcategory['CategoryIcon']){ ?>
 												<input type="hidden" name="OldCategoryIcon" id="OldCategoryIcon" value="<?= $complaintcategory['CategoryIcon']; ?>" />
-												<img src="<?= base_url($complaintcategory['CategoryIcon']); ?>" alt="image" class="FormImg"/>
+												<img src="<?= base_url($complaintcategory['CategoryIcon']); ?>" alt="image" class="FormImg" width="50px"/>
 											<?php } ?>
 										</div>
 										

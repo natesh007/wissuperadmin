@@ -135,9 +135,9 @@
 											
 											<td>
 												<?php if ($cnty['Status'] == 1) { ?>
-													<button data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-success inactive" onclick="activate_inactivate(<?= $cnty['TypeID']; ?>,'organization_types','TypeID',0)"><span class="fa fa-check"></span></button>
+													<button data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-success inactive" onclick="activate_inactivate(<?= $cnty['TypeID']; ?>,'organization_type','TypeID',0)"><span class="fa fa-check"></span></button>
 												<?php } else { ?>
-													&nbsp;<button data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-warning " onclick="activate_inactivate(<?= $cnty['TypeID']; ?>,'organization_types','TypeID',1)"><span class="fa fa-times"></span></button>
+													&nbsp;<button data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-warning " onclick="activate_inactivate(<?= $cnty['TypeID']; ?>,'organization_type','TypeID',1)"><span class="fa fa-times"></span></button>
 												<?php } ?>
 												&nbsp;<a data-toggle="tooltip" href="<?= base_url('admin/organization_types/edit_organization_type/' . $cnty['TypeID']); ?>" title="Edit" class="btn btn-xs btn-primary"><span class="fa fa-pen"></span></a>
 												&nbsp;<button data-toggle="tooltip" onclick="deletedata('<?= $cnty['TypeID'] ?>','organization_type','TypeID', '', '')" title="Delete" class="btn btn-xs btn-danger"><span class="fa fa-trash"></span></button>

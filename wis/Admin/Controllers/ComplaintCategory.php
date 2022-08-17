@@ -124,6 +124,7 @@ class ComplaintCategory extends BaseController
 			$perPage = 10;
 		}
 		$complaintcategory = $model->get_complaintcategories($page, $perPage, $keyword, '0');
+		$data['complaintcategory'] = $complaintcategory['results'];
 		$orgs = [];
 		foreach($data['complaintcategory'] as $rec){
 			$orgnames = $model->getorgnames($rec['ComCatID']);

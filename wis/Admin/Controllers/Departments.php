@@ -192,7 +192,7 @@ class departments extends BaseController
 	public function getbranches(){
         $BranchModel = new BranchModel();
         $orgid=$_POST['OrgID'];
-        $branchesdata = $BranchModel->where('OrgID', $orgid)->findAll();
+        $branchesdata = $BranchModel->where('OrgID', $orgid)->where('Status', 1)->findAll();
 		//echo "<pre>";print_r($data['branches']);exit;
 		//echo view('Modules\Admin\Views\branch_dropdown_ajax',$data);
 		echo json_encode($branchesdata);       
@@ -201,7 +201,7 @@ class departments extends BaseController
 	public function getdepartments(){
         $DepartmentsModel = new DepartmentsModel();
         $orgid=$_POST['OrgID'];
-        $data['departments'] = $DepartmentsModel->where('OrgID', $orgid)->findAll();
+        $data['departments'] = $DepartmentsModel->where('OrgID', $orgid)->where('Status', 1)->findAll();
 		$data['total_cats'] = $this->buildTree($data['departments'], 'ParentDept', 'DeptID');
 		//echo "<pre>";print_r($data['departments']);exit;
 		echo view('Modules\Admin\Views\departments_dropdown_ajax',$data);
@@ -211,7 +211,7 @@ class departments extends BaseController
 	public function getBrdepartments(){
         $DepartmentsModel = new DepartmentsModel();
         $brid=$_POST['BrID'];
-        $data['departments'] = $DepartmentsModel->whereIn('BrID', $brid)->findAll();
+        $data['departments'] = $DepartmentsModel->whereIn('BrID', $brid)->where('Status', 1)->findAll();
 		$data['total_cats'] = $this->buildTree($data['departments'], 'ParentDept', 'DeptID');
 		//echo "<pre>";print_r($data['departments']);exit;
 		echo view('Modules\Admin\Views\departments_dropdown_ajax',$data);

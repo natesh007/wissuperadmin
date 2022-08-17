@@ -245,7 +245,7 @@ class WisAPI extends REST
 							"Shift" => $qu->Shift,
 							"PreviousExp" => $qu->PreviousExp,
 							"ProfilePic" => SiteURL.$qu->ProfilePic,
-							"Logi" => SiteURL1.$qu->Logo,
+							"Logo" => SiteURL1.$qu->Logo,
 							"DateOfJoining" => $qu->DateOfJoining,
 							"UpdatedDate" => $qu->UpdatedDate,
 							"OrgName" => $qu->OrgName,
@@ -350,7 +350,7 @@ class WisAPI extends REST
 	    if ($this->get_request_method() != "POST") {
 			$this->errorMSG(406, "Wrong HTTP Method");
 		}
-		$query1 = $this->db->executeQueryAndGetArray("SELECT o.OrgID,o.OrgName FROM organization o left join organization_type ot on ot.TypeID=o.OrgType", MYSQLI_ASSOC);
+		$query1 = $this->db->executeQueryAndGetArray("SELECT o.OrgID,o.OrgName FROM organization o left join organization_type ot on ot.TypeID=o.OrgType where o.Status = 1", MYSQLI_ASSOC);
 			//	echo $this->db->getLastSQLStatement();exit;
 		
 		/// dropdown view
@@ -364,7 +364,7 @@ class WisAPI extends REST
 	    if ($this->get_request_method() != "POST") {
 			$this->errorMSG(406, "Wrong HTTP Method");
 		}
-		$query1 = $this->db->executeQueryAndGetArray("SELECT s.ShID,s.ShiftName,s.ShiftDesc FROM shifts s", MYSQLI_ASSOC);
+		$query1 = $this->db->executeQueryAndGetArray("SELECT s.ShID,s.ShiftName,s.ShiftDesc FROM shifts s where s.Status = 1", MYSQLI_ASSOC);
 		$this->successMSG('Shifts list', $query1);
 	}
 	function branches()
@@ -375,7 +375,7 @@ class WisAPI extends REST
 		$OrgID = $this->OrgID;
 		
 		
-		$query1 = $this->db->executeQueryAndGetArray("SELECT b.BrID,b.BrName,b.Address,b.BrLangitude,b.BrLatitude,b.Status,b.UpdatedBy,b.UpdatedDate,o.OrgName,o.OrgID FROM branches b left join organization o on o.OrgID=b.OrgID where b.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'", MYSQLI_ASSOC);
+		$query1 = $this->db->executeQueryAndGetArray("SELECT b.BrID,b.BrName,b.Address,b.BrLangitude,b.BrLatitude,b.Status,b.UpdatedBy,b.UpdatedDate,o.OrgName,o.OrgID FROM branches b left join organization o on o.OrgID=b.OrgID where b.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND b.Status = 1", MYSQLI_ASSOC);
 			//	echo $this->db->getLastSQLStatement();exit;
 		
 	
@@ -390,7 +390,7 @@ class WisAPI extends REST
 		$OrgID = $this->OrgID;
 		
 		
-		$query1 = $this->db->executeQueryAndGetArray("SELECT OrgID,JobTID,JobTitle FROM jobtitle where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'", MYSQLI_ASSOC);
+		$query1 = $this->db->executeQueryAndGetArray("SELECT OrgID,JobTID,JobTitle FROM jobtitle where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND Status = 1", MYSQLI_ASSOC);
 				//echo $this->db->getLastSQLStatement();exit;
 		
 	
@@ -405,7 +405,7 @@ class WisAPI extends REST
 		$OrgID = $this->_request['OrgID'];
 		
 		
-		$query1 = $this->db->executeQueryAndGetArray("SELECT b.BID,b.BuildingName,br.BrName FROM building b left join branches br on br.BrID = b.BrID where b.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'", MYSQLI_ASSOC);
+		$query1 = $this->db->executeQueryAndGetArray("SELECT b.BID,b.BuildingName,br.BrName FROM building b left join branches br on br.BrID = b.BrID where b.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND b.Status = 1", MYSQLI_ASSOC);
 				//echo $this->db->getLastSQLStatement();exit;
 		
 	
@@ -419,7 +419,7 @@ class WisAPI extends REST
 		}
 		$BID = $this->_request['BuildingID'];
 
-		$query1 = $this->db->executeQueryAndGetArray("SELECT bk.BKID,bk.BlockName FROM block bk where bk.BID='" . mysqli_real_escape_string($this->db->mysql_link, $BID) . "'", MYSQLI_ASSOC);
+		$query1 = $this->db->executeQueryAndGetArray("SELECT bk.BKID,bk.BlockName FROM block bk where bk.BID='" . mysqli_real_escape_string($this->db->mysql_link, $BID) . "' AND bk.Status = 1", MYSQLI_ASSOC);
 				//echo $this->db->getLastSQLStatement();exit;
 		
 	
@@ -434,7 +434,7 @@ class WisAPI extends REST
 		//$BID = $this->_request['BuildingID'];
 		$BKID = $this->_request['BlockID'];
 
-		$query1 = $this->db->executeQueryAndGetArray("SELECT f.FID,f.FloorName FROM floor f where f.BKID='" . mysqli_real_escape_string($this->db->mysql_link, $BKID) . "'", MYSQLI_ASSOC);
+		$query1 = $this->db->executeQueryAndGetArray("SELECT f.FID,f.FloorName FROM floor f where f.BKID='" . mysqli_real_escape_string($this->db->mysql_link, $BKID) . "' AND  f.Status = 1", MYSQLI_ASSOC);
 				//echo $this->db->getLastSQLStatement();exit;
 		
 	
@@ -448,7 +448,7 @@ class WisAPI extends REST
 		}
 		$FID = $this->_request['FloorID'];
 
-		$query1 = $this->db->executeQueryAndGetArray("SELECT r.RID,r.RoomName FROM room r where r.FID='" . mysqli_real_escape_string($this->db->mysql_link, $FID) . "'", MYSQLI_ASSOC);
+		$query1 = $this->db->executeQueryAndGetArray("SELECT r.RID,r.RoomName FROM room r where r.FID='" . mysqli_real_escape_string($this->db->mysql_link, $FID) . "' AND r.Status = 1", MYSQLI_ASSOC);
 				//echo $this->db->getLastSQLStatement();exit;
 		
 	
@@ -706,7 +706,7 @@ class WisAPI extends REST
 
 		$RName = $this->db->getFirstRowFirstColumn("SELECT `RoomName` FROM `room` WHERE `RID`='" . mysqli_real_escape_string($this->db->mysql_link, $RID) . "';");
 
-		$query1 = $this->db->executeQueryAndGetArray("SELECT cco.ComCatID,cc.CategoryName,cco.OrgID,cc.CategoryIcon FROM complaintcategoryorganizations cco left join complaintcategory cc on cc.ComCatID = cco.ComCatID where cco.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'", MYSQLI_ASSOC);
+		$query1 = $this->db->executeQueryAndGetArray("SELECT cco.ComCatID,cc.CategoryName,cco.OrgID,cc.CategoryIcon FROM complaintcategoryorganizations cco left join complaintcategory cc on cc.ComCatID = cco.ComCatID where cco.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "' AND cc.Status = 1", MYSQLI_ASSOC);
 
 		$r["location"] = array(
 			"BID"=>$BID,
@@ -1378,7 +1378,7 @@ class WisAPI extends REST
 		if ($ComID == '') {
 			$this->errorMSG(400, "Please enter Complaint ID");
 		}
-		$query = $this->db->executeQueryAndGetArray("SELECT c.ComID,cc.CategoryName,cn.ComplaintNature,b.BuildingName,bk.BKID,bk.BlockName,f.FloorName,r.RoomName,c.CreatedDate,cs.StausName,c.UpdatedBy as empid,c.UpdatedDate,e.EmpName as AssignedBy,c.Name,c.Mobile,c.CustomComplaint,c.ComplaintRemarks,c.ComplaintPriority,c.ComplaintStatus,cp.Priority,c.AssignedNote,c.DeptID FROM complaints c left join block bk on bk.BKID = c.BKID left join complaintcategory cc on cc.ComCatID = c.ComCatID left join complaintnature cn on cn.ComNatID = c.ComNatID left join building b on b.BID = c.BID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintstatus cs on cs.StatusID  = c.ComplaintStatus left join complaintpriority cp on cp.PriorityID  = c.ComplaintPriority left join employees e on e.EmpID  = c.UpdatedBy where c.ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);	
+		$query = $this->db->executeQueryAndGetArray("SELECT c.ComID,cc.CategoryName,cn.ComplaintNature,b.BuildingName,bk.BKID,bk.BlockName,f.FloorName,r.RoomName,c.CreatedDate,cs.StausName,c.UpdatedBy as empid,c.UpdatedDate,e.EmpName as AssignedBy,c.Name,c.Mobile,c.CustomComplaint,c.ComplaintRemarks,c.ComplaintPriority,c.ComplaintStatus,cp.Priority,c.AssignedNote,c.DeptID,e.Contact as EmpMobile FROM complaints c left join block bk on bk.BKID = c.BKID left join complaintcategory cc on cc.ComCatID = c.ComCatID left join complaintnature cn on cn.ComNatID = c.ComNatID left join building b on b.BID = c.BID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintstatus cs on cs.StatusID  = c.ComplaintStatus left join complaintpriority cp on cp.PriorityID  = c.ComplaintPriority left join employees e on e.EmpID  = c.UpdatedBy where c.ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);	
 	
 
 		$query1 = $this->db->executeQueryAndGetArray("SELECT Image FROM complaintimages where ComCatID = '" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);
