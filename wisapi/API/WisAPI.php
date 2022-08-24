@@ -412,7 +412,7 @@ class WisAPI extends REST
 		$this->successMSG('Buildings list', $query1);
 	}
 
-	function getblocks()
+	/*function getblocks()
 	{
 	    if ($this->get_request_method() != "POST") {
 			$this->errorMSG(406, "Wrong HTTP Method");
@@ -424,7 +424,7 @@ class WisAPI extends REST
 		
 	
 		$this->successMSG('Blocks list', $query1);
-	}
+	}*/
 
 	function getfloors()
 	{
@@ -432,9 +432,9 @@ class WisAPI extends REST
 			$this->errorMSG(406, "Wrong HTTP Method");
 		}
 		//$BID = $this->_request['BuildingID'];
-		$BKID = $this->_request['BlockID'];
+		$BID = $this->_request['BuildingID'];
 
-		$query1 = $this->db->executeQueryAndGetArray("SELECT f.FID,f.FloorName FROM floor f where f.BKID='" . mysqli_real_escape_string($this->db->mysql_link, $BKID) . "' AND  f.Status = 1", MYSQLI_ASSOC);
+		$query1 = $this->db->executeQueryAndGetArray("SELECT f.FID,f.FloorName FROM floor f where f.BID='" . mysqli_real_escape_string($this->db->mysql_link, $BID) . "' AND  f.Status = 1", MYSQLI_ASSOC);
 				//echo $this->db->getLastSQLStatement();exit;
 		
 	
@@ -666,16 +666,16 @@ class WisAPI extends REST
 
 		//$OrgID = $this->OrgID;	
 		$BID = $this->_request['BID'];
-		$BKID = $this->_request['BKID'];
+		//$BKID = $this->_request['BKID'];
 		$FID = $this->_request['FID'];	
 		$RID = $this->_request['RID'];
 
 		if ($BID == '') {
 			$this->errorMSG(400, "Please enter Building");
 		}
-		if ($BKID == '') {
+		/*if ($BKID == '') {
 			$this->errorMSG(400, "Please enter Block");
-		}
+		}*/
 		if ($FID == '') {
 			$this->errorMSG(400, "Please enter Floor");
 		}
@@ -686,9 +686,9 @@ class WisAPI extends REST
 		if (!$this->db->hasRecords("SELECT * FROM `building` WHERE BID='" . mysqli_real_escape_string($this->db->mysql_link, $BID) . "'")) {
 			$this->errorMSG(400, "Building Not Exist!");
 		}
-		if (!$this->db->hasRecords("SELECT * FROM `block` WHERE BKID='" . mysqli_real_escape_string($this->db->mysql_link, $BKID) . "'")) {
+		/*if (!$this->db->hasRecords("SELECT * FROM `block` WHERE BKID='" . mysqli_real_escape_string($this->db->mysql_link, $BKID) . "'")) {
 			$this->errorMSG(400, "Block Not Exist!");
-		}
+		}*/
 		if (!$this->db->hasRecords("SELECT * FROM `floor` WHERE FID='" . mysqli_real_escape_string($this->db->mysql_link, $FID) . "'")) {
 			$this->errorMSG(400, "Floor Not Exist!");
 		}
@@ -700,7 +700,7 @@ class WisAPI extends REST
 
 		$BName = $this->db->getFirstRowFirstColumn("SELECT `BuildingName` FROM `building` WHERE `BID`='" . mysqli_real_escape_string($this->db->mysql_link, $BID) . "';");
 
-		$BKName = $this->db->getFirstRowFirstColumn("SELECT `BlockName` FROM `block` WHERE `BKID`='" . mysqli_real_escape_string($this->db->mysql_link, $BKID) . "';");
+		/*$BKName = $this->db->getFirstRowFirstColumn("SELECT `BlockName` FROM `block` WHERE `BKID`='" . mysqli_real_escape_string($this->db->mysql_link, $BKID) . "';");*/
 
 		$FName = $this->db->getFirstRowFirstColumn("SELECT `FloorName` FROM `floor` WHERE `FID`='" . mysqli_real_escape_string($this->db->mysql_link, $FID) . "';");
 
@@ -711,8 +711,6 @@ class WisAPI extends REST
 		$r["location"] = array(
 			"BID"=>$BID,
 			"BuildingName"=>$BName,
-			"BKID"=>$BKID,
-			"BlockName"=>$BKName,
 			"FID"=>$FID,
 			"FloorName"=>$FName,
 			"RID"=>$RID,
@@ -1112,7 +1110,7 @@ class WisAPI extends REST
 			$this->errorMSG(406, "Wrong Method");
 		}
 		$BID = $this->_request['BID'];
-		$BKID = $this->_request['BKID'];
+		//$BKID = $this->_request['BKID'];
 		$FID = $this->_request['FID'];	
 		$RID = $this->_request['RID'];
 		$ComCatID = $this->_request['ComCatID'];
@@ -1131,9 +1129,9 @@ class WisAPI extends REST
 		if ($BID == '') {
 			$this->errorMSG(400, "Please enter Building");
 		}
-		if ($BKID == '') {
+		/*if ($BKID == '') {
 			$this->errorMSG(400, "Please enter Block");
-		}
+		}*/
 		if ($FID == '') {
 			$this->errorMSG(400, "Please enter Floor");
 		}
@@ -1149,16 +1147,15 @@ class WisAPI extends REST
 
 			try {
 
-				$this->db->executeQuery("INSERT INTO `complaints`(`OrgID`,`BID`,`BKID`, `FID`,`RID`,`ComCatID`, `ComNatID`, `CustomComplaint`, `ComplaintPriority`, `ComplaintRemarks`, `ComplaintStatus`, `DeptID`,`Name`,`Mobile`,`CreatedBy`,`CreatedDate`,`UpdatedBy`,`UpdatedDate`) VALUES('" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "',
+				$this->db->executeQuery("INSERT INTO `complaints`(`OrgID`,`BID`, `FID`,`RID`,`ComCatID`, `ComNatID`, `CustomComplaint`, `ComplaintPriority`, `ComplaintRemarks`, `ComplaintStatus`, `DeptID`,`Name`,`Mobile`,`CreatedBy`,`CreatedDate`,`UpdatedBy`,`UpdatedDate`) VALUES('" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $BID) . "',
-				'" . mysqli_real_escape_string($this->db->mysql_link, $BKID) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $FID) . "'
 				,'" . mysqli_real_escape_string($this->db->mysql_link, $RID) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $ComCatID) . "','" . mysqli_real_escape_string($this->db->mysql_link, $ComNatID) . "','" . mysqli_real_escape_string($this->db->mysql_link, $CustomComplaint) . "','" . mysqli_real_escape_string($this->db->mysql_link, $Priority) . "','" . mysqli_real_escape_string($this->db->mysql_link, $Remarks) . "',
 				'1','0','" . mysqli_real_escape_string($this->db->mysql_link, $Name) . "','" . mysqli_real_escape_string($this->db->mysql_link, $Mobile) . "','" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "','" . date('Y-m-d H:i:s') . "','0','" . date('Y-m-d H:i:s') . "')");
 				
 				$comid = $this->db->getLastInsertID();
-				$query = $this->db->executeQueryAndGetArray("SELECT c.ComID,c.ComCatID,b.BuildingName,bk.BlockName,f.FloorName,r.RoomName,cc.CategoryName,cn.ComplaintNature,cp.Priority,cs.StausName,c.ComplaintRemarks,c.Name,c.Mobile,c.CustomComplaint FROM complaints c left join building b on b.BID = c.BID left join block bk on bk.BKID = c.BKID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintcategory cc on cc.ComCatID = c.ComCatID left join complaintnature cn on cn.ComNatID = c.ComNatID left join complaintpriority cp on cp.PriorityID = c.ComplaintPriority left join complaintstatus cs on cs.StatusID = c.ComplaintStatus where c.ComID = '" . mysqli_real_escape_string($this->db->mysql_link, $comid) . "'", MYSQLI_ASSOC);
+				$query = $this->db->executeQueryAndGetArray("SELECT c.ComID,c.ComCatID,b.BuildingName,f.FloorName,r.RoomName,cc.CategoryName,cn.ComplaintNature,cp.Priority,cs.StausName,c.ComplaintRemarks,c.Name,c.Mobile,c.CustomComplaint FROM complaints c left join building b on b.BID = c.BID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintcategory cc on cc.ComCatID = c.ComCatID left join complaintnature cn on cn.ComNatID = c.ComNatID left join complaintpriority cp on cp.PriorityID = c.ComplaintPriority left join complaintstatus cs on cs.StatusID = c.ComplaintStatus where c.ComID = '" . mysqli_real_escape_string($this->db->mysql_link, $comid) . "'", MYSQLI_ASSOC);
 				
 
 				if($images){
@@ -1304,7 +1301,7 @@ class WisAPI extends REST
 		$ComCatID = $this->_request['ComCatID'];
 		$ComNatID = $this->_request['ComNatID'];
 		$BID = $this->_request['BID'];
-		$BKID = $this->_request['BKID'];
+		//$BKID = $this->_request['BKID'];
 		$FID = $this->_request['FID'];
 		$RID = $this->_request['RID'];
 		$ComplaintBy = $this->_request['ComplaintBy'];
@@ -1324,7 +1321,7 @@ class WisAPI extends REST
 		
 		
 		
-		$sql = "SELECT c.ComID,cc.CategoryName,cn.ComplaintNature,b.BuildingName,bk.BlockName,f.FloorName,r.RoomName,c.CreatedDate,cs.StausName,c.UpdatedBy as empid,e.EmpName as AssignedBy,c.CustomComplaint,c.ComplaintStatus FROM complaints c left join complaintcategory cc on cc.ComCatID = c.ComCatID left join complaintnature cn on cn.ComNatID = c.ComNatID left join building b on b.BID = c.BID left join block bk on bk.BKID = c.BKID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintstatus cs on cs.StatusID  = c.ComplaintStatus left join employees e on e.EmpID  = c.UpdatedBy where c.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'";
+		$sql = "SELECT c.ComID,cc.CategoryName,cn.ComplaintNature,b.BuildingName,f.FloorName,r.RoomName,c.CreatedDate,cs.StausName,c.UpdatedBy as empid,e.EmpName as AssignedBy,c.CustomComplaint,c.ComplaintStatus FROM complaints c left join complaintcategory cc on cc.ComCatID = c.ComCatID left join complaintnature cn on cn.ComNatID = c.ComNatID left join building b on b.BID = c.BID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintstatus cs on cs.StatusID  = c.ComplaintStatus left join employees e on e.EmpID  = c.UpdatedBy where c.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'";
 	
 		if($DeptName != "Admin"){
 			$sql.=" AND c.UpdatedBy = '".mysqli_real_escape_string($this->db->mysql_link, $EmpID)."'";
@@ -1338,9 +1335,7 @@ class WisAPI extends REST
 		if($BID != ''){
 			$sql.=" AND c.BID = '".mysqli_real_escape_string($this->db->mysql_link, $BID)."'";
 		}
-		if($BKID != ''){
-			$sql.=" AND c.BKID = '".mysqli_real_escape_string($this->db->mysql_link, $BKID)."'";
-		}
+		
 		if($FID != ''){
 			$sql.=" AND c.FID = '".mysqli_real_escape_string($this->db->mysql_link, $FID)."'";
 		}
@@ -1372,7 +1367,6 @@ class WisAPI extends REST
 		    "CategoryName" => $rec["CategoryName"],
 		    "ComplaintNature" => ($rec["ComplaintNature"]==""?$rec["CustomComplaint"]:$rec["ComplaintNature"]),
 		    "BuildingName" => $rec["BuildingName"],
-		    "BlockName" => $rec["BlockName"],
 		    "FloorName" => $rec["FloorName"],
 		    "RoomName" => $rec["RoomName"],
 		    "CreatedDate" => $rec["CreatedDate"],
@@ -1400,7 +1394,7 @@ class WisAPI extends REST
 		if ($ComID == '') {
 			$this->errorMSG(400, "Please enter Complaint ID");
 		}
-		$query = $this->db->executeQueryAndGetArray("SELECT c.ComID,cc.CategoryName,cn.ComplaintNature,b.BuildingName,bk.BKID,bk.BlockName,f.FloorName,r.RoomName,c.CreatedDate,cs.StausName,c.UpdatedBy as empid,c.UpdatedDate,e.EmpName as AssignedBy,c.Name,c.Mobile,c.CustomComplaint,c.ComplaintRemarks,c.ComplaintPriority,c.ComplaintStatus,cp.Priority,c.AssignedNote,c.DeptID,e.Contact as EmpMobile FROM complaints c left join block bk on bk.BKID = c.BKID left join complaintcategory cc on cc.ComCatID = c.ComCatID left join complaintnature cn on cn.ComNatID = c.ComNatID left join building b on b.BID = c.BID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintstatus cs on cs.StatusID  = c.ComplaintStatus left join complaintpriority cp on cp.PriorityID  = c.ComplaintPriority left join employees e on e.EmpID  = c.UpdatedBy where c.ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);	
+		$query = $this->db->executeQueryAndGetArray("SELECT c.ComID,cc.CategoryName,cn.ComplaintNature,b.BuildingName,f.FloorName,r.RoomName,c.CreatedDate,cs.StausName,c.UpdatedBy as empid,c.UpdatedDate,e.EmpName as AssignedBy,c.Name,c.Mobile,c.CustomComplaint,c.ComplaintRemarks,c.ComplaintPriority,c.ComplaintStatus,cp.Priority,c.AssignedNote,c.DeptID,e.Contact as EmpMobile FROM complaints c left join complaintcategory cc on cc.ComCatID = c.ComCatID left join complaintnature cn on cn.ComNatID = c.ComNatID left join building b on b.BID = c.BID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintstatus cs on cs.StatusID  = c.ComplaintStatus left join complaintpriority cp on cp.PriorityID  = c.ComplaintPriority left join employees e on e.EmpID  = c.UpdatedBy where c.ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);	
 	
 
 		$query1 = $this->db->executeQueryAndGetArray("SELECT Image FROM complaintimages where ComCatID = '" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);
@@ -1412,8 +1406,6 @@ class WisAPI extends REST
 		    "CategoryName" => $rec["CategoryName"],
 		    "ComplaintNature" => ($rec["ComplaintNature"]==""?$rec["CustomComplaint"]:$rec["ComplaintNature"]),
 		    "BuildingName" => $rec["BuildingName"],
-		    "BKID" => $rec["BKID"],
-		    "BlockName" => $rec["BlockName"],
 		    "FloorName" => $rec["FloorName"],
 		    "RoomName" => $rec["RoomName"],
 		    "CreatedDate" => $rec["CreatedDate"],
@@ -1522,7 +1514,7 @@ class WisAPI extends REST
 		}
 		$OrgID = $this->_request['OrgID'];
 		$BID = $this->_request['BID'];
-		$BKID = $this->_request['BKID'];
+		//$BKID = $this->_request['BKID'];
 		$FID = $this->_request['FID'];
 		$RID = $this->_request['RID'];
 
@@ -1532,9 +1524,9 @@ class WisAPI extends REST
 		if ($BID == '') {
 			$this->errorMSG(400, "Please enter building ID");
 		}
-		if ($BKID == '') {
+		/*if ($BKID == '') {
 			$this->errorMSG(400, "Please enter block ID");
-		}
+		}*/
 		if ($FID == '') {
 			$this->errorMSG(400, "Please enter floor ID");
 		}
@@ -1545,8 +1537,6 @@ class WisAPI extends REST
 		$data['OrgName'] = $this->db->getFirstRowFirstColumn("SELECT OrgName FROM organization where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'", MYSQLI_ASSOC);
 
 		$data['BuildingName'] = $this->db->getFirstRowFirstColumn("SELECT BuildingName FROM building where BID='" . mysqli_real_escape_string($this->db->mysql_link, $BID) . "'", MYSQLI_ASSOC);
-
-		$data['BlockName'] = $this->db->getFirstRowFirstColumn("SELECT BlockName FROM block where BKID='" . mysqli_real_escape_string($this->db->mysql_link, $BKID) . "'", MYSQLI_ASSOC);
 
 		$data['FloorName'] = $this->db->getFirstRowFirstColumn("SELECT FloorName FROM floor where FID='" . mysqli_real_escape_string($this->db->mysql_link, $FID) . "'", MYSQLI_ASSOC);
 
