@@ -59,97 +59,84 @@
 							<h4>Blocks & Floors & Rooms Info</h4>
 							<?php if(!empty(@$building['blocks'])){ 
 								$i = 1;
-								foreach($building['blocks'] as $block){ ?>
-									<div class="TotalBlock">
-										<div class="form-group row">
-											<div class="col-md-4">
-												<label for="BlockName">Block Name<strong class="help-block">*</strong></label>
-												<input type="text" name="BlockName[<?= ($i == 1) ? $i : ''; ?>]" class="form-control" placeholder="Enter Block Name" autocomplete="off" value="<?= $block['BlockName']; ?>">
-											</div>
-										</div>
-										<div class="card">
-											<div class="card-body">
-												<?php if(!empty(@$block['floors'])){ 
-													$j = 1;
-													foreach($block['floors'] as $floor){ ?>
-														<div class="MainFloor<?= $i ?> <?php if($j > 1) echo 'FloorBlk'; ?>">
-															<div class="form-group row">
-																<div class="col-md-4">
-																	<label for="FloorName">Floor Name<strong class="help-block">*</strong></label>
-																	<input type="text" name="FloorName[<?= $i ?>][<?= ($j == 1) ? $j : ''; ?>]" class="form-control" placeholder="Enter Floor Name" autocomplete="off" value="<?= $floor['FloorName']; ?>">
-																</div>
-															</div>
-															<?php if(!empty(@$floor['rooms'])){ ?>
-																<label for="RoomName">Room Name<strong class="help-block">*</strong></label>
-																<div class="row">
-																 	<?php $k = 1; 
-																	foreach($floor['rooms'] as $room){ ?>
-																		<div class="col-md-3 mb-2 MainRoom_<?= $i ?>_<?= $j ?> <?php if($k > 1) echo 'RoomBlk'; ?>">
-																			<input type="text" name="RoomName[<?= $i ?>][<?= $j ?>][<?= ($k == 1) ? $k : ''; ?>]" class="form-control" placeholder="Enter Room Name" autocomplete="off" value="<?= $room['RoomName']; ?>"/>
-																			<?php if($k > 1){ ?>
-																				<button type="button" class="btn btn-sm btn-danger" style="float: right; margin-top: -38px; height: calc(2.25rem + 2px);" onclick="removerelatedrecords(<?= $room['RID']; ?>, 'room')"><span class="fa fa-minus"></span></button>
-																			<?php } ?>
-																		</div>
-																	<?php $k++; } ?>
-																	<div class="col-md-2 my-auto">
-																		<button type="button" class="btn btn-sm btn-success" onclick="AddMoreRooms(<?= $i ?>, <?= $j ?>)"><span class="fa fa-plus"></span> Add Room</button>
-																	</div>
-																</div>
-															<?php }else{ ?>
-																<label for="RoomName">Room Name<strong class="help-block">*</strong></label>
-																<div class="row">
-																	<div class="col-md-3 mb-2 MainRoom_<?= $i ?>_<?= $j ?>">
-																		<input type="text" name="RoomName[<?= $i ?>][<?= $j ?>][1]" class="form-control" placeholder="Enter Room Name" autocomplete="off"/>
-																	</div>
-																	<div class="col-md-2 my-auto">
-																		<button type="button" class="btn btn-sm btn-success" onclick="AddMoreRooms(<?= $i ?>, <?= $j ?>)"><span class="fa fa-plus"></span> Add Room</button>
-																	</div>
-																</div>
-															<?php } if($j > 1){ ?>
-																<div class="col-md-12 text-right"><button type="button" class="btn btn-sm btn-danger" onclick="removerelatedrecords(<?= $floor['FID']; ?>, 'floor')"><span class="fa fa-minus"></span> Remove Floor</button></div>
-															<?php } ?>
-															<hr>
-														</div>
-													<?php $j++; } ?>
-													<div class="col-md-12 text-right">
-														<button type="button" class="btn btn-sm btn-success" id="AddMoreFloorsBtn<?= $i ?>" onclick="AddMoreFloors(<?= $i ?>, <?= $j ?>)"><span class="fa fa-plus"></span> Add Floor</button>
-													</div>
-												<?php }else{ ?>
-													<div class="MainFloor<?= $i ?>">
+								foreach($building['blocks'] as $block){ 
+									if(!empty(@$block['floors'])){ 
+										$j = 1;
+										foreach($block['floors'] as $floor){ ?>
+											<div class="card">
+												<div class="card-body">
+													<div class="MainFloor <?php if($j > 1) echo 'FloorBlk'; ?>">
 														<div class="form-group row">
 															<div class="col-md-4">
 																<label for="FloorName">Floor Name<strong class="help-block">*</strong></label>
-																<input type="text" name="FloorName[<?= $i ?>][1]" class="form-control" placeholder="Enter Floor Name" autocomplete="off">
+																<input type="text" name="FloorName[<?= ($i == 1) ? $i : ''; ?>]" class="form-control" placeholder="Enter Floor Name" autocomplete="off" value="<?= $floor['FloorName']; ?>">
 															</div>
 														</div>
-														<label for="RoomName">Room Name<strong class="help-block">*</strong></label>
-														<div class="row">
-															<div class="col-md-3 mb-2 MainRoom_<?= $i ?>_1">
-																<input type="text" name="RoomName[<?= $i ?>][1][1]" class="form-control" placeholder="Enter Room Name" autocomplete="off"/>
+														<?php if(!empty(@$floor['rooms'])){ ?>
+															<label for="RoomName">Room Name<strong class="help-block">*</strong></label>
+															<div class="row">
+																<?php $k = 1; 
+																foreach($floor['rooms'] as $room){ ?>
+																	<div class="col-md-3 mb-2 MainRoom_<?= $i ?>_<?= $j ?> <?php if($k > 1) echo 'RoomBlk'; ?>">
+																		<input type="text" name="RoomName[<?= $i ?>][<?= ($j == 1) ? $j : ''; ?>]" class="form-control" placeholder="Enter Room Name" autocomplete="off" value="<?= $room['RoomName']; ?>"/>
+																		<?php if($k > 1){ ?>
+																			<button type="button" class="btn btn-sm btn-danger" style="float: right; margin-top: -38px; height: calc(2.25rem + 2px);" onclick="removerelatedrecords(<?= $room['RID']; ?>, 'room')"><span class="fa fa-minus"></span></button>
+																		<?php } ?>
+																	</div>
+																<?php $k++; } ?>
+																<div class="col-md-2 my-auto">
+																	<button type="button" class="btn btn-sm btn-success" onclick="AddMoreRooms(<?= $i ?>, <?= $j ?>)"><span class="fa fa-plus"></span> Add Room</button>
+																</div>
 															</div>
-															<div class="col-md-2 my-auto">
-																<button type="button" class="btn btn-sm btn-success" onclick="AddMoreRooms(<?= $i ?>, 1)"><span class="fa fa-plus"></span> Add Room</button>
+														<?php }else{ ?>
+															<label for="RoomName">Room Name<strong class="help-block">*</strong></label>
+															<div class="row">
+																<div class="col-md-3 mb-2 MainRoom_<?= $i ?>_<?= $j ?>">
+																	<input type="text" name="RoomName[<?= $i ?>][<?= $j ?>][1]" class="form-control" placeholder="Enter Room Name" autocomplete="off"/>
+																</div>
+																<div class="col-md-2 my-auto">
+																	<button type="button" class="btn btn-sm btn-success" onclick="AddMoreRooms(<?= $i ?>, <?= $j ?>)"><span class="fa fa-plus"></span> Add Room</button>
+																</div>
 															</div>
-														</div>
+														<?php } if($j > 1){ ?>
+															<div class="col-md-12 text-right"><button type="button" class="btn btn-sm btn-danger" onclick="removerelatedrecords(<?= $floor['FID']; ?>, 'floor')"><span class="fa fa-minus"></span> Remove Floor</button></div>
+														<?php } ?>
 														<hr>
 													</div>
-													<div class="col-md-12 text-right">
-														<button type="button" class="btn btn-sm btn-success" id="AddMoreFloorsBtn<?= $i ?>" onclick="AddMoreFloors(<?= $i ?>, <?= $j ?>)"><span class="fa fa-plus"></span> Add Floor</button>
+												<?php $j++; } ?>
+												<div class="col-md-12 text-right">
+													<button type="button" class="btn btn-sm btn-success" id="AddMoreFloorsBtn<?= $i ?>" onclick="AddMoreFloors(<?= $i ?>, <?= $j ?>)"><span class="fa fa-plus"></span> Add Floor</button>
+												</div>
+											<?php }else{ ?>
+												<div class="MainFloor<?= $i ?>">
+													<div class="form-group row">
+														<div class="col-md-4">
+															<label for="FloorName">Floor Name<strong class="help-block">*</strong></label>
+															<input type="text" name="FloorName[<?= $i ?>][1]" class="form-control" placeholder="Enter Floor Name" autocomplete="off">
+														</div>
 													</div>
-												<?php } ?>
+													<label for="RoomName">Room Name<strong class="help-block">*</strong></label>
+													<div class="row">
+														<div class="col-md-3 mb-2 MainRoom_<?= $i ?>_1">
+															<input type="text" name="RoomName[<?= $i ?>][1][1]" class="form-control" placeholder="Enter Room Name" autocomplete="off"/>
+														</div>
+														<div class="col-md-2 my-auto">
+															<button type="button" class="btn btn-sm btn-success" onclick="AddMoreRooms(<?= $i ?>, 1)"><span class="fa fa-plus"></span> Add Room</button>
+														</div>
+													</div>
+													<hr>
+												</div>
+												<div class="col-md-12 text-right">
+													<button type="button" class="btn btn-sm btn-success" id="AddMoreFloorsBtn<?= $i ?>" onclick="AddMoreFloors(<?= $i ?>, <?= $j ?>)"><span class="fa fa-plus"></span> Add Floor</button>
+												</div>
 											</div>
 										</div>
-										<?php if($i > 1){ ?>
-											<div class="col-md-12 text-right"><button type="button" class="btn btn-sm btn-danger" onclick="removerelatedrecords(<?= $block['BKID']; ?>, 'block')"><span class="fa fa-minus"></span> Remove Block</button></div>
-										<?php } ?>
-										<hr>
-									</div>
-								<?php $i++; } ?>
-								<div class="col-md-12 text-right">
-									<button type="button" class="btn btn-sm btn-success" id="AddMoreBlocksBtn" onclick="AddMoreBlocks(<?= $i ?>)"><span class="fa fa-plus"></span> Add Block</button>
-									&nbsp;
-								</div>
-							<?php } ?>
+									<?php } ?>
+									<?php if($i > 1){ ?>
+										<div class="col-md-12 text-right"><button type="button" class="btn btn-sm btn-danger" onclick="removerelatedrecords(<?= $block['BKID']; ?>, 'block')"><span class="fa fa-minus"></span> Remove Block</button></div>
+									<?php } ?>
+									<hr>
+								<?php $i++; } } ?>
 							<div class="form-group text-center">
 								<button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Save</button>
 								<a data-toggle="tooltip" title="Cancel" href="<?= base_url(); ?>/admin<?= session()->get('building_page'); ?>" class="btn btn-sm btn-primary">Cancel</a>
