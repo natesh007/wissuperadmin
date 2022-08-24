@@ -17,7 +17,7 @@ class WisAPI extends REST
 {
 	private $db;
 	private $appSecret = "dfhfhfi&9)jnd%sndn&565ggghGGdedj*nsn&jsdnjdnj";
-	private $jwtPassThroughRoutes = array("logout","test","editemployee","addemployee","employees","alldepartments","branches","adddaepartment","editdepartment","departments","jobtitles","getcomplaints","complaintcategorysearch");
+	private $jwtPassThroughRoutes = array("logout","test","editemployee","addemployee","employees","alldepartments","branches","adddepartment","editdepartment","departments","jobtitles","getcomplaints","complaintcategorysearch");
 	private $logIndex = 0;
 	private $EmpID = 0;
 	private $EmailID = '';
@@ -1075,7 +1075,7 @@ class WisAPI extends REST
 		if ($ComCatID == '') {
 			$this->errorMSG(400, "Please enter Complaint Category ID.");
 		}
-		$query1 = $this->db->executeQueryAndGetArray("SELECT ComNatID,ComplaintNature FROM complaintnature where ComCatID = '" . mysqli_real_escape_string($this->db->mysql_link, $ComCatID) . "'", MYSQLI_ASSOC);
+		$query1 = $this->db->executeQueryAndGetArray("SELECT ComNatID,ComplaintNature FROM complaintnature where ComCatID = '" . mysqli_real_escape_string($this->db->mysql_link, $ComCatID) . "' AND Status = 1", MYSQLI_ASSOC);
 		//"1"=>"Order Created","2"=>"In-Progress","3"=>"Ready","4"=>"Delivered"
 		foreach ($query1 as $q) {
 			$items[$q['ComNatID']] = $q['ComplaintNature'];
@@ -1311,6 +1311,7 @@ class WisAPI extends REST
 		$ComplaintStatus = $this->_request['ComplaintStatus'];
 	
 		$DeptID = $this->db->getFirstRowFirstColumn("SELECT DeptID FROM employees where EmpID='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "'", MYSQLI_ASSOC);
+				//echo $this->db->getLastSQLStatement();exit;
 	
 		$DeptName = $this->db->getFirstRowFirstColumn("SELECT DeptName FROM departments where DeptID='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "'", MYSQLI_ASSOC);
 	
@@ -1362,8 +1363,29 @@ class WisAPI extends REST
 		$sql.=" order by c.ComID DESC";
 	
 		$query1 = $this->db->executeQueryAndGetArray($sql, MYSQLI_ASSOC);
-		//	echo $this->db->getLastSQLStatement();exit;
-		$data["List"] = $query1;
+	
+		
+	
+		foreach($query1 as $rec ){
+		    $item[] = array(
+		    "ComID" => $rec["ComID"],
+		    "CategoryName" => $rec["CategoryName"],
+		    "ComplaintNature" => ($rec["ComplaintNature"]==""?$rec["CustomComplaint"]:$rec["ComplaintNature"]),
+		    "BuildingName" => $rec["BuildingName"],
+		    "BlockName" => $rec["BlockName"],
+		    "FloorName" => $rec["FloorName"],
+		    "RoomName" => $rec["RoomName"],
+		    "CreatedDate" => $rec["CreatedDate"],
+		    "StausName" => $rec["StausName"],
+		    "AssignedBy" => $rec["AssignedBy"],
+		    "CustomComplaint" => $rec["CustomComplaint"],
+		    "ComplaintStatus" => $rec["ComplaintStatus"],
+		    "empid" => $rec["empid"]
+		    );
+		}
+		
+		$data["List"] = $item;
+		
 		
 		$this->successMSG('Complaints list', $data);
 	} 
@@ -1382,11 +1404,41 @@ class WisAPI extends REST
 	
 
 		$query1 = $this->db->executeQueryAndGetArray("SELECT Image FROM complaintimages where ComCatID = '" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);
-		foreach($query1 as $rec){
+	
+		
+		foreach($query as $rec){
+		    $item[] = array(
+		    "ComID" => $rec["ComID"],
+		    "CategoryName" => $rec["CategoryName"],
+		    "ComplaintNature" => ($rec["ComplaintNature"]==""?$rec["CustomComplaint"]:$rec["ComplaintNature"]),
+		    "BuildingName" => $rec["BuildingName"],
+		    "BKID" => $rec["BKID"],
+		    "BlockName" => $rec["BlockName"],
+		    "FloorName" => $rec["FloorName"],
+		    "RoomName" => $rec["RoomName"],
+		    "CreatedDate" => $rec["CreatedDate"],
+		    "StausName" => $rec["StausName"],
+		    "empid" => $rec["empid"],
+		    "AssignedBy" => $rec["AssignedBy"],
+		    "CustomComplaint" => $rec["CustomComplaint"],
+		    "ComplaintStatus" => $rec["ComplaintStatus"],
+		    "UpdatedDate" => $rec["UpdatedDate"],
+		    "Name" => $rec["Name"],
+		    "Mobile" => $rec["Mobile"],
+		    "ComplaintRemarks" => $rec["ComplaintRemarks"],
+		    "ComplaintPriority" => $rec["ComplaintPriority"],
+		    "Priority" => $rec["Priority"],
+		    "AssignedNote" => $rec["AssignedNote"],
+		    "DeptID" => $rec["DeptID"],
+		    "EmpMobile" => $rec["EmpMobile"]
+		    );
+		}
+		foreach($query1 as $rec1){
 			$img[]=array(
-				"Image" => SiteURL.$rec['Image']
+				"Image" => SiteURL.$rec1['Image']
 			);
 		}
+		$query = $item;
 		$query['Images'] = $img;
 
 		

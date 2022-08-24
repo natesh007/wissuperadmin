@@ -150,6 +150,7 @@ class departments extends BaseController
 			}
 			
 			$save = $cmodel->insert($departmentdata);
+			
 			if ($save) {
 				$msg = 'Data inserted successfully.';
 				return redirect()->to(base_url('admin/departments'))->with('msg', $msg);

@@ -35,7 +35,7 @@ class DepartmentsModel extends Model
     function get_departments($page, $perpage, $keyword, $status)
     {
         $start_from = ($page - 1) * $perpage;
-        $query = 'SELECT *,(SELECT DeptName FROM departments WHERE DeptID=d.ParentDept) AS ParentDeptName,o.OrgName,b.BrName FROM departments d left join organization o on o.OrgID = d.OrgID left join branches b on b.BrID = d.BrID';
+        $query = 'SELECT *,(SELECT DeptName FROM departments WHERE DeptID = d.ParentDept) AS ParentDeptName,o.OrgName,b.BrName FROM departments d left join organization o on o.OrgID = d.OrgID left join branches b on b.BrID = d.BrID';
         if ($keyword !=''&& $status !='') {
             $query .=' where DeptName like "%'. $keyword . '%" AND Status = '.$status;
         }

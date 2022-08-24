@@ -130,7 +130,7 @@
 													<input type="checkbox" name="" class="delete_checkbox" value="<?= $department['DeptID']; ?>">
 												</td>
 												<td><?= $department['DeptName']; ?></td>
-												<td><?= $department['ParentDeptName']; ?></td>
+												<td><?php /*<?= $department['ParentDeptName']; ?>*/?></td>
 												<td><?= $department['OrgName']; ?></td>
 												<td><?= $department['BrName']; ?></td>
 												

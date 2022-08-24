@@ -47,7 +47,7 @@
 											<label for="Priority">Parent Department</label>
 											<select name="ParentDept" id="ParentDept" class="form-control">
 												<option disabled selected value>Select Department</option>
-												<option value="0">None</option>
+												<option value="0" <?php echo ($cat['ParentDept']==0?"selected":"");?>>None</option>
 												<?php if(!empty($total_cats)){
 													foreach ($total_cats as $departments) { ?>
 													<option value="<?= $departments['DeptID']; ?>" style="font-weight:800;background-color:#e9ebed;font-size:18px" <?php if ($cat['ParentDept'] != '') {
