@@ -103,7 +103,7 @@
 									<?php $i++; 
 								} ?>
 								<div class="col-md-12 text-right">
-									<button type="button" class="btn btn-sm btn-success" id="AddMoreFloorsBtn<?= $i ?>" onclick="AddMoreFloors(<?= $i ?>)"><span class="fa fa-plus"></span> Add Floor</button>
+									<button type="button" class="btn btn-sm btn-success" id="AddMoreFloorsBtn" onclick="AddMoreFloors(<?= $i ?>)"><span class="fa fa-plus"></span> Add Floor</button>
 								</div>
 							<?php } ?>
 							<div class="form-group text-center">
@@ -142,6 +142,7 @@
 			// Add More Floors
 			function AddMoreFloors(num){
 				$('<div class="card MainFloor FloorBlk"><div class="card-body"><div class="form-group row"><div class="col-md-4"><label for="FloorName">Floor Name<strong class="help-block">*</strong></label><input type="text" name="FloorName[]" class="form-control" placeholder="Enter Floor Name" autocomplete="off"></div></div><label for="RoomName">Room Name<strong class="help-block">*</strong></label><div class="row"><div class="col-md-3 mb-2 MainRoom'+num+'"><input type="text" name="RoomName['+num+'][1]" class="form-control" placeholder="Enter Room Name" autocomplete="off"/></div><div class="col-md-2 my-auto"><button type="button" class="btn btn-sm btn-success" onclick="AddMoreRooms('+num+')"><span class="fa fa-plus"></span> Add Room</button></div></div><hr><div class="col-md-12 text-right"><button type="button" class="btn btn-sm btn-danger RemoveFloorBtn"><span class="fa fa-minus"></span> Remove Floor</button></div></div></div>').insertAfter($('.MainFloor').last());
+				$("#AddMoreFloorsBtn").attr('onclick', 'AddMoreFloors('+(num+1)+')');
 			}
 			// Add More Rooms
 			function AddMoreRooms(num){
