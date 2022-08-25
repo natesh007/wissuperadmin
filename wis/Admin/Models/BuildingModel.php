@@ -75,16 +75,10 @@ class BuildingModel extends Model {
     }
     function get_building_data($id){
         $data = $this->db->query('SELECT * FROM building WHERE BID = ' . $id)->getRowArray();
-        $data['blocks'] = [];
-        $data['blocks'] = $this->db->query('SELECT * FROM block WHERE BID = ' . $id)->getResultArray();
-        if(!empty($data['blocks'])){
-            foreach($data['blocks'] as $i => $block){
-                $data['blocks'][$i]['floors'] = $this->db->query('SELECT * FROM floor WHERE BKID = ' . $block['BKID'] . ' AND BID = ' . $id)->getResultArray();
-                if(!empty($data['blocks'][$i]['floors'])){
-                    foreach($data['blocks'][$i]['floors'] as $j => $floor){
-                        $data['blocks'][$i]['floors'][$j]['rooms'] = $this->db->query('SELECT * FROM room WHERE BKID = ' . $floor['BKID'] . ' AND FID = ' . $floor['FID'] . ' AND BID = ' . $id)->getResultArray();
-                    }
-                }
+        $data['floors'] = $this->db->query('SELECT * FROM floor WHERE BID = ' . $id)->getResultArray();
+        if(!empty($data['floors'])){
+            foreach($data['floors'] as $i => $floor){
+                $data['floors'][$i]['rooms'] = $this->db->query('SELECT * FROM room WHERE FID = ' . $floor['FID'] . ' AND BID = ' . $id)->getResultArray();
             }
         }
         return $data;

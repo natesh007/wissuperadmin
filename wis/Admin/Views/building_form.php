@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <div class="col-md-12 text-right">
-                        <button type="button" class="btn btn-sm btn-success" id="AddMoreFloorsBtn" onclick="AddMoreFloors(2)"><span class="fa fa-plus"></span> Add Floor</button>
+                        <button type="button" class="btn btn-sm btn-success" onclick="AddMoreFloors(2)"><span class="fa fa-plus"></span> Add Floor</button>
                     </div>
                     <div class="form-group text-center">
                         <button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">Save</button>
@@ -122,7 +122,6 @@
                 OrgID: { required: true },
                 BrID: { required: true },
                 BuildingName: { required: true },
-                "BlockName[1]": { required: true },
                 "FloorName[1][1]": { required: true },
                 "RoomName[1][1][1]": { required: true},
             },
@@ -130,7 +129,6 @@
                 OrgID: "Please select Organization",
                 BrID: "Please select Branch",
                 BuildingName:"Please enter Building Name",
-                "BlockName[1]": "Please enter Block Name",
                 "FloorName[1][1]": "Please enter Floor Name",
                 "RoomName[1][1][1]": "Please enter Room Name",
             },

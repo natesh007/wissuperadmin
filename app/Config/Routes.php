@@ -104,15 +104,6 @@ $routes->add('/admin/buildings/edit_building/(:num)', 'Building::edit_building/$
 $routes->add('/admin/buildings/deletebuilding', 'Building::deletebuilding', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/buildings/removerelatedrecords', 'Building::removerelatedrecords', ['namespace' => 'Modules\Admin\Controllers']);
 
-// Blocks Routes
-$routes->add('/admin/blocks', 'Block::index', ['namespace' => 'Modules\Admin\Controllers']);
-$routes->add('/admin/active_blocks', 'Block::active_blocks', ['namespace' => 'Modules\Admin\Controllers']);
-$routes->add('/admin/inactive_blocks', 'Block::inactive_blocks', ['namespace' => 'Modules\Admin\Controllers']);
-$routes->add('/admin/blocks/add_block', 'Block::add_block', ['namespace' => 'Modules\Admin\Controllers']);
-$routes->add('/admin/blocks/edit_block/(:num)', 'Block::edit_block/$1', ['namespace' => 'Modules\Admin\Controllers']);
-$routes->add('/admin/blocks/getbuildings', 'Block::getbuildings', ['namespace' => 'Modules\Admin\Controllers']);
-
-
 // floors Routes
 $routes->add('/admin/floors', 'Floor::index', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/active_floors', 'Floor::active_floors', ['namespace' => 'Modules\Admin\Controllers']);
