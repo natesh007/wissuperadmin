@@ -183,7 +183,7 @@ class Employee extends BaseController
 						'City' => '',
 						'DateOfJoining' => $this->request->getVar('DateOfJoining'),
 						'Doc' => '',
-						'ProfilePic' => $img,
+						'ProfilePic' => '',
 						'Status' => 1,
 						'Shift' => $this->request->getVar('Shift')
 					];
@@ -281,7 +281,7 @@ class Employee extends BaseController
 						'City' => '',
 						'DateOfJoining' => $this->request->getVar('DateOfJoining'),
 						'Doc' => '',
-						'ProfilePic' => $img,
+						'ProfilePic' => '',
 						'Shift' => $this->request->getVar('Shift')
 					];
 					
