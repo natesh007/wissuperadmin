@@ -1635,6 +1635,7 @@ class WisAPI extends REST
 		}
 	}
 }
+
 // Initiiate Library
 $api = new WisAPI();
 $api->processApi();
