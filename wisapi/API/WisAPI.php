@@ -1362,7 +1362,7 @@ class WisAPI extends REST
 		
 		
 		
-		$sql = "SELECT c.ComID,cc.CategoryName,cn.ComplaintNature,b.BuildingName,f.FloorName,r.RoomName,c.CreatedDate,cs.StausName,c.UpdatedBy as empid,e.EmpName as AssignedBy,c.CustomComplaint,c.ComplaintStatus,c.ComplaintRaisedBy,c.Material,cp.Priority FROM complaints c left join complaintcategory cc on cc.ComCatID = c.ComCatID left join complaintnature cn on cn.ComNatID = c.ComNatID left join building b on b.BID = c.BID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintstatus cs on cs.StatusID  = c.ComplaintStatus left join employees e on e.EmpID  = c.UpdatedBy left join complaintpriority cp on cp.PriorityID  = c.ComplaintPriority where c.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'";
+		$sql = "SELECT c.ComID,cc.CategoryName,cn.ComplaintNature,b.BuildingName,f.FloorName,r.RoomName,c.CreatedDate,cs.StausName,c.UpdatedBy as empid,e.EmpName as AssignedBy,c.CustomComplaint,c.ComplaintStatus,c.ComplaintRaisedBy,c.Material,cp.Priority,c.AssignedTime,c.CompletedTime FROM complaints c left join complaintcategory cc on cc.ComCatID = c.ComCatID left join complaintnature cn on cn.ComNatID = c.ComNatID left join building b on b.BID = c.BID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintstatus cs on cs.StatusID  = c.ComplaintStatus left join employees e on e.EmpID  = c.UpdatedBy left join complaintpriority cp on cp.PriorityID  = c.ComplaintPriority where c.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'";
 	
 	/*	if($DeptName != "Admin"){
 			$sql.=" AND c.UpdatedBy = '".mysqli_real_escape_string($this->db->mysql_link, $EmpID)."'";
@@ -1405,7 +1405,24 @@ class WisAPI extends REST
 	
 		
 	
-		foreach($query1 as $rec ){
+		foreach($query1 as $rec){
+		    
+		    $final = "";
+    		if($rec["ComplaintStatus"] == '3'){
+    		    $AssignedTime = new DateTime($rec["AssignedTime"]);
+                $CompletedTime = new DateTime($rec["CompletedTime"]);
+                $interval = $AssignedTime->diff($CompletedTime);
+                //$final = $interval->format('%Y-%m-%d %H:%i:%s');
+                //$y = $interval->format('%y');
+                //$m = $interval->format('%m');
+                $a = $interval->format('%a');
+                $h = $interval->format('%h');
+                $i = $interval->format('%i');
+                
+                $final = ($a == 0?"":$a."days ")."".($h == 0?"":$h."hrs ")."".($i == 0?"":$i."mins");
+                
+    		}
+    		
 		    $item[] = array(
 		    "ComID" => $rec["ComID"],
 		    "CategoryName" => $rec["CategoryName"],
@@ -1421,7 +1438,10 @@ class WisAPI extends REST
 			"ComplaintRaisedBy" => $rec["ComplaintRaisedBy"],
 		    "empid" => $rec["empid"],
 		    "Material" => $rec["Material"],
-		    "Priority" => $rec["Priority"]
+		    "Priority" => $rec["Priority"],
+		    "AssignedTime" => $rec["AssignedTime"],
+		    "CompletedDateTime" => $rec["CompletedTime"],
+		    "CompletedTime" => $final
 		    );
 		}
 		
@@ -1441,14 +1461,32 @@ class WisAPI extends REST
 		if ($ComID == '') {
 			$this->errorMSG(400, "Please enter Complaint ID");
 		}
-		$query = $this->db->executeQueryAndGetArray("SELECT c.ComID,cc.CategoryName,cn.ComplaintNature,b.BuildingName,f.FloorName,r.RoomName,c.CreatedDate,cs.StausName,c.UpdatedBy as empid,c.UpdatedDate,e.EmpName as AssignedBy,c.Name,c.Mobile,c.ComplaintRaisedBy,c.Material,c.CustomComplaint,c.ComplaintRemarks,c.ComplaintPriority,c.ComplaintStatus,cp.Priority,c.AssignedNote,c.DeptID,e.Contact as EmpMobile,e.WhatsApp FROM complaints c left join complaintcategory cc on cc.ComCatID = c.ComCatID left join complaintnature cn on cn.ComNatID = c.ComNatID left join building b on b.BID = c.BID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintstatus cs on cs.StatusID  = c.ComplaintStatus left join complaintpriority cp on cp.PriorityID  = c.ComplaintPriority left join employees e on e.EmpID  = c.UpdatedBy where c.ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);	
+		$query = $this->db->executeQueryAndGetArray("SELECT c.ComID,cc.CategoryName,cn.ComplaintNature,b.BuildingName,f.FloorName,r.RoomName,c.CreatedDate,cs.StausName,c.UpdatedBy as empid,c.UpdatedDate,e.EmpName as AssignedBy,c.Name,c.Mobile,c.ComplaintRaisedBy,c.Material,c.CustomComplaint,c.ComplaintRemarks,c.ComplaintPriority,c.ComplaintStatus,cp.Priority,c.AssignedNote,c.DeptID,e.Contact as EmpMobile,e.WhatsApp,c.AssignedTime,c.CompletedTime,d.DeptName FROM complaints c left join complaintcategory cc on cc.ComCatID = c.ComCatID left join complaintnature cn on cn.ComNatID = c.ComNatID left join building b on b.BID = c.BID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintstatus cs on cs.StatusID  = c.ComplaintStatus left join complaintpriority cp on cp.PriorityID  = c.ComplaintPriority left join employees e on e.EmpID  = c.UpdatedBy left join departments d on d.DeptID  = c.DeptID where c.ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);	
 	
 
 		$query1 = $this->db->executeQueryAndGetArray("SELECT Image FROM complaintimages where ComCatID = '" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);
 		$query2 = $this->db->executeQueryAndGetArray("SELECT Image FROM complaintafterimages where ComCatID = '" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);
-	
+		
+		
 		
 		foreach($query as $rec){
+		    $final = "";
+    		if($rec["ComplaintStatus"] == '3'){
+    		    $AssignedTime = new DateTime($rec["AssignedTime"]);
+                $CompletedTime = new DateTime($rec["CompletedTime"]);
+                $interval = $AssignedTime->diff($CompletedTime);
+                //$final = $interval->format('%Y-%m-%d %H:%i:%s');
+                //$y = $interval->format('%y');
+                //$m = $interval->format('%m');
+                $a = $interval->format('%a');
+                $h = $interval->format('%h');
+                $i = $interval->format('%i');
+                
+                $final = ($a == 0?"":$a."days ")."".($h == 0?"":$h."hrs ")."".($i == 0?"":$i."mins");
+                
+    		}
+	
+	
 		    $item[] = array(
 		    "ComID" => $rec["ComID"],
 		    "CategoryName" => $rec["CategoryName"],
@@ -1473,7 +1511,11 @@ class WisAPI extends REST
 		    "DeptID" => $rec["DeptID"],
 		    "EmpMobile" => $rec["EmpMobile"],
 			"ComplaintRaisedBy" => $rec["ComplaintRaisedBy"],
-			"Material" => $rec["Material"]
+			"Material" => $rec["Material"],
+			"AssignedTime" => $rec["AssignedTime"],
+			"CompletedDateTime" => $rec["CompletedTime"],
+			"CompletedTime" => $final,
+			"DeptName" => $rec["DeptName"]
 		    );
 		}
 		foreach($query1 as $rec1){
@@ -1558,9 +1600,20 @@ class WisAPI extends REST
 		}
 		
 		
+		if($ComplaintStatus == 2){
+		    $AssignedDate = $this->db->getFirstRowFirstColumn("SELECT AssignedTime FROM complaints where ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);   
+		    if($AssignedDate == "0000-00-00 00:00:00"){
+		        $AssignedDate = date('Y-m-d H:i:s');
+		    }
+		}
 		
+		$CompletedTime = "";
+		if($ComplaintStatus == 3){
+		    $AssignedDate = $this->db->getFirstRowFirstColumn("SELECT AssignedTime FROM complaints where ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);
+		    $CompletedTime = date('Y-m-d H:i:s');
+		}
 		
-		$sql = "UPDATE `complaints` SET `DeptID`='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "',`UpdatedBy`='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "',`ComplaintStatus`='" . mysqli_real_escape_string($this->db->mysql_link, $ComplaintStatus) . "',`ComplaintPriority`='" . mysqli_real_escape_string($this->db->mysql_link, $ComplaintPriority) . "',`AssignedNote`='" . mysqli_real_escape_string($this->db->mysql_link, $AssignedNote) . "',`UpdatedDate`='" . date('Y-m-d H:i:s') . "',`Material`='" . mysqli_real_escape_string($this->db->mysql_link, $Material) . "' WHERE `ComID`='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "';";
+		$sql = "UPDATE `complaints` SET `DeptID`='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "',`UpdatedBy`='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "',`ComplaintStatus`='" . mysqli_real_escape_string($this->db->mysql_link, $ComplaintStatus) . "',`AssignedNote`='" . mysqli_real_escape_string($this->db->mysql_link, $AssignedNote) . "',`UpdatedDate`='" . date('Y-m-d H:i:s') . "',`Material`='" . mysqli_real_escape_string($this->db->mysql_link, $Material) . "',`AssignedTime`='" . mysqli_real_escape_string($this->db->mysql_link, $AssignedDate) . "', `CompletedTime`='" . mysqli_real_escape_string($this->db->mysql_link, $CompletedTime) . "' WHERE `ComID`='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "';";
 
 		if ($this->db->executeQuery($sql)) {
 			if($images){
@@ -1635,7 +1688,6 @@ class WisAPI extends REST
 		}
 	}
 }
-
 // Initiiate Library
 $api = new WisAPI();
 $api->processApi();
