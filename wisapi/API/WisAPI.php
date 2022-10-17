@@ -532,6 +532,7 @@ class WisAPI extends REST
 			$this->errorMSG(406, "Wrong HTTP Method");
 		}
 		$OrgID = $this->OrgID;		
+		$DeptID = $this->_request['DeptID'];
 	    $DeptName = $this->_request['DeptName'];
 		$BrID = $this->_request['BrID'];
 		$SortType = $this->_request['SortType'];//branch,department
@@ -541,11 +542,14 @@ class WisAPI extends REST
         $sql = "SELECT d.BrID,d.DeptID,d.DeptName,d.ParentDept,b.BrName,d.Status,dd.DeptName as ParentName FROM departments d left join departments dd on dd.DeptID = d.ParentDept left join branches b on b.BrId = d.BrId  where d.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'";
         
 		//$sql = "SELECT d.BrID,d.DeptID,d.DeptName,d.ParentDept,dd.DeptName as ParentName,b.BrName,d.Status FROM departments d left join departments dd on dd.ParentDept = d.DeptID left join branches b on b.BrId = d.BrId  where d.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'";
+		if($DeptID != ''){
+			$sql.=" AND d.DeptID = '" . $DeptID . "'";
+		}
 		if($DeptName != ''){
-			$sql.="AND d.DeptName like '%". $DeptName . "%'";
+			$sql.=" AND d.DeptName like '%". $DeptName . "%'";
 		}
 		if($BrID != ''){
-			$sql.="AND d.BrID = '" . mysqli_real_escape_string($this->db->mysql_link, $BrID) . "' ";
+			$sql.=" AND d.BrID = '" . mysqli_real_escape_string($this->db->mysql_link, $BrID) . "' ";
 		}
 		if($SortType != ''){
 			if($SortType == 'branch'){
@@ -1219,6 +1223,35 @@ class WisAPI extends REST
 		
 	}
 
+	function addreassign(){
+		if ($this->get_request_method() != "POST") {
+			$this->errorMSG(406, "Wrong Method");
+		}
+		$ComID = $this->_request['ComID'];
+		$AssignTo = $this->_request['AssignTo'];	
+		$AssignTime = $this->_request['AssignTime'];	
+		$CompletedTime = $this->_request['CompletedTime'];	
+		$ComplaintStatus = $this->_request['ComplaintStatus'];
+		
+		if ($ComID == '') {
+			$this->errorMSG(400, "Please enter Complaint ID");
+		}
+
+			try {
+
+				$this->db->executeQuery("INSERT INTO `complaintreassign`(`ComID`,`AssignTime`, `CompletedTime`,`AssignTo`,`ComplaintStatus`, `CreatedDate`, `UpdatedBy`, `UpdatedDate`) VALUES('" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "','" . mysqli_real_escape_string($this->db->mysql_link, $AssignTime) . "','" . mysqli_real_escape_string($this->db->mysql_link, $CompletedTime) . "','" . mysqli_real_escape_string($this->db->mysql_link, $AssignTo) . "','" . mysqli_real_escape_string($this->db->mysql_link, $ComplaintStatus) . "','" . date('Y-m-d H:i:s') . "','','')");
+				
+				//echo $this->db->getLastSQLStatement();exit;
+				$this->successMSG('Re Assign Complaint Added Succesfully..!', $query);
+
+				
+			} catch (Exception $e) {
+				$this->db->rollbackTransaction();
+				$this->errorMSG(400, $e->getMessage());
+			}
+		
+	}
+
 	function adddepartment(){
 		if ($this->get_request_method() != "POST") {
 			$this->errorMSG(406, "Wrong Method");
@@ -1409,7 +1442,7 @@ class WisAPI extends REST
 		    
 		    $final = "";
     		if($rec["ComplaintStatus"] == '3'){
-    		    $AssignedTime = new DateTime($rec["AssignedTime"]);
+    		    $AssignedTime = new DateTime($rec["CreatedDate"]);
                 $CompletedTime = new DateTime($rec["CompletedTime"]);
                 $interval = $AssignedTime->diff($CompletedTime);
                 //$final = $interval->format('%Y-%m-%d %H:%i:%s');
@@ -1472,7 +1505,7 @@ class WisAPI extends REST
 		foreach($query as $rec){
 		    $final = "";
     		if($rec["ComplaintStatus"] == '3'){
-    		    $AssignedTime = new DateTime($rec["AssignedTime"]);
+    		    $AssignedTime = new DateTime($rec["CreatedDate"]);
                 $CompletedTime = new DateTime($rec["CompletedTime"]);
                 $interval = $AssignedTime->diff($CompletedTime);
                 //$final = $interval->format('%Y-%m-%d %H:%i:%s');
@@ -1575,6 +1608,7 @@ class WisAPI extends REST
 		$AssignedNote = $this->_request['Note'];
 		$Material = $this->_request['Material'];
 		$images = $this->_request['Images'];
+		$ReAssign = $this->_request['ReAssign'];
 		
 		if ($ComID == '') {
 			$this->errorMSG(400, "Please enter Complaint ID");
@@ -1601,27 +1635,39 @@ class WisAPI extends REST
 		
 		
 		if($ComplaintStatus == 2){
-		    $AssignedDate = $this->db->getFirstRowFirstColumn("SELECT AssignedTime FROM complaints where ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);   
-		    if($AssignedDate == "0000-00-00 00:00:00"){
-		        $AssignedDate = date('Y-m-d H:i:s');
-		    }
+			$AssignedDate = $this->db->getFirstRowFirstColumn("SELECT AssignedTime FROM complaints where ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);   
+			$reassign = $this->db->getFirstRowFirstColumn("SELECT ReAssign FROM complaints where ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC); 
+
+			$OldEmp = $this->db->getFirstRowFirstColumn("SELECT UpdatedBy FROM complaints where ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC); 
+
+			if($AssignedDate == "0000-00-00 00:00:00"){
+				$AssignedDate = date('Y-m-d H:i:s');
+			}			
+			if($ReAssign == 1){
+				if($OldEmp == $EmpID){
+					$AssignedDate = $AssignedDate;
+				}else{
+					$AssignedDate = date('Y-m-d H:i:s');
+				}
+			}
 		}
 		
 		$CompletedTime = "";
 		if($ComplaintStatus == 3){
-		    $AssignedDate = $this->db->getFirstRowFirstColumn("SELECT AssignedTime FROM complaints where ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);
+		    //$AssignedDate = $this->db->getFirstRowFirstColumn("SELECT AssignedTime FROM complaints where ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);
 		    $CompletedTime = date('Y-m-d H:i:s');
 		}
 		
-		$sql = "UPDATE `complaints` SET `DeptID`='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "',`UpdatedBy`='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "',`ComplaintStatus`='" . mysqli_real_escape_string($this->db->mysql_link, $ComplaintStatus) . "',`AssignedNote`='" . mysqli_real_escape_string($this->db->mysql_link, $AssignedNote) . "',`UpdatedDate`='" . date('Y-m-d H:i:s') . "',`Material`='" . mysqli_real_escape_string($this->db->mysql_link, $Material) . "',`AssignedTime`='" . mysqli_real_escape_string($this->db->mysql_link, $AssignedDate) . "', `CompletedTime`='" . mysqli_real_escape_string($this->db->mysql_link, $CompletedTime) . "' WHERE `ComID`='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "';";
+		$sql = "UPDATE `complaints` SET `DeptID`='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "',`UpdatedBy`='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "',`ComplaintStatus`='" . mysqli_real_escape_string($this->db->mysql_link, $ComplaintStatus) . "',`AssignedNote`='" . mysqli_real_escape_string($this->db->mysql_link, $AssignedNote) . "',`UpdatedDate`='" . date('Y-m-d H:i:s') . "',`Material`='" . mysqli_real_escape_string($this->db->mysql_link, $Material) . "',`AssignedTime`='" . mysqli_real_escape_string($this->db->mysql_link, $AssignedDate) . "', `CompletedTime`='" . mysqli_real_escape_string($this->db->mysql_link, $CompletedTime) . "', `ReAssign`='" . mysqli_real_escape_string($this->db->mysql_link, $ReAssign) . "'  WHERE `ComID`='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "';";
 
 		if ($this->db->executeQuery($sql)) {
+		    $a=$this->db->getLastSQLStatement();
 			if($images){
 				for($i=0;$i<count($images);$i++){
 					$this->db->executeQuery("INSERT INTO `complaintafterimages`(`ComCatID`,`Image`,`CreatedBy`,`CreatedDate`,`UpdatedBy`,`UpdatedDate`) VALUES('" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "','" . mysqli_real_escape_string($this->db->mysql_link, $images[$i]) . "','" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "','" . date('Y-m-d H:i:s') . "','0','" . date('Y-m-d H:i:s') . "')");
 				}
 			}
-			$this->successMSG('Compalint Updated!', "");
+			$this->successMSG('Compalint Updated!', $a);
 		}
 
 	}
@@ -1679,7 +1725,7 @@ class WisAPI extends REST
 		$this->response($this->json($susmsg), 200);
 	}
 	/*
-	 *	Encode array into JSON
+	 *	Encode array into JSONad
 	*/
 	public function json($data)
 	{

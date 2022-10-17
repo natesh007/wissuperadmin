@@ -1,0 +1,1 @@
+ALTER TABLE `complaints` ADD `ReAssign` TINYINT NOT NULL AFTER `UpdatedDate`;
