@@ -17,7 +17,7 @@ class WisAPI extends REST
 {
 	private $db;
 	private $appSecret = "dfhfhfi&9)jnd%sndn&565ggghGGdedj*nsn&jsdnjdnj";
-	private $jwtPassThroughRoutes = array("logout","test","editemployee","addemployee","employees","alldepartments","branches","adddepartment","editdepartment","departments","jobtitles","getcomplaints","complaintcategorysearch","getorgsrooms");
+	private $jwtPassThroughRoutes = array("logout","test","editemployee","addemployee","employees","alldepartments","branches","adddepartment","editdepartment","departments","jobtitles","getcomplaints","complaintcategorysearch","getorgsrooms","graphcomplaintsby");
 	private $logIndex = 0;
 	private $EmpID = 0;
 	private $EmailID = '';
@@ -1620,7 +1620,8 @@ class WisAPI extends REST
 		
 		$Status = $this->db->getFirstRowFirstColumn("SELECT ComplaintStatus FROM complaints where ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);
 
-
+        $AssignedDate = $this->db->getFirstRowFirstColumn("SELECT AssignedTime FROM complaints where ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);   
+        
 		if ($DeptID == '') {
 			$DeptID = $DeptName;
 		}
@@ -1635,7 +1636,7 @@ class WisAPI extends REST
 		
 		
 		if($ComplaintStatus == 2){
-			$AssignedDate = $this->db->getFirstRowFirstColumn("SELECT AssignedTime FROM complaints where ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);   
+			
 			$reassign = $this->db->getFirstRowFirstColumn("SELECT ReAssign FROM complaints where ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC); 
 
 			$OldEmp = $this->db->getFirstRowFirstColumn("SELECT UpdatedBy FROM complaints where ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC); 
@@ -1707,6 +1708,56 @@ class WisAPI extends REST
 
 		
 		$this->successMSG('Data', $data);
+	}
+
+	function graphcomplaintsby(){
+		if ($this->get_request_method() != "POST") {
+			$this->errorMSG(406, "Wrong HTTP Method");
+		}
+		$OrgID = $this->OrgID;
+		$FromDate = $this->_request['FromDate'];
+		$ToDate = $this->_request['ToDate'];
+		$ComBy = $this->_request['ComBy'];//1:Today, 2:This Month, 3:last 3 Years, 4:Year Till Date.
+
+		$sql = "SELECT SUM(CASE WHEN ComplaintRaisedBy = 'Customer' THEN 1 ELSE 0 END) AS 'Customer',SUM(CASE WHEN ComplaintRaisedBy = 'Employee' THEN 1 ELSE 0 END) AS 'Employee', SUM(CASE WHEN ComplaintRaisedBy = 'Patient' THEN 1 ELSE 0 END) AS 'Patient',SUM(CASE WHEN ComplaintStatus = '2' THEN 1 ELSE 0 END) AS 'InProcess', SUM(CASE WHEN ComplaintStatus = '3' THEN 1 ELSE 0 END) AS 'Completed', SUM(CASE WHEN ComplaintStatus = '1' THEN 1 ELSE 0 END) AS 'Assigned' FROM complaints where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'";
+
+		if($FromDate!="" && $ToDate!=""){
+			$FromDate = $FromDate." 00-00-00";
+			$ToDate = $ToDate." 23-59-59";
+			$sql.="AND CreatedDate BETWEEN '".$FromDate."' AND '".$ToDate."'";
+		}
+		if($ComBy == 1){
+			$TodayDate = date('Y-m-d');
+
+			$sql.=" AND CreatedDate like '".$TodayDate."%'";
+		}else if($ComBy == 2){
+			$Month = date('m');
+			$Year = date('Y');
+			$FirstDate = $Year.'-'.$Month.'-1 00-00-00';
+			$TodayDate = date('Y-m-d 23:59:59');
+
+			$sql.="AND CreatedDate BETWEEN '".$FirstDate."' AND '".$TodayDate."'";
+		}else if($ComBy == 3){
+			$Month = date('m')-3;
+			$Year = date('Y');
+			$FirstDate = $Year.'-'.$Month.'-1 00-00-00';
+			$TodayDate = date('Y-m-d 23:59:59');
+
+			$sql.=" AND CreatedDate BETWEEN '".$FirstDate."' AND '".$TodayDate."'";
+		}else if($ComBy == 4){
+			$Year = date('Y');
+			$FirstDate = $Year.'-01-1 00-00-00';
+			$TodayDate = date('Y-m-d 23:59:59');
+
+			$sql.=" AND CreatedDate BETWEEN '".$FirstDate."' AND '".$TodayDate."'";
+		}
+		//echo $sql;exit;
+		$query = $this->db->executeQueryAndGetArray($sql, MYSQLI_ASSOC);
+
+		$query['totalcount'] = $this->db->getFirstRowFirstColumn("SELECT COUNT('*') as TotalComplaints FROM `complaints` WHERE OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'");
+		//echo $this->db->getLastSQLStatement();exit;
+
+		$this->successMSG('Complaints by Data', $query);
 	}
 
 	/*
