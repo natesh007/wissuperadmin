@@ -17,7 +17,7 @@ class WisAPI extends REST
 {
 	private $db;
 	private $appSecret = "dfhfhfi&9)jnd%sndn&565ggghGGdedj*nsn&jsdnjdnj";
-	private $jwtPassThroughRoutes = array("logout","test","editemployee","addemployee","employees","alldepartments","branches","adddepartment","editdepartment","departments","jobtitles","getcomplaints","complaintcategorysearch","getorgsrooms","graphcomplaintsby");
+	private $jwtPassThroughRoutes = array("logout","test","editemployee","addemployee","employees","alldepartments","branches","adddepartment","editdepartment","departments","jobtitles","getcomplaints","complaintcategorysearch","getorgsrooms","graphcomplaintsby","complaintsreport");
 	private $logIndex = 0;
 	private $EmpID = 0;
 	private $EmailID = '';
@@ -1718,46 +1718,243 @@ class WisAPI extends REST
 		$FromDate = $this->_request['FromDate'];
 		$ToDate = $this->_request['ToDate'];
 		$ComBy = $this->_request['ComBy'];//1:Today, 2:This Month, 3:last 3 Years, 4:Year Till Date.
+		
+	
 
 		$sql = "SELECT SUM(CASE WHEN ComplaintRaisedBy = 'Customer' THEN 1 ELSE 0 END) AS 'Customer',SUM(CASE WHEN ComplaintRaisedBy = 'Employee' THEN 1 ELSE 0 END) AS 'Employee', SUM(CASE WHEN ComplaintRaisedBy = 'Patient' THEN 1 ELSE 0 END) AS 'Patient',SUM(CASE WHEN ComplaintStatus = '2' THEN 1 ELSE 0 END) AS 'InProcess', SUM(CASE WHEN ComplaintStatus = '3' THEN 1 ELSE 0 END) AS 'Completed', SUM(CASE WHEN ComplaintStatus = '1' THEN 1 ELSE 0 END) AS 'Assigned' FROM complaints where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'";
 
 		if($FromDate!="" && $ToDate!=""){
+		    $query["Dates"] = array(
+		        "FromDate" => $FromDate,
+		        "ToDate" => $ToDate
+		    );
 			$FromDate = $FromDate." 00-00-00";
 			$ToDate = $ToDate." 23-59-59";
 			$sql.="AND CreatedDate BETWEEN '".$FromDate."' AND '".$ToDate."'";
 		}
 		if($ComBy == 1){
 			$TodayDate = date('Y-m-d');
+			$query["Dates"] = array(
+		        "FromDate" => $TodayDate,
+		        "ToDate" => $TodayDate
+		    );
 
 			$sql.=" AND CreatedDate like '".$TodayDate."%'";
 		}else if($ComBy == 2){
 			$Month = date('m');
 			$Year = date('Y');
+			$From =  $Year.'-'.$Month.'-1';
+			$To = date('Y-m-d');
 			$FirstDate = $Year.'-'.$Month.'-1 00-00-00';
 			$TodayDate = date('Y-m-d 23:59:59');
 
 			$sql.="AND CreatedDate BETWEEN '".$FirstDate."' AND '".$TodayDate."'";
+			$query["Dates"] = array(
+		        "FromDate" => $From,
+		        "ToDate" => $To
+		    );
+			
 		}else if($ComBy == 3){
-			$Month = date('m')-3;
+			$Month = date('m')-1;
+			$Month3 = date('m')-3;
 			$Year = date('Y');
-			$FirstDate = $Year.'-'.$Month.'-1 00-00-00';
-			$TodayDate = date('Y-m-d 23:59:59');
+			$From = $Year.'-'.$Month3.'-1';
+			$To = $Year.'-'.$Month.'-31';
+			$FirstDate = $Year.'-'.$Month3.'-1 00-00-00';
+			$EndDate = $Year.'-'.$Month.'-31 23-59-59';
 
-			$sql.=" AND CreatedDate BETWEEN '".$FirstDate."' AND '".$TodayDate."'";
+			$sql.=" AND CreatedDate BETWEEN '".$FirstDate."' AND '".$EndDate."'";
+			$query["Dates"] = array(
+		        "FromDate" => $From,
+		        "ToDate" => $To
+		    );
 		}else if($ComBy == 4){
 			$Year = date('Y');
+			$From = $Year.'-01-1';
+			$To = date('Y-m-d');
 			$FirstDate = $Year.'-01-1 00-00-00';
 			$TodayDate = date('Y-m-d 23:59:59');
 
 			$sql.=" AND CreatedDate BETWEEN '".$FirstDate."' AND '".$TodayDate."'";
+			$query["Dates"] = array(
+		        "FromDate" => $From,
+		        "ToDate" => $To
+		    );
 		}
 		//echo $sql;exit;
-		$query = $this->db->executeQueryAndGetArray($sql, MYSQLI_ASSOC);
-
-		$query['totalcount'] = $this->db->getFirstRowFirstColumn("SELECT COUNT('*') as TotalComplaints FROM `complaints` WHERE OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'");
+		$data1 = $this->db->executeQueryAndGetArray($sql, MYSQLI_ASSOC);
+		$query['data'] = $data1;
+		//echo "<pre>";print_r($data1);exit;
+		$query['totalcount'] = $data1[0]['InProcess']+$data1[0]['Completed']+$data1[0]['Assigned'];
+		//$query['totalcount'] = sizeof($data);
+		//$query['totalcount'] = $this->db->getFirstRowFirstColumn("SELECT COUNT('*') as TotalComplaints FROM `complaints` WHERE OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'");
 		//echo $this->db->getLastSQLStatement();exit;
 
+		$cats = $this->db->executeQueryAndGetArray("SELECT ComCatID,CategoryName from complaintcategory", MYSQLI_ASSOC);
+
+		foreach($cats as $c){
+			$sql1 = "SELECT SUM(CASE WHEN ComCatID = '".$c['ComCatID']."' THEN 1 ELSE 0 END) AS 'Customer' FROM complaints where OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'";
+
+			if($FromDate!="" && $ToDate!=""){
+				$query["Dates"] = array(
+					"FromDate" => $FromDate,
+					"ToDate" => $ToDate
+				);
+				$FromDate = $FromDate." 00-00-00";
+				$ToDate = $ToDate." 23-59-59";
+				$sql1.="AND CreatedDate BETWEEN '".$FromDate."' AND '".$ToDate."'";
+			}
+			if($ComBy == 1){
+				$TodayDate = date('Y-m-d');
+				$query["Dates"] = array(
+					"FromDate" => $TodayDate,
+					"ToDate" => $TodayDate
+				);
+	
+				$sql1.=" AND CreatedDate like '".$TodayDate."%'";
+			}else if($ComBy == 2){
+				$Month = date('m');
+				$Year = date('Y');
+				$From =  $Year.'-'.$Month.'-1';
+				$To = date('Y-m-d');
+				$FirstDate = $Year.'-'.$Month.'-1 00-00-00';
+				$TodayDate = date('Y-m-d 23:59:59');
+	
+				$sql1.="AND CreatedDate BETWEEN '".$FirstDate."' AND '".$TodayDate."'";
+				$query["Dates"] = array(
+					"FromDate" => $From,
+					"ToDate" => $To
+				);
+				
+			}else if($ComBy == 3){
+				$Month = date('m')-1;
+				$Month3 = date('m')-3;
+				$Year = date('Y');
+				$From = $Year.'-'.$Month3.'-1';
+				$To = $Year.'-'.$Month.'-31';
+				$FirstDate = $Year.'-'.$Month3.'-1 00-00-00';
+				$EndDate = $Year.'-'.$Month.'-31 23-59-59';
+	
+				$sql1.=" AND CreatedDate BETWEEN '".$FirstDate."' AND '".$EndDate."'";
+				$query["Dates"] = array(
+					"FromDate" => $From,
+					"ToDate" => $To
+				);
+			}else if($ComBy == 4){
+				$Year = date('Y');
+				$From = $Year.'-01-1';
+				$To = date('Y-m-d');
+				$FirstDate = $Year.'-01-1 00-00-00';
+				$TodayDate = date('Y-m-d 23:59:59');
+	
+				$sql1.=" AND CreatedDate BETWEEN '".$FirstDate."' AND '".$TodayDate."'";
+				$query["Dates"] = array(
+					"FromDate" => $From,
+					"ToDate" => $To
+				);
+			}
+			//echo $sql;exit;
+			$totalcamps = $this->db->getFirstRowFirstColumn($sql1);
+
+			$item[]=array(
+				'ComCatID' => $c['ComCatID'],
+				'CategoryName' => $c['CategoryName'],
+				'Count' => $totalcamps
+			);
+		}
+
+		$query['ComplaintsType'] = $item;
+
 		$this->successMSG('Complaints by Data', $query);
+	}
+
+	function complaintsreport(){
+		if ($this->get_request_method() != "POST") {
+			$this->errorMSG(406, "Wrong HTTP Method");
+		}
+		$OrgID = $this->OrgID;
+		$FromDate = $this->_request['FromDate'];
+		$ToDate = $this->_request['ToDate'];
+		$ComBy = $this->_request['ComBy'];//1:Today, 2:This Month, 3:last 3 Years, 4:Year Till Date.
+		$BID = $this->_request['BID'];
+		$FID = $this->_request['FID'];
+		$RID = $this->_request['RID'];
+		$ComplaintRaisedBy = $this->_request['ComplaintRaisedBy'];//Customer:Customer, Employee:Employee, Patient:Patient
+		$ComCatID = $this->_request['ComCatID'];
+		$ComplaintStatus = $this->_request['ComplaintStatus'];//1:Unassigned, 2:In Process, 3:Complted
+	
+
+		$sql = "SELECT c.ComID,cc.CategoryName,b.BuildingName,f.FloorName,r.RoomName,c.CreatedDate,cs.StausName,c.ComplaintStatus,c.ComplaintRaisedBy,c.UpdatedBy as empid,e.EmpName as AssignedBy FROM complaints c left join complaintcategory cc on cc.ComCatID = c.ComCatID left join building b on b.BID = c.BID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintstatus cs on cs.StatusID  = c.ComplaintStatus left join employees e on e.EmpID  = c.UpdatedBy where c.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'";
+		
+		if($FromDate!="" && $ToDate!=""){
+		    
+			$FromDate = $FromDate." 00-00-00";
+			$ToDate = $ToDate." 23-59-59";
+			$sql.="AND c.CreatedDate BETWEEN '".$FromDate."' AND '".$ToDate."'";
+		}
+		if($ComBy == 1){
+			$TodayDate = date('Y-m-d');
+
+			$sql.=" AND c.CreatedDate like '".$TodayDate."%'";
+		}else if($ComBy == 2){
+			$Month = date('m');
+			$Year = date('Y');
+			$From =  $Year.'-'.$Month.'-1';
+			$To = date('Y-m-d');
+			$FirstDate = $Year.'-'.$Month.'-1 00-00-00';
+			$TodayDate = date('Y-m-d 23:59:59');
+
+			$sql.="AND c.CreatedDate BETWEEN '".$FirstDate."' AND '".$TodayDate."'";
+			
+		}else if($ComBy == 3){
+			$Month = date('m')-1;
+			$Month3 = date('m')-3;
+			$Year = date('Y');
+			$From = $Year.'-'.$Month3.'-1';
+			$To = $Year.'-'.$Month.'-31';
+			$FirstDate = $Year.'-'.$Month3.'-1 00-00-00';
+			$EndDate = $Year.'-'.$Month.'-31 23-59-59';
+
+			$sql.=" AND c.CreatedDate BETWEEN '".$FirstDate."' AND '".$EndDate."'";
+			
+		}else if($ComBy == 4){
+			$Year = date('Y');
+			$From = $Year.'-01-1';
+			$To = date('Y-m-d');
+			$FirstDate = $Year.'-01-1 00-00-00';
+			$TodayDate = date('Y-m-d 23:59:59');
+
+			$sql.=" AND c.CreatedDate BETWEEN '".$FirstDate."' AND '".$TodayDate."'";
+			
+		}
+		
+		
+		if($ComCatID != ''){
+			$sql.=" AND c.ComCatID = '".mysqli_real_escape_string($this->db->mysql_link, $ComCatID)."'";
+		}
+		if($BID != ''){
+			$sql.=" AND c.BID = '".mysqli_real_escape_string($this->db->mysql_link, $BID)."'";
+		}		
+		if($FID != ''){
+			$sql.=" AND c.FID = '".mysqli_real_escape_string($this->db->mysql_link, $FID)."'";
+		}
+		if($RID != ''){
+			$sql.=" AND c.RID = '".mysqli_real_escape_string($this->db->mysql_link, $RID)."'";
+		}
+		if($ComplaintRaisedBy != ''){
+			$sql.=" AND c.ComplaintRaisedBy = '".mysqli_real_escape_string($this->db->mysql_link, $ComplaintRaisedBy)."'";
+		}
+		if($ComplaintStatus != ''){
+			$sql.=" AND c.ComplaintStatus = '".mysqli_real_escape_string($this->db->mysql_link, $ComplaintStatus)."'";
+		}
+	
+		//echo $sql;exit;
+		$data1 = $this->db->executeQueryAndGetArray($sql, MYSQLI_ASSOC);
+		
+		$query['data'] = $data1;
+		
+
+		$this->successMSG('Complaints Reports Data', $query);
 	}
 
 	/*
