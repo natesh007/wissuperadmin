@@ -7,6 +7,7 @@ require "../utilities/vendor/autoload.php";
 //test
 use \Firebase\JWT\JWT;
 
+//SiteURLs
 define('SiteURL', 'http://igreen.systems/wisadmin/');
 define('SiteURL1', 'http://igreen.systems/wissuperadmin/');
 
