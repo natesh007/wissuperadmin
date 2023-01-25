@@ -60,6 +60,19 @@ $routes->add('/admin/inactive_shifts', 'Shift::inactive_shifts', ['namespace' =>
 $routes->add('/admin/shifts/add_shift', 'Shift::add_shift', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/shifts/edit_shift/(:num)', 'Shift::edit_shift/$1', ['namespace' => 'Modules\Admin\Controllers']);
 
+// OrganizationManagesBy Routes
+$routes->add('/admin/organizationmanagesby', 'OrganizationManagedBy::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/organizationmanagesby.(:num)', 'OrganizationManagedBy::index/$1', ['namespace' => 'Modules\Admin\Controllers']);
+
+$routes->add('/admin/organizationmanagesby/add_organizationmanagedby', 'OrganizationManagedBy::add_organizationmanagedby', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/organizationmanagesby/edit_organizationmanagedby/(:num)', 'OrganizationManagedBy::edit_organizationmanagedby/$1', ['namespace' => 'Modules\Admin\Controllers']);
+
+// Organizationdeploymenttypes Routes
+$routes->add('/admin/organizationdeploymenttypes', 'OrganizationDeploymentType::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/organizationdeploymenttypes.(:num)', 'OrganizationDeploymentType::index/$1', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/organizationdeploymenttypes/add_organizationdeploymenttype', 'OrganizationDeploymentType::add_organizationdeploymenttype', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/organizationdeploymenttypes/edit_organizationdeploymenttype/(:num)', 'OrganizationDeploymentType::edit_organizationdeploymenttype/$1', ['namespace' => 'Modules\Admin\Controllers']);
+
 // Organization Type Routes
 $routes->add('/admin/organization_types', 'OrganizationType::index', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/active_organization_types', 'OrganizationType::active_organization_types', ['namespace' => 'Modules\Admin\Controllers']);

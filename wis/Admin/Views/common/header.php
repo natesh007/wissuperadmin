@@ -119,13 +119,24 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">                                 
-                                <li class="nav-item">
+                                <?php /*<li class="nav-item">
                                     <a href="<?= base_url('admin/roles') ?>" class="nav-link" id="RolesTab">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Roles</p>
                                     </a>
+                                </li>*/?>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('admin/organizationmanagesby') ?>" class="nav-link" id="OrganizationmanagesbyTab">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Organization Managed By</p>
+                                    </a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a href="<?= base_url('admin/organizationdeploymenttypes') ?>" class="nav-link" id="OrganizationdeploymenttypeTab">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Organization Deployment Type</p>
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="<?= base_url('admin/shifts') ?>" class="nav-link" id="ShiftsTab">
                                         <i class="far fa-circle nav-icon"></i>
@@ -180,12 +191,12 @@
                                         <p>Organizations</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <?php/* <li class="nav-item">
                                     <a href="<?= base_url('admin/buildings') ?>" class="nav-link" id="BuildingsTab">
                                         <i class="far fa-building nav-icon"></i>
                                         <p>Buildings</p>
                                     </a>
-                                </li>
+                                </li>*/?>
                                 <?php /*
                                 <li class="nav-item">
                                     <a href="<?= base_url('admin/floors') ?>" class="nav-link" id="FloorsTab">
@@ -201,7 +212,7 @@
                                 </li>*/?>
                             </ul>
                         </li>
-                        <li class="nav-item">
+                        <?php /*<li class="nav-item">
                           <a href="<?= base_url('admin/branches'); ?>" class="nav-link" id="BranchesTab">
                               <i class="nav-icon fa fa-map-marker"></i>
                               <p>Branches</p>
@@ -218,7 +229,7 @@
                               <i class="nav-icon fa fa-user"></i>
                               <p>Employees</p>
                           </a>
-                        </li>
+                        </li>*/?>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

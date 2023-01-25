@@ -3,10 +3,10 @@
 use CodeIgniter\Model;
 use Modules\Admin\Models\UtilModel;
 
-class ShiftModel extends Model {
-    protected $table='shifts';
-    protected $primaryKey='ShID';
-    protected $allowedFields = ['ShiftName', 'ShiftDesc', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
+class OrganizationDeploymentTypeModel extends Model {
+    protected $table='organizationdeploymenttype';
+    protected $primaryKey='OrgDeploymentTypeID';
+    protected $allowedFields = ['DeploymentType', 'Status', 'CreatedBy', 'CreatedDate', 'UpdatedBy', 'UpdatedDate'];
 
     protected $beforeInsert=['beforeInsert'];
     protected $beforeUpdate=['beforeUpdate'];
@@ -24,30 +24,30 @@ class ShiftModel extends Model {
         $data['data']['UpdatedDate']=date('Y-m-d H:i:s');
         return $data;
     }
-    function get_shifts($page, $perpage, $keyword, $status) 
+    function get_organizationdeploymenttypes($page, $perpage, $keyword, $status) 
     {
         $start_from = ($page - 1) * $perpage;
-        $query = 'SELECT s.*, a.Name FROM shifts s left join admins a on a.AID = s.UpdatedBy';
+        $query = 'SELECT od.*, a.Name FROM organizationdeploymenttype od left join admins a on a.AID = od.UpdatedBy';
         if ($keyword !=''&& $status !='') {
-            $query .=' where s.ShiftName  like "%'. $keyword . '%" AND s.Status = '.$status;
+            $query .=' where od.DeploymentType  like "%'. $keyword . '%" AND od.Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $query .=' where s.ShiftName  like "%'. $keyword . '%"';
+            $query .=' where od.DeploymentType  like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {
-            $query .=' where s.Status = '.$status;
+            $query .=' where od.Status = '.$status;
         }
         $query .=' Limit ' . $start_from . ',' . $perpage;
-        $shifts['results'] = $this->db->query($query)->getResultArray();
-        $countquery = 'SELECT count(ShID) as ttl_rows FROM shifts';
+        $organizationdeploymenttype['results'] = $this->db->query($query)->getResultArray();
+        $countquery = 'SELECT count(OrgDeploymentTypeID) as ttl_rows FROM organizationdeploymenttype';
         if ($keyword !=''&& $status !='') {
-            $countquery .=' where ShiftName  like "%'. $keyword . '%" AND Status = '.$status;
+            $countquery .=' where DeploymentType  like "%'. $keyword . '%" AND Status = '.$status;
         }
 
         else if ($keyword !=''&& $status=='') {
-            $countquery .=' where ShiftName like "%'. $keyword . '%"';
+            $countquery .=' where DeploymentType like "%'. $keyword . '%"';
         }
 
         else if ($keyword==''&& $status !='') {
@@ -62,7 +62,7 @@ class ShiftModel extends Model {
         } else {
             $actual_link = $actual_link_array[0] . '?' . 'key_word=' . $keyword . '&';
         }
-        $shifts['ttl_rows'] = $row->ttl_rows;
+        $organizationdeploymenttype['ttl_rows'] = $row->ttl_rows;
         $adjacents = "2";
         $previous_page = $page - 1;
         $next_page = $page + 1;
@@ -70,8 +70,8 @@ class ShiftModel extends Model {
         $second_last = $totalPages - 1; // total page minus 1
         $utilmodel = new UtilModel;
         $pagelinks = $utilmodel->build_pagelinks($actual_link, $previous_page, $next_page, $totalPages, $adjacents, $page, $second_last);
-        $shifts['pagelinks'] = $pagelinks;
-        return $shifts;
+        $organizationdeploymenttype['pagelinks'] = $pagelinks;
+        return $organizationdeploymenttype;
 
 
      
