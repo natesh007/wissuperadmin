@@ -62,8 +62,7 @@ $routes->add('/admin/shifts/edit_shift/(:num)', 'Shift::edit_shift/$1', ['namesp
 
 // OrganizationManagesBy Routes
 $routes->add('/admin/organizationmanagesby', 'OrganizationManagedBy::index', ['namespace' => 'Modules\Admin\Controllers']);
-$routes->add('/admin/organizationmanagesby.(:num)', 'OrganizationManagedBy::index/$1', ['namespace' => 'Modules\Admin\Controllers']);
-
+$routes->add('/admin/organizationmanagesby/(:num)', 'OrganizationManagedBy::index/$1', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/organizationmanagesby/add_organizationmanagedby', 'OrganizationManagedBy::add_organizationmanagedby', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/organizationmanagesby/edit_organizationmanagedby/(:num)', 'OrganizationManagedBy::edit_organizationmanagedby/$1', ['namespace' => 'Modules\Admin\Controllers']);
 
@@ -172,6 +171,14 @@ $routes->add('/admin/active_complaintnatures', 'ComplaintNature::active_complain
 $routes->add('/admin/inactive_complaintnatures', 'ComplaintNature::inactive_complaintnatures', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/complaintnatures/add_complaintnature', 'ComplaintNature::add_complaintnature', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/complaintnatures/edit_complaintnature/(:num)', 'ComplaintNature::edit_complaintnature/$1', ['namespace' => 'Modules\Admin\Controllers']);
+
+
+
+// OrganizationReporting Routes
+$routes->add('/admin/organizationreporting', 'OrganizationReporting::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/organizationreporting/(:num)', 'OrganizationReporting::index/$1', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/organizationreporting/add_organizationreporting', 'OrganizationReporting::add_organizationreporting', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/organizationreporting/edit_organizationreporting/(:num)', 'OrganizationReporting::edit_organizationreporting/$1', ['namespace' => 'Modules\Admin\Controllers']);
 
 /**
  * --------------------------------------------------------------------

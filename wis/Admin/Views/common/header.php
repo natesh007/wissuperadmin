@@ -132,6 +132,12 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="<?= base_url('admin/organizationreporting') ?>" class="nav-link" id="OrganizationReportingTab">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Organization Reporting</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="<?= base_url('admin/organizationdeploymenttypes') ?>" class="nav-link" id="OrganizationdeploymenttypeTab">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Organization Deployment Type</p>
