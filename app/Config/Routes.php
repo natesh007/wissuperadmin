@@ -197,6 +197,14 @@ $routes->add('/admin/organizationdepartment', 'OrganizationDepartment::index', [
 $routes->add('/admin/organizationdepartment/(:num)', 'OrganizationDepartment::index/$1', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/organizationdepartment/add_organizationdepartment', 'OrganizationDepartment::add_organizationdepartment', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/organizationdepartment/edit_organizationdepartment/(:num)', 'OrganizationDepartment::edit_organizationdepartment/$1', ['namespace' => 'Modules\Admin\Controllers']);
+
+
+// Status Routes
+$routes->add('/admin/status', 'Status::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/status/(:num)', 'Status::index/$1', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/status/add_status', 'Status::add_status', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/status/edit_status/(:num)', 'Status::edit_status/$1', ['namespace' => 'Modules\Admin\Controllers']);
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
