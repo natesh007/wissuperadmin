@@ -163,6 +163,12 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="<?= base_url('admin/jurisdictions') ?>" class="nav-link" id="JurisdictionsTab">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Jurisdictions</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="<?= base_url('admin/organizationdeploymenttypes') ?>" class="nav-link" id="OrganizationdeploymenttypeTab">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Organization Deployment Type</p>

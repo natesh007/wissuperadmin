@@ -6,10 +6,10 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0"> Status</h1>
+                            <h1 class="m-0">Jurisdictions</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6 text-right add_user">
-							<a href="<?= site_url('admin/status/add_status') ?>" class="btn btn-sm btn-success btn-background">Add New Status</a>
+							<a href="<?= site_url('admin/jurisdictions/add_jurisdictions') ?>" class="btn btn-sm btn-success btn-background">Add New Jurisdictions</a>
 						</div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -29,9 +29,9 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col-md-3  head-title">
-									<button onclick="delete_all('status', 'StatusID', '', '')" name="delete_all[]" id="delete_all" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></button> Delete &nbsp;&nbsp;
-									<button onclick="active_inactive_all('status',1,'StatusID')" data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-success" name="delete_all[]" id="active_all"><span class="fa fa-check"></span></button> Active &nbsp;&nbsp;
-									<button onclick="active_inactive_all('status',0,'StatusID')" data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-warning" name="delete_all[]" id="inactive_all"><span class="fa fa-times"></span></button> Inactive
+									<button onclick="delete_all('jurisdictions', 'JurisdictionsID', '', '')" name="delete_all[]" id="delete_all" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span></button> Delete &nbsp;&nbsp;
+									<button onclick="active_inactive_all('jurisdictions',1,'JurisdictionsID')" data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-success" name="delete_all[]" id="active_all"><span class="fa fa-check"></span></button> Active &nbsp;&nbsp;
+									<button onclick="active_inactive_all('jurisdictions',0,'JurisdictionsID')" data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-warning" name="delete_all[]" id="inactive_all"><span class="fa fa-times"></span></button> Inactive
 								</div>
 								<div class="col-md-9">
 									<div class="row">
@@ -39,19 +39,19 @@
 											<div class="dropdown">
 												<button type="button" class="btn btn-sm btn-primary dropdown-toggle form-control" data-toggle="dropdown">
 													<?php
-													if (session('status_page') == '/status') {
-														echo "All Status";
-													} elseif (session('status_page') == '/status/1') {
-														echo "Active Status";
-													} elseif (session('status_page') == '/status/0') {
-														echo "Inactive Status";
+													if (session('jurisdictions_page') == '/jurisdictions') {
+														echo "All Jurisdictions";
+													} elseif (session('jurisdictions_page') == '/jurisdictions/1') {
+														echo "Active Jurisdictions";
+													} elseif (session('jurisdictions_page') == '/jurisdictions/0') {
+														echo "Inactive Jurisdictions";
 													}
 													?>
 												</button>
 												<div class="dropdown-menu">
-													<a class="dropdown-item" href="<?= base_url('admin/status') ?>">All Status</a>
-													<a class="dropdown-item" href="<?= base_url('admin/status/1') ?>">Active Status</a>
-													<a class="dropdown-item" href="<?= base_url('admin/status/0') ?>">Inactive Status</a>
+													<a class="dropdown-item" href="<?= base_url('admin/jurisdictions') ?>">All Jurisdictionss</a>
+													<a class="dropdown-item" href="<?= base_url('admin/jurisdictions/1') ?>">Active Jurisdictionss</a>
+													<a class="dropdown-item" href="<?= base_url('admin/jurisdictions/0') ?>">Inactive Jurisdictionss</a>
 												</div>
 											</div>
 										</div>
@@ -100,7 +100,7 @@
 													<button type="submit" id="submit" name="submit" class="btn btn-sm btn-success">search</button>
 													</div>
 													<div class="col-md-2">
-														<a href="<?= base_url('admin/status') ?>" class="btn btn-sm btn-info">Clear</a>
+														<a href="<?= base_url('admin/jurisdictions') ?>" class="btn btn-sm btn-info">Clear</a>
 													</div>
 												</div>
 											</form>
@@ -113,39 +113,39 @@
 								<thead>
 									<tr>
 										<th width="70px"> All &nbsp;<input type="checkbox" id="select_all" class="select_all"></th>
-										<th>Department</th>
+										<th>Jurisdictions</th>
 										<th>Actions</th>
 									</tr>
 								</thead>
 								<tbody id="Table">
 									<?php
-									if(!empty($status)){
-									foreach ($status as $cnty) {
+									if(!empty($jurisdictions)){
+									foreach ($jurisdictions as $cnty) {
 									?>
-										<tr id="<?= $cnty['StatusID']; ?>">
+										<tr id="<?= $cnty['JurisdictionsID']; ?>">
 											<td>
-												<input type="checkbox" name="" class="delete_checkbox" value="<?= $cnty['StatusID']; ?>">
+												<input type="checkbox" name="" class="delete_checkbox" value="<?= $cnty['JurisdictionsID']; ?>">
 											</td>
 											<td>
-												<?= $cnty['StatusName']; ?>
+												<?= $cnty['Jurisdictions']; ?>
 											</td>
 											
 											
 											<td>
 												<?php if ($cnty['Status'] == 1) { ?>
-													<button data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-success inactive" onclick="activate_inactivate(<?= $cnty['StatusID']; ?>,'status','StatusID',0)"><span class="fa fa-check"></span></button>
+													<button data-toggle="tooltip" title="Mark As Inactive" class="btn btn-xs btn-success inactive" onclick="activate_inactivate(<?= $cnty['JurisdictionsID']; ?>,'jurisdictions','JurisdictionsID',0)"><span class="fa fa-check"></span></button>
 												<?php } else { ?>
-													&nbsp;<button data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-warning " onclick="activate_inactivate(<?= $cnty['StatusID']; ?>,'status','StatusID',1)"><span class="fa fa-times"></span></button>
+													&nbsp;<button data-toggle="tooltip" title="Mark As Active" class="btn btn-xs btn-warning " onclick="activate_inactivate(<?= $cnty['JurisdictionsID']; ?>,'jurisdictions','JurisdictionsID',1)"><span class="fa fa-times"></span></button>
 												<?php } ?>
-												&nbsp;<a data-toggle="tooltip" href="<?= base_url('admin/status/edit_status/' . $cnty['StatusID']); ?>" title="Edit" class="btn btn-xs btn-primary"><span class="fa fa-pen"></span></a>
-												&nbsp;<button data-toggle="tooltip" onclick="deletedata('<?= $cnty['StatusID'] ?>','status','StatusID', '', '')" title="Delete" class="btn btn-xs btn-danger"><span class="fa fa-trash"></span></button>
+												&nbsp;<a data-toggle="tooltip" href="<?= base_url('admin/jurisdictions/edit_jurisdictions/' . $cnty['JurisdictionsID']); ?>" title="Edit" class="btn btn-xs btn-primary"><span class="fa fa-pen"></span></a>
+												&nbsp;<button data-toggle="tooltip" onclick="deletedata('<?= $cnty['JurisdictionsID'] ?>','jurisdictions','JurisdictionsID', '', '')" title="Delete" class="btn btn-xs btn-danger"><span class="fa fa-trash"></span></button>
 											</td>
 										</tr>
 										<?php
 									} }else{
 									?>
 									<tr><td colspan="4">
-									<?php echo "No Status Data found!";
+									<?php echo "No Jurisdictions Data found!";
 								}
 								?>
 								</tbody>
@@ -160,7 +160,7 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-		<input type="hidden" value="StatusTab" id="CurrentPage" />
+		<input type="hidden" value="JurisdictionsTab" id="CurrentPage" />
 		<?= view('Modules\Admin\Views\common\footer'); ?>
 	</body>
 </html>

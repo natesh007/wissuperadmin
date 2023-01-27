@@ -205,6 +205,12 @@ $routes->add('/admin/status/(:num)', 'Status::index/$1', ['namespace' => 'Module
 $routes->add('/admin/status/add_status', 'Status::add_status', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/status/edit_status/(:num)', 'Status::edit_status/$1', ['namespace' => 'Modules\Admin\Controllers']);
 
+// Status Routes
+$routes->add('/admin/jurisdictions', 'Jurisdictions::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/jurisdictions/(:num)', 'Jurisdictions::index/$1', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/jurisdictions/add_jurisdictions', 'Jurisdictions::add_jurisdictions', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/jurisdictions/edit_jurisdictions/(:num)', 'Jurisdictions::edit_jurisdictions/$1', ['namespace' => 'Modules\Admin\Controllers']);
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
