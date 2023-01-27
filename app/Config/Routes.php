@@ -180,11 +180,17 @@ $routes->add('/admin/organizationreporting/(:num)', 'OrganizationReporting::inde
 $routes->add('/admin/organizationreporting/add_organizationreporting', 'OrganizationReporting::add_organizationreporting', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/organizationreporting/edit_organizationreporting/(:num)', 'OrganizationReporting::edit_organizationreporting/$1', ['namespace' => 'Modules\Admin\Controllers']);
 
-// OrganizationReporting Routes
+// Organization Routes
 $routes->add('/admin/organizationsite', 'OrganizationSite::index', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/organizationsite/(:num)', 'OrganizationSite::index/$1', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/organizationsite/add_organizationsite', 'OrganizationSite::add_organizationsite', ['namespace' => 'Modules\Admin\Controllers']);
 $routes->add('/admin/organizationsite/edit_organizationsite/(:num)', 'OrganizationSite::edit_organizationsite/$1', ['namespace' => 'Modules\Admin\Controllers']);
+
+// OrganizationDesignation Routes
+$routes->add('/admin/organizationdesignation', 'OrganizationDesignation::index', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/organizationdesignation/(:num)', 'OrganizationDesignation::index/$1', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/organizationdesignation/add_organizationdesignation', 'OrganizationDesignation::add_organizationdesignation', ['namespace' => 'Modules\Admin\Controllers']);
+$routes->add('/admin/organizationdesignation/edit_organizationdesignation/(:num)', 'OrganizationDesignation::edit_organizationdesignation/$1', ['namespace' => 'Modules\Admin\Controllers']);
 /**
  * --------------------------------------------------------------------
  * Additional Routing

@@ -144,6 +144,12 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="<?= base_url('admin/organizationdesignation') ?>" class="nav-link" id="OrganizationDesignationTab">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Organization Designation</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="<?= base_url('admin/organizationdeploymenttypes') ?>" class="nav-link" id="OrganizationdeploymenttypeTab">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Organization Deployment Type</p>
