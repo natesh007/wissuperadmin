@@ -169,7 +169,6 @@ class Employee extends BaseController
 				$exist_emp = $EmployeeModel->where('EmailID',$this->request->getVar('EmailID'))->first();
 				if(!$exist_emp){
 					$data = [
-						'RoleID' => '',
 						'EmpName' => $this->request->getVar('EmpName'),
 						'DeptID' => $this->request->getVar('ParentDept'),
 						'OrgID' => $this->request->getVar('OrgID'),

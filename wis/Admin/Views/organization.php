@@ -114,7 +114,7 @@
 									<tr>
 										<th width="70px"> All &nbsp;<input type="checkbox" id="select_all" class="select_all"></th>
 										<th>Organization</th>
-										<th>Organization Type</th>
+										
 										
 										<th width="110">Actions</th>
 									</tr>
@@ -131,9 +131,7 @@
 											<td>
 												<?= $cnty['OrgName']; ?>
 											</td>
-											<td>
-												<?= $cnty['OrganizationType']; ?>
-											</td>
+											
 											
 											
 											
