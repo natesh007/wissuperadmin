@@ -2,7 +2,7 @@
 
 namespace Modules\Admin\Controllers;
 
-use Modules\Admin\Models\organizationmanagedbyModel;
+use Modules\Admin\Models\OrganizationManagedByModel;
 
 class OrganizationManagedBy extends BaseController
 {
@@ -16,7 +16,7 @@ class OrganizationManagedBy extends BaseController
 		}
 		
 		$data['pager'] = \Config\Services::pager();
-		$model = new organizationmanagedbyModel();
+		$model = new OrganizationManagedByModel();
 		$uri = service('uri');
 
 
@@ -55,13 +55,13 @@ class OrganizationManagedBy extends BaseController
     public function add_organizationmanagedby()
 	{
 		
-		$organizationmanagedbyModel = new organizationmanagedbyModel();
+		$OrganizationManagedByModel = new OrganizationManagedByModel();
 		if ($this->request->getMethod() == 'post') {
 			$data = [
 				'OrgManaged' => $this->request->getVar('OrgManaged'),
 				'Status' => 1
 			];
-			$save = $organizationmanagedbyModel->insert($data);
+			$save = $OrganizationManagedByModel->insert($data);
 			$msg = 'Data Saved Successfully';
 			return redirect()->to(base_url('admin/organizationmanagesby'))->with('msg', $msg);
 		}
@@ -72,15 +72,15 @@ class OrganizationManagedBy extends BaseController
 	public function edit_organizationmanagedby($id = null)
 	{
 		
-		$organizationmanagedbyModel = new organizationmanagedbyModel();
-		$data['organizationmanagedby'] = $organizationmanagedbyModel->where('OrgManagedByID', $id)->first();
+		$OrganizationManagedByModel = new OrganizationManagedByModel();
+		$data['organizationmanagedby'] = $OrganizationManagedByModel->where('OrgManagedByID', $id)->first();
 		//echo "<pre>";print_r($data['organizationmanagesby']);exit;
 		if ($this->request->getMethod() == 'post') {
 			$data = [
 				'OrgManaged' => $this->request->getVar('OrgManaged')			
 			];
 			//print_r($data);exit;
-			$organizationmanagedbyModel->update($id, $data);
+			$OrganizationManagedByModel->update($id, $data);
 			$msg = 'Data Updated Successfully';
 			return redirect()->to(base_url('admin/organizationmanagesby'))->with('msg', $msg);
 		}

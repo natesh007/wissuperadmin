@@ -228,13 +228,12 @@
                                         <p>Organizations</p>
                                     </a>
                                 </li>
-                                <?php/* <li class="nav-item">
+                                <?php /* <li class="nav-item">
                                     <a href="<?= base_url('admin/buildings') ?>" class="nav-link" id="BuildingsTab">
                                         <i class="far fa-building nav-icon"></i>
                                         <p>Buildings</p>
                                     </a>
-                                </li>*/?>
-                                <?php /*
+                                </li>
                                 <li class="nav-item">
                                     <a href="<?= base_url('admin/floors') ?>" class="nav-link" id="FloorsTab">
                                         <i class="far fa-building nav-icon"></i>
