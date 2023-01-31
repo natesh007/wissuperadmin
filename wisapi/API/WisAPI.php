@@ -8,8 +8,10 @@ require "../utilities/vendor/autoload.php";
 use \Firebase\JWT\JWT;
 
 //SiteURLs
-define('SiteURL', 'http://igreen.systems/wisadmin/');
-define('SiteURL1', 'http://igreen.systems/wissuperadmin/');
+//define('SiteURL', 'http://igreen.systems/wisadmin/');
+//define('SiteURL1', 'http://igreen.systems/wissuperadmin/');
+define('SiteURL', 'https://admin.wisspaces.com/');
+define('SiteURL1', 'https://superadmin.wisspaces.com/');
 
 require_once("../utilities/Rest.inc.php");
 require_once("../utilities/class.MySQL.php");
@@ -218,10 +220,11 @@ class WisAPI extends REST
 		// Input validations
 		if (!empty($email) and !empty($password)) {
 			if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-				$sql = "SELECT e.OrgID,e.JobTID,e.DeptID,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.WhatsApp,e.Password,e.Gender,e.Address,e.JobType,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate,e.DateOfJoining,e.PreviousExp,e.ProfilePic,o.OrgName,o.Logo,d.DeptName FROM employees as e LEFT JOIN roles as r
+				$sql = "SELECT e.OrgID,e.JobTID,e.DeptID,e.EmpID,CONCAT(e.FirstName , ' ', e.MiddleName, ' ', e.LastName )as EmpName,e.EmailID,e.Contact,e.WhatsApp,e.Password,e.Gender,e.Address,e.JobType,e.RoleID,e.Status,e.CreatedDate,e.UpdatedDate,e.DateOfJoining,e.PreviousExp,e.ProfilePic,o.OrgName,o.Logo,d.DeptName FROM employees as e LEFT JOIN roles as r
 				ON r.RoleID = e.RoleID LEFT JOIN organization as o
 				ON o.OrgID = e.OrgID LEFT JOIN departments as d
 				ON d.DeptID = e.DeptID WHERE e.EmailID = '" . mysqli_real_escape_string($this->db->mysql_link, $email) . "' AND e.Status=1";
+				
 				$this->db->executeQuery($sql);
 				
 				
@@ -611,7 +614,7 @@ class WisAPI extends REST
 		$query = $this->db->executeQueryAndGetArray($sql1, MYSQLI_ASSOC);
 
 		foreach($query as $rec){
-			$sql = "SELECT * FROM((SELECT e.EmpID,e.EmpName,e.DeptID,e.JobTID,e.Gender,e.EmailID,e.Address,e.Contact,e.WhatsApp,e.JobType,e.DateOfJoining,ex.Experience as exp,ex.Exp_Desc as PreviousExperience,e.Status,e.CreatedDate,e.UpdatedDate,d.DeptName,j.JobTitle from employees e left join departments d on d.DeptID = e.DeptID left join jobtitle j on j.JobTID = e.JobTID left join experience ex on ex.ExeID = e.PreviousExp where e.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "') UNION (SELECT e.EmpID,e.EmpName,e.DeptID,e.JobTID,e.Gender,e.EmailID,e.Address,e.Contact,e.WhatsApp,e.JobType,e.DateOfJoining,ex.Experience as exp,ex.Exp_Desc as PreviousExperience,e.Status,e.CreatedDate,e.UpdatedDate,d.DeptName,j.JobTitle from employees e left join departments d on d.DeptID = e.DeptID left join jobtitle j on j.JobTID = e.JobTID left join experience ex on ex.ExeID = e.PreviousExp WHERE e.DeptID IN(SELECT d.DeptID FROM departments d WHERE d.ParentDept = '" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "'))) AS N";
+			$sql = "SELECT * FROM((SELECT e.EmpID,CONCAT(e.FirstName , ' ', e.MiddleName, ' ', e.LastName )as EmpName,e.DeptID,e.JobTID,e.Gender,e.EmailID,e.Address,e.Contact,e.WhatsApp,e.JobType,e.DateOfJoining,ex.Experience as exp,ex.Exp_Desc as PreviousExperience,e.Status,e.CreatedDate,e.UpdatedDate,d.DeptName,j.JobTitle from employees e left join departments d on d.DeptID = e.DeptID left join jobtitle j on j.JobTID = e.JobTID left join experience ex on ex.ExeID = e.PreviousExp where e.DeptID = '" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "') UNION (SELECT e.EmpID,CONCAT(e.FirstName , ' ', e.MiddleName, ' ', e.LastName )as EmpName,e.DeptID,e.JobTID,e.Gender,e.EmailID,e.Address,e.Contact,e.WhatsApp,e.JobType,e.DateOfJoining,ex.Experience as exp,ex.Exp_Desc as PreviousExperience,e.Status,e.CreatedDate,e.UpdatedDate,d.DeptName,j.JobTitle from employees e left join departments d on d.DeptID = e.DeptID left join jobtitle j on j.JobTID = e.JobTID left join experience ex on ex.ExeID = e.PreviousExp WHERE e.DeptID IN(SELECT d.DeptID FROM departments d WHERE d.ParentDept = '" . mysqli_real_escape_string($this->db->mysql_link, $rec['DeptID']) . "'))) AS N";
 			if($JobTID != ''){
 				$sql.=" WHERE N.JobTID = '" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "'";
 				if($JoiningDate!='' && $JobTID != ''){
@@ -805,7 +808,9 @@ class WisAPI extends REST
 
        // echo $this->EmpID;exit;
 	   	$UserIndex = $this->_request['UserIndex'];
-		$EmpName = $this->_request['EmpName'];
+		$FirstName = $this->_request['FirstName'];
+		$MiddleName = $this->_request['MiddleName'];
+		$LastName = $this->_request['LastName'];
 		$OrgID = $this->OrgID;
 		$BrID = $this->_request['BrID'];
 		$DeptID = $this->_request['DeptID'];
@@ -821,8 +826,11 @@ class WisAPI extends REST
 		$PreviousExp = $this->_request['PreviousExp'];
 		$ProfilePic = $this->_request['ProfilePic'];
 		$branches = explode(",",$BrID);
-		if ($EmpName == '') {
-			$this->errorMSG(400, "Please enter Employee Name.");
+		if ($FirstName == '') {
+			$this->errorMSG(400, "Please enter Employee First Name.");
+		}
+		if ($LastName == '') {
+			$this->errorMSG(400, "Please enter Employee Last Name.");
 		}
 		if ($Email == '') {	
 			$this->errorMSG(400, "Please enter Email.");
@@ -865,7 +873,7 @@ class WisAPI extends REST
 				//$OrgID = $this->db->getFirstRowFirstColumn("SELECT `OrgID` FROM `departments` WHERE `DeptID`='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "';");
 				
 
-				$this->db->executeQuery("INSERT INTO `employees`(`RoleID`,`EmpName`,`DeptID`, `OrgID`,`JobTID`,`Gender`, `EmailID`, `Password`, `Address`, `Contact`, `WhatsApp`, `JobType`,`DateOfJoining`,`PreviousExp`,`ProfilePic`,`Status`,`Shift`,`CreatedBy`,`CreatedDate`,`UpdatedBy`,`UpdatedDate`) VALUES('0','" . mysqli_real_escape_string($this->db->mysql_link, $EmpName) . "','" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "',
+				$this->db->executeQuery("INSERT INTO `employees`(`RoleID`,`FirstName`,`MiddleName`,`LastName`,`DeptID`, `OrgID`,`JobTID`,`Gender`, `EmailID`, `Password`, `Address`, `Contact`, `WhatsApp`, `JobType`,`DateOfJoining`,`PreviousExp`,`ProfilePic`,`Status`,`Shift`,`CreatedBy`,`CreatedDate`,`UpdatedBy`,`UpdatedDate`) VALUES('0','" . mysqli_real_escape_string($this->db->mysql_link, $FirstName) . "','" . mysqli_real_escape_string($this->db->mysql_link, $MiddleName) . "','" . mysqli_real_escape_string($this->db->mysql_link, $LastName) . "','" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "','" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "','" . mysqli_real_escape_string($this->db->mysql_link, $Gender) . "','" . mysqli_real_escape_string($this->db->mysql_link, $Email) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, md5("123456")) . "','" . mysqli_real_escape_string($this->db->mysql_link, $Address) . "','" . mysqli_real_escape_string($this->db->mysql_link, $Mobile) . "',
 				'" . mysqli_real_escape_string($this->db->mysql_link, $WhatsApp) . "','" . mysqli_real_escape_string($this->db->mysql_link, $JobType) . "','" . mysqli_real_escape_string($this->db->mysql_link, $DateOfJoining) . "','" . mysqli_real_escape_string($this->db->mysql_link, $PreviousExp) . "','" . mysqli_real_escape_string($this->db->mysql_link, $ProfilePic) . "','1','" . mysqli_real_escape_string($this->db->mysql_link, $Shift) . "','" . mysqli_real_escape_string($this->db->mysql_link, $this->EmpID) . "','" . date('Y-m-d H:i:s') . "','" . mysqli_real_escape_string($this->db->mysql_link, $this->EmpID) . "','" . date('Y-m-d H:i:s') . "')");
@@ -895,7 +903,7 @@ class WisAPI extends REST
 		if ($EmpID == '') {
 			$this->errorMSG(400, "Please enter Employee ID");
 		}
-		$query1 = $this->db->executeQueryAndGetArray("SELECT e.OrgID,e.JobTID,e.DeptID,e.EmpID,e.EmpName,e.EmailID,e.Contact,e.WhatsApp,e.Gender,e.Address,e.JobType,e.Contact,e.RoleID,e.Status,e.Shift,e.CreatedDate,e.UpdatedDate,e.PreviousExp,e.ProfilePic,e.DateOfJoining FROM employees e where e.EmpID='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "'", MYSQLI_ASSOC);
+		$query1 = $this->db->executeQueryAndGetArray("SELECT e.OrgID,e.JobTID,e.DeptID,e.EmpID,CONCAT(e.FirstName , ' ', e.MiddleName, ' ', e.LastName )as EmpName,e.EmailID,e.Contact,e.WhatsApp,e.Gender,e.Address,e.JobType,e.Contact,e.RoleID,e.Status,e.Shift,e.CreatedDate,e.UpdatedDate,e.PreviousExp,e.ProfilePic,e.DateOfJoining FROM employees e where e.EmpID='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "'", MYSQLI_ASSOC);
 		
 		$query2 = $this->db->executeQueryAndGetArray("SELECT * FROM employeebranches where EmpID='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "'", MYSQLI_ASSOC);
 		
@@ -958,7 +966,9 @@ class WisAPI extends REST
 		}
 
 		$EmpID = $this->_request['EmpID'];
-		$EmpName = $this->_request['EmpName'];
+		$FirstName = $this->_request['FirstName'];
+		$MiddleName = $this->_request['MiddleName'];
+		$LastName = $this->_request['LastName'];
 		$OrgID = $this->OrgID;
 		$BrID = $this->_request['BrID'];
 		$DeptID = $this->_request['DeptID'];
@@ -977,8 +987,11 @@ class WisAPI extends REST
 		if ($EmpID == '') {
 			$this->errorMSG(400, "Please enter Employee ID.");
 		}
-		if ($EmpName == '') {
-			$this->errorMSG(400, "Please enter Employee Name.");
+		if ($FirstName == '') {
+			$this->errorMSG(400, "Please enter Employee First Name.");
+		}
+		if ($LastName == '') {
+			$this->errorMSG(400, "Please enter Employee Last Name.");
 		}
 		if ($Email == '') {	
 			$this->errorMSG(400, "Please enter Email.");
@@ -1034,7 +1047,7 @@ class WisAPI extends REST
 		} else {
 			try {
 	
-				$sql = "UPDATE `employees` SET `EmpName`='" . mysqli_real_escape_string($this->db->mysql_link, $EmpName) . "',`DeptID`='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "',`OrgID`='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "',`JobTID`='" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "',`Gender`='" . mysqli_real_escape_string($this->db->mysql_link, $Gender) . "',`EmailID`='" . mysqli_real_escape_string($this->db->mysql_link, $Email) . "',`Address`='" . mysqli_real_escape_string($this->db->mysql_link, $Address) . "',`Contact`='" . mysqli_real_escape_string($this->db->mysql_link, $Mobile) . "',`WhatsApp`='" . mysqli_real_escape_string($this->db->mysql_link, $WhatsApp) . "',`JobType`='" . mysqli_real_escape_string($this->db->mysql_link, $JobType) . "',`DateOfJoining`='" . mysqli_real_escape_string($this->db->mysql_link, $DateOfJoining) . "',`PreviousExp`='" . mysqli_real_escape_string($this->db->mysql_link, $PreviousExp) . "',`ProfilePic`='" . mysqli_real_escape_string($this->db->mysql_link, $ProfilePic) . "',`Shift`='" . mysqli_real_escape_string($this->db->mysql_link, $Shift) . "',`UpdatedBy`='" .mysqli_real_escape_string($this->db->mysql_link, $this->EmpID) . "',`UpdatedDate`='" . date('Y-m-d H:i:s') . "' WHERE `EmpID`='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "';";
+				$sql = "UPDATE `employees` SET `FirstName`='" . mysqli_real_escape_string($this->db->mysql_link, $FirstName) . "',`MiddleName`='" . mysqli_real_escape_string($this->db->mysql_link, $MiddleName) . "',`LastName`='" . mysqli_real_escape_string($this->db->mysql_link, $LastName) . "',`DeptID`='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "',`OrgID`='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "',`JobTID`='" . mysqli_real_escape_string($this->db->mysql_link, $JobTID) . "',`Gender`='" . mysqli_real_escape_string($this->db->mysql_link, $Gender) . "',`EmailID`='" . mysqli_real_escape_string($this->db->mysql_link, $Email) . "',`Address`='" . mysqli_real_escape_string($this->db->mysql_link, $Address) . "',`Contact`='" . mysqli_real_escape_string($this->db->mysql_link, $Mobile) . "',`WhatsApp`='" . mysqli_real_escape_string($this->db->mysql_link, $WhatsApp) . "',`JobType`='" . mysqli_real_escape_string($this->db->mysql_link, $JobType) . "',`DateOfJoining`='" . mysqli_real_escape_string($this->db->mysql_link, $DateOfJoining) . "',`PreviousExp`='" . mysqli_real_escape_string($this->db->mysql_link, $PreviousExp) . "',`ProfilePic`='" . mysqli_real_escape_string($this->db->mysql_link, $ProfilePic) . "',`Shift`='" . mysqli_real_escape_string($this->db->mysql_link, $Shift) . "',`UpdatedBy`='" .mysqli_real_escape_string($this->db->mysql_link, $this->EmpID) . "',`UpdatedDate`='" . date('Y-m-d H:i:s') . "' WHERE `EmpID`='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "';";
 				if ($this->db->executeQuery($sql)) {
 					$sql = $this->db->executeQuery("DELETE FROM `employeebranches` WHERE EmpID='" . mysqli_real_escape_string($this->db->mysql_link, $EmpID) . "';");
 					if(!empty($branches)){
@@ -1396,7 +1409,7 @@ class WisAPI extends REST
 		
 		
 		
-		$sql = "SELECT c.ComID,cc.CategoryName,cn.ComplaintNature,b.BuildingName,f.FloorName,r.RoomName,c.CreatedDate,cs.StausName,c.UpdatedBy as empid,e.EmpName as AssignedBy,c.CustomComplaint,c.ComplaintStatus,c.ComplaintRaisedBy,c.Material,cp.Priority,c.AssignedTime,c.CompletedTime FROM complaints c left join complaintcategory cc on cc.ComCatID = c.ComCatID left join complaintnature cn on cn.ComNatID = c.ComNatID left join building b on b.BID = c.BID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintstatus cs on cs.StatusID  = c.ComplaintStatus left join employees e on e.EmpID  = c.UpdatedBy left join complaintpriority cp on cp.PriorityID  = c.ComplaintPriority where c.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'";
+		$sql = "SELECT c.ComID,cc.CategoryName,cn.ComplaintNature,b.BuildingName,f.FloorName,r.RoomName,c.CreatedDate,cs.StausName,c.UpdatedBy as empid,CONCAT(e.FirstName , ' ', e.MiddleName, ' ', e.LastName )as AssignedBy,c.CustomComplaint,c.ComplaintStatus,c.ComplaintRaisedBy,c.Material,cp.Priority,c.AssignedTime,c.CompletedTime FROM complaints c left join complaintcategory cc on cc.ComCatID = c.ComCatID left join complaintnature cn on cn.ComNatID = c.ComNatID left join building b on b.BID = c.BID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintstatus cs on cs.StatusID  = c.ComplaintStatus left join employees e on e.EmpID  = c.UpdatedBy left join complaintpriority cp on cp.PriorityID  = c.ComplaintPriority where c.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'";
 	
 	/*	if($DeptName != "Admin"){
 			$sql.=" AND c.UpdatedBy = '".mysqli_real_escape_string($this->db->mysql_link, $EmpID)."'";
@@ -1495,7 +1508,7 @@ class WisAPI extends REST
 		if ($ComID == '') {
 			$this->errorMSG(400, "Please enter Complaint ID");
 		}
-		$query = $this->db->executeQueryAndGetArray("SELECT c.ComID,cc.CategoryName,cn.ComplaintNature,b.BuildingName,f.FloorName,r.RoomName,c.CreatedDate,cs.StausName,c.UpdatedBy as empid,c.UpdatedDate,e.EmpName as AssignedBy,c.Name,c.Mobile,c.ComplaintRaisedBy,c.Material,c.CustomComplaint,c.ComplaintRemarks,c.ComplaintPriority,c.ComplaintStatus,cp.Priority,c.AssignedNote,c.DeptID,e.Contact as EmpMobile,e.WhatsApp,c.AssignedTime,c.CompletedTime,d.DeptName FROM complaints c left join complaintcategory cc on cc.ComCatID = c.ComCatID left join complaintnature cn on cn.ComNatID = c.ComNatID left join building b on b.BID = c.BID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintstatus cs on cs.StatusID  = c.ComplaintStatus left join complaintpriority cp on cp.PriorityID  = c.ComplaintPriority left join employees e on e.EmpID  = c.UpdatedBy left join departments d on d.DeptID  = c.DeptID where c.ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);	
+		$query = $this->db->executeQueryAndGetArray("SELECT c.ComID,cc.CategoryName,cn.ComplaintNature,b.BuildingName,f.FloorName,r.RoomName,c.CreatedDate,cs.StausName,c.UpdatedBy as empid,c.UpdatedDate,CONCAT(e.FirstName , ' ', e.MiddleName, ' ', e.LastName )as AssignedBy,c.Name,c.Mobile,c.ComplaintRaisedBy,c.Material,c.CustomComplaint,c.ComplaintRemarks,c.ComplaintPriority,c.ComplaintStatus,cp.Priority,c.AssignedNote,c.DeptID,e.Contact as EmpMobile,e.WhatsApp,c.AssignedTime,c.CompletedTime,d.DeptName FROM complaints c left join complaintcategory cc on cc.ComCatID = c.ComCatID left join complaintnature cn on cn.ComNatID = c.ComNatID left join building b on b.BID = c.BID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintstatus cs on cs.StatusID  = c.ComplaintStatus left join complaintpriority cp on cp.PriorityID  = c.ComplaintPriority left join employees e on e.EmpID  = c.UpdatedBy left join departments d on d.DeptID  = c.DeptID where c.ComID='" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);	
 	
 
 		$query1 = $this->db->executeQueryAndGetArray("SELECT Image FROM complaintimages where ComCatID = '" . mysqli_real_escape_string($this->db->mysql_link, $ComID) . "'", MYSQLI_ASSOC);
@@ -1577,7 +1590,7 @@ class WisAPI extends REST
 		//$org = $this->OrgID;
 		$DeptID = $this->_request['DeptID'];		
 		
-		$query1 = $this->db->executeQueryAndGetArray("SELECT e.EmpID,e.EmpName,e.Shift,e.Contact as Mobile,e.WhatsApp,s.ShiftDesc as Shift FROM employees e left join complaints c on c.UpdatedBy = e.EmpID left join shifts s on s.ShID = e.Shift  where e.DeptID='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "' AND e.Status = 1 group by e.EmpID", MYSQLI_ASSOC);	
+		$query1 = $this->db->executeQueryAndGetArray("SELECT e.EmpID,CONCAT(e.FirstName , ' ', e.MiddleName, ' ', e.LastName )as EmpName,e.Shift,e.Contact as Mobile,e.WhatsApp,s.ShiftDesc as Shift FROM employees e left join complaints c on c.UpdatedBy = e.EmpID left join shifts s on s.ShID = e.Shift  where e.DeptID='" . mysqli_real_escape_string($this->db->mysql_link, $DeptID) . "' AND e.Status = 1 group by e.EmpID", MYSQLI_ASSOC);	
 		foreach($query1 as $q){
 			$query2 = $this->db->executeQueryAndGetArray("SELECT SUM(CASE WHEN c.ComplaintStatus = '2' THEN 1 ELSE 0 END) AS 'InProcess', SUM(CASE WHEN c.ComplaintStatus = '3' THEN 1 ELSE 0 END) AS 'Completed', SUM(CASE WHEN c.ComplaintStatus = '1' THEN 1 ELSE 0 END) AS 'Assigned' FROM complaints c where c.UpdatedBy='" . mysqli_real_escape_string($this->db->mysql_link, $q['EmpID']) . "'", MYSQLI_ASSOC);	
 			//echo "<pre>";print_r($query2);exit;
@@ -1885,7 +1898,7 @@ class WisAPI extends REST
 		$ComplaintStatus = $this->_request['ComplaintStatus'];//1:Unassigned, 2:In Process, 3:Complted
 	
 
-		$sql = "SELECT c.ComID,cc.CategoryName,b.BuildingName,f.FloorName,r.RoomName,c.CreatedDate,cs.StausName,c.ComplaintStatus,c.ComplaintRaisedBy,c.UpdatedBy as empid,e.EmpName as AssignedBy FROM complaints c left join complaintcategory cc on cc.ComCatID = c.ComCatID left join building b on b.BID = c.BID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintstatus cs on cs.StatusID  = c.ComplaintStatus left join employees e on e.EmpID  = c.UpdatedBy where c.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'";
+		$sql = "SELECT c.ComID,cc.CategoryName,b.BuildingName,f.FloorName,r.RoomName,c.CreatedDate,cs.StausName,c.ComplaintStatus,c.ComplaintRaisedBy,c.UpdatedBy as empid,CONCAT(e.FirstName , ' ', e.MiddleName, ' ', e.LastName )as AssignedBy FROM complaints c left join complaintcategory cc on cc.ComCatID = c.ComCatID left join building b on b.BID = c.BID left join floor f on f.FID = c.FID left join room r on r.RID = c.RID left join complaintstatus cs on cs.StatusID  = c.ComplaintStatus left join employees e on e.EmpID  = c.UpdatedBy where c.OrgID='" . mysqli_real_escape_string($this->db->mysql_link, $OrgID) . "'";
 		
 		if($FromDate!="" && $ToDate!=""){
 		    
